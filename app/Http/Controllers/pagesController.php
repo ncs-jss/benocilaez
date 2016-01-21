@@ -5,11 +5,11 @@ use Illuminate\Routing\Controller as BaseController;
 
 class PagesController extends BaseController{
 
-	public function a(){
-		$googleClient = new Google_Client;
-		$auth = new GoogleAuth;
-
-		return \View::make('welcome',array('login'=> $auth->$isLoggedIn ));
+	public function login(){
+		return \View::make('bologin');
+	}
+	public function registration(){
+		return \View::make('addsociety');
 	}
 }
 ?>

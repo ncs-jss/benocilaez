@@ -86,7 +86,7 @@ class UserController extends BaseController
   {
     $data = Input::all(); 
 
-$rules=array(
+/*$rules=array(
 'name'=>'min:2|alpha_dash',
 'email'=>'required|unique:users',
 'password'=>'required|min:4|confirmed',
@@ -94,11 +94,11 @@ $rules=array(
 
 
 
-);
+);*/
    $validator = Validator::make($data, $rules);
 
 
-if($validator->fails()){
+if(false){
   
     return Redirect::to('signup')->withInput()->withErrors($validator);
   }
