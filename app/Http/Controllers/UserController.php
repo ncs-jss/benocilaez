@@ -28,7 +28,7 @@ class UserController extends BaseController{
 		$validate = Validator::make($data, $rules);
 
 		if($validate->fails()){
-			return Redirect::to('add_society')->withErrors($validate)->withInput();
+			return Redirect::to('/')->withErrors($validate)->withInput();
 		}else{
 			$user = new User;
 			$user->email = $data['email'];
@@ -60,21 +60,19 @@ class UserController extends BaseController{
 
 		$validator = Validator::make($data, $rules);
 		if($validator->fails()){
-			//return $validator->errors();
-			return redirect('/')
+			return redirect()->route('root')
                         ->withErrors($validator)
                         ->withInput();
 		}else{
 
 			if(\Auth::attempt($data)){
-				return 'x';
-				/*Session::put('email',$data['email']);
+				session_unset();
+				Session::put('email',$data['email']);
 				Session::save();
-				return Redirect::to('add_society');*/
+				return redirect()->route('root');
 			}else{
-				return 'y';
-				/*Session::put('error',"Ops! Credentials do not match");
-				return Redirect::to('/')->withInput();*/
+				Session::flash('err',"1");
+				return redirect()->route('root');
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use Session;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -12,7 +13,11 @@ class PagesController extends BaseController{
 		if(\Auth::check()){
 			return view('add_event');
 		}else{
-			return view('back_office_login');
+			if(Session::get('err') == '1'){
+				return view('back_office_login', ['err'=>"Oh daiiumm!! Email and password aren't compatible"]);
+			}else{
+				return view('back_office_login', ['err'=>'']);
+			}
 		}
 	}
 }

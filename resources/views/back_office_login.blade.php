@@ -38,11 +38,13 @@
 				</div>
 			</div>
 		</form>
+		<div> {{ $err }}</div>
 		@if($errors->has())
 		@foreach ($errors->all() as $error)
 		<div>{{ $error }}</div>
 		@endforeach
 		@endif
+		
 	</div>
 </div>
 </body>
