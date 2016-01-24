@@ -7,9 +7,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/register', function () {
 		return view('add_society');
 	});
-	/*Route::get('/', function () {
-		return view('');
+	Route::get('/add_society', ['as'=>'add_soc', 'uses'=>'PagesController@add_society']);
+	Route::get('/event_approval', ['as'=>'event_approval', 'uses'=>'PagesController@event_approval']);
+
+	Route::get('/ss', function(){
+		return App\Events::all();
 	});
+
+	/*
 	Route::get('/register', function () {
 		return view('');
 	});
