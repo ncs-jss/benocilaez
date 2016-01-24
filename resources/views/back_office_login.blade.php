@@ -20,13 +20,13 @@
 				<div class="form-group">
 					<label for="email" class="col-md-4 control-label">E-mail</label>
 					<div class="col-md-5">
-						<input type="text" name="email" class="form-control" placeholder="E-mail">
+						<input type="email" name="email" class="form-control" placeholder="E-mail">
 					</div>
 				</div><br>
 				<div class="form-group">
 					<label for="password" class="col-md-4 control-label">Password</label>
 					<div class="col-md-5">
-						<input type="text" name="password" class="form-control" placeholder="Password">
+						<input type="password" name="password" class="form-control" placeholder="Password">
 					</div>
 				</div><br>
 				<div class="col-md-7"></div>
