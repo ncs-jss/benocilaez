@@ -17,6 +17,7 @@
 	</div>
 </div>
 <div class="container">
+	<h1>{{ $society_name }}</h1>
 		<div style="text-align:center">
 		<table class=" table table-bordered">
 			<tr>

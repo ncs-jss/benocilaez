@@ -15,6 +15,7 @@
 	<div class="jumbotron">
 		<h1 style="text-align:center">Add Society</h1><br>
 	</div>
+	<h1>{{ $society_name }}</h1>
 			<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="register_society" method="POST">
 				<div class="form-group">
