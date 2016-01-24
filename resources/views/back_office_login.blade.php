@@ -29,6 +29,12 @@
 						<input type="password" name="password" class="form-control" placeholder="Password">
 					</div>
 				</div><br>
+				<div> {{ $err }}</div>
+				@if($errors->has())
+				@foreach ($errors->all() as $error)
+				<div>{{ $error }}</div>
+				@endforeach
+				@endif
 				<div class="col-md-7"></div>
 				<div class="col-md-2">
 					<button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -38,12 +44,6 @@
 				</div>
 			</div>
 		</form>
-		<div> {{ $err }}</div>
-		@if($errors->has())
-		@foreach ($errors->all() as $error)
-		<div>{{ $error }}</div>
-		@endforeach
-		@endif
 		
 	</div>
 </div>

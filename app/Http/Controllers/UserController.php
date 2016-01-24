@@ -28,25 +28,18 @@ class UserController extends BaseController{
 		$validate = Validator::make($data, $rules);
 
 		if($validate->fails()){
-			return Redirect::to('/')->withErrors($validate)->withInput();
+			return Redirect::to('add_society')->withErrors($validate)->withInput();
 		}else{
 			$user = new User;
 			$user->email = $data['email'];
 			$user->password = \Hash::make($data['password']);
 			$user->society = $data['society_name'];
 			$user->priviliges = 2;
-			$user->save();
+			if($user->save()){
+				return 'a';
+			}else
+			return 'asa';
 
-
-			//Authenticate the user...
-
-			if(\Auth::attempt($user->email, $user->password)){
-				Session::put('email', $user->email);
-				Session::save();
-				return Redirect::to('/');
-			}else{
-				return Redirect::to('/');
-			}
 
 		}
 	}
@@ -61,8 +54,8 @@ class UserController extends BaseController{
 		$validator = Validator::make($data, $rules);
 		if($validator->fails()){
 			return redirect()->route('root')
-                        ->withErrors($validator)
-                        ->withInput();
+			->withErrors($validator)
+			->withInput();
 		}else{
 
 			if(\Auth::attempt($data)){

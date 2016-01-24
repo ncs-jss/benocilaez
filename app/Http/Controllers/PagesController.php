@@ -45,8 +45,12 @@ class PagesController extends BaseController{
 	public function view_events(){
 		$user = User::where('email', Session::get('email'))->first();
 
-		if( \Auth::check() && $user->priviliges == 1){
-			return view('event_approval');
+		if( \Auth::check()){
+			if ($user->priviliges == 1){
+				return view('view_event');
+			}else{
+				return view('view_event')
+			}
 		}else{
 			return redirect('/');
 		}
