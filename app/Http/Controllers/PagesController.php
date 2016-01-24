@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Session;
 use App\User;
+use App\Events;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -47,7 +48,14 @@ class PagesController extends BaseController{
 
 		if( \Auth::check()){
 			if ($user->priviliges == 1){
-				return view('view_event');
+				$societies = User::all();
+				$events = [];
+				foreach ($societies as email => $value) {
+					$events_des = Events:join('EventDetails', 'events.event_id', '=', 'event_details.event_id')-get();
+					array_push($events, $event_des);
+				}
+
+				return view('view_event', array('events', $events));
 			}else{
 				return view('view_event')
 			}

@@ -11,7 +11,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/event_approval', ['as'=>'event_approval', 'uses'=>'PagesController@event_approval']);
 
 	Route::get('/ss', function(){
-		return App\Events::all();
+		return App\User::join('Events','users.email', '=','events.society_email')->get();
 	});
 
 	/*
