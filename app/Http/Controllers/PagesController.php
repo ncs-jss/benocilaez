@@ -50,14 +50,20 @@ class PagesController extends BaseController{
 			if ($user->priviliges == 1){
 				$societies = User::all();
 				$events = [];
-				foreach ($societies as email => $value) {
-					$events_des = Events:join('EventDetails', 'events.event_id', '=', 'event_details.event_id')-get();
-					array_push($events, $event_des);
+				foreach ($societies as  $value) {
+					$events_des = User::where('email', $value['email'])
+								->join('events','events.society_email', '=', 'users.email')
+								->join('event_details', 'events.event_id', '=', 'event_details.event_id')
+								->select('events.event_id', 'event_details.event_name', 
+									'event_details.event_description','event_details.approved')
+								->get();
+
+					array_push($events, array('society_name'=>$value['society'], 'society_events'=>$events_des));
 				}
 
-				return view('view_event', array('events', $events));
+				return view('view_event', array('societies'=> $events));
 			}else{
-				return view('view_event')
+				return view('view_event');
 			}
 		}else{
 			return redirect('/');
