@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Add Events</title>
+<title>Edit Events</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 <!-- Optional theme -->
@@ -13,20 +13,16 @@
 <body>
 <div class="container">
 	<div class="jumbotron" style="text-align:center">
-		<h1>{{ $action }}</h1>
+		<h1>Edit Events</h1>
 	</div>
 </div>
 <div class="container">
 		<div style="text-align:center">
-			<form class="form-horizontal" role="form" action="add_event" method="POST">
+			<form class="form-horizontal" role="form" action=" " method="POST">
 				<div class="form-group">
 				<label for="event_name" class="col-md-4 control-label">Event Name</label>
 					<div class="col-md-5">
-						@if($action == 'Add Event')
 						<input type="text" name="event_name" class="form-control" placeholder="Event Name">
-						@else
-						<p>{{ $event_name }}<p>
-						@endif
 					</div>
 				</div><br>
 				<div class="form-group">
@@ -38,7 +34,7 @@
 				<div class="form-group">
 					<label for="time" class="col-md-4 control-label">Timing</label>
 					<div class="col-md-5">
-						<input type="datetime-local" name="timing" class="form-control" placeholder="Timing">
+						<input type="datetime" name="timing" class="form-control" placeholder="Timing">
 					</div>
 				</div><br>
 				<div class="form-group">
@@ -47,22 +43,11 @@
 						<input type="text" name="winners" class="form-control" placeholder="Number of Winners">
 					</div>
 				</div><br>
-				<div> {{ $err }}</div>
-				@if($errors->has())
-				@foreach ($errors->all() as $error)
-				<div>{{ $error }}</div>
-				@endforeach
-				@endif
 				<div class="col-md-7"></div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block">{{ @action }}</button>
+                        <button type="submit" class="btn btn-info btn-block">Edit</button>
                     </div>
                 </div>
-                <div class="col-md-5">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-				</div>
-
-
 			</form>
 	</div>
 </body>

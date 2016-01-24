@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Events;
+use App\EventDetails;
+
 use Session;
 use Validator;
 use Redirect;
@@ -62,11 +65,49 @@ class UserController extends BaseController{
 				session_unset();
 				Session::put('email',$data['email']);
 				Session::save();
-				return redirect()->route('root');
+				return Redirect::route('root');
 			}else{
 				Session::flash('err',"1");
-				return redirect()->route('root');
+				return Redirect::route('root');
 			}
+		}
+	}
+
+	public function create_event(){
+		if(\Auth::check()){
+			$user = User::where('email', Session::get('email'))->first();	
+			$data = Input::all();
+			array_pop($data);
+	
+			$rules = ['event_name'=>'required'];
+	
+			$validator = Validator::make($data, $rules);
+	
+			if($validator->fails()){
+				return Redirect::route('add_event')
+				->withErrors($validator)
+				->withInput();
+			}
+	
+			$event = new Events;
+			$event->society_email = $user->email;
+			$event_count = Events::where('society_email', $user->email)->count() + 1;
+			$event->event_id = strtolower(substr($user->society, 0, 4)).$event_count;
+			$event->save();
+	
+			$eventdetails = new EventDetails;
+			$eventdetails->event_id = $event->event_id;
+			$eventdetails->event_name = $data['event_name'];
+			$eventdetails->event_description = $data['event_description'];
+			$eventdetails->timing = $data['timing'];
+			//$eventdetails->rules = $data['rules'];
+			$eventdetails->approved = 0;
+			$eventdetails->save();
+	
+			Session::flash('success','1');
+			return Redirect::route('add_event');
+		}else{
+			return Redirect::route('add_event');
 		}
 	}
 }
