@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    </head>  
+<head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+ <script src="//code.jquery.com/jquery-1.12.0.min.js"></script> 
+</head>  
 <body>
-    <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
   	<div class="container-fluid">
-    <div class="navbar-header">
-     <p class="navbar-brand" href="#">{{ $society }} | {{ $action }}</p>
-    </div>
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="navbar-header">
+       <p class="navbar-brand" href="#">{{ $society }} | {{ $action }}</p>
+     </div>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         @if($admin == 1)
         <li><a href="add_society">Add Society</a></li>
@@ -26,7 +21,7 @@
         <li><a href="logout">Logout</a></li>
       </ul>
     </div>
-  	</div>
-	</nav>
+  </div>
+</nav>
 </body>
 </html>
