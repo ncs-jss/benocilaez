@@ -50,8 +50,8 @@
 					<div class="col-md-8">
 						<input type="text" name="rules" class="form-control" placeholder="Rules">						
 					</div>
-					<div class="col-md-2" style="float:left">
-					<button type="button" class="btn btn-primary" aria-label="Left Align">
+					<div class="col-md-1">
+					<button type="button" class="btn btn-primary" id="add_rule" aria-label="Left Align">
   						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					</button>
 					</div>

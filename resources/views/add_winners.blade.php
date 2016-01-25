@@ -31,33 +31,36 @@
 					<div class="col-md-5">
 						<input type="text" name="winner" class="form-control" placeholder="Winner">
 					</div>
-				</div>
-				<div class="col-md-6"></div>
-				<button type="button" class="btn btn-info btn-sm">
+				<div class="col-md-1">
+				<button type="button" class="btn btn-info btn-sm" id="add_winner">
   					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 				</button>
+				</div>
+				</div>
 				<br><br>
 				<div class="form-group">
 					<label for="runner1" class="col-md-4 control-label">1st Runner Up</label>
 					<div class="col-md-5">
 						<input type="text" name="runner_up1" class="form-control" placeholder="1st Runner Up">
 					</div>
-				</div>
-				<div class="col-md-6"></div>
-				<button type="button" class="btn btn-info btn-sm">
+				<div class="col-md-1">
+				<button type="button" class="btn btn-info btn-sm" id="add_runner1">
   					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 				</button>
+				</div>
+				</div>
 				<br><br>
 				<div class="form-group">
 					<label for="runner2" class="col-md-4 control-label">2nd Runner Up</label>
 					<div class="col-md-5">
 						<input type="text" name="runner_up2" class="form-control" placeholder="2nd Runner Up">
 					</div>
+					<div class="col-md-1">
+					<button type="button" class="btn btn-info btn-sm" id="add_runner2">
+  						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</button>
+					</div>
 				</div>
-				<div class="col-md-6"></div>
-				<button type="button" class="btn btn-info btn-sm">
-  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				</button>
 				<br><br>
 				<div class="help">
 				<p>The names of winners once added shall not be changed.</p>
