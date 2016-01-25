@@ -70,6 +70,6 @@
 			</table>	
 		</div>
 		@endforeach
-	</div>
+	</div><br><br><br><br><br><br>
 </body>
 </html>

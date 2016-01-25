@@ -15,7 +15,7 @@ class PagesController extends BaseController{
 	public function root(){
 		if(\Auth::check()){
 			$user = User::where('email', Session::get('email'))->first();
-			return view('add_event', ['action'=>'Add Event', 'err'=>'']);
+			return view('add_event', ['society'=>$user->society,'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>'']);
 		}else{
 			if(Session::get('err') == '1'){
 				return view('back_office_login', ['err'=>"Oh daiiumm!! Email and password aren't compatible"]);
@@ -61,7 +61,8 @@ class PagesController extends BaseController{
 					array_push($events, array('society_name'=>$value['society'], 'society_events'=>$events_des));
 				}
 
-				return view('view_event', array('society'=>$user->society, 'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 1));
+				return view('view_event', array('society'=>$user->society, 'action'=>'View Events', 
+					'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 1));
 			}else{
 				$events= [];
 				$event_des = User::where('email', 'quanta@quanta.com')
@@ -71,7 +72,8 @@ class PagesController extends BaseController{
 					'event_details.event_description','event_details.approved')
 				->get();
 				array_push($events, array('society_name'=>$user->society, 'society_events'=>$event_des));
-				return view('view_event', array('societies'=> $events, 'accessor'=> $user->society, 'admin'=> 0));
+				return view('view_event', array('society'=>$user->society, 'action'=>'View Events', 
+					'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 0));
 			}
 		}else{
 			return Redirect::route('root');

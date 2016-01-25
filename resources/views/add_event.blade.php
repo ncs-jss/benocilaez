@@ -8,11 +8,9 @@
 	width:150%;
 	height:200px; 
 }
-.sdesc{
-	width: 100%;
-	height:60px;
+.rules{
+	font-size: 25px;
 }
-
 </style>
 </head>
 <body>
@@ -21,29 +19,42 @@
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="add_event" method="POST">
 				<div class="form-group">
-				<label for="event_name" class="col-md-4 control-label">Event Name</label>
-					<div class="col-md-5">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
 						@if($action == 'Add Event')
-						<input type="text" name="event_name" class="form-control">
+						<input type="text" name="event_name" class="form-control" placeholder="Event Name">
 						@else
 						<p>{{ $event_name }}<p>
 						@endif
 					</div>
 				</div><br>
 				<div class="form-group">
-					<div class="col-md-3"></div>
-					<div class="col-md-7">
-						<textarea class="sdesc" rows="5" name="short_description" class="form-control" placeholder="A Short Description of Your Event..."></textarea>
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<input type="text" name="short_description" class="form-control" placeholder="A Short Description of Your Event..."></textarea>
 					</div>
 				</div><br>
 				<div class="form-group">
-					<div class="col-md-3"></div>
-					<div class="col-md-7">
+					<p><b>Event description:</b></p>
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
 						<textarea class="desc" id="editor1" name="editor1">Your Event's Description Here...</textarea>
 						<script type="text/javascript">
 							CKEDITOR.replace( 'editor1' );
 						</script>
 					</div> 
+				</div><br>
+				<div class="form-group">
+					<p><b>Rules:</b></p>
+					<div class="col-md-2"><p class="rules" style="text-align:right"><b>1.</b></p></div>
+					<div class="col-md-8">
+						<input type="text" name="rules" class="form-control" placeholder="Rules">						
+					</div>
+					<div class="col-md-2" style="float:left">
+					<button type="button" class="btn btn-primary" aria-label="Left Align">
+  						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</button>
+					</div>
 				</div><br>
 				<div class="form-group">
 					<label for="time" class="col-md-4 control-label">Time</label>
@@ -75,6 +86,16 @@
 						<input type="text" name="conatct_number" class="form-control" placeholder="Number">
 					</div>
 				</div><br>
+				<div class="form-group">
+					<label for="prize_money" class="col-md-4 control-label">Prize Money</label>
+					<div class="col-md-2">
+						<input type="text" name="prize_money" class="form-control" placeholder="Fisrt Prize">
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<input type="text" name="conatct_number" class="form-control" placeholder="Second Prize">
+					</div>
+				</div><br>
 				<div> {{ $err }}</div>
 				@if($errors->has())
 				@foreach ($errors->all() as $error)
@@ -89,9 +110,8 @@
                 <div class="col-md-5">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				</div>
-
-
 			</form>
+			<br><br><br><br><br><br>
 	</div>
 </body>
 </html>

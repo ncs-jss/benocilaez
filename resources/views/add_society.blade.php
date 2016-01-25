@@ -3,7 +3,6 @@
 @include('header')
 <body>
 	<div class="container">
-		
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="register_society" method="POST">
 				<div class="form-group">
@@ -38,7 +37,7 @@
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				</div>
 			</div>
-		</form>
+		</form><br><br><br><br><br><br>
 	</div>
 </div>
 </body>

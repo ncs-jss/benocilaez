@@ -4,11 +4,7 @@
 <title>Edit Events</title>
 </head>
 <body>
-<div class="container">
-	<div class="jumbotron" style="text-align:center">
-		<h1>Edit Events</h1>
-	</div>
-</div>
+@include('header')
 <div class="container">
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action=" " method="POST">
@@ -41,7 +37,7 @@
                         <button type="submit" class="btn btn-info btn-block">Edit</button>
                     </div>
                 </div>
-			</form>
+			</form><br><br><br><br><br><br>
 	</div>
 </body>
 </html>
