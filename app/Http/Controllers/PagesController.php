@@ -26,9 +26,10 @@ class PagesController extends BaseController{
 	}
 
 	public function add_society(){
+		$user = User::where('email', Session::get('email'))->first();
+		
 		if( \Auth::check() && $user->priviliges == 1){
-			$user = User::where('email', Session::get('email'))->first();
-			return view('add_society');
+			return view('add_society', array('admin'=>1, 'society'=>$user->society, 'action'=> 'Add Society'));
 		}else{
 			return Redirect::route('root');
 		}

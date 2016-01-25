@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Add Society</title>
-</head>
+@include('header')
 <body>
 	<div class="container">
-		<div class="jumbotron">
-			<h1 style="text-align:center">Add Society</h1><br>
-		</div>
+		
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="register_society" method="POST">
 				<div class="form-group">
