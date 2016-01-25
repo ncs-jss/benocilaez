@@ -11,6 +11,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/delete/{id}', ['as'=>'delete' , 'uses'=>'OpController@delete']);
 	Route::get('/add_winners', ['as'=>'add_winners', 'uses'=>'OpController@add_winners']);
 
+	Route::get('/logout',['as'=>'logout', 'uses'=>'OpController@logout']);
 
 	Route::get('/ss', function(){
 

@@ -56,4 +56,9 @@ class OpController extends BaseController{
 			return view('add_winners', array('society'=>$user->society, 'action'=> 'Add Winners', 'admin'=> $user->priviliges));
 		}
 	}
+
+	public function logout(){
+		\Auth::logout();
+		return Redirect::route('root');
+	}
 }
