@@ -6,11 +6,6 @@
 <body>
 	@include('header')
 <div class="container">
-	<div class="jumbotron" style="text-align:center">
-		<h1>Event Approval</h1>
-	</div>
-</div>
-<div class="container">
 		<div style="text-align:center">
 		<table class=" table table-bordered">
 			<tr>
