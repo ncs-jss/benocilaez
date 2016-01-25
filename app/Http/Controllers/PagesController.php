@@ -35,14 +35,14 @@ class PagesController extends BaseController{
 		}
 	}
 
-	public function event_approval(){
+	/*public function event_approval(){
 		if( \Auth::check() && $user->priviliges == 1){
 			$user = User::where('email', Session::get('email'))->first();
 			return view('event_approval');
 		}else{
 			return Redirect::route('root');
 		}
-	}
+	}*/
 
 	public function view_events(){
 		if( \Auth::check()){
@@ -60,18 +60,18 @@ class PagesController extends BaseController{
 
 					array_push($events, array('society_name'=>$value['society'], 'society_events'=>$events_des));
 				}
-
 				return view('view_event', array('society'=>$user->society, 'action'=>'View Events', 
 					'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 1));
 			}else{
 				$events= [];
-				$event_des = User::where('email', 'quanta@quanta.com')
+				$event_des = User::where('email', $user->email)
 				->join('events','events.society_email', '=', 'users.email')
 				->leftjoin('event_details', 'events.event_id', '=', 'event_details.event_id')
 				->select('users.society', 'events.event_id', 'event_details.event_name', 
 					'event_details.event_description','event_details.approved')
 				->get();
 				array_push($events, array('society_name'=>$user->society, 'society_events'=>$event_des));
+				
 				return view('view_event', array('society'=>$user->society, 'action'=>'View Events', 
 					'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 0));
 			}
