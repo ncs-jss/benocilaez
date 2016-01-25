@@ -8,9 +8,6 @@
 	width:150%;
 	height:200px; 
 }
-.rules{
-	font-size: 25px;
-}
 </style>
 </head>
 <body>
@@ -46,9 +43,12 @@
 				</div><br>
 				<div class="form-group">
 					<p><b>Rules:</b></p>
-					<div class="col-md-2"><p class="rules" style="text-align:right"><b>1.</b></p></div>
+					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<input type="text" name="rules" class="form-control" placeholder="Rules">						
+						<div class="input-group">
+  							<span class="input-group-addon" id="basic-addon1">1</span>
+  							<input type="text" class="form-control" placeholder="Rules" aria-describedby="basic-addon1">
+						</div>						
 					</div>
 					<div class="col-md-1">
 					<button type="button" class="btn btn-primary" id="add_rule" aria-label="Left Align">

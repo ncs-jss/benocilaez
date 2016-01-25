@@ -2,24 +2,31 @@
 <html>
 <head>
 	<title>Veiw Events</title>
+	<style type="text/css">
+	.event{
+		padding-top: 5em;
+	}
+	</style>
 </head>
 <body>
 	@include('header')
 	<div class="container">
-		<div class="jumbotron" style="text-align:center">
-			<h1>Veiw Events</h1>
+		<div class="col-md-2" style="float:left">
+    	@foreach ($societies as $data)
+		<select style="font-size:1.2em" class="form-control">
+  			<option>{{ $data['society_name'] }}</option>
+ 		 	<option>{{ $data['society_name'] }}</option>
+  			<option>{{ $data['society_name'] }}</option>
+  			<option>{{ $data['society_name'] }}</option>
+  			<option>{{ $data['society_name'] }}</option>
+		</select><br>
 		</div>
-	</div>
-	<div class="container">
-		@foreach ($societies as $data)
-		<h1>{{ $data['society_name'] }}</h1>
-		<div style="text-align:center">
+		<div style="text-align:center" class="table-reponsive">
 			<table class=" table table-bordered">
 				<tr>
-					<th class="col-md-1">#</th>
-					<th class="col-md-1">Event Id</th>
+					<th style="width:5%">#</th>
 					<th class="col-md-2">Event Name</th>
-					<th class="col-md-5">Event Description</th>
+					<th class="col-md-6">Event Description</th>
 					<th class="col-md-1">Approved?</th>
 					@if($data['society_name'] == $accessor)
 					<th class="col-md-1">Edit</th>
@@ -31,7 +38,6 @@
 				<?php $i++; ?>
 				<tr>
 					<td>{{ $i }}</td>
-					<td>{{ $event->event_id }}</td>
 					<td>{{ $event->event_name }}</td>
 					<td>{{ $event->event_description }}</td>
 					<td>
