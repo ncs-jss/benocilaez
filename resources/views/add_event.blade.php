@@ -9,6 +9,18 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+<style>
+.desc{
+	width:150%;
+	height:200px; 
+}
+.sdesc{
+	width: 100%;
+	height:60px;
+}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -30,15 +42,26 @@
 					</div>
 				</div><br>
 				<div class="form-group">
-					<label for="eventdesc" class="col-md-4 control-label">Event Description</label>
 					<div class="col-md-5">
-						<textarea rows="5" name="event_description" class="form-control"></textarea>
+						<textarea class="sdesc" rows="5" name="short_description" class="form-control" placeholder="A Short Description of Your Event..."></textarea>
 					</div>
 				</div><br>
 				<div class="form-group">
-					<label for="time" class="col-md-4 control-label">Timing</label>
 					<div class="col-md-5">
-						<input type="datetime-local" name="timing" class="form-control" placeholder="Timing">
+						<textarea class="desc" id="editor1" name="editor1" placeholder="Enter Your Event's Description Here.."></textarea>
+						<script type="text/javascript">
+							CKEDITOR.replace( 'editor1' );
+						</script>
+					</div> 
+				</div><br>
+				<div class="form-group">
+					<label for="time" class="col-md-4 control-label">Time</label>
+					<div class="col-md-2">
+						<input type="time" name="time" class="form-control">
+					</div>
+					<label for="date" class="col-md-1 control-label">Date</label>
+					<div class="col-md-2">
+						<input type="date" name="date" class="form-control">
 					</div>
 				</div><br>
 				<div class="form-group">
@@ -55,7 +78,7 @@
 				@endif
 				<div class="col-md-7"></div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block">{{ @action }}</button>
+                        <button type="submit" class="btn btn-primary btn-block">{{ $action }}</button>
                     </div>
                 </div>
                 <div class="col-md-5">
