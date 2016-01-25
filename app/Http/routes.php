@@ -8,8 +8,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/view_event', ['as'=>'view_event', 'uses'=>'PagesController@view_events']);
 	Route::get('/add_event',['as'=>'add_event', 'uses'=>'PagesController@add_event']);
 	Route::get('/edit_event/{id}', ['as'=>'edit_event', 'uses'=>'OpController@edit']);
-
 	Route::get('/delete/{id}', ['as'=>'delete' , 'uses'=>'OpController@delete']);
+
+	Route::get('/add_winners', ['as'=>'add_winners', 'uses'=>'OpController@add_winners']);
+
 
 	Route::get('/ss', function(){
 

@@ -7,6 +7,7 @@ use App\Events;
 use App\EventDetails;
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -28,7 +29,7 @@ class OpController extends BaseController{
 				));
 			
 		}else{
-			return redirect()->route('view_event');
+			return Redirect::route('view_event');
 		}
 	}
 
@@ -46,6 +47,12 @@ class OpController extends BaseController{
 			
 		}else{
 			return 0;
+		}
+	}
+
+	public function add_winners(){
+		if(\Auth::check()){
+			return view('add_winners', array(''));
 		}
 	}
 }

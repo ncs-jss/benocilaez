@@ -91,7 +91,7 @@ class UserController extends BaseController{
 	
 			$event = new Events;
 			$event->society_email = $user->email;
-			$event_count = Events::where('society_email', $user->email)->count() + 1;
+			$event_count = Events::all()->last()->id + 1;
 			$event->event_id = strtolower(substr($user->society, 0, 4)).$event_count;
 			$event->save();
 	

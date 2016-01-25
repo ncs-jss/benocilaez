@@ -5,6 +5,7 @@ use App\User;
 use App\Events;
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -29,7 +30,7 @@ class PagesController extends BaseController{
 			$user = User::where('email', Session::get('email'))->first();
 			return view('add_society');
 		}else{
-			return redirect('/');
+			return Redirect::route('root');
 		}
 	}
 
@@ -38,7 +39,7 @@ class PagesController extends BaseController{
 			$user = User::where('email', Session::get('email'))->first();
 			return view('event_approval');
 		}else{
-			return redirect('/');
+			return Redirect::route('root');
 		}
 	}
 

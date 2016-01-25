@@ -13,7 +13,7 @@
     <nav class="navbar navbar-default">
   	<div class="container-fluid">
     <div class="navbar-header">
-     <p class="navbar-brand" href="#">{{ $society_name }}</p>
+     <p class="navbar-brand" href="#">as</p>
     </div>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
@@ -25,10 +25,5 @@
     </div>
   	</div>
 	</nav>
-	<div class="container" style="text-align:center">
-        <div class="jumbotron">
-                <h1> {{ $heading }} </h1>
-        </div>
-    </div>
 </body>
 </html>
