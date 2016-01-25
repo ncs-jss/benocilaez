@@ -13,14 +13,17 @@
     <nav class="navbar navbar-default">
   	<div class="container-fluid">
     <div class="navbar-header">
-     <p class="navbar-brand" href="#">as</p>
+     <p class="navbar-brand" href="#">{{ $society }} | {{ $action }}</p>
     </div>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
+        @if($admin == 1)
+        <li><a href="add_society">Add Society</a></li>
+        @endif
+        <li><a href="add_event">Add event</a></li>
+        <li><a href="view_event">View Events</a></li>
+        <li><a href="add_winners">Add Winners</a></li>
+        <li><a href="logout">Logout</a></li>
       </ul>
     </div>
   	</div>

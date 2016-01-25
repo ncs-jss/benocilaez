@@ -60,7 +60,7 @@ class PagesController extends BaseController{
 					array_push($events, array('society_name'=>$value['society'], 'society_events'=>$events_des));
 				}
 
-				return view('view_event', array('societies'=> $events, 'accessor'=> $user->society, 'admin'=> 1));
+				return view('view_event', array('society'=>$user->society, 'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 1));
 			}else{
 				$events= [];
 				$event_des = User::where('email', 'quanta@quanta.com')
@@ -79,10 +79,11 @@ class PagesController extends BaseController{
 
 	public function add_event(){
 		if(\Auth::check()){
+			$user = User::where('email', Session::get('email'))->first();
 			if(Session::get('success') == 1){
-				return view('add_event', array('action'=>'Add Event', 'err'=>'Event created Successfully!!'));
+				return view('add_event', array('society'=>$user->society, 'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>'Event created Successfully!!'));
 			}else{
-				return view('add_event', array('action'=>'Add Event', 'err'=>''));
+				return view('add_event', array('society'=>$user->society, 'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>''));
 			}
 		}else{
 			return Redirect::route('root');

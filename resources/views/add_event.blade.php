@@ -23,11 +23,7 @@
 </style>
 </head>
 <body>
-<div class="container">
-	<div class="jumbotron" style="text-align:center">
-		<h1>{{ $action }}</h1>
-	</div>
-</div>
+@include('header')
 <div class="container">
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="add_event" method="POST">
