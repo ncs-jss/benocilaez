@@ -37,7 +37,8 @@
 		});
 
 		$('#del_rule').click(function(){
-			$(this).attribute('rule')
+			$('#rule_group').remove();
+			
 		});
 
 	});	
