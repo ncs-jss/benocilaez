@@ -15,7 +15,8 @@ class PagesController extends BaseController{
 	public function root(){
 		if(\Auth::check()){
 			$user = User::where('email', Session::get('email'))->first();
-			return view('add_event', ['society'=>$user->society,'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>'']);
+			return Redirect::route('add_event');
+			//return view('add_event', ['society'=>$user->society,'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>'']);
 		}else{
 			if(Session::get('err') == '1'){
 				return view('back_office_login', ['err'=>"Oh daiiumm!! Email and password aren't compatible"]);
@@ -34,15 +35,6 @@ class PagesController extends BaseController{
 			return Redirect::route('root');
 		}
 	}
-
-	/*public function event_approval(){
-		if( \Auth::check() && $user->priviliges == 1){
-			$user = User::where('email', Session::get('email'))->first();
-			return view('event_approval');
-		}else{
-			return Redirect::route('root');
-		}
-	}*/
 
 	public function view_events(){
 		if( \Auth::check()){
