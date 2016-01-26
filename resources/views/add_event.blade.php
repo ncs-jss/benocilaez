@@ -37,6 +37,7 @@
 		});
 
 		$('#del_rule').click(function(){
+			$('#rule_group').remove();
 
 		});
 

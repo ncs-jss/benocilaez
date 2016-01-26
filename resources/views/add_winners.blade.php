@@ -11,6 +11,33 @@
 </head>
 <body>
 @include('header')
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+	var i=1;
+	$("#add_winner").click(function(){
+		$("#winner-group").append('<br><label for="winner" class="col-md-4 control-label">Winner</label>'+
+					'<div class="col-md-5">'
+						+'<input type="text" name="winner" class="form-control" placeholder="Winner">'+
+					'</div>'
+					+'<div class="col-md-1">'
+				+'<button type="button" class="btn btn-danger" id="del_winner">'
+  					+'<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
+				+'</button>'
+				+'</div>');
+
+
+
+	});
+
+
+
+});
+
+
+
+
+</script>
 <div class="container">
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action=" " method="POST">
@@ -26,7 +53,7 @@
 						<input type="text" name="event_id" class="form-control" placeholder="Event ID">
 					</div>
 				</div><br>
-				<div class="form-group">
+				<div class="form-group" id = "winner-group">
 					<label for="winner" class="col-md-4 control-label">Winner</label>
 					<div class="col-md-5">
 						<input type="text" name="winner" class="form-control" placeholder="Winner">
