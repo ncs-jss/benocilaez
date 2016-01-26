@@ -20,13 +20,13 @@
 				<div class="form-group">
 					<label for="email" class="col-md-4 control-label">E-mail</label>
 					<div class="col-md-5">
-						<input type="email" name="email" class="form-control" placeholder="E-mail">
+						<input type="email" name="email" class="form-control" placeholder="E-mail" required>
 					</div>
 				</div><br>
 				<div class="form-group">
 					<label for="password" class="col-md-4 control-label">Password</label>
 					<div class="col-md-5">
-						<input type="password" name="password" class="form-control" placeholder="Password">
+						<input type="password" name="password" class="form-control" placeholder="Password" required>
 					</div>
 				</div><br>
 				<div> {{ $err }}</div>
