@@ -23,22 +23,51 @@
 			var event_des ={short_des: $('input[name=short_description]').val(),
 			long_des: CKEDITOR.instances['editor1'].getData(),
 			rules: rules,
-		}
-
-		var data = {event_name: $('input[name=event_name]').val(),
-					eventDetails: event_des,
+			}
+			console.log($('input[name=event_name]').val()=='');
+			if($('input[name=event_name]').val() == ''){
+				console.log('s');
+				$('.req').addClass('has-error');
+				$('input[name=event_name]').focus();
+				return;
+			}else{
+				$('.req').removeClass('has-error');
+			}
+			$('form-group[class=req]').addClass('inputError1');
+			var data = {event_name: $('input[name=event_name]').val(),
+					event_description: event_des,
 					contact: [{name: $('input[name=contact_name1]').val(), 
 							  	number: $('input[name=contact_number1]').val(),},
 							  {name: $('input[name=contact_name2]').val(), 
 							   	number: $('input[name=contact_number2]').val(),}],
 					prize_money:[$('input[name=contact_name1]').val(), 
 									$('input[name=contact_number1]').val(),],
-					time: '',
+					timing: '',
 					_token: $('input[name=_token]').val()
-		}
+			}
+			var button = $(this);
+			var i = 0;
+			console.log(button);
+			var adding = setInterval(function(){
+				button.html('Adding Event'+'.'.repeat(i % 4));
+				i = (i + 1) % 4;
+			}, 500);
 
-		$.post('add_event', data);
-	});
+			$.post('add_event', data, function(response){
+				clearInterval(adding);
+				if(response == 1){
+					window.location.href = window.location.href;
+				}else{
+					$('.err').html('Event could not be added.');
+				}
+			});
+		});
+
+		var clear_inputs = function(){
+			$('input').each(function(){
+				$(this).val('');
+			});
+		}
 
 		$('.rules').bind('rules_add', function(){
 			var group = $(this);
@@ -74,11 +103,12 @@
 <div class="container">
 	<div style="text-align:center">
 		<form class="form-horizontal" role="form" action="add_event" method="POST">
-			<div class="form-group">
+			<div class='err'> {{ $err }}</div>
+			<div class="form-group req">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					@if($action == 'Add Event')
-					<input type="text" name="event_name" class="form-control" placeholder="Event Name" required>
+					<input type="text" name="event_name" class="form-control" placeholder="Event Name *(required)" >
 					@else
 					<p>{{ $event_name }}<p>
 						@endif
@@ -157,7 +187,7 @@
 						<input type="text" name="prize_money2" class="form-control" placeholder="Second Prize">
 					</div>
 				</div><br>
-				<div> {{ $err }}</div>
+				
 				@if($errors->has())
 				@foreach ($errors->all() as $error)
 				<div>{{ $error }}</div>
