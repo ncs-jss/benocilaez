@@ -50,8 +50,9 @@ class OpController extends BaseController{
 		}
 	}
 
-	public function add_winners(){
-		if(\Auth::check()){
+	public function add_winners()
+	{
+		if (\Auth::check()) {
 			$user = User::where('email', Session::get('email'))->first();
 			return view('add_winners', array('society'=>$user->society, 'action'=> 'Add Winners', 'admin'=> $user->priviliges));
 		}
