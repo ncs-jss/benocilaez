@@ -98,13 +98,16 @@ class UserController extends BaseController{
 			$eventdetails = new EventDetails;
 			$eventdetails->event_id = $event->event_id;
 			$eventdetails->event_name = $data['event_name'];
-			$eventdetails->event_description = $data['event_description'];
+
+			$eventdetails->event_description = json_encode($data['event_description']);
 			$eventdetails->timing = $data['timing'];
-			//$eventdetails->rules = $data['rules'];
+			$eventdetails->contact = json_encode($data['contact']);
+			$eventdetails->prize_money = json_encode($data['prize_money']);
 			$eventdetails->approved = 0;
 			$eventdetails->save();
-	
 			Session::flash('success','1');
+			return 1;
+			
 			return Redirect::route('add_event');
 		}else{
 			return Redirect::route('add_event');
