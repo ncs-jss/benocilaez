@@ -40,8 +40,8 @@
 							  	number: $('input[name=contact_number1]').val(),},
 							  {name: $('input[name=contact_name2]').val(), 
 							   	number: $('input[name=contact_number2]').val(),}],
-					prize_money:[$('input[name=contact_name1]').val(), 
-									$('input[name=contact_number1]').val(),],
+					prize_money:[$('input[name=prize_money1]').val(), 
+									$('input[name=prize_money2]').val(),],
 					timing: '',
 					_token: $('input[name=_token]').val()
 			}
@@ -164,7 +164,7 @@
 					</div>
 					<div class="col-md-1"></div>
 					<div class="col-md-2">
-						<input type="text" name="conatct_number1" class="form-control" placeholder="Number">
+						<input type="text" name="contact_number1" class="form-control" placeholder="Number">
 					</div>
 				</div><br>
 				<div class="form-group">
@@ -174,7 +174,7 @@
 					</div>
 					<div class="col-md-1"></div>
 					<div class="col-md-2">
-						<input type="text" name="conatct_number2" class="form-control" placeholder="Number">
+						<input type="text" name="contact_number2" class="form-control" placeholder="Number">
 					</div>
 				</div><br>
 				<div class="form-group">

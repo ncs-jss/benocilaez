@@ -13,19 +13,19 @@
 		</tr>
 		<?php $i=0; ?>
 		@foreach ( $society_events as $event)
-		<?php $i++; 
-		?>
+		<?php $i++; ?>
 		<tr>
 			<td>{{ $i }}</td>
 			<td>{{ $event->event_name }}</td>
 			<td>
-				@if( $event->event_description->short_des != '')
+
+				@if( $event->event_description != null $event->event_description->short_des != '')
 				<p>SHORT DESCRIPTION:</p>
 				<p>{{ $event->event_description->short_des }}</p>
 				@endif
 				@if( $event->event_description->long_des != '')
 				<p>LONG DESCRIPTION:</p>
-				<p><?php echo $event->event_description->long_des ?></p>
+				<p>{!! $event->event_description->long_des !!}</p>
 				@endif
 				@if( count($event->event_description->rules) > 0 && $event->event_description->rules[0] != '')
 				<p>RULES:</p>
@@ -35,7 +35,7 @@
 					@endforeach
 				</ol>
 				@endif
-				
+
 			</td>
 			<td>
 				@if($admin == 1)
@@ -44,7 +44,7 @@
 					{{ ($event->approved == 0 ) ? 
 					'' : 'checked' }}>
 				</label>
-				
+
 				@else
 				{{ ($event->approved == 0 ) ? 
 				'No' : 'Yes' }}
@@ -71,6 +71,6 @@
 		</tr>
 		@endforeach 
 	</table>	
-	
+
 </body>
 </html>

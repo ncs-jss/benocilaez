@@ -121,7 +121,8 @@ public function admin_view_event($user, $admin, $accessor, $soc_id, $re_draw){
 	->join('events','events.society_email', '=', 'users.email')
 	->leftjoin('event_details', 'events.event_id', '=', 'event_details.event_id')
 	->select('users.society', 'events.event_id', 
-		'event_details.event_name', 'event_details.event_description',
+		'event_details.event_name', 'event_details.event_description', 
+		'event_details.prize_money', 'event_details.contact', 'event_details.timing',
 		'event_details.approved')
 	->get();
 
@@ -130,6 +131,7 @@ public function admin_view_event($user, $admin, $accessor, $soc_id, $re_draw){
 		$event_des[$i]['event_description'] = json_decode($x);
 
 	}
+	echo $event_des[0]->event_description->short_des;
 	if($admin == 1){
 		if($re_draw == 1) 
 			return \View::make('view_event', array('society'=>$user->society,
