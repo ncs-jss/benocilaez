@@ -57,7 +57,7 @@ class UserController extends BaseController{
 		$validator = Validator::make($data, $rules);
 		if($validator->fails()){
 			return redirect()->route('root')
-			->withErrors($validator)
+			->withErrors($validator->errors())
 			->withInput();
 		}else{
 
@@ -79,16 +79,15 @@ class UserController extends BaseController{
 			$data = Input::all();
 			array_pop($data);
 	
-			$rules = ['event_name'=>'required'];
+			$rules = ['event_name'=>'required','attachment' => 'mimes:application/pdf'];
 	
 			$validator = Validator::make($data, $rules);
 	
 			if($validator->fails()){
 				return Redirect::route('add_event')
-				->withErrors($validator)
+				->withErrors($validator->errors())
 				->withInput();
 			}
-	
 			$event = new Events;
 			$event->society_email = $user->email;
 			$event_count = Events::all()->last()->id + 1;
@@ -104,6 +103,13 @@ class UserController extends BaseController{
 			$eventdetails->contact = json_encode($data['contact']);
 			$eventdetails->prize_money = json_encode($data['prize_money']);
 			$eventdetails->approved = 0;
+			if (Input::file('attachment')->isValid()) {
+    		  $destinationPath = 'uploads'; // upload path  
+   	   		  $extension = Input::file('attachment')->getClientOriginalExtension(); // getting image extension
+     	   		$fileName = rand(11111,99999).'.'.$extension; // renameing image
+   		     Input::file('attachment')->move($destinationPath, $fileName); // uploading file to given path
+				$eventdetails->attachment = $fileName;
+				}			
 			$eventdetails->save();
 			Session::flash('success','1');
 			return 1;
