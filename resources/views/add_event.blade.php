@@ -191,13 +191,27 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-3">
-    						<input type="file" id="attachment">
-    					</div>
-    					<div class="col-md-1">
-    						<label for="attachment">Attachment</label>
+							<label class="btn btn-primary" for="my-file-selector">
+    							<input id="my-file-selector" type="file" style="display:none;">
+    								Choose file....
+							</label>
+						</div>
+    					<div class="col-md-1" style="">
+    						<label for="attachment" style="font-size:1.2em">Attachment</label>
     					</div>
     				</div>
     			</div>
+    			<div class="row">
+    			<div class="col-md-4"></div>
+    			<div class="col-md-3">
+    				<div class="progress">
+  					<div class="progress-bar progress-bar-success" id="progressbar" style="width:40%">
+  						<span class="sr-only"></span>
+					</div>
+				</div>
+				</div>
+				</div>
+				</div>
 				@if($errors->has())
 				@foreach ($errors->all() as $error)
 				<div>{{ $error }}</div>
