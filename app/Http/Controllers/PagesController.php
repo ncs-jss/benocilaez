@@ -36,11 +36,29 @@ class PagesController extends BaseController{
 		}
 	}
 
-	public function view_events(){
+
+	public function add_event(){
+		if(\Auth::check()){
+			$user = User::where('email', Session::get('email'))->first();
+			if(Session::get('success') == 1){
+				return view('add_event', array('society'=>$user->society, 
+					'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>'Event created Successfully!!'));
+			}else{
+				return view('add_event', array('society'=>$user->society, 
+					'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>''));
+			}
+		}else{
+			return Redirect::route('root');
+		}
+	}
+
+	public function view_events($soc_id = null){
 		if( \Auth::check()){
 			$user = User::where('email', Session::get('email'))->first();
 			if ($user->priviliges == 1){
-				$societies = User::all();
+				return self::admin_view_event($user, 1, $user->Society, (($soc_id == null ) ? $user->id : $soc_id),
+				 (($soc_id == null) ? 1 : 0) );
+				/*$societies = User::all();
 				$events = [];
 				foreach ($societies as  $value) {
 					$events_des = User::where('email', $value['email'])
@@ -66,24 +84,62 @@ class PagesController extends BaseController{
 				
 				return view('view_event', array('society'=>$user->society, 'action'=>'View Events', 
 					'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 0));
-			}
-		}else{
-			return Redirect::route('root');
-		}
+			*/
+}
+}else{
+	return Redirect::route('root');
+}
+}
+
+public function admin_soc_view_event($accessor, $soc_id, $admin){
+	$soc = User::where('id', $soc_id)->get();
+
+	$event_des = User::where('email', $soc->email)
+	->join('events','events.society_email', '=', 'users.email')
+	->leftjoin('event_details', 'events.event_id', '=', 'event_details.event_id')
+	->select('users.society', 'events.event_id', 
+		'event_details.event_name', 'event_details.event_description',
+		'event_details.approved')
+	->get();
+
+	for ($i=0; $i < count($event_des) ; $i++) { 
+		$x = $event_des[$i]['event_description'];
+		$event_des[$i]['event_description'] = json_decode($x);
+
 	}
 
-	public function add_event(){
-		if(\Auth::check()){
-			$user = User::where('email', Session::get('email'))->first();
-			if(Session::get('success') == 1){
-				return view('add_event', array('society'=>$user->society, 'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>'Event created Successfully!!'));
-			}else{
-				return view('add_event', array('society'=>$user->society, 'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>''));
-			}
-		}else{
-			return Redirect::route('root');
-		}
+	return \View::make('table', array('society'=>$soc->society,
+		'society_events'=>$event_des, 
+		'accessor'=> $accessor, 'admin'=> $admin));
+}
+
+public function admin_view_event($user, $admin, $accessor, $soc_id, $re_draw){
+	if($admin == 1)
+		$societies = User::select('id','society')->get();
+
+	$event_des = User::where('users.id', $soc_id)
+	->join('events','events.society_email', '=', 'users.email')
+	->leftjoin('event_details', 'events.event_id', '=', 'event_details.event_id')
+	->select('users.society', 'events.event_id', 
+		'event_details.event_name', 'event_details.event_description',
+		'event_details.approved')
+	->get();
+
+	for ($i=0; $i < count($event_des) ; $i++) { 
+		$x = $event_des[$i]['event_description'];
+		$event_des[$i]['event_description'] = json_decode($x);
+
+	}
+	if($admin == 1){
+		if($re_draw == 1) 
+			return \View::make('view_event', array('society'=>$user->society,
+							'society_events'=>$event_des, 'action'=>'View Events', 
+							'societies'=> $societies, 'accessor'=> $user, 'admin'=> 1));
+		else
+			return \View::make('table', array('society'=>$user->society,
+							'society_events'=>$event_des, 'accessor'=> $user, 'admin'=> 1));
 	}
 
-	
+}
+
 }

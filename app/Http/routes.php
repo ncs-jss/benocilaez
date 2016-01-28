@@ -5,7 +5,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);
 	Route::get('/add_society', ['as'=>'add_soc', 'uses'=>'PagesController@add_society']);
 	Route::get('/event_approval', ['as'=>'event_approval', 'uses'=>'PagesController@event_approval']);
-	Route::get('/view_event', ['as'=>'view_event', 'uses'=>'PagesController@view_events']);
+	Route::get('/view_event/{soc_id?}', ['as'=>'view_event', 'uses'=>'PagesController@view_events']);
 	Route::get('/add_event',['as'=>'add_event', 'uses'=>'PagesController@add_event']);
 	Route::get('/edit_event/{id}', ['as'=>'edit_event', 'uses'=>'OpController@edit']);
 	Route::get('/delete/{id}', ['as'=>'delete' , 'uses'=>'OpController@delete']);

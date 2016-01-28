@@ -10,72 +10,32 @@
 </head>
 <body>
 	@include('header')
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#soc_select").change(function(){
+			$.get('view_event/' + $('#soc_select').val(), function(response){
+				$('#table-container').html(response);
+			});
+		});
+	});
+	</script>
+
 	<div class="container">
 		<div class="col-md-2" style="float:left">
-    	@foreach ($societies as $data)
-		<select style="font-size:1.2em" class="form-control">
-  			<option>{{ $data['society_name'] }}</option>
- 		 	<option>{{ $data['society_name'] }}</option>
-  			<option>{{ $data['society_name'] }}</option>
-  			<option>{{ $data['society_name'] }}</option>
-  			<option>{{ $data['society_name'] }}</option>
-		</select><br>
-		</div>
-		<div style="text-align:center" class="table-reponsive">
-			<table class=" table table-bordered">
-				<tr>
-					<th style="width:5%">#</th>
-					<th class="col-md-2">Event Name</th>
-					<th class="col-md-6">Event Description</th>
-					<th class="col-md-1">Approved?</th>
-					@if($data['society_name'] == $accessor)
-					<th class="col-md-1">Edit</th>
-					<th class="col-md-1">Delete</th>
-					@endif
-				</tr>
-				<?php $i=0; ?>
-				@foreach ( $data['society_events'] as $event)
-				<?php $i++; ?>
-				<tr>
-					<td>{{ $i }}</td>
-					<td>{{ $event->event_name }}</td>
-					<td>{{ $event->event_description }}</td>
-					<td>
-						@if($admin == 1)
-						<label>
-							<input type="checkbox"
-							{{ ($event->approved == 0 ) ? 
-							'' : 'checked' }}>
-						</label>
-						
-						@else
-						{{ ($event->approved == 0 ) ? 
-						'No' : 'Yes' }}
-						@endif
-
-					</td>
-					@if($data['society_name'] == $accessor)
-					<td><a class="btn btn-info btn-xs" 
-						href="#" 
-						role="button" 
-						{{ ($event->approved == 0 ) ? '' 
-						: "disabled='disabled'" }} >
-						Edit</a>
-					</td>
-
-					<td><a class="btn btn-danger btn-xs" 
-						href="#" 
-						role="button" 
-						{{ ($event->approved == 0 ) ? '' 
-						: "disabled='disabled'" }}>
-						Delete</a>
-					</td>
-					@endif
-				</tr>
+			@if ($admin == 1)
+			<select style="font-size:1.2em" class="form-control" id="soc_select">
+				@foreach ($societies as $data)
+				<option value='{{ $data->id }}'>{{ $data->society }}</option>
 				@endforeach
-			</table>	
+			</select>
+			@else
+			<p>{{ $accessor }}</p>
+			@endif
+			<br>
 		</div>
-		@endforeach
-	</div><br><br><br><br><br><br>
+		<div style="text-align:center" class="table-reponsive" id='table-container'>
+		@include('table')
+		</div>
+	</div><br><br><br><br>
 </body>
 </html>
