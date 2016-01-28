@@ -56,64 +56,22 @@ class PagesController extends BaseController{
 		if( \Auth::check()){
 			$user = User::where('email', Session::get('email'))->first();
 			if ($user->priviliges == 1){
-				return self::admin_view_event($user, 1, $user->Society, (($soc_id == null ) ? $user->id : $soc_id),
-				 (($soc_id == null) ? 1 : 0) );
-				/*$societies = User::all();
-				$events = [];
-				foreach ($societies as  $value) {
-					$events_des = User::where('email', $value['email'])
-					->join('events','events.society_email', '=', 'users.email')
-					->leftjoin('event_details', 'events.event_id', '=', 'event_details.event_id')
-					->select('events.event_id', 'event_details.event_name', 
-						'event_details.event_description','event_details.approved')
-					->get();
-
-					array_push($events, array('society_name'=>$value['society'], 'society_events'=>$events_des));
+				if($soc_id == null )
+					return self::view_event($user, 1, $user->society, $user->id, (($soc_id == null) ? 1 : 0) );
+				else{
+					$soc2 = User::where('id',$soc_id)->first()->society;
+					return self::view_event($soc2, 1, $user->society, $soc_id, 0);
 				}
-				return view('view_event', array('society'=>$user->society, 'action'=>'View Events', 
-					'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 1));
-			}else{
-				$events= [];
-				$event_des = User::where('email', $user->email)
-				->join('events','events.society_email', '=', 'users.email')
-				->leftjoin('event_details', 'events.event_id', '=', 'event_details.event_id')
-				->select('users.society', 'events.event_id', 'event_details.event_name', 
-					'event_details.event_description','event_details.approved')
-				->get();
-				array_push($events, array('society_name'=>$user->society, 'society_events'=>$event_des));
-				
-				return view('view_event', array('society'=>$user->society, 'action'=>'View Events', 
-					'societies'=> $events, 'accessor'=> $user->society, 'admin'=> 0));
-			*/
-}
+		}else{
+			return self::view_event($user, 0, $user->society, $user->id, 0);
+		}
 }else{
 	return Redirect::route('root');
 }
 }
 
-public function admin_soc_view_event($accessor, $soc_id, $admin){
-	$soc = User::where('id', $soc_id)->get();
 
-	$event_des = User::where('email', $soc->email)
-	->join('events','events.society_email', '=', 'users.email')
-	->leftjoin('event_details', 'events.event_id', '=', 'event_details.event_id')
-	->select('users.society', 'events.event_id', 
-		'event_details.event_name', 'event_details.event_description',
-		'event_details.approved')
-	->get();
-
-	for ($i=0; $i < count($event_des) ; $i++) { 
-		$x = $event_des[$i]['event_description'];
-		$event_des[$i]['event_description'] = json_decode($x);
-
-	}
-
-	return \View::make('table', array('society'=>$soc->society,
-		'society_events'=>$event_des, 
-		'accessor'=> $accessor, 'admin'=> $admin));
-}
-
-public function admin_view_event($user, $admin, $accessor, $soc_id, $re_draw){
+public function view_event($user, $admin, $accessor, $soc_id, $re_draw){
 	if($admin == 1)
 		$societies = User::select('id','society')->get();
 
@@ -131,15 +89,18 @@ public function admin_view_event($user, $admin, $accessor, $soc_id, $re_draw){
 		$event_des[$i]['event_description'] = json_decode($x);
 
 	}
-	echo $event_des[0]->event_description->short_des;
 	if($admin == 1){
 		if($re_draw == 1) 
 			return \View::make('view_event', array('society'=>$user->society,
 							'society_events'=>$event_des, 'action'=>'View Events', 
-							'societies'=> $societies, 'accessor'=> $user, 'admin'=> 1));
+							'societies'=> $societies, 'accessor'=> $accessor, 'admin'=> $admin));
 		else
-			return \View::make('table', array('society'=>$user->society,
-							'society_events'=>$event_des, 'accessor'=> $user, 'admin'=> 1));
+			return \View::make('table', array('society'=>$user,
+							'society_events'=>$event_des, 'accessor'=> $accessor, 'admin'=> $admin));
+	}else{
+		return \View::make('view_event', array('society'=>$user->society,
+							'society_events'=>$event_des, 'action'=>'View Events', 
+							'societies'=> null, 'accessor'=> $accessor , 'admin'=> $admin));
 	}
 
 }

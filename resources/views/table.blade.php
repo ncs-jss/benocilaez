@@ -18,8 +18,8 @@
 			<td>{{ $i }}</td>
 			<td>{{ $event->event_name }}</td>
 			<td>
-
-				@if( $event->event_description != null $event->event_description->short_des != '')
+				@if( $event->event_description != null)
+				@if( $event->event_description->short_des != '')
 				<p>SHORT DESCRIPTION:</p>
 				<p>{{ $event->event_description->short_des }}</p>
 				@endif
@@ -35,7 +35,7 @@
 					@endforeach
 				</ol>
 				@endif
-
+				@endif
 			</td>
 			<td>
 				@if($admin == 1)
