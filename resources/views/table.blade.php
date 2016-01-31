@@ -53,7 +53,7 @@
 			</td>
 			@if($society == $accessor)
 			<td><a class="btn btn-info btn-xs" 
-				href="#" 
+				href="edit_event/{!! $event->event_id !!}" 
 				role="button" 
 				{{ ($event->approved == 0 ) ? '' 
 				: "disabled='disabled'" }} >
@@ -61,7 +61,7 @@
 			</td>
 
 			<td><a class="btn btn-danger btn-xs" 
-				href="#" 
+				href="delete/{!! $event->event_id !!}" 
 				role="button" 
 				{{ ($event->approved == 0 ) ? '' 
 				: "disabled='disabled'" }}>
