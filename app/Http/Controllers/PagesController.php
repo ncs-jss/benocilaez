@@ -16,12 +16,13 @@ class PagesController extends BaseController{
 		if(\Auth::check()){
 			$user = User::where('email', Session::get('email'))->first();
 			return Redirect::route('add_event');
-			//return view('add_event', ['society'=>$user->society,'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>'']);
 		}else{
 			if(Session::get('err') == '1'){
-				return view('back_office_login', ['err'=>"Oh daiiumm!! Email and password aren't compatible"]);
+				return view('back_office_login', 
+					['err'=>"Oh daiiumm!! Email and password don't match."]);
 			}else{
-				return view('back_office_login', ['err'=>'']);
+				return view('back_office_login', 
+					['err'=>'']);
 			}
 		}
 	}
@@ -30,7 +31,8 @@ class PagesController extends BaseController{
 		$user = User::where('email', Session::get('email'))->first();
 		
 		if( \Auth::check() && $user->priviliges == 1){
-			return view('add_society', array('admin'=>1, 'society'=>$user->society, 'action'=> 'Add Society'));
+			return view('add_society', array('admin'=>1, 
+				'society'=>$user->society, 'action'=> 'Add Society'));
 		}else{
 			return Redirect::route('root');
 		}
@@ -42,10 +44,12 @@ class PagesController extends BaseController{
 			$user = User::where('email', Session::get('email'))->first();
 			if(Session::get('success') == 1){
 				return view('add_event', array('society'=>$user->society, 
-					'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>'Event created Successfully!!'));
+					'admin'=>$user->priviliges, 'action'=>'Add Event', 
+					'err'=>'Event created Successfully!!', 'edit'=>0));
 			}else{
 				return view('add_event', array('society'=>$user->society, 
-					'admin'=>$user->priviliges, 'action'=>'Add Event', 'err'=>''));
+					'admin'=>$user->priviliges, 'action'=>'Add Event', 
+					'err'=>'', 'edit'=>0));
 			}
 		}else{
 			return Redirect::route('root');
@@ -57,7 +61,8 @@ class PagesController extends BaseController{
 			$user = User::where('email', Session::get('email'))->first();
 			if ($user->priviliges == 1){
 				if($soc_id == null )
-					return self::view_event($user, 1, $user->society, $user->id, (($soc_id == null) ? 1 : 0) );
+					return self::view_event($user, 1, $user->society, $user->id, 
+						(($soc_id == null) ? 1 : 0) );
 				else{
 					$soc2 = User::where('id',$soc_id)->first()->society;
 					return self::view_event($soc2, 1, $user->society, $soc_id, 0);

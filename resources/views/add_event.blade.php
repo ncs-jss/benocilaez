@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add Events</title>
+	<title>{{ $action }}</title>
 	<script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+	<!-- // <script src="{{ URL::asset('ass/ckeditor.js') }}"></script> -->
 	<style>
 	.desc{
 		width:150%;
@@ -48,6 +49,9 @@
 			var button = $(this);
 			var i = 0;
 			console.log(button);
+
+
+			@if( $edit == 0)
 			var adding = setInterval(function(){
 				button.html('Adding Event'+'.'.repeat(i % 4));
 				i = (i + 1) % 4;
@@ -61,7 +65,31 @@
 					$('.err').html('Event could not be added.');
 				}
 			});
+			@else
+			var adding = setInterval(function(){
+				button.html('Editing Event'+'.'.repeat(i % 4));
+				i = (i + 1) % 4;
+			}, 500);
+
+			$.post('{!! $id !!}', data, function(response){
+				clearInterval(adding);
+				if(response == 1){
+					window.location.href = "../view_event";
+				}else if(response == 0){
+					$('.err').html('An approved event can not be edited.'+
+						' Request for editing from view event page...');
+				}else{
+					$('.err').html('Event could not be edited.');
+				}
+			});
+			@endif
+
+			
+
 		});
+
+
+
 
 		var clear_inputs = function(){
 			$('input').each(function(){
@@ -97,10 +125,43 @@
 		});
 		$('.rules').trigger('rules_add');
 
+		@if($edit == 1)
+
+		var populate_inputs = function(){
+			var x = {!! html_entity_decode($event_des) !!};
+			var json = JSON.parse(x.toString());
+			$('input[name=short_description]').val(json.short_des);
+			CKEDITOR.instances.editor1.setData(json.long_des);
+			var rules = json.rules;
+			var i = 1;
+			$(".rule-1 input").val( rules[0]);
+			console.log(rules);
+			for(i = 1; i< rules.length; i++){
+				$('.add_rule').click();
+				$('div[rule_no='+(i+1)+'] input').val(rules[i]);
+			}
+
+			var contact = {!! $contacts !!}
+
+			$('input[name=contact_name1]').val(contact[0].name);
+			$('input[name=contact_number1]').val(contact[0].number);
+			$('input[name=contact_name2]').val(contact[1].name);
+			$('input[name=contact_number2]').val(contact[1].number);
+
+			var prizes = {!! $prizes !!}
+
+			$('input[name=prize_money1]').val(prizes[0]);
+			$('input[name=prize_money2]').val(prizes[1]);
+		}
+
+
+		populate_inputs();
+		@endif
 	});
 </script>
 
 <div class="container">
+
 	<div style="text-align:center">
 		<form class="form-horizontal" role="form" action="add_event" method="POST">
 			<div class='err'> {{ $err }}</div>

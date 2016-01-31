@@ -21,15 +21,25 @@ class OpController extends BaseController{
 			$user = User::where('email', Session::get('email'))->first();
 
 			$event = EventDetails::where('event_id',$id)->get();
-
+			//echo $event[0]->event_description;
+			$e = $event[0]->event_description;
+			//echo $e;
 			return view('add_event', array(
 				'action'=>'Edit Event',
 				'event_name'=>$event[0]->event_name,
-				'err'=>''
+				'err'=>'',
+				'society'=>$user->society,
+				'admin'=>$user->priviliges,
+				'id'=>$id,
+				'event_des'=>json_encode($e),
+				'edit'=>1,
+				'contacts'=>$event[0]->contact,
+				'prizes'=>$event[0]->prize_money,
 				));
+
 			
 		}else{
-			return Redirect::route('view_event');
+			return Redirect::back();
 		}
 	}
 
@@ -54,7 +64,37 @@ class OpController extends BaseController{
 	{
 		if (\Auth::check()) {
 			$user = User::where('email', Session::get('email'))->first();
-			return view('add_winners', array('society'=>$user->society, 'action'=> 'Add Winners', 'admin'=> $user->priviliges));
+			return view('add_winners', array('society'=>$user->society,
+			 'action'=> 'Add Winners', 'admin'=> $user->priviliges));
+		}else{
+			return Redirect::route('root');
+		}
+	}
+
+	public function edit_event($id = null){
+		if(\Auth::check()){
+			$user = User::where('email', Session::get('email'))->first();
+			$data = Input::all();
+
+			$eventdetails = EventDetails::where('event_id', $id)->first();
+			//echo print_r($eventdetails);
+
+			if($eventdetails->approved == 0){
+				$eventdetails->event_description = json_encode($data['event_description']);
+				$eventdetails->timing = $data['timing'];
+				$eventdetails->contact = json_encode($data['contact']);
+				$eventdetails->prize_money = json_encode($data['prize_money']);
+				$eventdetails->approved = 0;
+				$eventdetails->save();
+				return 1;
+				return Redirect::route('edit_event');
+			}else{
+				//cannot update an already approved event.
+				return 0;	
+				return Redirect::route('edit_event');
+			}
+		}else{
+			return Redirect::route('root');
 		}
 	}
 
@@ -62,4 +102,5 @@ class OpController extends BaseController{
 		\Auth::logout();
 		return Redirect::back();
 	}
+
 }
