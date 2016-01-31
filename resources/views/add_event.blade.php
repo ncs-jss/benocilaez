@@ -44,7 +44,8 @@
 					prize_money:[$('input[name=prize_money1]').val(), 
 									$('input[name=prize_money2]').val(),],
 					timing: '',
-					_token: $('input[name=_token]').val()
+					_token: $('input[name=_token]').val(),
+					attachment :$('input[name=attachment]').val()
 			}
 			var button = $(this);
 			var i = 0;
@@ -164,6 +165,16 @@
 
 	<div style="text-align:center">
 		<form class="form-horizontal" role="form" action="add_event" method="POST">
+			 <div class="signup-form" id="error">
+                @if($errors->has())
+                <p>
+                  {{$errors->first('event_name',':message')}} </p>
+                <p>  {{$errors->first('short_description',':message')}} </p>
+                <p>  {{$errors->first('long_des',':message')}} </p>
+                <p>  {{$errors->first('editor1',':message')}} </p>
+                <p>  {{$errors->first('attachment',':message')}} </p>
+                @endif
+               </div>
 			<div class='err'> {{ $err }}</div>
 			<div class="form-group req">
 				<div class="col-md-2"></div>
@@ -253,7 +264,7 @@
 						<div class="col-md-4"></div>
 						<div class="col-md-3">
 							<label class="btn btn-primary" for="my-file-selector">
-    							<input id="my-file-selector" type="file" style="display:none;">
+    							<input id="my-file-selector" type="file" name="attachment" style="display:none;">
     								Choose file....
 							</label>
 						</div>
