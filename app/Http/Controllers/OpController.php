@@ -98,6 +98,19 @@ class OpController extends BaseController{
 		}
 	}
 
+
+	public function approve($id = null){
+		$admin = User::where('email', Session::get('email'))->first()->priviliges;
+		if($id != null && \Auth::check() && $admin == 1){
+			$event = EventDetails::where('event_id', $id)->first();
+			$event->approved = ($event->approved + 1) % 2;
+			$event->save();
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
 	public function logout(){
 		\Auth::logout();
 		return Redirect::back();

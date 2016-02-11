@@ -90,9 +90,9 @@ class UserController extends BaseController{
 			}
 			$event = new Events;
 			$event->society_email = $user->email;
-			if(Events::all() != [])
-				return Events::all();
+			if(sizeof(Events::all()) != 0){
 				$event_count = Events::all()->last()->id + 1;
+			}
 			else
 				$event_count = 0;
 			$event->event_id = strtolower(substr($user->society, 0, 4)).$event_count;
@@ -107,11 +107,13 @@ class UserController extends BaseController{
 			$eventdetails->contact = json_encode($data['contact']);
 			$eventdetails->prize_money = json_encode($data['prize_money']);
 			$eventdetails->approved = 0;
-			if (Input::file('attachment')->isValid()) {
-    		  $destinationPath = 'uploads'; // upload path  
-   	   		  $extension = Input::file('attachment')->getClientOriginalExtension(); // getting image extension
+
+			if (Input::file('attachment') != null && Input::file('attachment') -> isValid()) {
+				echo Input::file('attachment');
+    			$destinationPath = 'uploads'; // upload path  
+   	   			$extension = Input::file('attachment') -> getClientOriginalExtension(); // getting image extension
      	   		$fileName = rand(11111,99999).'.'.$extension; // renameing image
-   		     Input::file('attachment')->move($destinationPath, $fileName); // uploading file to given path
+   		    	Input::file('attachment')->move($destinationPath, $fileName); // uploading file to given path
 				$eventdetails->attachment = $fileName;
 				}			
 			$eventdetails->save();
