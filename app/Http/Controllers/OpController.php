@@ -46,7 +46,7 @@ class OpController extends BaseController{
 	public function delete($id){
 		$owner = Events::where('event_id', $id)->get()[0]->society_email;
 		if(\Auth::check() && Session::get('email')==$owner){
-			
+
 			if (EventDetails::where('event_id', $id)->count()>=1){
 				EventDetails::where('event_id', $id)->delete();
 			}
