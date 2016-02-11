@@ -263,10 +263,7 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-3">
-							<label class="btn btn-primary" for="my-file-selector">
-    							<input id="my-file-selector" type="file" name="attachment" style="display:none;">
-    								Choose file....
-							</label>
+    							<input id="my-file-selector" type="file" name="attachment" style="font-size:1.2em">
 						</div>
     					<div class="col-md-1" style="">
     						<label for="attachment" style="font-size:1.2em">Attachment</label>
