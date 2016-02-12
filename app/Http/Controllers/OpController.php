@@ -46,7 +46,7 @@ class OpController extends BaseController{
 	public function delete($id){
 		$owner = Events::where('event_id', $id)->get()[0]->society_email;
 		if(\Auth::check() && Session::get('email')==$owner){
-			
+
 			if (EventDetails::where('event_id', $id)->count()>=1){
 				EventDetails::where('event_id', $id)->delete();
 			}
@@ -95,6 +95,19 @@ class OpController extends BaseController{
 			}
 		}else{
 			return Redirect::route('root');
+		}
+	}
+
+
+	public function approve($id = null){
+		$admin = User::where('email', Session::get('email'))->first()->priviliges;
+		if($id != null && \Auth::check() && $admin == 1){
+			$event = EventDetails::where('event_id', $id)->first();
+			$event->approved = ($event->approved + 1) % 2;
+			$event->save();
+			return 1;
+		}else{
+			return 0;
 		}
 	}
 

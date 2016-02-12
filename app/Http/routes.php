@@ -14,7 +14,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/logout',['as'=>'logout', 'uses'=>'OpController@logout']);
 
 		//POST Routes
-
+	Route::post('/approve/{id}', ['as'=>'approve', 'uses'=>'OpController@approve']);
 	Route::post('/edit_event/{id}', ['as'=>'edit', 'before'=>'csrf', 'uses'=>'OpController@edit_event']);
 	Route::post('/register_society', ['as'=>'register', 'before'=>'csrf', 'uses'=>'UserController@reg_society']);
 	Route::post('/login_society',['as'=>'login', 'before'=>'csrf', 'uses'=>'UserController@login_society']);

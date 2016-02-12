@@ -188,7 +188,7 @@
 <div class="container">
 
 	<div style="text-align:center">
-		<form class="form-horizontal" role="form" action="add_event" method="POST">
+		<form class="form-horizontal" role="form" action="add_event" method="POST" enctype="multipart/form-data">
 			 <div class="signup-form" id="error">
                 @if($errors->has())
                 <p>
@@ -206,7 +206,7 @@
 					@if($action == 'Add Event')
 					<input type="text" name="event_name" class="form-control" placeholder="Event Name *(required)" >
 					@else
-					<p>{{ $event_name }}<p>
+					<h4><strong>{{ $event_name }}</strong></h4>
 						@endif
 					</div>
 				</div><br>
