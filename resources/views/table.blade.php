@@ -40,9 +40,20 @@
 			<td>
 				@if($admin == 1)
 				<label>
-					<input type="checkbox"
+					<!--<input type="checkbox"
 					{{ ($event->approved == 0 ) ? 
-					'' : 'checked' }}>
+					'' : 'checked' }}>-->
+					@if($event->approved == 0 )
+					<a class="btn btn-success btn-xs" 
+					href="edit_event/{!! $event->event_id !!}" 
+					role="button"> 
+					Approve</a>
+					@else
+					<a class="btn btn-danger btn-xs" 
+					href="edit_event/{!! $event->event_id !!}" 
+					role="button"> 
+					diapprove</a>
+					@endif
 				</label>
 
 				@else

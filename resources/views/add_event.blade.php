@@ -9,12 +9,36 @@
 		width:150%;
 		height:200px; 
 	}
+	#my-file-selector{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	}
+	
+	#my-file-selector + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+	}
+
+	#my-file-selector:focus + label,
+	.my-file-selector + label:hover 
+	{
+    background-color: blue;
+	}
 	</style>
 </head>
 <body>
 	@include('header')
 
-	<script type="text/javascript">
+	<script type="javascript">
+	
+	( document, window, 0 ));
 	$(document).ready(function(){
 		$('#go').click(function(){
 			var rules = [];
@@ -263,7 +287,11 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-3">
-    							<input id="my-file-selector" type="file" name="attachment" style="font-size:1.2em">
+							<span id="filename" >filename</span>
+							<label class="btn btn-primary">
+    							<input id="my-file-selector" type="file" name="attachment" data-multiple-caption="{count} files selected" multiple />
+    							Choose file...
+    						</label>
 						</div>
     					<div class="col-md-1" style="">
     						<label for="attachment" style="font-size:1.2em">Attachment</label>
