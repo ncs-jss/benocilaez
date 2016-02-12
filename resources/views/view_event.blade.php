@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Veiw Events</title>
+	<title>View Events</title>
 	<style type="text/css">
 	.event{
 		padding-top: 5em;
