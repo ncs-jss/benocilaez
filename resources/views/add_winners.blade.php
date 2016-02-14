@@ -16,15 +16,20 @@
 	$(document).ready(function(){
 	var i=1;
 	$("#add_winner").click(function(){
-		$("#winner-group").append('<br><label for="winner" class="col-md-4 control-label">Winner</label>'+
-					'<div class="col-md-5">'
-						+'<input type="text" name="winner" class="form-control" placeholder="Winner">'+
-					'</div>'
-					+'<div class="col-md-1">'
-				+'<button type="button" class="btn btn-danger" id="del_winner">'
-  					+'<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
-				+'</button>'
-				+'</div>');
+		$("#winner-group").append('<div class="row">'
+						+'<div class="col-md-4"></div>'
+						+'<div class="col-md-5">'
+						+'<input type="text" name="winner" class="form-control" placeholder="Winner">'
+						+'</div>'
+						+'<div class="col-md-1">'
+						+'<button type="button" class="btn btn-danger btn-sm" id="del_winner">'
+  						+'<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
+						+'</button>'
+						+'</div>'
+						+'</div>'
+						+'<br>');
+
+		
 
 
 
@@ -54,30 +59,35 @@
 					</div>
 				</div><br>
 				<div class="form-group" id = "winner-group">
+					<div class="row">
 					<label for="winner" class="col-md-4 control-label">Winner</label>
 					<div class="col-md-5">
 						<input type="text" name="winner" class="form-control" placeholder="Winner">
 					</div>
-				<div class="col-md-1">
-				<button type="button" class="btn btn-info btn-sm" id="add_winner">
+					<div class="col-md-1">
+					<button type="button" class="btn btn-info btn-sm" id="add_winner">
   					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				</button>
+					</button>
+					</div>
+					</div><br>
 				</div>
-				</div>
-				<br><br>
+				<br>
 				<div class="form-group">
+					<div class="row">
 					<label for="runner1" class="col-md-4 control-label">1st Runner Up</label>
 					<div class="col-md-5">
 						<input type="text" name="runner_up1" class="form-control" placeholder="1st Runner Up">
 					</div>
-				<div class="col-md-1">
-				<button type="button" class="btn btn-info btn-sm" id="add_runner1">
-  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				</button>
-				</div>
+					<div class="col-md-1">
+					<button type="button" class="btn btn-info btn-sm" id="add_runner1">
+  						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</button>
+					</div>
+					</div>
 				</div>
 				<br><br>
 				<div class="form-group">
+					<div class="row">
 					<label for="runner2" class="col-md-4 control-label">2nd Runner Up</label>
 					<div class="col-md-5">
 						<input type="text" name="runner_up2" class="form-control" placeholder="2nd Runner Up">
@@ -86,6 +96,7 @@
 					<button type="button" class="btn btn-info btn-sm" id="add_runner2">
   						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					</button>
+					</div>
 					</div>
 				</div>
 				<br><br>
