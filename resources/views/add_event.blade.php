@@ -10,35 +10,33 @@
         height:200px; 
     }
     #my-file-selector{
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
     }
     
     #my-file-selector + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
+        font-size: 1.25em;
+        font-weight: 700;
+        color: white;
+        background-color: black;
+        display: inline-block;
     }
 
     #my-file-selector:focus + label,
     .my-file-selector + label:hover 
     {
-    background-color: blue;
+        background-color: blue;
     }
     </style>
 </head>
 <body>
     @include('header')
 
-    <script type="javascript">
-    
-    ( document, window, 0 ));
+    <script type="text/javascript">
     $(document).ready(function(){
         $('#go').click(function(){
             var rules = [];
@@ -108,21 +106,10 @@
                 }
             });
             @endif
-
-            
-
         });
 
-
-
-
-        var clear_inputs = function(){
-            $('input').each(function(){
-                $(this).val('');
-            });
-        }
-
         $('.rules').bind('rules_add', function(){
+            console.log('abhay');
             var group = $(this);
             var input = $('.rule', group);
             var minus = $('.plus', input);
@@ -150,7 +137,7 @@
         });
         $('.rules').trigger('rules_add');
 
-        @if($edit == 1)
+         @if($edit == 1)
 
         var populate_inputs = function(){
             var x = {!! html_entity_decode($event_des) !!};
@@ -182,148 +169,151 @@
 
         populate_inputs();
         @endif
+        
     });
-</script>
+    </script>
 
-<div class="container">
+    <div class="container">
 
-    <div style="text-align:center">
-        <form class="form-horizontal" role="form" action="add_event" method="POST" enctype="multipart/form-data">
-             <div class="signup-form" id="error">
+        <div style="text-align:center">
+            <form class="form-horizontal" role="form" action="add_event" method="POST" enctype="multipart/form-data">
+               <div class="signup-form" id="error">
                 @if($errors->has())
                 <p>
                   {{$errors->first('event_name',':message')}} </p>
-                <p>  {{$errors->first('short_description',':message')}} </p>
-                <p>  {{$errors->first('long_des',':message')}} </p>
-                <p>  {{$errors->first('editor1',':message')}} </p>
-                <p>  {{$errors->first('attachment',':message')}} </p>
-                @endif
-               </div>
-            <div class='err'> {{ $err }}</div>
-            <div class="form-group req">
+                  <p>  {{$errors->first('short_description',':message')}} </p>
+                  <p>  {{$errors->first('long_des',':message')}} </p>
+                  <p>  {{$errors->first('editor1',':message')}} </p>
+                  <p>  {{$errors->first('attachment',':message')}} </p>
+                  @endif
+              </div>
+              <div class='err'> {{ $err }}</div>
+              <div class="form-group req">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     @if($action == 'Add Event')
                     <input type="text" name="event_name" class="form-control" placeholder="Event Name *(required)" >
                     @else
                     <h4><strong>{{ $event_name }}</strong></h4>
-                        @endif
-                    </div>
-                </div><br>
-                <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <input type="text" name="short_description" class="form-control" placeholder="A Short Description of Your Event..."></textarea>
-                    </div>
-                </div><br>
-                <div class="form-group">
-                    <p><b>Event description:</b></p>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <textarea class="desc" id="editor1" name="editor1">Your Event's Description Here...</textarea>
-                        <script type="text/javascript">
-                        CKEDITOR.replace( 'editor1' );
-                        </script>
-                    </div> 
-                </div><br>
-                <div class="form-group rules" style="text-align:center">
-                    <p><b>Rules:</b></p>
-                    <div class="col-md-10 col-md-offset-2 rule">
-                        <div class="col-md-9">
-                            <div class="input-group rule-1">
-                                <span class="input-group-addon" id="rulenumber">1</span>
-                                <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1">
-                            </div>
-                        </div>                      
-                        <div class="col-md-1 plus">
-                            <button type="button" class="btn btn-primary add_rule" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
+                    @endif
+                </div>
+            </div><br>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <input type="text" name="short_description" class="form-control" placeholder="A Short Description of Your Event..."></textarea>
+                </div>
+            </div><br>
+            <div class="form-group">
+                <p><b>Event description:</b></p>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <textarea class="desc" id="editor1" name="editor1">Your Event's Description Here...</textarea>
+                    <script type="text/javascript">
+                    CKEDITOR.replace( 'editor1' );
+                    </script>
+                </div> 
+            </div><br>
+            <div class="form-group rules" style="text-align:center">
+                <p><b>Rules:</b></p>
+                <div class="col-md-10 col-md-offset-2 rule">
+                    <div class="col-md-9">
+                        <div class="input-group rule-1">
+                            <span class="input-group-addon" id="rulenumber">1</span>
+                            <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1">
                         </div>
-                        <br><br>
+                    </div>                      
+                    <div class="col-md-1 plus">
+                        <button type="button" class="btn btn-primary add_rule" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
                     </div>
-                </div><br>
-                <div class="form-group">
-                    <label for="time" class="col-md-4 control-label">Time</label>
-                    <div class="col-md-2">
-                        <input type="time" name="time" class="form-control">
-                    </div>
-                    <label for="date" class="col-md-1 control-label">Date</label>
-                    <div class="col-md-2">
-                        <input type="date" name="date" class="form-control">
-                    </div>
-                </div><br>
-                <div class="form-group">
-                    <label for="contact" class="col-md-4 control-label">Contacts</label>
-                    <div class="col-md-2">
-                        <input type="text" name="contact_name1" class="form-control" placeholder="Name">
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-2">
-                        <input type="text" name="contact_number1" class="form-control" placeholder="Number">
-                    </div>
-                </div><br>
-                <div class="form-group">
+                    <br><br>
+                </div>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <label for="time" class="col-md-4 control-label">Time</label>
+                <div class="col-md-2">
+                    <input type="time" name="time" class="form-control">
+                </div>
+                <label for="date" class="col-md-1 control-label">Date</label>
+                <div class="col-md-2">
+                    <input type="date" name="date" class="form-control">
+                </div>
+            </div><br>
+            <div class="form-group">
+                <label for="contact" class="col-md-4 control-label">Contacts</label>
+                <div class="col-md-2">
+                    <input type="text" name="contact_name1" class="form-control" placeholder="Name">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <input type="text" name="contact_number1" class="form-control" placeholder="Number">
+                </div>
+            </div><br>
+            <div class="form-group">
+                <div class="col-md-4"></div>
+                <div class="col-md-2">
+                    <input type="text" name="contact_name2" class="form-control" placeholder="Name">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <input type="text" name="contact_number2" class="form-control" placeholder="Number">
+                </div>
+            </div><br>
+            <div class="form-group">
+                <label for="prize_money" class="col-md-4 control-label">Prize Money</label>
+                <div class="col-md-2">
+                    <input type="text" name="prize_money1" class="form-control" placeholder="Fisrt Prize">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <input type="text" name="prize_money2" class="form-control" placeholder="Second Prize">
+                </div>
+            </div><br>
+            <div class="form-group">
+                <div class="row">
                     <div class="col-md-4"></div>
-                    <div class="col-md-2">
-                        <input type="text" name="contact_name2" class="form-control" placeholder="Name">
+                    <div class="col-md-3">
+                        <span id="filename" >filename</span>
+                        <label class="btn btn-primary">
+                            <input id="my-file-selector" type="file" name="attachment" data-multiple-caption="{count} files selected" multiple />
+                            Choose file...
+                        </label>
                     </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-2">
-                        <input type="text" name="contact_number2" class="form-control" placeholder="Number">
-                    </div>
-                </div><br>
-                <div class="form-group">
-                    <label for="prize_money" class="col-md-4 control-label">Prize Money</label>
-                    <div class="col-md-2">
-                        <input type="text" name="prize_money1" class="form-control" placeholder="Fisrt Prize">
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-2">
-                        <input type="text" name="prize_money2" class="form-control" placeholder="Second Prize">
-                    </div>
-                </div><br>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-3">
-                            <span id="filename" >filename</span>
-                            <label class="btn btn-primary">
-                                <input id="my-file-selector" type="file" name="attachment" data-multiple-caption="{count} files selected" multiple />
-                                Choose file...
-                            </label>
-                        </div>
-                        <div class="col-md-1" style="">
-                            <label for="attachment" style="font-size:1.2em">Attachment</label>
-                        </div>
+                    <div class="col-md-1" style="">
+                        <label for="attachment" style="font-size:1.2em">Attachment</label>
                     </div>
                 </div>
-                <div class="row">
+            </div>
+            <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-3">
                     <div class="progress">
-                    <div class="progress-bar progress-bar-success" id="progressbar" style="width:40%">
-                        <span class="sr-only"></span>
+                        <div class="progress-bar progress-bar-success" id="progressbar" style="width:40%">
+                            <span class="sr-only"></span>
+                        </div>
                     </div>
                 </div>
-                </div>
-                </div>
-                </div>
-                @if($errors->has())
-                @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
-                @endforeach
-                @endif
-                <div class="col-md-7"></div>
-                <div class="col-md-2">
-                    <button type="button" id="go" class="btn btn-primary btn-block">{{ $action }}</button>
-                </div>
             </div>
-            <div class="col-md-5">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            </div>
-        </form>
-        <br><br><br><br><br><br>
+        </div>
+        @if($errors->has())
+        @foreach ($errors->all() as $error)
+        <div>{{ $error }}</div>
+        @endforeach
+        @endif
+        <div class="col-md-7"></div>
+        <div class="col-md-2">
+            <button type="button" id="go" class="btn btn-primary btn-block">{{ $action }}</button>
+        </div>
     </div>
+    <div class="col-md-5">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    </div>
+</form>
+<br><br><br><br><br><br>
+</div>
 </body>
 </html>
