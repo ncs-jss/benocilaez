@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>{{ $action }}</title>
-    <script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.5.6/basic/ckeditor.js"></script>
     <!-- // <script src="{{ URL::asset('ass/ckeditor.js') }}"></script> -->
     <style>
     .desc{
