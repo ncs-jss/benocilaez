@@ -14,10 +14,33 @@
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
-
 		$('#go').click(function(){
-			
+			var c = [], d = [], e = [];
+			$('#winner .rule0 input').each(function(){c.push($(this).val())});
+			$('#runnerup1 .rule1 input').each(function(){d.push($(this).val())});
+			$('#runnerup2 .rule2 input').each(function(){e.push($(this).val())});
+			/*
+			console.log(c);
+			console.log(d);*/
+			console.log($('select').val());
+
+			var data = {
+			event_id : '',
+			winnner : c,
+			runnnerup1 : d,
+			runnerup2 : e,
+			}
+			console.log(data);
+
+			$.post('add_winners', data, function(response){
+                if(response == 1){
+                	document.write(response);
+                }else{
+                	document.write("Error");
+                }
+            });
 		});
+
 
 		$('.winner').each(function(index){
 			$(this).bind('rules_add', function(){
@@ -60,7 +83,7 @@
 </script>
 <div class="container">
 	<div style="text-align:center">
-		<form class="form-horizontal" role="form" action="req" method="POST">
+		<form class="form-horizontal" role="form" action="" method="POST">
 			<div class="form-group" >
 				<label for="event_name" class="control-label" style="display:block; text-align:center;">Event Name</label>
 				<select  class="form-control" id="event_name" style="margin-left:1.5%; width:inherit; display:inline">
@@ -138,7 +161,7 @@
 			</div>
 			<div class="col-md-7"></div>
 			<div class="col-md-2">
-				<button type="submit" class="btn btn-primary btn-block">Add</button>
+				<button type="button" class="btn btn-primary btn-block" id="go">Add</button>
 			</div>
 		</div>
 	</form>
