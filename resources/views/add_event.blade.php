@@ -79,7 +79,7 @@
                 button.html('Adding Event'+'.'.repeat(i % 4));
                 i = (i + 1) % 4;
             }, 500);
-
+            
             $.post('add_event', data, function(response){
                 clearInterval(adding);
                 if(response == 1){
