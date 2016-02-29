@@ -62,7 +62,7 @@ class OpController extends BaseController{
     }
 
     public function add_winners(){
-
+        return "abhay";
     }
 
     public function edit_event($id = null){
