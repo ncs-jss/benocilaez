@@ -16,7 +16,7 @@
 		<?php $i++; ?>
 		
 		@if($admin == 1 && $event->approved == 2)
-		<tr style='background:rgba(254, 97, 0, 0.64);'>
+		<tr id="row" style='background:rgba(254, 97, 0, 0.64);'>
 			@else
 			<tr>
 				@endif
@@ -72,7 +72,8 @@
 				@if($society == $accessor)
 				<td><a class="btn btn-info btn-xs" 
 					val="{!! $event->event_id !!}" 
-					role="edit_button" 
+					role="edit_button"
+					appr="{{$event->approved}}" 
 					{{ ($event->approved == 0 ) ? '' 
 					: "disabled='disabled'" }} >
 					Edit</a>
@@ -81,6 +82,7 @@
 				<td><a class="btn btn-danger btn-xs" 
 					val="{!! $event->event_id !!}" 
 					role="del_button" 
+					appr="{{$event->approved}}"
 					{{ ($event->approved == 0 ) ? '' 
 					: "disabled='disabled'" }}>
 					Delete</a>
@@ -134,8 +136,9 @@
 		@endif
 
 		$(document).ready(function(){
+			modalcaller = null;
 
-			request = function(id){
+			request = function(id, appr){
 				$('#myModal #send-req').attr('val', id);
 				$('#myModal h4').html("Well here's the problem&hellip;");
 				
@@ -144,10 +147,23 @@
 					'<br>Disapprove the event to continue.');
 				$('#send-req').hide();
 				@else
-				$('#myModal p').html("You cannot edit or delete an approved event.<br>"+
-					"To do so you'll need to send a request the admin to disapprove the particular event.<br>"+
-					"Click on the send request button to send a disapproval event to the admin.");
-				$('#send-req').show();
+				if(appr != '2'){
+					$('#myModal p').html("You cannot edit or delete"+
+						" an approved event.<br>"+
+						"To do so you'll need to send a request the "+
+						"admin to disapprove the particular event.<br>"+
+						"Click on the send request button to send a "+
+						"disapproval event to the admin.");
+					$('#send-req').show();
+				}else{
+					$('#myModal p').html("You cannot edit or delete"+
+						" an approved event.<br>"+
+						"To do so you'll need to send a request the "+
+						"admin to disapprove the particular event.<br>"+
+						"It seems that you've already sent a request for disapproval."+
+						"Please have patience, the administrator will respond soon");
+					$("#send-req").hide();
+				}				
 				@endif
 				$('#myModal').modal('show');
 			};
@@ -156,8 +172,6 @@
 			$('.approve').click(function(){
 				var id = $(this).attr('val');
 				var x = $(this);
-				console.log('here');
-				console.log('approve/'+id);
 				$.get('approve/' + id, function(res){
 					if(res == '1'){
 						if(x.hasClass('btn-success')){
@@ -172,6 +186,7 @@
 							x.addClass('btn-success');
 							$('a[role=del_button]', x.parent().parent().parent()).removeAttr('disabled');
 							$('a[role=edit_button]', x.parent().parent().parent()).removeAttr('disabled');
+							x.parent().parent().parent().attr('style', '');
 						}
 
 					}else{
@@ -186,6 +201,7 @@
 			});
 
 			$('#send-req').click(function(){
+
 				var data = $(this).attr('val'); 
 				var x = $(this).parent().parent();
 				$.get('req/' + data, function(res){
@@ -193,6 +209,7 @@
 						$('h4', x).html('Hurrayy!');
 						$('p', x).html('Your request has been sent.');
 						$('#send-req').hide();
+						$('a', modalcaller).attr('appr', '2');
 					}else{
 						$('h4', x).html('Oooh damn..!');
 						$('p', x).html('Your request could not be sent.'+
@@ -204,7 +221,8 @@
 
 			$('a[role=edit_button]').click(function(){
 				if($(this).attr('disabled') == 'disabled'){
-					request($(this).attr('val'));
+					request($(this).attr('val'), $(this).attr('appr'));
+					modalcaller = $(this).parent().parent();
 					return;
 				}
 				window.location = 'edit_event/' + $(this).attr('val');
@@ -215,7 +233,8 @@
 
 			$('a[role=del_button]').click(function(response){
 				if($(this).attr('disabled') == 'disabled'){
-					request($(this).attr('val'));
+					modalcaller = $(this).parent().parent();
+					request($(this).attr('val'), $(this).attr('appr'));
 					return;
 				}
 				$(this).removeClass('btn-danger');
