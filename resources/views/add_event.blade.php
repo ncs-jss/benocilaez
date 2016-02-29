@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>{{ $action }}</title>
-    <script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.5.6/basic/ckeditor.js"></script>
     <!-- // <script src="{{ URL::asset('ass/ckeditor.js') }}"></script> -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <!-- Generic page styles -->
@@ -19,7 +19,7 @@
     <style>
     .desc{
         width:150%;
-        height:200px; 
+        height:200px;
     }
     #my-file-selector{
         width: 0.1px;
@@ -29,7 +29,7 @@
         position: absolute;
         z-index: -1;
     }
-    
+
     #my-file-selector + label {
         font-size: 1.25em;
         font-weight: 700;
@@ -39,7 +39,7 @@
     }
 
     #my-file-selector:focus + label,
-    .my-file-selector + label:hover 
+    .my-file-selector + label:hover
     {
         background-color: blue;
     }
@@ -71,13 +71,14 @@
             $('form-group[class=req]').addClass('inputError1');
             var data = {event_name: $('input[name=event_name]').val(),
                     event_description: event_des,
-                    contact: [{name: $('input[name=contact_name1]').val(), 
+                    contact: [{name: $('input[name=contact_name1]').val(),
                                 number: $('input[name=contact_number1]').val(),},
-                              {name: $('input[name=contact_name2]').val(), 
+                              {name: $('input[name=contact_name2]').val(),
                                 number: $('input[name=contact_number2]').val(),}],
-                    prize_money:[$('input[name=prize_money1]').val(), 
+                    prize_money:[$('input[name=prize_money1]').val(),
                                     $('input[name=prize_money2]').val(),],
-                    timing: '',
+                    timing: $('input[name=date]').val()+" "
+                            +$('input[name=time]').val(),
                     _token: $('input[name=_token]').val(),
                     attachment :$('input[name=attachment]').val()
             }
@@ -91,7 +92,7 @@
                 button.html('Adding Event'+'.'.repeat(i % 4));
                 i = (i + 1) % 4;
             }, 500);
-            
+
             $.post('add_event', data, function(response){
                 clearInterval(adding);
                 if(response == 1){
@@ -181,7 +182,7 @@
 
         populate_inputs();
         @endif
-        
+
     });
     </script>
 
@@ -224,7 +225,7 @@
                     <script type="text/javascript">
                     CKEDITOR.replace( 'editor1' );
                     </script>
-                </div> 
+                </div>
             </div><br>
             <div class="form-group rules" style="text-align:center">
                 <p><b>Rules:</b></p>
@@ -234,7 +235,7 @@
                             <span class="input-group-addon" id="rulenumber">1</span>
                             <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1">
                         </div>
-                    </div>                      
+                    </div>
                     <div class="col-md-1 plus">
                         <button type="button" class="btn btn-primary add_rule" aria-label="Left Align">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
