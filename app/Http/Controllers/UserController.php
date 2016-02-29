@@ -72,14 +72,30 @@ class UserController extends BaseController{
             }
         }
     }
+    public function upload_add_event(){
+    	$data = Input::all();
 
+    	if (Input::file('files') != null && Input::file('files') -> isValid()) {
+                $destinationPath = 'uploads'; // upload path
+                $extension = Input::file('files') -> getClientOriginalExtension(); // getting image extension
+                $fileName = rand(11111,99999).'.'.$extension; // renameing image
+                Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
+                Session::put('attachment',$fileName);
+                $response = array("files"=>array("url"=>"http://localhost/benocilaez/public/uploads/".$fileName,"thumbnailUrl"=>"http://localhost/benocilaez/public/uploads/".$fileName,"name" => $fileName, "type"=> $extension, "size" =>Input::file('files')->getClientSize()));
+ 
+                return json_encode($response);
+            }
+                $response = array("files"=>array("error"=>"Can't upload file right now..." ));
+
+            return $response;
+        }
     public function create_event(){
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
             $data = Input::all();
             array_pop($data);
 
-            $rules = ['event_name'=>'required','attachment' => 'mimes:application/pdf'];
+            $rules = ['event_name'=>'required'];
 
             $validator = Validator::make($data, $rules);
 
@@ -113,16 +129,10 @@ class UserController extends BaseController{
             $eventdetails->prize_money = json_encode($data['prize_money']);
             $eventdetails->approved = 0;
 
-            if (Input::file('attachment') != null && Input::file('attachment') -> isValid()) {
-                echo Input::file('attachment');
-                $destinationPath = 'uploads'; // upload path
-                $extension = Input::file('attachment') -> getClientOriginalExtension(); // getting image extension
-                $fileName = rand(11111,99999).'.'.$extension; // renameing image
-                Input::file('attachment')->move($destinationPath, $fileName); // uploading file to given path
-                $eventdetails->attachment = $fileName;
+            if (Session::get('attachment')) {
+                $eventdetails->attachment = Session::get('attachment');
             }
             $eventdetails->save();
-
             Session::flash('success','1');
             return 1;
 

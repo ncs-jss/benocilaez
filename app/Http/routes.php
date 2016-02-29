@@ -21,7 +21,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/edit_event/{id}', ['as'=>'edit', 'before'=>'csrf', 'uses'=>'OpController@edit_event']);
 	Route::post('/register_society', ['as'=>'register', 'before'=>'csrf', 'uses'=>'UserController@reg_society']);
 	Route::post('/login_society',['as'=>'login', 'before'=>'csrf', 'uses'=>'UserController@login_society']);
-	Route::post('/upload_add_event', ['as'=>'event_creation_upload', 'before'=>'csrf', 'uses'=>'UserController@upload_create_event']);
+	Route::post('/upload_add_event', ['as'=>'event_creation_upload', 'before'=>'csrf', 'uses'=>'UserController@upload_add_event']);
 	
 	Route::post('/add_event', ['as'=>'event_creation', 'before'=>'csrf', 'uses'=>'UserController@create_event']);
 	Route::post('/add_winners', ['as'=>'create_winners', 'before'=>'csrf', 'uses'=>'OpController@add_winners']);

@@ -301,6 +301,9 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
     </div>
 </form>
+</br>
+        <p style="text-align:center"> Please Upload PDF file before submitting the Event Details...</p>
+
         <div style="text-align:center">
 
 <form id="fileupload" action="upload_add_event" method="POST" enctype="multipart/form-data">
@@ -309,11 +312,12 @@
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
+                {{csrf_field()}}
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add files...</span>
-                    <input type="file" name="files[]" multiple>
+                    <input type="file" name="files" multiple>
                 </span>
                 <button type="submit" class="btn btn-primary start">
                     <i class="glyphicon glyphicon-upload"></i>
@@ -433,9 +437,6 @@
 <!-- The File Upload image preview & resize plugin -->
 <script src="js/jquery.fileupload-image.js"></script>
 <!-- The File Upload audio preview plugin -->
-<script src="js/jquery.fileupload-audio.js"></script>
-<!-- The File Upload video preview plugin -->
-<script src="js/jquery.fileupload-video.js"></script>
 <!-- The File Upload validation plugin -->
 <script src="js/jquery.fileupload-validate.js"></script>
 <!-- The File Upload user interface plugin -->

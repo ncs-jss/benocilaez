@@ -173,14 +173,9 @@
                     deferred;
                 if (data.context) {
                     data.context.each(function (index) {
-                        var file = files[index] ||
-                                {error: 'Empty file upload result'};
-                        deferred = that._addFinishedDeferreds();
-                        that._transition($(this)).done(
+                          that._transition($(this)).done(
                             function () {
                                 var node = $(this);
-                                template = that._renderDownload([file])
-                                    .replaceAll(node);
                                 that._forceReflow(template);
                                 that._transition(template).done(
                                     function () {
@@ -194,10 +189,6 @@
                         );
                     });
                 } else {
-                    template = that._renderDownload(files)[
-                        that.options.prependFiles ? 'prependTo' : 'appendTo'
-                    ](that.options.filesContainer);
-                    that._forceReflow(template);
                     deferred = that._addFinishedDeferreds();
                     that._transition(template).done(
                         function () {
@@ -547,8 +538,7 @@
         },
 
         _forceReflow: function (node) {
-            return $.support.transition && node.length &&
-                node[0].offsetWidth;
+            return $.support.transition && node[0].offsetWidth;
         },
 
         _transition: function (node) {
