@@ -285,17 +285,7 @@
                     <input type="text" name="prize_money2" class="form-control" placeholder="Second Prize">
                 </div>
             </div><br>
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-3">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-success" id="progressbar" style="width:40%">
-                            <span class="sr-only"></span>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
         @if($errors->has())
         @foreach ($errors->all() as $error)
         <div>{{ $error }}</div>
