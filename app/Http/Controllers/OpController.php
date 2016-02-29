@@ -21,9 +21,9 @@ class OpController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
 
             $event = EventDetails::where('event_id',$id)->get();
-            dd($event[0]->approved);
-            if($event[0]->approved > 0)
-            return Route::route('view_event');
+
+            if(!($event[0]->approved == 0))
+            return Redirect::route('view_event');
 
             $e = $event[0]->event_description;
 
