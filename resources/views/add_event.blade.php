@@ -45,7 +45,7 @@
     }
     </style>
 </head>
-<body>
+<body style="padding-top:0px;border-top:0px;margin-top:0px">
     @include('header')
 
     <script type="text/javascript">
@@ -287,31 +287,18 @@
                 </div>
             </div><br>
             </div>
-        @if($errors->has())
-        @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-        @endforeach
-        @endif
-        <div class="col-md-7"></div>
-        <div class="col-md-2">
-            <button type="button" id="go" class="btn btn-primary btn-block">{{ $action }}</button>
-        </div>
-    </div>
-    <div class="col-md-5">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    </div>
-</form>
-</br>
-        <p style="text-align:center"> Please Upload PDF file before submitting the Event Details...</p>
+        <div class="row">
+            <div class="col-md-offset-4"></div> 
+            <div style="text-align:center">
+            <p style="text-align:center"> Please Upload PDF file before submitting the Event Details...</p>
 
-        <div style="text-align:center">
-
-<form id="fileupload" action="upload_add_event" method="POST" enctype="multipart/form-data">
-        <!-- Redirect browsers with JavaScript disabled to the origin page -->
-        <noscript><input type="hidden" name="redirect" value="add_event"></noscript>
-        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-        <div class="row fileupload-buttonbar">
-            <div class="col-lg-7">
+            <form id="fileupload" action="upload_add_event" method="POST" enctype="multipart/form-data">
+            <!-- Redirect browsers with JavaScript disabled to the origin page -->
+            <noscript><input type="hidden" name="redirect" value="add_event"></noscript>
+            <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+            <div class="row fileupload-buttonbar">
+                <div class="col-lg-">
+                <div class="col-lg-">
                 {{csrf_field()}}
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button">
@@ -323,8 +310,6 @@
                     <i class="glyphicon glyphicon-upload"></i>
                     <span>Start upload</span>
                 </button>
-                <input type="checkbox" class="toggle">
-                <!-- The global file processing state -->
                 <span class="fileupload-process"></span>
             </div>
             <!-- The global progress state -->
@@ -340,7 +325,27 @@
         <!-- The table listing the files available for upload/download -->
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
     </form>
-</div>
+    </div>
+    </div>
+    <div class="row" style="color:red;text-align:center">
+        <div class="col-md-offset-4"></div>
+        @if($errors->has())
+        @foreach ($errors->all() as $error)
+        <div>{{ $error }}</div>
+        @endforeach
+        @endif
+    </div>
+        <div class="col-md-7"></div>
+        <div class="col-md-2">
+            <button type="button" id="go" class="btn btn-primary btn-block">{{ $action }}</button>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    </div>
+</form>
+</br>
+
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
