@@ -17,6 +17,30 @@
 <noscript><link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css"></noscript>
 
     <style>
+    #f1_upload_process{
+   z-index:100;
+   position:absolute;
+   visibility:hidden;
+   text-align:center;
+   width:400px;
+   margin:0px;
+   padding:0px;
+   background-color:#fff;
+   border:1px solid #ccc;
+}
+ 
+.upload{
+   text-align:center;
+   width:390px;
+   margin:0px;
+   padding:5px;
+   background-color:#fff;
+   border:1px solid #ccc;
+ 
+}
+
+
+
     .desc{
         width:150%;
         height:200px;
@@ -296,11 +320,60 @@
             <!-- Redirect browsers with JavaScript disabled to the origin page -->
             <noscript><input type="hidden" name="redirect" value="add_event"></noscript>
             <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+            <script type="text/javascript">
+                function startUpload(){
+            document.getElementById('f1_upload_process').style.visibility = 'visible';
+            return true;
+            }
+            function stopUpload(success){
+            var result = '';
+            if (success == 1){
+                document.getElementById('result').innerHTML =
+           '<span class="msg">The file was uploaded successfully!<\/span><br/><br/>';
+             }
+                        else {
+                 document.getElementById('result').innerHTML = 
+            '<span class="emsg">There was an error during file upload!<\/span><br/><br/>';
+                  }
+            document.getElementById('f1_upload_process').style.visibility = 'hidden';
+            return true;   
+             }
+
+                    }</script>
+
+
+                    
+            <p id="f1_upload_process">Loading...<br/><img src="http://localhost:8000/benocilaez/public/img/loader.gif" /></p>
+            <p id="result"></p>
+            <form class="upload" action="upload.php" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();" >
+            File: <input name="myfile" type="file" />
+            <input type="submit" name="submitBtn" value="Upload" />
+            </form>
+ 
+            <iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>                 
+
+
+
+            <script language="javascript" type="text/javascript">
+   window.top.window.stopUpload(<?php echo $result; ?>);
+</script> 
+
+
+
+
+
+
+
+
+
+<!--
+
+
             <div class="row fileupload-buttonbar">
                 <div class="col-lg-">
                 <div class="col-lg-">
                 {{csrf_field()}}
-                <!-- The fileinput-button span is used to style the file input field as button -->
+                 The fileinput-button span is used to style the file input field as button 
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add files...</span>
@@ -312,7 +385,7 @@
                 </button>
                 <span class="fileupload-process"></span>
             </div>
-            <!-- The global progress state -->
+   -->         <!-- The global progress state -->
             <div class="col-lg-5 fileupload-progress fade">
                 <!-- The global progress bar -->
                 <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
