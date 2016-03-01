@@ -1,4 +1,6 @@
 <?php
+
+use App\User;
 Route::group(['middleware' => ['web']], function () {
 
 
@@ -11,15 +13,17 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/delete/{id}', ['as'=>'delete' , 'uses'=>'OpController@delete']);
 	Route::get('/add_winners', ['as'=>'add_winners', 'uses'=>'PagesController@add_winners']);
 
-	Route::get('/logout',['as'=>'logout', 'uses'=>'OpController@logout']);
-	Route::get('/req/{id}', function(){
-		return 1;
-	});
+	Route::get('/logout', ['as'=>'logout', 'uses'=>'OpController@logout']);
+	Route::get('/req/{id}', ['as'=>'request', 'uses'=>'OpController@request']);
 	Route::get('/approve/{id}', ['as'=>'approve', 'uses'=>'OpController@approve']);
 
 		//POST Routes
 	Route::post('/edit_event/{id}', ['as'=>'edit', 'before'=>'csrf', 'uses'=>'OpController@edit_event']);
 	Route::post('/register_society', ['as'=>'register', 'before'=>'csrf', 'uses'=>'UserController@reg_society']);
 	Route::post('/login_society',['as'=>'login', 'before'=>'csrf', 'uses'=>'UserController@login_society']);
+	Route::post('/upload_add_event', ['as'=>'event_creation_upload', 'before'=>'csrf', 'uses'=>'UserController@upload_add_event']);
+	
 	Route::post('/add_event', ['as'=>'event_creation', 'before'=>'csrf', 'uses'=>'UserController@create_event']);
+	Route::post('/add_winners', ['as'=>'create_winners', 'before'=>'csrf', 'uses'=>'OpController@add_winners']);
+
 });

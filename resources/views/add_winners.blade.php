@@ -25,9 +25,7 @@
 				$('#runnerup1 .rule1 input').each(function(){d.push($(this).val())});
 				$('#runnerup2 .rule2 input').each(function(){e.push($(this).val())});
 				console.log(c);
-			/*
-			console.log(c);
-			console.log(d);*/
+			
 			console.log($(this));
 			var i = 0;
 
@@ -54,7 +52,6 @@
 			if(check === true){
 				var button = $(this);
 				var adding = setInterval(function(){
-					//console.log($(this))
 					button.html('Adding winner'+'.'.repeat(i % 4));
 					i = (i+1) % 4;
 				},500);
@@ -75,13 +72,10 @@
 			$('.winner').each(function(index){
 				$(this).bind('rules_add', function(){
 					var group = $(this);
-				//var group2 = $('.add_rule', $(this));
-				//console.log(group2);
 				var input = $('.rule'+index, group);
 				var minus = $('.plus', input);
 
 				$(document).on('click', '.add_rule'+index, function(){
-					//console.log(group);
 					var s = $(input).clone().appendTo(group);
 					var i = $('.rule'+index).length;
 					s.find('#winnerno'+index).html(i);
