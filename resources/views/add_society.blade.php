@@ -17,12 +17,14 @@
 					username: $('input[name="username"]').val(),
 					email: $('input[name="email"]').val(),
 					password: $('input[name="password"]').val(),
-					token: $('input[name="_token"]').val(),
+					_token: $('input[name="_token"]').val(),
 				}
 
 				$.post("register_society", data, function(response){
-					if(response=='a'){
+					if(response == 'a'){
 						$('#success').css("display","block");
+					}else if(response == 'b'){
+						$('#validation').css("display","block");
 					}else{
 						$('#failure').css("display","block");
 					}
@@ -58,11 +60,11 @@
 						<input type="password" name="password" class="form-control" placeholder="Password">
 					</div>
 				</div><br>
-				<div class="col-md-7"></div>
-				<div class="col-md-2">
-					<div class="alert alert-success col-md-6 col-md-offset-3" role="alert" id"success">Hurray! Society added.</div>
+				<div class="form-group">
+					<div class="alert alert-success col-md-6 col-md-offset-3" role="alert" id="success">Hurray! Society added.</div>
 					<div class="alert alert-danger col-md-6 col-md-offset-3" role="alert" id="failure">Oops! Looks like your society could not be added.</div>
-					<button type="button" class="btn btn-primary btn-block" id="go">Add Society</button>
+                    <div class="alert alert-danger col-md-6 col-md-offset-3" role="alert" id="validation">Validation Error.</div>
+					<button type="button" class="btn btn-primary col-md-2 col-md-offset-5" id="go">Add Society</button>
 				</div>
 				<div class="col-md-5">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">

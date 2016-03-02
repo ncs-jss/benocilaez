@@ -31,7 +31,7 @@ class UserController extends BaseController{
         $validate = Validator::make($data, $rules);
 
         if($validate->fails()){
-            return Redirect::to('add_society')->withErrors($validate)->withInput();
+            return 'b';
         }else{
             $user = new User;
             $user->email = $data['email'];
@@ -82,7 +82,7 @@ class UserController extends BaseController{
                 Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
                 Session::put('attachment',$fileName);
                 $response = array("files"=>array("url"=>"http://localhost/benocilaez/public/uploads/".$fileName,"thumbnailUrl"=>"http://localhost/benocilaez/public/uploads/".$fileName,"name" => $fileName, "type"=> $extension, "size" =>Input::file('files')->getClientSize()));
- 
+
                 return json_encode($response);
             }
                 $response = array("files"=>array("error"=>"Can't upload file right now..." ));
