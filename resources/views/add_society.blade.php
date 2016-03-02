@@ -20,14 +20,14 @@
 					_token: $('input[name="_token"]').val(),
 				}
 
-                var clear_inputs = function(){
+                function clear_inputs(){
                     $('input').val("");
                 }
 
 				$.post("register_society", data, function(response){
 					if(response == 'a'){
 						$('#success').css("display","block");
-                        claer_inputs();
+                        clear_inputs();
 					}else if(response == 'b'){
 						$('#validation').css("display","block");
 					}else{
