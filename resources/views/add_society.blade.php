@@ -2,9 +2,38 @@
 <html>
 @include('header')
 <body>
+	<style>
+		.alert
+		{
+			text-align: center;
+			display: none;
+		}
+	</style>
+	<script>
+		$(document).ready(function(){
+			$('#go').click(function(){
+				var data={
+					society_name: $('input[name="society_name"]').val(),
+					username: $('input[name="username"]').val(),
+					email: $('input[name="email"]').val(),
+					password: $('input[name="password"]').val(),
+					token: $('input[name="_token"]').val(),
+				}
+
+				$.post("register_society", data, function(response){
+					if(response=='a'){
+						$('#success').css("display","block");
+					}else{
+						$('#failure').css("display","block");
+					}
+				})
+
+			})
+		})
+	</script>
 	<div class="container">
 		<div style="text-align:center">
-			<form class="form-horizontal" role="form" action="register_society" method="POST">
+			<form class="form-horizontal" role="form" action="" method="POST">
 				<div class="form-group">
 					<label for="societyname" class="col-md-4 control-label">Society Name</label>
 					<div class="col-md-5">
@@ -31,7 +60,9 @@
 				</div><br>
 				<div class="col-md-7"></div>
 				<div class="col-md-2">
-					<button type="submit" class="btn btn-primary btn-block">Add Society</button>
+					<div class="alert alert-success col-md-6 col-md-offset-3" role="alert" id"success">Hurray! Society added.</div>
+					<div class="alert alert-danger col-md-6 col-md-offset-3" role="alert" id="failure">Oops! Looks like your society could not be added.</div>
+					<button type="button" class="btn btn-primary btn-block" id="go">Add Society</button>
 				</div>
 				<div class="col-md-5">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
