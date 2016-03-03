@@ -112,19 +112,20 @@ class UserController extends BaseController{
             else
             $event_count = 0;
             $event->event_id = strtolower(substr($user->society, 0, 4)).$event_count;
-            $event->save();
 
             $eventdetails = new EventDetails;
             $eventdetails->event_id = $event->event_id;
             $eventdetails->event_name = $data['event_name'];
 
             $eventdetails->event_description = json_encode($data['event_description']);
-            //dd($data['timing']);
+            //dd(rtrim($data['timing']));
+            if(rtrim($data['timing']) != ''){
             $tv = preg_split('/[- :]/', $data['timing']);
             $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
             $timestamp = date("Y-m-d h:i:s", $d);
             $eventdetails->timing = $timestamp;
-            //dd($timestamp);
+            }
+
             $eventdetails->contact = json_encode($data['contact']);
             $eventdetails->prize_money = json_encode($data['prize_money']);
             $eventdetails->approved = 0;
@@ -132,6 +133,7 @@ class UserController extends BaseController{
             if (Session::get('attachment')) {
                 $eventdetails->attachment = Session::get('attachment');
             }
+            $event->save();
             $eventdetails->save();
             Session::flash('success','1');
             return 1;

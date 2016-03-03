@@ -74,6 +74,7 @@
 
     <script type="text/javascript">
     $(document).ready(function(){
+        $('.err').css('display','none');
         $('#go').click(function(){
             var rules = [];
             $('.event_rule').each(function(){
@@ -120,13 +121,22 @@
     $.post('add_event', data, function(response){
         clearInterval(adding);
         if(response == 1){
-            window.location.href = window.location.href;
+            $('.err').html('Event Added Successfully');
+            $('.err').css("display","block");
+            CKEDITOR.instances['editor1']
+            .setData("Your Event's Description Here...");
+            setTimeout(function(){
+                $('.err').css("display","none");
+            },3000);
+            $('input').val("");
         }else{
             $('.err').html('Event could not be added.');
+            $('.err').css("display","block");
         }
     }).fail(function(){
         clearInterval(adding);
         $('.err').html('Event could not be added.');
+        $('.err').css("display","block");
     });
     @else
     var adding = setInterval(function(){
@@ -141,8 +151,10 @@
         }else if(response == 0){
             $('.err').html('An approved event can not be edited.'+
             ' Request for editing from view event page...');
+            $('.err').css("display","block");
         }else{
             $('.err').html('Event could not be edited.');
+            $('.err').css("display","block");
         }
     });
     @endif
@@ -227,7 +239,7 @@ populate_inputs();
                     <p>  {{$errors->first('attachment',':message')}} </p>
                     @endif
                 </div>
-                <div class='err'> {{ $err }}</div>
+
                 <div class="form-group req">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
@@ -250,7 +262,9 @@ populate_inputs();
                     <div class="col-md-8">
                         <textarea class="desc" id="editor1" name="editor1">Your Event's Description Here...</textarea>
                         <script type="text/javascript">
-                        CKEDITOR.replace( 'editor1' );
+                        CKEDITOR.replace( 'editor1' ,  {
+                            extraAllowedContent: 'strong[onclick]'
+                        } );
                         </script>
                     </div>
                 </div><br>
@@ -340,8 +354,10 @@ populate_inputs();
         @endif
     </div>
     <div class="col-md-7"></div>
-    <div class="col-md-2">
-        <button type="button" id="go" class="btn btn-primary btn-block">{{ $action }}</button>
+
+    <div class="form-group">
+        <div class="alert alert-success col-md-6 col-md-offset-3 err" role="alert" id="success">{{ $err }}</div>
+        <button type="button" id="go" class="btn btn-primary col-md-2 col-md-offset-5">{{ $action }}</button>
     </div>
 </div>
 <div class="col-md-5">
