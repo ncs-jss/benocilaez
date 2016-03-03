@@ -73,22 +73,24 @@ class UserController extends BaseController{
         }
     }
     public function upload_add_event(){
-    	$data = Input::all();
+        $data = Input::all();
 
-    	if (Input::file('files') != null && Input::file('files') -> isValid()) {
-                $destinationPath = 'uploads'; // upload path
-                $extension = Input::file('files') -> getClientOriginalExtension(); // getting image extension
-                $fileName = rand(11111,99999).'.'.$extension; // renameing image
-                Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
-                Session::put('attachment',$fileName);
-                $response = array("files"=>array("url"=>"http://localhost/benocilaez/public/uploads/".$fileName,"thumbnailUrl"=>"http://localhost/benocilaez/public/uploads/".$fileName,"name" => $fileName, "type"=> $extension, "size" =>Input::file('files')->getClientSize()));
+        if (Input::file('files') != null && Input::file('files') -> isValid()) {
+            $destinationPath = 'uploads'; // upload path
+            $extension = Input::file('files') -> getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
+            Session::put('attachment',$fileName);
+            $response = array("files"=>array("url"=>"http://localhost/benocilaez/public/uploads/"
+            .$fileName,"thumbnailUrl"=>"http://localhost/benocilaez/public/uploads/"
+            .$fileName,"name" => $fileName, "type"=> $extension, "size" =>Input::file('files')->getClientSize()));
 
-                return json_encode($response);
-            }
-                $response = array("files"=>array("error"=>"Can't upload file right now..." ));
-
-            return $response;
+            return json_encode($response);
         }
+        $response = array("files"=>array("error"=>"Can't upload file right now..." ));
+
+        return $response;
+    }
     public function create_event(){
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
@@ -120,10 +122,10 @@ class UserController extends BaseController{
             $eventdetails->event_description = json_encode($data['event_description']);
             //dd(rtrim($data['timing']));
             if(rtrim($data['timing']) != ''){
-            $tv = preg_split('/[- :]/', $data['timing']);
-            $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
-            $timestamp = date("Y-m-d h:i:s", $d);
-            $eventdetails->timing = $timestamp;
+                $tv = preg_split('/[- :]/', $data['timing']);
+                $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
+                $timestamp = date("Y-m-d h:i:s", $d);
+                $eventdetails->timing = $timestamp;
             }
 
             $eventdetails->contact = json_encode($data['contact']);
@@ -136,7 +138,7 @@ class UserController extends BaseController{
             $event->save();
             $eventdetails->save();
             Session::flash('success','1');
-            return 1;
+            return ["status" => 1, "_token"=> csrf_token()];
 
             return Redirect::route('add_event');
         }else{

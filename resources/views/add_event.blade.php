@@ -118,10 +118,9 @@
         i = (i + 1) % 4;
     }, 500);
 
-    $.post('add_event', data, function(response){
+    $.post('add_event', data, function(v){
         clearInterval(adding);
-        var v = $jQuery.parseJSON(response);
-        $('input[name="_token"]').val('v._token')
+        //console.log(v._token);
         if(v.status == 1){
             $('.err').html('Event Added Successfully');
             $('.err').css("display","block");
@@ -135,6 +134,7 @@
             $('.err').html('Event could not be added.');
             $('.err').css("display","block");
         }
+        $('input[name="_token"]').attr('value', v._token);
     }).fail(function(){
         clearInterval(adding);
         $('.err').html('Event could not be added.');
