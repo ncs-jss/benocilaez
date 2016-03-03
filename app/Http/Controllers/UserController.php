@@ -31,7 +31,7 @@ class UserController extends BaseController{
         $validate = Validator::make($data, $rules);
 
         if($validate->fails()){
-            return 'b';
+            return ['status'=>'b', '_token'=> csrf_token()];
         }else{
             $user = new User;
             $user->email = $data['email'];
@@ -39,11 +39,9 @@ class UserController extends BaseController{
             $user->society = $data['society_name'];
             $user->priviliges = 2;
             if($user->save()){
-                return 'a';
+                return ['status'=>'a', '_token'=> csrf_token()];
             }else
-            return 'asa';
-
-
+            return ['status'=>'asssa', '_token'=> csrf_token()];
         }
     }
 
