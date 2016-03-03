@@ -120,7 +120,9 @@
 
     $.post('add_event', data, function(response){
         clearInterval(adding);
-        if(response == 1){
+        var v = $jQuery.parseJSON(response);
+        $('input[name="_token"]').val('v._token')
+        if(v.status == 1){
             $('.err').html('Event Added Successfully');
             $('.err').css("display","block");
             CKEDITOR.instances['editor1']
