@@ -20,19 +20,32 @@
 					_token: $('input[name="_token"]').val(),
 				}
 
-                function clear_inputs(){
-                    $('input').val("");
-                }
+				function clear_inputs(){
+					$('input').val("");
+				}
 
 				$.post("register_society", data, function(response){
-					if(response == 'a'){
+					if(response.status == 'a'){
+						clear_inputs();
 						$('#success').css("display","block");
-                        clear_inputs();
-					}else if(response == 'b'){
+						setTimeout(function(){
+							$('#success').css("display","none");
+							console.log($(this));;
+						},2000);
+					}else if(response.status == 'b'){
 						$('#validation').css("display","block");
+						setTimeout(function(){
+							$('#validation').css("display","none");
+							console.log($(this));
+						},2000);
 					}else{
 						$('#failure').css("display","block");
+						setTimeout(function(){
+							$('#failure').css("display","none");
+							console.log($(this));
+						},2000);
 					}
+					$('input[name="_token"]').attr("value", response._token);
 				})
 
 			})
@@ -68,7 +81,7 @@
 				<div class="form-group">
 					<div class="alert alert-success col-md-6 col-md-offset-3" role="alert" id="success">Hurray! Society added.</div>
 					<div class="alert alert-danger col-md-6 col-md-offset-3" role="alert" id="failure">Oops! Looks like your society could not be added.</div>
-                    <div class="alert alert-danger col-md-6 col-md-offset-3" role="alert" id="validation">Validation Error.</div>
+					<div class="alert alert-danger col-md-6 col-md-offset-3" role="alert" id="validation">Validation Error.</div>
 					<button type="button" class="btn btn-primary col-md-2 col-md-offset-5" id="go">Add Society</button>
 				</div>
 				<div class="col-md-5">
