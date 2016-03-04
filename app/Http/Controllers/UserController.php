@@ -24,7 +24,7 @@ class UserController extends BaseController{
     public function reg_society(){
         $data = Input::all();
 
-        $rules = ['email'=>'required|unique:users',
+        $rules = ['email'=>'email|required|unique:users',
         'password'=> 'required|min:4',
         'society_name'=>'required'];
 
