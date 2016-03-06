@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 
 use Session;
 use App\User;
+use App\Status;
 use App\Events;
+use App\Members;
 use App\EventDetails;
 
 use Illuminate\Support\Facades\Input;
@@ -91,7 +93,8 @@ class OpController extends BaseController{
     }
 
     public function approve($id = null){
-        $admin = User::where('email', Session::get('email'))->first()->priviliges;
+        $admin = User::where('email', Session::get('email'))->
+                first()->priviliges;
         if($id != null && \Auth::check() && $admin == 1){
             $event = EventDetails::where('event_id', $id)->first();
             $event->approved = ($event->approved == 0) ? 1 : 0;
@@ -103,7 +106,8 @@ class OpController extends BaseController{
 
     public function request($id){
         $user = User::where('email', Session::get('email'))->first();
-        $soc_mail = Events::where('event_id', $id)->select('society_email')->first();
+        $soc_mail = Events::where('event_id', $id)->
+                    select('society_email')->first();
         $event = EventDetails::where('event_id', $id)->first();
 
         if($event->approved == 0)
@@ -120,6 +124,75 @@ class OpController extends BaseController{
     public function logout(){
         \Auth::logout();
         return Redirect::back();
+    }
+
+    public function enable($what){
+        if(\Auth::check()){
+            $user = User::where('email', Session::get('email'))->first();
+            if($user->priviliges == 1){
+                $status = Status::first();
+                if($what == 0){
+                    $status->add_events = ($status->add_events) ? 0 : 1;
+                    $status->save();
+                    return $status->add_events;
+                }else if($what == 1){
+                    $status->add_winners = ($status->add_winners) ? 0 : 1;
+                    $status->save();
+                    return $status->add_winners;
+                }else {
+                    return 0;
+                }
+            }
+        }
+    }
+
+    public function save_mem_details(){
+        if(\Auth::check()){
+            $member = new Members;
+            $data = Input::all();
+            $member->name = $data['name'];
+            $member->type = $data['type'];
+            $member->phone = $data['phone'];
+            $member->roll_num = $data['rollno'];
+            $member->soc_id = Session::get('email');
+            $member->branch_yr = $data['branch_yr'];
+            $member->events = $data['events'];
+            if($member->save()){
+                return ['status'=>'1','id'=>$member->id];
+            }
+        }
+        return 0;
+    }
+
+    public function update_mem_details($id){
+        if(\Auth::check()){
+            $member = Members::where('id', $id);
+            $data = Input::all();
+            $updation = ['name'=> $data['name'],
+                        'type' => $data['type'],
+                        'phone' => $data['phone'],
+                        'roll_num' => $data['rollno'],
+                        'soc_id' => Session::get('email'),
+                        'branch_yr' => $data['branch_yr'],
+                        'events' => $data['events'] ];
+            if($member->update($updation)){
+                return ['status'=>'1','id'=>$id];
+            }
+        }
+        return 0;
+    }
+
+    public function delete_mem_details($id){
+        if(\Auth::check()){
+            $user = User::where('email', Session::get('email'))->first();
+            $member = Members::where('id', $id);
+            if($member->first()->soc_id == Session::get('email')){
+                if($member->delete()){
+                    return ['status'=>1];
+                }
+            }
+        }
+        return ['status'=>0];
     }
 
 }

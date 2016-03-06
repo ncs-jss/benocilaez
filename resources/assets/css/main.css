@@ -1,0 +1,47 @@
+@media only screen and (max-width: 1080px)  {
+
+    .navbar a{
+        font-size: 20px;
+    }
+
+    .navbar p{
+        font-size: 20px;
+    }
+
+    .control-label{
+        font-size: 30px;
+        text-align: center !important;
+        text-transform: uppercase;
+    }
+    .form-control{
+        height: 50px;
+        width: 100%;
+    }
+    .plus{
+        padding: 20px;
+    }
+    .tableres th{
+        font-size: 18px;
+    }
+
+}
+.margin-hatao{
+    margin: 0px;
+}
+
+.button-chod{
+    width: 100% !important;
+}
+
+.unblock{
+    display: inline-block;
+    width: 48% !important;
+}
+
+td h4{
+    width: 100% !important;
+}
+
+td{
+    text-align: left;
+}

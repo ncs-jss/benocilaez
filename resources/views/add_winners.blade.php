@@ -7,59 +7,75 @@
 		{
 			font-size:10px;
 		}
+
+		.alert
+		{
+			text-align: center;
+			display: none;
+		}
 	</style>
 </head>
 <body>
 	@include('header')
 	<script type="text/javascript">
-
 		$(document).ready(function(){
 			$('#go').click(function(){
 				var c = [], d = [], e = [];
 				$('#winner .rule0 input').each(function(){c.push($(this).val())});
 				$('#runnerup1 .rule1 input').each(function(){d.push($(this).val())});
 				$('#runnerup2 .rule2 input').each(function(){e.push($(this).val())});
-			/*
-			console.log(c);
-			console.log(d);*/
+				console.log(c);
+			
 			console.log($(this));
 			var i = 0;
 
 			var data = {
-				event_id : '',
+				event_id : $('#event_name').val(),
 				winnner : c,
 				runnnerup1 : d,
 				runnerup2 : e,
+				_token: $('#token').val(),
 			}
 			console.log(data);
-			var button = $(this);
-			var adding = setInterval(function(){
-				//console.log($(this))
-				button.html('Adding winner'+'.'.repeat(i % 4));
-				i = (i+1) % 4;
-			},500);
-
-			$.post('add_winners', data, function(response){
+			
+			var check = true;
+			var repeat = function(x){
+				for(var i=0; i<x.length; i++){
+					if(c[i] === ''){
+						return false;
+					}
+				}
+				return true;
+			}
+			check  = repeat(d) && repeat(c) && repeat(e);
+			console.log(check);
+			if(check === true){
+				var button = $(this);
+				var adding = setInterval(function(){
+					button.html('Adding winner'+'.'.repeat(i % 4));
+					i = (i+1) % 4;
+				},500);
+				$.post('add_winners', data, function(response){
 				clearInterval(adding);
 				if(response == 1){
 					document.write(response);
 				}else{
 					document.write("Error");
-				}
-			});
-		});
+				};
+			}); 
+			}else if(check===false){
+				$(".alert").css("display","block");
+			}	
+		});		
 
 
 			$('.winner').each(function(index){
 				$(this).bind('rules_add', function(){
 					var group = $(this);
-				//var group2 = $('.add_rule', $(this));
-				//console.log(group2);
 				var input = $('.rule'+index, group);
 				var minus = $('.plus', input);
 
 				$(document).on('click', '.add_rule'+index, function(){
-					//console.log(group);
 					var s = $(input).clone().appendTo(group);
 					var i = $('.rule'+index).length;
 					s.find('#winnerno'+index).html(i);
@@ -110,7 +126,7 @@
 								<span class="input-group-addon" id="winnerno0">1</span>
 								<input type="text" class="form-control event_rule" placeholder="Winner" aria-describedby="basic-addon1">
 							</div>
-						</div>
+						</div>                      
 						<div class="col-md-1 plus">
 							<button type="button" class="btn btn-primary add_rule0" aria-label="Left Align">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -131,7 +147,7 @@
 								<span class="input-group-addon" id="winnerno1">1</span>
 								<input type="text" class="form-control event_rule" placeholder="1st Runner Up" aria-describedby="basic-addon1">
 							</div>
-						</div>
+						</div>                      
 						<div class="col-md-1 plus">
 							<button type="button" class="btn btn-primary add_rule1" aria-label="Left Align">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -152,7 +168,7 @@
 								<span class="input-group-addon" id="winnerno2">1</span>
 								<input type="text" class="form-control event_rule" placeholder="2nd Runner Up" aria-describedby="basic-addon1">
 							</div>
-						</div>
+						</div>                      
 						<div class="col-md-1 plus">
 							<button type="button" class="btn btn-primary add_rule2" aria-label="Left Align">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -162,21 +178,22 @@
 					</div>
 				</div>
 
-                <div class="col-md-5">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                </div>
-
 				<br>
 				<br>
 				<div class="help">
 					<p style="font-size:2em; color:#F44336">The names of winners once added shall not be changed.</p>
 				</div>
+				<div class="alert alert-danger col-md-6 col-md-offset-3" role="alert">Empty field.</div>
 				<div class="col-md-7"></div>
 				<div class="col-md-2">
 					<button type="button" class="btn btn-primary btn-block" id="go">Add</button>
 				</div>
 			</div>
+			<div class="col-md-5">
+        			<input type="hidden" id="token" value="{{ csrf_token() }}">
+    		</div>
 		</form>
-	</div><br><br><br><br><br><br>
+	</div><br>
+	<br><br><br><br><br>
 </body>
 </html>

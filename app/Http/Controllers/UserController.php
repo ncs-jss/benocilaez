@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Events;
+use App\Status;
 use App\EventDetails;
 
 use Session;
@@ -24,14 +25,15 @@ class UserController extends BaseController{
     public function reg_society(){
         $data = Input::all();
 
-        $rules = ['email'=>'required|unique:users',
+        $rules = ['email'=>'email|required|unique:users',
         'password'=> 'required|min:4',
         'society_name'=>'required'];
 
         $validate = Validator::make($data, $rules);
 
         if($validate->fails()){
-            return Redirect::to('add_society')->withErrors($validate)->withInput();
+            return ['status'=>'b', '_token'=> csrf_token(),
+            'error'=> $validate->errors()];
         }else{
             $user = new User;
             $user->email = $data['email'];
@@ -39,11 +41,9 @@ class UserController extends BaseController{
             $user->society = $data['society_name'];
             $user->priviliges = 2;
             if($user->save()){
-                return 'a';
+                return ['status'=>'a', '_token'=> csrf_token()];
             }else
-            return 'asa';
-
-
+            return ['status'=>'asssa', '_token'=> csrf_token()];
         }
     }
 
@@ -73,30 +73,31 @@ class UserController extends BaseController{
         }
     }
     public function upload_add_event(){
-    	$data = Input::all();
+        $data = Input::all();
 
-    	if (Input::file('files') != null && Input::file('files') -> isValid()) {
-                $destinationPath = 'uploads'; // upload path
-                $extension = Input::file('files') -> getClientOriginalExtension(); // getting image extension
-                $fileName = rand(11111,99999).'.'.$extension; // renameing image
-                Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
-                Session::put('attachment',$fileName);
-                $response = array("files"=>array("url"=>"http://localhost/benocilaez/public/uploads/".$fileName,"thumbnailUrl"=>"http://localhost/benocilaez/public/uploads/".$fileName,"name" => $fileName, "type"=> $extension, "size" =>Input::file('files')->getClientSize()));
- 
-                return json_encode($response);
-            }
-                $response = array("files"=>array("error"=>"Can't upload file right now..." ));
+        if (Input::file('files') != null && Input::file('files') -> isValid()) {
+            $destinationPath = 'uploads'; // upload path
+            $extension = Input::file('files') -> getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
+            Session::put('attachment',$fileName);
+            $response = array("files"=>array("url"=>"http://localhost/benocilaez/public/uploads/"
+            .$fileName,"thumbnailUrl"=>"http://localhost/benocilaez/public/uploads/"
+            .$fileName,"name" => $fileName, "type"=> $extension, "size" =>Input::file('files')->getClientSize()));
 
-            return $response;
+            return json_encode($response);
         }
+        $response = array("files"=>array("error"=>"Can't upload file right now..." ));
+
+        return $response;
+    }
     public function create_event(){
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
             $data = Input::all();
             array_pop($data);
-
+            //dd($data);
             $rules = ['event_name'=>'required'];
-
             $validator = Validator::make($data, $rules);
 
             if($validator->fails()){
@@ -112,33 +113,39 @@ class UserController extends BaseController{
             else
             $event_count = 0;
             $event->event_id = strtolower(substr($user->society, 0, 4)).$event_count;
-            $event->save();
 
             $eventdetails = new EventDetails;
             $eventdetails->event_id = $event->event_id;
             $eventdetails->event_name = $data['event_name'];
 
             $eventdetails->event_description = json_encode($data['event_description']);
-            //dd($data['timing']);
-            $tv = preg_split('/[- :]/', $data['timing']);
-            $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
-            $timestamp = date("Y-m-d h:i:s", $d);
-            $eventdetails->timing = $timestamp;
-            //dd($timestamp);
-            $eventdetails->contact = json_encode($data['contact']);
-            $eventdetails->prize_money = json_encode($data['prize_money']);
-            $eventdetails->approved = 0;
+            if(Status::first()->add_events == 1){
+                if(rtrim($data['timing']) != '' &&
+                strpos($data['timing'], 'undefined') === false){
+                    $tv = preg_split('/[- :]/', $data['timing']);
+                    $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
+                    $timestamp = date("Y-m-d h:i:s", $d);
+                    $eventdetails->timing = $timestamp;
+                }
 
-            if (Session::get('attachment')) {
-                $eventdetails->attachment = Session::get('attachment');
+                $eventdetails->contact = json_encode($data['contact']);
+                $eventdetails->prize_money = json_encode($data['prize_money']);
+                $eventdetails->approved = 0;
+
+                if (Session::get('attachment')) {
+                    $eventdetails->attachment = Session::get('attachment');
+                }
             }
-            $eventdetails->save();
-            Session::flash('success','1');
-            return 1;
-
-            return Redirect::route('add_event');
+            $event->save();
+            if($eventdetails->save()){
+                Session::flash('success','1');
+                return ["status" => 1, "_token"=> csrf_token()];
+            }else{
+                Session::flash('success','0');
+                return ["status" => 0, "_token"=> csrf_token()];
+            }
         }else{
-            return Redirect::route('add_event');
+            return ["status" => 0, "_token"=> csrf_token()];
         }
     }
 }
