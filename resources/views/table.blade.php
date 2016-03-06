@@ -25,7 +25,7 @@
 				<td>{{ $event->event_name }}</td>
 				<td>
 					@if( $event->event_description != null)
-					@if( $event->event_description->short_des != '')
+					@if( isset($event->event_description->short_des) && $event->event_description->short_des != '')
 					<p>SHORT DESCRIPTION:</p>
 					<p>{{ $event->event_description->short_des }}</p>
 					@endif

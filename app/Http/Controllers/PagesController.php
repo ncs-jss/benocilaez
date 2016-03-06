@@ -7,7 +7,7 @@ use App\Events;
 use App\Members;
 use App\EventDetails;
 
-
+use DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -143,7 +143,7 @@ class PagesController extends BaseController{
             }
             return view('add_winners', array('society'=>$user->society,
             'add_winners'=>$status->add_winners,
-            'action'=> 'Add Winners', 'admin'=> $user->priviliges,
+            'action'=> 'Add Winners', '`'=> $user->priviliges,
             'events'=> $event_name));
         }else{
             return Redirect::route('root');
@@ -155,10 +155,24 @@ class PagesController extends BaseController{
         if (\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
+                /*$users = Members::select(DB::raw('count(*) as count, soc_id'))
+                     ->groupBy('soc_id','type')
+                     ->get();
+                */
+                     $ema= array();
+                     $emails = Members::select('soc_id')->distinct()->pluck('soc_id');
+                     foreach ($emails as $em) {
+                         $ema[] = $em;
+                     }
+                $details = array();
+                foreach ($ema as $mails) {
+                    $s_name = User::where('email',$mails)->first();
+                    $details[] = array("society"=>$s_name['society'],"ctc"=>count(Members::where('soc_id',$mails)->where('type',1)->get()),"coordinator"=>count(Members::where('soc_id',$mails)->where('type',2)->get()),"volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()));  
+                }
                 return \View::make('admin_panel', array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
                 'add_events'=>$status->add_events,
-                'action'=>'Admin Panel', 'admin'=> 1));
+                'action'=>'Admin Panel', 'admin'=> 1,'details'=>$details));
             }
             return Redirect::back();
         }

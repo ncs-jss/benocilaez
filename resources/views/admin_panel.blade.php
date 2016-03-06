@@ -110,13 +110,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($details as $d)
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$d['society']}}</td>
+                        <td>{{$d['ctc']}}</td>
+                        <td>{{$d['volunteer']}}</td>
+                        <td>{{$d['coordinator']}}</td>
+                        <td>#teach</td>
+                        <td>#certificate</td>
                         <td><button type="button" class="btn btn-default button-chod">
                             View/Edit
                         </button></td>
@@ -124,6 +125,7 @@
                             View Events
                         </button></td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
