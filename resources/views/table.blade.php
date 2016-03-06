@@ -29,11 +29,11 @@
 					<p>SHORT DESCRIPTION:</p>
 					<p>{{ $event->event_description->short_des }}</p>
 					@endif
-					@if( $event->event_description->long_des != '')
+					@if( isset($event->event_description->long_des) && $event->event_description->long_des != '')
 					<p>LONG DESCRIPTION:</p>
 					<p>{!! $event->event_description->long_des !!}</p>
 					@endif
-					@if( count($event->event_description->rules) > 0 && $event->event_description->rules[0] != '')
+					@if(isset($event->event_description->rules) && count($event->event_description->rules) > 0 && $event->event_description->rules[0] != '')
 					<p>RULES:</p>
 					<ol>
 						@foreach($event->event_description->rules as $rule)
