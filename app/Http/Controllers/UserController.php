@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Events;
+use App\Status;
 use App\EventDetails;
 
 use Session;
@@ -31,7 +32,8 @@ class UserController extends BaseController{
         $validate = Validator::make($data, $rules);
 
         if($validate->fails()){
-            return ['status'=>'b', '_token'=> csrf_token()];
+            return ['status'=>'b', '_token'=> csrf_token(),
+            'error'=> $validate->errors()];
         }else{
             $user = new User;
             $user->email = $data['email'];
@@ -94,9 +96,8 @@ class UserController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             $data = Input::all();
             array_pop($data);
-
+            //dd($data);
             $rules = ['event_name'=>'required'];
-
             $validator = Validator::make($data, $rules);
 
             if($validator->fails()){
@@ -118,29 +119,33 @@ class UserController extends BaseController{
             $eventdetails->event_name = $data['event_name'];
 
             $eventdetails->event_description = json_encode($data['event_description']);
-            //dd(rtrim($data['timing']));
-            if(rtrim($data['timing']) != ''){
-                $tv = preg_split('/[- :]/', $data['timing']);
-                $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
-                $timestamp = date("Y-m-d h:i:s", $d);
-                $eventdetails->timing = $timestamp;
-            }
+            if(Status::first()->add_events == 1){
+                if(rtrim($data['timing']) != '' &&
+                strpos($data['timing'], 'undefined') === false){
+                    $tv = preg_split('/[- :]/', $data['timing']);
+                    $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
+                    $timestamp = date("Y-m-d h:i:s", $d);
+                    $eventdetails->timing = $timestamp;
+                }
 
-            $eventdetails->contact = json_encode($data['contact']);
-            $eventdetails->prize_money = json_encode($data['prize_money']);
-            $eventdetails->approved = 0;
+                $eventdetails->contact = json_encode($data['contact']);
+                $eventdetails->prize_money = json_encode($data['prize_money']);
+                $eventdetails->approved = 0;
 
-            if (Session::get('attachment')) {
-                $eventdetails->attachment = Session::get('attachment');
+                if (Session::get('attachment')) {
+                    $eventdetails->attachment = Session::get('attachment');
+                }
             }
             $event->save();
-            $eventdetails->save();
-            Session::flash('success','1');
-            return ["status" => 1, "_token"=> csrf_token()];
-
-            return Redirect::route('add_event');
+            if($eventdetails->save()){
+                Session::flash('success','1');
+                return ["status" => 1, "_token"=> csrf_token()];
+            }else{
+                Session::flash('success','0');
+                return ["status" => 0, "_token"=> csrf_token()];
+            }
         }else{
-            return Redirect::route('add_event');
+            return ["status" => 0, "_token"=> csrf_token()];
         }
     }
 }

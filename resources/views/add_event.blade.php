@@ -81,8 +81,10 @@
                 rules.push($(this).val());
             });
             var event_des ={short_des: $('input[name=short_description]').val(),
+            @if($add_events == 1)
             long_des: CKEDITOR.instances['editor1'].getData(),
             rules: rules,
+            @endif
         }
         console.log($('input[name=event_name]').val()=='');
         if($('input[name=event_name]').val() == ''){
@@ -105,12 +107,10 @@
         timing: $('input[name=date]').val()+" "
         +$('input[name=time]').val(),
         _token: $('input[name=_token]').val(),
-        attachment :$('input[name=attachment]').val()
+        attachment :$('input[name=attachment]').val(),
     }
     var button = $(this);
     var i = 0;
-    console.log(button);
-
 
     @if( $edit == 0)
     var adding = setInterval(function(){
@@ -120,7 +120,6 @@
 
     $.post('add_event', data, function(v){
         clearInterval(adding);
-        //console.log(v._token);
         if(v.status == 1){
             $('.err').html('Event Added Successfully');
             $('.err').css("display","block");
@@ -130,6 +129,10 @@
                 $('.err').css("display","none");
             },3000);
             $('input').val("");
+        }else if(v.status == -1){
+            $('.err').html('Admin has changed the settings...'+
+            'Reload the page to continue');
+            $('.err').css("display","block");
         }else{
             $('.err').html('Event could not be added.');
             $('.err').css("display","block");
@@ -258,8 +261,9 @@ populate_inputs();
                         <input type="text" name="short_description" class="form-control" placeholder="A Short Description of Your Event..."></textarea>
                     </div>
                 </div><br>
+                @if($add_events == 1)
                 <div class="form-group">
-                    <p><b>Event description:</b></p>
+                    <p  class="control-label" ><b>Event description:</b></p>
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <textarea class="desc" id="editor1" name="editor1">Your Event's Description Here...</textarea>
@@ -271,7 +275,7 @@ populate_inputs();
                     </div>
                 </div><br>
                 <div class="form-group rules" style="text-align:center">
-                    <p><b>Rules:</b></p>
+                    <p class="control-label"><b>Rules:</b></p>
                     <div class="col-md-10 col-md-offset-2 rule">
                         <div class="col-md-9">
                             <div class="input-group rule-1">
@@ -281,7 +285,7 @@ populate_inputs();
                         </div>
                         <div class="col-md-1 plus">
                             <button type="button" class="btn btn-primary add_rule" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-plus chod" aria-hidden="true"></span>
                             </button>
                         </div>
                         <br><br>
@@ -342,8 +346,7 @@ populate_inputs();
                         <div class="progress-extended">&nbsp;</div>
                     </div>
                 </div>
-                <!-- The table listing the files available for upload/download -->
-                <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                @endif
             </form>
         </div>
     </div>
