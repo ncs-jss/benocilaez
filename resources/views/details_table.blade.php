@@ -141,6 +141,50 @@
                 </table>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-offset-1"></div>
+            <div class="col-md-3" style="text-align:center">
+                <h3 class="margin-hatao">Teacher Coordinator</h3>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                <table class="table" type='4' id="table4">
+                    <thead>
+                        <tr class="tableres">
+                            <th>Teacher Name</th>
+                            <th>Ph.no.</th>
+                            <th>Edit/ Save</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="">
+                            <td>Teacher 1</td>
+                            <td>----------</td>
+                            <th><button type="button" class="edit-det btn btn-default unblock button-chod">
+                                Edit
+                            </button>
+                            <button type="button" class="del-det btn btn-danger unblock button-chod">
+                                Delete
+                            </button>
+                        </th>
+                        </tr>
+                        <tr id="">
+                            <td>Teacher 2</td>
+                            <td>----------</td>
+                            <th><button type="button" class="edit-det btn btn-default unblock button-chod">
+                                Edit
+                            </button>
+                            <button type="button" class="del-det btn btn-danger unblock button-chod">
+                                Delete
+                            </button>
+                        </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
 
     </body>
 </html>
