@@ -13,6 +13,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/delete/{id}', ['as'=>'delete' , 'uses'=>'OpController@delete']);
 	Route::get('/add_winners', ['as'=>'add_winners', 'uses'=>'PagesController@add_winners']);
 
+    Route::get('/acd/{id}', ['uses'=>'PagesController@get_soc_mem_details']);
     Route::get('/update_mem_details/{id}', ['uses'=>'OpController@update_mem_details']);
     Route::get('/del-det/{id}', ['uses'=>'OpController@delete_mem_details']);
     Route::get('/save_mem_details', ['uses'=>'OpController@save_mem_details']);
@@ -24,7 +25,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/req/{id}', ['as'=>'request', 'uses'=>'OpController@request']);
 	Route::get('/approve/{id}', ['as'=>'approve', 'uses'=>'OpController@approve']);
     Route::get('/admin',  ['as'=>'admin_panel', 'uses'=>'PagesController@admin']);
-    Route::get('/soc_details', ['as'=>'add_soc_details', 'uses'=>'PagesController@add_soc_details']);
+    Route::get('/soc_details/{id?}', ['as'=>'add_soc_details', 'uses'=>'PagesController@add_soc_details']);
     Route::get('/enable_feature/{what}', ['uses'=>'OpController@enable']);
     Route::get('/users-all', function(){
         return App\Statu::first();

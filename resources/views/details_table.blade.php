@@ -158,9 +158,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="">
-                            <td>Teacher 1</td>
-                            <td>----------</td>
+                        <?php $teach = 0; ?>
+                        @foreach($members as $mem)
+                        @if($mem['type'] == 4)
+                        <?php $teach++; ?>
+                        <tr id="{{ $mem['id'] }}">
+                            <td>{{ $mem['name'] }}</td>
+                            <td>{{ $mem['phone'] }}</td>
                             <th><button type="button" class="edit-det btn btn-default unblock button-chod">
                                 Edit
                             </button>
@@ -169,9 +173,12 @@
                             </button>
                         </th>
                         </tr>
+                        @endif
+                        @endforeach
+                        @for($i = $teach; $i < 2; $i++)
                         <tr id="">
-                            <td>Teacher 2</td>
-                            <td>----------</td>
+                            <td>Teacher Coordinator {{$i+1}}</td>
+                            <td></td>
                             <th><button type="button" class="edit-det btn btn-default unblock button-chod">
                                 Edit
                             </button>
@@ -180,6 +187,7 @@
                             </button>
                         </th>
                         </tr>
+                        @endfor
                     </tbody>
                 </table>
             </div>

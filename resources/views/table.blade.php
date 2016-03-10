@@ -27,7 +27,7 @@
 					@if( $event->event_description != null)
 					@if( isset($event->event_description->short_des) && $event->event_description->short_des != '')
 					<p>SHORT DESCRIPTION:</p>
-					<p>{{ $event->event_description->short_des }}</p>
+					<p>{!! $event->event_description->short_des !!}</p>
 					@endif
 					@if( isset($event->event_description->long_des) && $event->event_description->long_des != '')
 					<p>LONG DESCRIPTION:</p>

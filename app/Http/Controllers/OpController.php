@@ -17,7 +17,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class OpController extends BaseController{
     public function edit($id){
         $owner = Events::where('event_id', $id)->get()[0]->society_email;
-
+        $status = Status::first();
 
         if(\Auth::check() && Session::get('email') == $owner){
             $user = User::where('email', Session::get('email'))->first();
@@ -38,6 +38,8 @@ class OpController extends BaseController{
                 'id'=>$id,
                 'event_des'=>json_encode($e),
                 'edit'=>1,
+                'add_winners'=>$status->add_winners,
+                'add_events'=>$status->add_events,
                 'contacts'=>$event[0]->contact,
                 'prizes'=>$event[0]->prize_money,
             ));
@@ -166,15 +168,26 @@ class OpController extends BaseController{
 
     public function update_mem_details($id){
         if(\Auth::check()){
-            $member = Members::where('id', $id);
             $data = Input::all();
+            if($id == 'teach'){
+                $member = new Members;
+                $member->name = $data['name'];
+                $member->phone = $data['phone'];
+                $member->type = 4;
+                $member->soc_id = Session::get('email');
+                if($member->save()){
+                    return ['status'=>'1', 'id'=>$member->id];
+                }
+                return 0;
+            }
+            $member = Members::where('id', $id);
             $updation = ['name'=> $data['name'],
                         'type' => $data['type'],
                         'phone' => $data['phone'],
                         'roll_num' => $data['rollno'],
                         'soc_id' => Session::get('email'),
                         'branch_yr' => $data['branch_yr'],
-                        'events' => $data['events'] ];
+                        'events' => $data['events_name'] ];
             if($member->update($updation)){
                 return ['status'=>'1','id'=>$id];
             }

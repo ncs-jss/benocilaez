@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>{{ $action }}</title>
-    <script src="../resources/assets/js/ckeditor.js"></script>
+    <script src="http://cdn.ckeditor.com/4.5.6/basic/ckeditor.js"></script>
 
     <style>
     #f1_upload_process{
@@ -62,13 +62,14 @@
 
     <script type="text/javascript">
     $(document).ready(function(){
+        CKEDITOR.replace( 'editor2');
         $('.err').css('display','none');
         $('#go').click(function(){
             var rules = [];
             $('.event_rule').each(function(){
                 rules.push($(this).val());
             });
-            var event_des ={short_des: $('input[name=short_description]').val(),
+            var event_des ={short_des: CKEDITOR.instances['editor2'].getData(),
             @if($add_events == 1)
             long_des: CKEDITOR.instances['editor1'].getData(),
             rules: rules,
@@ -189,8 +190,8 @@ $('.rules').trigger('rules_add');
 var populate_inputs = function(){
     var x = {!! html_entity_decode($event_des) !!};
     var json = JSON.parse(x.toString());
-    $('input[name=short_description]').val(json.short_des);
-    @if(add_events == 1)
+    CKEDITOR.instances.editor2.setData(json.short_des);
+    @if($add_events == 1)
     CKEDITOR.instances.editor1.setData(json.long_des);
     @endif
     var rules = json.rules;
@@ -250,7 +251,10 @@ populate_inputs();
                 <div class="form-group">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
-                        <input type="text" name="short_description" class="form-control" placeholder="A Short Description of Your Event..."></textarea>
+                        <textarea class="desc" id="editor2" name="editor1">Your Event's Description Here...</textarea>
+                        <script type="text/javascript">
+
+                        </script>
                     </div>
                 </div><br>
                 @if($add_events == 1)

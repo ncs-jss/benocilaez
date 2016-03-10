@@ -203,8 +203,9 @@ class PagesController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             $members = Members::where('soc_id', Session::get('email'))->get();
             $members = $members->toArray();
+            //dd($members);
 
-            //yahan par event id ki jagh event name return karna hai...
+
 
             if($user->priviliges == 1){
                 if($id == -1){
@@ -231,13 +232,21 @@ class PagesController extends BaseController{
         return Redirect::route('root');
     }
 
-    public function get_soc_mem_details($id, $redraw){
+    public function get_soc_mem_details($id){
+        //return 'a';
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
+                $soc = User::where('id', $id)->get()->first();
+                $members = Members::where('soc_id', $soc['email'])->get();
+                $members = $members->toArray();
 
+                return \View::make('details_table', array(
+                    'members'=>$members,
+                ));
             }
         }
+        return Route::back();
     }
 
 }

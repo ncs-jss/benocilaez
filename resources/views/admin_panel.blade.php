@@ -33,6 +33,9 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+
+        
+
         $('.feature').click(function(){
             var what = $(this).attr('what');
             var button = $(this);
@@ -103,8 +106,7 @@
                         <th>#CTC</th>
                         <th>#Volunteer</th>
                         <th>#Coordinator</th>
-                        <th>#Teacher</th>
-                        <th>#Certi</th>
+
                         <th>Edit</th>
                     </tr>
                 </thead>
@@ -115,8 +117,7 @@
                         <td>{{$d['ctc']}}</td>
                         <td>{{$d['volunteer']}}</td>
                         <td>{{$d['coordinator']}}</td>
-                        <td>#teach</td>
-                        <td>#certificate</td>
+
                         <td><button type="button" class="btn btn-default button-chod">
                             Edit
                         </button></td>
