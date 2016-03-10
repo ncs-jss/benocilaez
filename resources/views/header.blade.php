@@ -3,8 +3,7 @@
 <head>
     <link rel="stylesheet" href="../resources/assets/css/bootstrap.min.css" media="screen" charset="utf-8">
     <script src="../resources/assets/js/jquery-2.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=
-    sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+    <script src="../resources/assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../resources/assets/css/main.css" media="screen" title="no title" charset="utf-8">
 </head>
 

@@ -105,8 +105,7 @@
                         <th>#Coordinator</th>
                         <th>#Teacher</th>
                         <th>#Certi</th>
-                        <th>View/Edit</th>
-                        <th>Events</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,10 +118,7 @@
                         <td>#teach</td>
                         <td>#certificate</td>
                         <td><button type="button" class="btn btn-default button-chod">
-                            View/Edit
-                        </button></td>
-                        <td><button type="button" class="btn btn-default button-chod">
-                            View Events
+                            Edit
                         </button></td>
                     </tr>
                     @endforeach

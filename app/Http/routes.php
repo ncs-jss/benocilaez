@@ -18,6 +18,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/save_mem_details', ['uses'=>'OpController@save_mem_details']);
     Route::get('/get_soc_events', ['uses'=>'PagesController@get_events']);
 
+    Route::get('/xx/{id?}', ['uses'=>'ApiController@get_events']);
+
 	Route::get('/logout', ['as'=>'logout', 'uses'=>'OpController@logout']);
 	Route::get('/req/{id}', ['as'=>'request', 'uses'=>'OpController@request']);
 	Route::get('/approve/{id}', ['as'=>'approve', 'uses'=>'OpController@approve']);

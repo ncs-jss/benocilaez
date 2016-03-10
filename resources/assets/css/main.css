@@ -45,3 +45,20 @@ td h4{
 td{
     text-align: left;
 }
+
+.btn-group{
+    width: 100% !important;
+}
+
+.btn-group > *
+{
+    width: 100% !important;
+
+}
+
+.dropdown-menu > *{
+    width: 100% !important;
+}
+.dropdown-menu li a{
+    width: 100% !important;
+}

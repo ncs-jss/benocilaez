@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Back Office Login</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="../resources/assets/css/bootstrap.min.css"/>
 </head>
 <body>
 	<div class="container">
@@ -12,9 +12,9 @@
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="login_society" method="POST">
 				<div class="form-group">
-					<label for="email" class="col-md-4 control-label">E-mail</label>
+					<label for="email" class="col-md-4 control-label">Society</label>
 					<div class="col-md-5">
-						<input type="email" name="email" class="form-control" placeholder="E-mail" required>
+						<input type="text" name="email" class="form-control" placeholder="E-mail" required>
 					</div>
 				</div><br>
 				<div class="form-group">

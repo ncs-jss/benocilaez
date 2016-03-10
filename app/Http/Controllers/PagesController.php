@@ -167,7 +167,7 @@ class PagesController extends BaseController{
                 $details = array();
                 foreach ($ema as $mails) {
                     $s_name = User::where('email',$mails)->first();
-                    $details[] = array("society"=>$s_name['society'],"ctc"=>count(Members::where('soc_id',$mails)->where('type',1)->get()),"coordinator"=>count(Members::where('soc_id',$mails)->where('type',2)->get()),"volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()));  
+                    $details[] = array("society"=>$s_name['society'],"ctc"=>count(Members::where('soc_id',$mails)->where('type',1)->get()),"coordinator"=>count(Members::where('soc_id',$mails)->where('type',2)->get()),"volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()));
                 }
                 return \View::make('admin_panel', array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
@@ -204,6 +204,8 @@ class PagesController extends BaseController{
             $members = Members::where('soc_id', Session::get('email'))->get();
             $members = $members->toArray();
 
+            //yahan par event id ki jagh event name return karna hai...
+
             if($user->priviliges == 1){
                 if($id == -1){
                     return \View::make('add_soc_details',   array('society'=>$user->society,
@@ -211,10 +213,18 @@ class PagesController extends BaseController{
                     'societies'=>$societies,
                     'members'=>$members,
                     'event_map'=>$mapping,
-                    'action'=>'Admin Panel', 'admin'=> 1));
+                    'action'=>'Member Details', 'admin'=> 1));
                 }
                 else
                 return get_soc_mem_details($id, $redraw);
+            }else{
+                return \View::make('add_soc_details',   array('society'=>$user->society,
+                'add_winners'=>$status->add_winners,
+                'societies'=>$societies,
+                'members'=>$members,
+                'event_map'=>$mapping,
+                'accessor'=>$user->email,
+                'action'=>'Member Details', 'admin'=> 0));
             }
             return Redirect::back();
         }
@@ -226,22 +236,6 @@ class PagesController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
 
-            }
-        }
-    }
-
-    public function get_events(){
-        if(\Auth::check()){
-            $user = User::where('email', Session::get('email'))->first();
-            if($user->priviliges == 1){
-                $events = Events::where('society_email', Session::get('email'))->pluck('event_id');
-
-                $event_name = EventDetails::where('event_id', $events)->pluck('event_name')
-                ->toArray();
-                
-                $mapping[$value->society] = $a;
-                $mapping = $mapping;
-                return $mapping;
             }
         }
     }

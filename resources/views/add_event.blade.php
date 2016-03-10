@@ -2,19 +2,7 @@
 <html>
 <head>
     <title>{{ $action }}</title>
-    <script src="//cdn.ckeditor.com/4.5.6/basic/ckeditor.js"></script>
-    <!-- // <script src="{{ URL::asset('ass/ckeditor.js') }}"></script> -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <!-- Generic page styles -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- blueimp Gallery styles -->
-    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <link rel="stylesheet" href="css/jquery.fileupload.css">
-    <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
-    <!-- CSS adjustments for browsers with JavaScript disabled -->
-    <noscript><link rel="stylesheet" href="css/jquery.fileupload-noscript.css"></noscript>
-    <noscript><link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css"></noscript>
+    <script src="../resources/assets/js/ckeditor.js"></script>
 
     <style>
     #f1_upload_process{
@@ -123,11 +111,13 @@
         if(v.status == 1){
             $('.err').html('Event Added Successfully');
             $('.err').css("display","block");
+            @if($add_events == 1)
             CKEDITOR.instances['editor1']
             .setData("Your Event's Description Here...");
+            @endif
             setTimeout(function(){
                 $('.err').css("display","none");
-            },3000);
+            },1500);
             $('input').val("");
         }else if(v.status == -1){
             $('.err').html('Admin has changed the settings...'+
@@ -200,7 +190,9 @@ var populate_inputs = function(){
     var x = {!! html_entity_decode($event_des) !!};
     var json = JSON.parse(x.toString());
     $('input[name=short_description]').val(json.short_des);
+    @if(add_events == 1)
     CKEDITOR.instances.editor1.setData(json.long_des);
+    @endif
     var rules = json.rules;
     var i = 1;
     $(".rule-1 input").val( rules[0]);

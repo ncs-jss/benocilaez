@@ -25,7 +25,7 @@ class UserController extends BaseController{
     public function reg_society(){
         $data = Input::all();
 
-        $rules = ['email'=>'email|required|unique:users',
+        $rules = ['email'=>'required|unique:users',
         'password'=> 'required|min:4',
         'society_name'=>'required'];
 
@@ -96,7 +96,6 @@ class UserController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             $data = Input::all();
             array_pop($data);
-            //dd($data);
             $rules = ['event_name'=>'required'];
             $validator = Validator::make($data, $rules);
 

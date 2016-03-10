@@ -14,7 +14,7 @@
 		<?php $i=0; ?>
 		@foreach ( $society_events as $event)
 		<?php $i++; ?>
-		
+
 		@if($admin == 1 && $event->approved == 2)
 		<tr id="row" style='background:rgba(254, 97, 0, 0.64);'>
 			@else
@@ -48,13 +48,13 @@
 					<label>
 						@if($event->approved == 0 )
 						<a class="btn btn-success btn-xs approve"
-						val="{!! $event->event_id !!}" 
-						role="button"> 
+						val="{!! $event->event_id !!}"
+						role="button">
 						Approve</a>
 						@else
-						<a class="btn btn-danger btn-xs approve" 
+						<a class="btn btn-danger btn-xs approve"
 						val="{!! $event->event_id !!}"
-						role="button"> 
+						role="button">
 						Disapprove</a>
 						@endif
 					</label>
@@ -70,33 +70,33 @@
 
 				</td>
 				@if($society == $accessor)
-				<td><a class="btn btn-info btn-xs" 
-					val="{!! $event->event_id !!}" 
+				<td><a class="btn btn-info btn-xs"
+					val="{!! $event->event_id !!}"
 					role="edit_button"
-					appr="{{$event->approved}}" 
-					{{ ($event->approved == 0 ) ? '' 
+					appr="{{$event->approved}}"
+					{{ ($event->approved == 0 ) ? ''
 					: "disabled='disabled'" }} >
 					Edit</a>
 				</td>
 
-				<td><a class="btn btn-danger btn-xs" 
-					val="{!! $event->event_id !!}" 
-					role="del_button" 
+				<td><a class="btn btn-danger btn-xs"
+					val="{!! $event->event_id !!}"
+					role="del_button"
 					appr="{{$event->approved}}"
-					{{ ($event->approved == 0 ) ? '' 
+					{{ ($event->approved == 0 ) ? ''
 					: "disabled='disabled'" }}>
 					Delete</a>
 				</td>
 				@endif
 			</tr>
-			@endforeach 
-		</table>	
+			@endforeach
+		</table>
 		<div class='empty'>
 			<h1>OOPS!!</h1>
 			<h3>You dont have any events...</h3>
-			<h6>Click <a href ='add_event'>here</a> to add events</h6> 
+			<h6>Click <a href ='add_event'>here</a> to add events</h6>
 		</div>
-		
+
 
 
 		<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
@@ -110,8 +110,8 @@
 					</div>
 					<div class="modal-body">
 						<p>
-							
-							
+
+
 						</p>
 					</div>
 					<div class="modal-footer">
@@ -141,7 +141,7 @@
 			request = function(id, appr){
 				$('#myModal #send-req').attr('val', id);
 				$('#myModal h4').html("Well here's the problem&hellip;");
-				
+
 				@if($admin == 1)
 				$('#myModal p').html('You cannot edit/delete an approved event.'+
 					'<br>Disapprove the event to continue.');
@@ -163,7 +163,7 @@
 						"It seems that you've already sent a request for disapproval."+
 						"Please have patience, the administrator will respond soon");
 					$("#send-req").hide();
-				}				
+				}
 				@endif
 				$('#myModal').modal('show');
 			};
@@ -202,7 +202,7 @@
 
 			$('#send-req').click(function(){
 
-				var data = $(this).attr('val'); 
+				var data = $(this).attr('val');
 				var x = $(this).parent().parent();
 				$.get('req/' + data, function(res){
 					if(res == '1'){
