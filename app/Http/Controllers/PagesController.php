@@ -23,10 +23,10 @@ class PagesController extends BaseController{
         }else{
             if(Session::get('err') == '1'){
                 return view('back_office_login',
-                ['err'=>"Email and password don't match."]);
+                    ['err'=>"Email and password don't match."]);
             }else{
                 return view('back_office_login',
-                ['err'=>'']);
+                    ['err'=>'']);
             }
         }
     }
@@ -36,8 +36,8 @@ class PagesController extends BaseController{
         $status = Status::first();
         if( \Auth::check() && $user->priviliges == 1){
             return view('add_society', array('admin'=> 1,
-            'add_winners'=>$status->add_winners,
-            'society'=>$user->society, 'action'=> 'Add Society'));
+                'add_winners'=>$status->add_winners,
+                'society'=>$user->society, 'action'=> 'Add Society'));
         }else{
             return Redirect::route('root');
         }
@@ -50,16 +50,16 @@ class PagesController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             if(Session::get('success') == 1){
                 return view('add_event', array('society'=>$user->society,
-                'admin'=>$user->priviliges, 'action'=>'Add Event',
-                'add_winners'=>$status->add_winners,
-                'add_events'=>$status->add_events,
-                'err'=>'Event created Successfully!!', 'edit'=>0));
+                    'admin'=>$user->priviliges, 'action'=>'Add Event',
+                    'add_winners'=>$status->add_winners,
+                    'add_events'=>$status->add_events,
+                    'err'=>'Event created Successfully!!', 'edit'=>0));
             }else{
                 return view('add_event', array('society'=>$user->society,
-                'admin'=>$user->priviliges, 'action'=>'Add Event',
-                'add_winners'=>$status->add_winners,
-                'add_events'=>$status->add_events,
-                'err'=>'', 'edit'=>0));
+                    'admin'=>$user->priviliges, 'action'=>'Add Event',
+                    'add_winners'=>$status->add_winners,
+                    'add_events'=>$status->add_events,
+                    'err'=>'', 'edit'=>0));
             }
         }else{
             return Redirect::route('root');
@@ -71,8 +71,8 @@ class PagesController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             if ($user->priviliges == 1){
                 if($soc_id == null )
-                return self::view_event($user, 1, $user->society, $user->id,
-                (($soc_id == null) ? 1 : 0) );
+                    return self::view_event($user, 1, $user->society, $user->id,
+                        (($soc_id == null) ? 1 : 0) );
                 else{
                     $soc2 = User::where('id',$soc_id)->first()->society;
                     return self::view_event($soc2, 1, $user->society, $soc_id, 0);
@@ -89,15 +89,15 @@ class PagesController extends BaseController{
     public function view_event($user, $admin, $accessor, $soc_id, $re_draw){
         $status = Status::first();
         if($admin == 1)
-        $societies = User::select('id','society')->get();
+            $societies = User::select('id','society')->get();
 
         $event_des = User::where('users.id', $soc_id)
         ->join('events','events.society_email', '=', 'users.email')
         ->leftjoin('event_details', 'events.event_id', '=', 'event_details.event_id')
         ->select('users.society', 'events.event_id',
-        'event_details.event_name', 'event_details.event_description',
-        'event_details.prize_money', 'event_details.contact', 'event_details.timing',
-        'event_details.approved')
+            'event_details.event_name', 'event_details.event_description',
+            'event_details.prize_money', 'event_details.contact', 'event_details.timing',
+            'event_details.approved')
         ->get();
 
         for ($i=0; $i < count($event_des) ; $i++) {
@@ -107,19 +107,19 @@ class PagesController extends BaseController{
         }
         if($admin == 1){
             if($re_draw == 1)
-            return \View::make('view_event', array('society'=>$user->society,
-            'society_events'=>$event_des, 'action'=>'View Events',
-            'add_winners'=>$status->add_winners,
-            'societies'=> $societies, 'accessor'=> $accessor, 'admin'=> $admin));
+                return \View::make('view_event', array('society'=>$user->society,
+                    'society_events'=>$event_des, 'action'=>'View Events',
+                    'add_winners'=>$status->add_winners,
+                    'societies'=> $societies, 'accessor'=> $accessor, 'admin'=> $admin));
             else
-            return \View::make('table', array('society'=>$user,
-            'add_winners'=>$status->add_winners,
-            'society_events'=>$event_des, 'accessor'=> $accessor, 'admin'=> $admin));
+                return \View::make('table', array('society'=>$user,
+                    'add_winners'=>$status->add_winners,
+                    'society_events'=>$event_des, 'accessor'=> $accessor, 'admin'=> $admin));
         }else{
             return \View::make('view_event', array('society'=>$user->society,
-            'society_events'=>$event_des, 'action'=>'View Events',
-            'add_winners'=>$status->add_winners,
-            'societies'=> null, 'accessor'=> $accessor , 'admin'=> $admin));
+                'society_events'=>$event_des, 'action'=>'View Events',
+                'add_winners'=>$status->add_winners,
+                'societies'=> null, 'accessor'=> $accessor , 'admin'=> $admin));
         }
 
     }
@@ -136,15 +136,15 @@ class PagesController extends BaseController{
                 $name = EventDetails::where('event_id', $value->event_id)
                 ->select('event_name')->get()->first();
                 if($name == null)
-                continue;
+                    continue;
 
                 array_push($event_name, ['event_id'=> $value->event_id,
-                'event_name'=> $name->event_name]);
+                    'event_name'=> $name->event_name]);
             }
             return view('add_winners', array('society'=>$user->society,
-            'add_winners'=>$status->add_winners,
-            'action'=> 'Add Winners', '`'=> $user->priviliges,
-            'events'=> $event_name));
+                'add_winners'=>$status->add_winners,
+                'action'=> 'Add Winners', '`'=> $user->priviliges,
+                'events'=> $event_name));
         }else{
             return Redirect::route('root');
         }
@@ -160,97 +160,105 @@ class PagesController extends BaseController{
                      ->get();
                 */
                      $ema= array();
-                     $emails = Members::select('soc_id')->distinct()->pluck('soc_id');
+                     $emails = User::select('email')->distinct()->pluck('email');
                      foreach ($emails as $em) {
-                         $ema[] = $em;
-                     }
-                $details = array();
-                foreach ($ema as $mails) {
-                    $s_name = User::where('email',$mails)->first();
-                    $details[] = array("society"=>$s_name['society'],
-                                        "ctc"=>count(Members::where('soc_id',$mails)
-                                        ->where('type',1)->get()),
-                                        "coordinator"=>count(Members::where('soc_id',$mails)->where('type',2)->get()),
-                                        "volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()));
-                }
-                return \View::make('admin_panel', array('society'=>$user->society,
+                       $ema[] = $em;
+                   }
+                   $details = array();
+                   foreach ($ema as $mails) {
+                    if(User::where('email',$mails)->first()){
+                        $s_name = User::where('email',$mails)->first();
+                        $details[] = array("society"=>$s_name['society'],
+                            "ctc"=>count(Members::where('soc_id',$mails)
+                                ->where('type',1)->get()),
+                            "coordinator"=>count(Members::where('soc_id',$mails)->where('type',2)->get()),
+                            "volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()));
+                    }
+                    else{
+                       $details[] = array("society"=>$s_name['society'],
+                        "ctc"=>0,
+                        "coordinator"=>0,
+                        "volunteer"=>0);   
+                   }
+               }
+               return \View::make('admin_panel', array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
                 'add_events'=>$status->add_events,
                 'action'=>'Admin Panel', 'admin'=> 1,'details'=>$details));
-            }
-            return Redirect::back();
-        }
-        return Redirect::route('root');
-    }
+           }
+           return Redirect::back();
+       }
+       return Redirect::route('root');
+   }
 
-    public function add_soc_details($id = -1, $redraw = 0){
-        $status = Status::first();
-        if (\Auth::check()){
-            $societies = User::select('id','society', 'email')->get();
-            $mapping = [];
-            foreach ($societies as $value) {
-                $events_ids = Events::where('society_email',
+   public function add_soc_details($id = -1, $redraw = 0){
+    $status = Status::first();
+    if (\Auth::check()){
+        $societies = User::select('id','society', 'email')->get();
+        $mapping = [];
+        foreach ($societies as $value) {
+            $events_ids = Events::where('society_email',
                 $value->email)->get()->toArray();
-                $a = [];
-                foreach ($events_ids as $event) {
-                    $event_name = EventDetails::where('event_id',
+            $a = [];
+            foreach ($events_ids as $event) {
+                $event_name = EventDetails::where('event_id',
                     $event['event_id'])->pluck('event_name')
-                    ->toArray();
-                    array_push($a, ['event_id'=>$event['event_id'],
+                ->toArray();
+                array_push($a, ['event_id'=>$event['event_id'],
                     'event_name'=>$event_name[0]]);
-                }
-                $mapping[$value->society] = $a;
             }
+            $mapping[$value->society] = $a;
+        }
 
-            $mapping = htmlspecialchars_decode(json_encode($mapping));
+        $mapping = htmlspecialchars_decode(json_encode($mapping));
 
-            $user = User::where('email', Session::get('email'))->first();
-            $members = Members::where('soc_id', Session::get('email'))->get();
-            $members = $members->toArray();
+        $user = User::where('email', Session::get('email'))->first();
+        $members = Members::where('soc_id', Session::get('email'))->get();
+        $members = $members->toArray();
             //dd($members);
 
 
 
-            if($user->priviliges == 1){
-                if($id == -1){
-                    return \View::make('add_soc_details',   array('society'=>$user->society,
+        if($user->priviliges == 1){
+            if($id == -1){
+                return \View::make('add_soc_details',   array('society'=>$user->society,
                     'add_winners'=>$status->add_winners,
                     'societies'=>$societies,
                     'members'=>$members,
                     'event_map'=>$mapping,
                     'action'=>'Member Details', 'admin'=> 1));
-                }
-                else
+            }
+            else
                 return get_soc_mem_details($id, $redraw);
-            }else{
-                return \View::make('add_soc_details',   array('society'=>$user->society,
+        }else{
+            return \View::make('add_soc_details',   array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
                 'societies'=>$societies,
                 'members'=>$members,
                 'event_map'=>$mapping,
                 'accessor'=>$user->email,
                 'action'=>'Member Details', 'admin'=> 0));
-            }
-            return Redirect::back();
         }
-        return Redirect::route('root');
+        return Redirect::back();
     }
+    return Redirect::route('root');
+}
 
-    public function get_soc_mem_details($id){
+public function get_soc_mem_details($id){
         //return 'a';
-        if(\Auth::check()){
-            $user = User::where('email', Session::get('email'))->first();
-            if($user->priviliges == 1){
-                $soc = User::where('id', $id)->get()->first();
-                $members = Members::where('soc_id', $soc['email'])->get();
-                $members = $members->toArray();
+    if(\Auth::check()){
+        $user = User::where('email', Session::get('email'))->first();
+        if($user->priviliges == 1){
+            $soc = User::where('id', $id)->get()->first();
+            $members = Members::where('soc_id', $soc['email'])->get();
+            $members = $members->toArray();
 
-                return \View::make('details_table', array(
-                    'members'=>$members,
+            return \View::make('details_table', array(
+                'members'=>$members,
                 ));
-            }
         }
-        return Route::back();
     }
+    return Route::back();
+}
 
 }
