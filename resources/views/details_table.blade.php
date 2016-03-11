@@ -18,9 +18,8 @@
                         <tr class="tableres">
                             <th>CTC Name</th>
                             <th>Branch/Year</th>
-                            <th>Roll no.</th>
                             <th>Ph.no.</th>
-                            <th>Event</th>
+                            <th>Email</th>
                             <th>Edit/ Save</th>
                         </tr>
                     </thead>
@@ -29,10 +28,9 @@
                         @if($mem['type'] == 1)
                         <tr id="{{ $mem['id'] }}">
                             <td>{{ $mem['name'] }}</td>
-                            <td>{{ $mem['branch_yr'] }}</td>
-                            <td>{{ $mem['roll_num'] }}</td>
+                            <td>{{ $mem['branch_yr'] }} yr</td>
                             <td>{{ $mem['phone'] }}</td>
-                            <td>{{ $mem['events'] }}</td>
+                            <td>{{ $mem['email'] }}</td>
                             <th><button type="button" class="edit-det btn btn-default unblock button-chod">
                                 Edit
                             </button>
@@ -47,7 +45,7 @@
                 </table>
             </div>
         </div>
-
+<br><br><br><br>
         <div class="row">
             <div class="col-md-2">
                 <h3 class="margin-hatao">Coordinators</h3>
@@ -65,7 +63,6 @@
                         <tr class="tableres">
                             <th>Coordinator Name</th>
                             <th>Branch/Year</th>
-                            <th>Roll no.</th>
                             <th>Ph.no.</th>
                             <th>Event</th>
                             <th>Edit/ Save</th>
@@ -76,8 +73,7 @@
                         @if($mem['type'] == 2)
                         <tr id="{{ $mem['id'] }}">
                             <td>{{ $mem['name'] }}</td>
-                            <td>{{ $mem['branch_yr'] }}</td>
-                            <td>{{ $mem['roll_num'] }}</td>
+                            <td>{{ $mem['branch_yr'] }} yr</td>
                             <td>{{ $mem['phone'] }}</td>
                             <td>{{ $mem['events'] }}</td>
                             <th><button type="button" class="edit-det btn btn-default unblock button-chod">
@@ -94,7 +90,7 @@
                 </table>
             </div>
         </div>
-
+<br><br><br><br>
         <div class="row">
             <div class="col-md-2">
                 <h3 class="margin-hatao">Volunteers</h3>
@@ -112,7 +108,6 @@
                         <tr class="tableres">
                             <th>Volunteer Name</th>
                             <th>Branch/Year</th>
-                            <th>Roll no.</th>
                             <th>Ph.no.</th>
                             <th>Event</th>
                             <th>Edit/ Save</th>
@@ -123,8 +118,7 @@
                         @if($mem['type'] == 3)
                         <tr id="{{ $mem['id'] }}">
                             <td>{{ $mem['name'] }}</td>
-                            <td>{{ $mem['branch_yr'] }}</td>
-                            <td>{{ $mem['roll_num'] }}</td>
+                            <td>{{ $mem['branch_yr'] }} yr</td>
                             <td>{{ $mem['phone'] }}</td>
                             <td>{{ $mem['events'] }}</td>
                             <th><button type="button" class="edit-det btn btn-default unblock button-chod">
@@ -141,6 +135,7 @@
                 </table>
             </div>
         </div>
+        <br><br><br><br>
         <div class="row">
             <div class="col-md-offset-1"></div>
             <div class="col-md-3" style="text-align:center">

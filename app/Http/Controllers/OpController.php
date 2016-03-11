@@ -163,6 +163,7 @@ class OpController extends BaseController{
             $member->soc_id = Session::get('email');
             $member->branch_yr = $data['branch_yr'];
             $member->events = $data['events'];
+            $member->email = $data['email'];
             if($member->save()){
                 return ['status'=>'1','id'=>$member->id];
             }
@@ -191,7 +192,8 @@ class OpController extends BaseController{
                         'roll_num' => $data['rollno'],
                         'soc_id' => Session::get('email'),
                         'branch_yr' => $data['branch_yr'],
-                        'events' => $data['events_name'] ];
+                        'events' => $data['events_name'],
+                        'email' => $data['email']];
             if($member->update($updation)){
                 return ['status'=>'1','id'=>$id];
             }
