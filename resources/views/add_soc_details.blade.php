@@ -7,28 +7,19 @@
 </head>
 <style media="screen">
 .table :nth-child(1){
-    width: 25%
+    width: 30%
 }
 .table :nth-child(2){
-    width: 10%
+    width: 15%
 }
 .table :nth-child(3){
     width: 10%
 }
 .table :nth-child(4){
-    width: 10%
+    width: 30%
 }
 .table :nth-child(5){
     width: 15%
-}
-.table :nth-child(6){
-    width: 10%
-}
-.table :nth-child(7){
-    width: 10%
-}
-.table :nth-child(8){
-    width: 10%
 }
 
 

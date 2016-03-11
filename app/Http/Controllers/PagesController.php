@@ -167,7 +167,11 @@ class PagesController extends BaseController{
                 $details = array();
                 foreach ($ema as $mails) {
                     $s_name = User::where('email',$mails)->first();
-                    $details[] = array("society"=>$s_name['society'],"ctc"=>count(Members::where('soc_id',$mails)->where('type',1)->get()),"coordinator"=>count(Members::where('soc_id',$mails)->where('type',2)->get()),"volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()));
+                    $details[] = array("society"=>$s_name['society'],
+                                        "ctc"=>count(Members::where('soc_id',$mails)
+                                        ->where('type',1)->get()),
+                                        "coordinator"=>count(Members::where('soc_id',$mails)->where('type',2)->get()),
+                                        "volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()));
                 }
                 return \View::make('admin_panel', array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
