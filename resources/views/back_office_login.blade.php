@@ -14,7 +14,7 @@
 				<div class="form-group">
 					<label for="email" class="col-md-4 control-label">Society</label>
 					<div class="col-md-5">
-						<input type="text" name="email" class="form-control" placeholder="E-mail" required>
+						<input type="text" name="email" class="form-control" placeholder="User Name" required>
 					</div>
 				</div><br>
 				<div class="form-group">

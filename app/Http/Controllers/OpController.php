@@ -79,8 +79,12 @@ class OpController extends BaseController{
             if($eventdetails->approved == 0){
                 $eventdetails->event_description = json_encode($data['event_description']);
                 $eventdetails->timing = $data['timing'];
+                if(isset($data['contact'])){
                 $eventdetails->contact = json_encode($data['contact']);
+            }
+                if(isset($data['contact'])){
                 $eventdetails->prize_money = json_encode($data['prize_money']);
+            }  
                 $eventdetails->approved = 0;
                 $eventdetails->save();
                 return 1;
