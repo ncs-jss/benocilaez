@@ -6,6 +6,7 @@ use App\Status;
 use App\Events;
 use App\Members;
 use App\EventDetails;
+
 use DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -193,22 +194,13 @@ class PagesController extends BaseController{
         $status = Status::first();
         if (\Auth::check()){
             $societies = User::select('id','society', 'email')->get();
-            $mapping = [];
-            foreach ($societies as $value) {
-                $events_ids = Events::where('society_email',
-                $value->email)->get()->toArray();
-                $a = [];
-                foreach ($events_ids as $event) {
-                    $event_name = EventDetails::where('event_id',
-                    $event['event_id'])->pluck('event_name')
-                    ->toArray();
-                    array_push($a, ['event_id'=>$event['event_id'],
-                    'event_name'=>$event_name[0]]);
-                }
-                $mapping[$value->society] = $a;
-            }
 
-            $mapping = htmlspecialchars_decode(json_encode($mapping));
+
+
+            $user = User::where('email', Session::get('email'))->first();
+            $members = Members::where('soc_id', Session::get('email'))
+            ->where('type', $team)->get();
+            $members = $members->toArray();
             $disp_events = Events::where('society_email',Session::get('email'))
             ->get()->pluck('event_id');
             $disp_event_details = array();
@@ -216,10 +208,6 @@ class PagesController extends BaseController{
                 $disp_event_details[] = EventDetails::where('event_id',
                     $disp)->first();
             }
-            $user = User::where('email', Session::get('email'))->first();
-            $members = Members::where('soc_id', Session::get('email'))
-            ->where('type', $team)->get();
-            $members = $members->toArray();
             if($user->priviliges == 1){
                 if($id == -1){
                     return \View::make('core_team',array('society'=>$user->society,
@@ -228,19 +216,17 @@ class PagesController extends BaseController{
                     'members'=>$members,
                     'type'=>$team,
                     'disp_events'=>$disp_event_details,
-                    'event_map'=>$mapping,
                     'action'=>'Member Details', 'admin'=> 1));
                 }
                 else
-                return get_soc_mem_details($id, $redraw);
+                return Self::get_soc_mem_details($id, $team);
             }else{
-                return \View::make('core_team',array('society'=>$user->society,
+                return \View::make('core_team',   array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
                 'societies'=>$societies,
                 'members'=>$members,
-                'event_map'=>$mapping,
-                'disp_events'=>$disp_event_details,
                 'type'=>$team,
+                'disp_events'=>$disp_event_details,
                 'accessor'=>$user->email,
                 'action'=>'Member Details', 'admin'=> 0));
             }
@@ -248,11 +234,7 @@ class PagesController extends BaseController{
         }
         return Redirect::route('root');
     }
-
-
-
-
-    public function get_soc_mem_details($id){
+    public function get_soc_mem_details($id, $type){
         //return 'a';
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
@@ -261,16 +243,15 @@ class PagesController extends BaseController{
                 $members = Members::where('soc_id', $soc['email'])->get();
                 $members = $members->toArray();
 
-                return \View::make('details_table', array(
+                return \View::make('team_table', array(
                     'members'=>$members,
+                    'type'=> $type,
                 ));
             }
         }
         return Route::back();
     }
-
     public function core_team($id = -1){
 
     }
-
 }

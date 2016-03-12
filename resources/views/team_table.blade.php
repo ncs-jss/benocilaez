@@ -1,164 +1,156 @@
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
+<div class="panel-heading">
+    @if($type == 1)
+    Core Team
+    @elseif($type == 2)
+    Coordinators
+    @elseif($type == 3)
+    Volunteers
+    @else($type == 4)
+    Teacher Coordinators
+    @endif
+</div>
 
-            <div class="panel-heading">
-                @if($type == 1)
-                Core Team
-                @elseif($type == 2)
-                Coordinators
-                @elseif($type == 3)
-                Volunteers
-                @else($type == 4)
-                Teacher Coordinators
-                @endif
-            </div>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12">
 
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-12">
 
-                        <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">Edit Member Details</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form role="form" id="form1" action="" method="get">
-                                            <div class="form-group">
-                                                <label>Name</label>
-                                                <input type="text" name="name" placeholder="Name" class="form-control name" required>
-                                            </div>
-                                            @if($type == 1 && $type != 4)
-                                            <div class="form-group">
-                                                <label>E-mail</label>
-                                                <input type="email" name="email" placeholder="E-mail" class="form-control email" required>
-                                            </div>
-                                            @endif
-                                            @if($type != 4 && $type != 1)
-                                            <div class="form-group">
-                                                <label>Events <em>Press ctrl to select multiple</em></label>
-                                                <select class="events form-control events" name="events" multiple>
-                                                    @foreach($disp_events as $disp)
-                                                    <option value ="{{$disp->event_id}}">{{$disp->event_name}}</option>
-                                                @endforeach
-                                                </select>
-                                            </div>
-                                            @endif
-                                            <div class="form-group">
-                                                <label>Member Contact Number</label>
-                                                <input type="tel" name="phone" placeholder="Phone"  maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control phone" required>
-                                            </div>
-                                            @if($type != 4)
-                                            <div class="form-group">
-                                                <label>Branch/ Course</label>
-                                                <select name ="branch" class="branch form-control">
-                                                    <option value="-">-</option>
-                                                    <option value="CS">CS</option>
-                                                    <option value="EC">EC</option>
-                                                    <option value="CE">CE</option>
-                                                    <option value="ME">ME</option>
-                                                    <option value="EE">EE</option>
-                                                    <option value="EEE">EEE</option>
-                                                    <option value="IT">IT</option>
-                                                    <option value="IC">IC</option>
-                                                    <option value="MT">MT</option>
-                                                    <option value="MCA">MCA</option>
-                                                    <option value="MBA">MBA</option>
-                                                    <option value="MTECH">MTECH</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Year</label>
-                                                <select name = "year" class="year form-control">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </div>
-                                            @endif
-                                            <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
-                                        </form>
-                                    </div>
+            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Edit Member Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" id="form1" action="" method="get">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" name="name" placeholder="Name" class="form-control name" required>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="panel-body" id="include-table">
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            @if($type == 4)
-                                            <th>Teacher Name</th>
-                                            @else
-                                            <th>Member Name</th>
-                                            @endif
-                                            <th>Phone no.</th>
-                                            @if($type == 1 && $type != 4)
-                                            <th>Email</th>
-                                            @endif
-                                            @if($type != 1 && $type != 4)
-                                            <th>Events</th>
-                                            @endif
-                                            @if($type != 4)
-                                            <th>Branch/Yr</th>
-                                            @endif
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ( $members as $mem)
-                                        <tr>
-                                            <td>{{ $mem['name'] }}</td>
-                                            <td>{{ $mem['phone'] }}</td>
-                                            @if($type == 1 && $type != 4)
-                                            <td>{{ $mem['email'] }}</td>
-                                            @endif
-                                            @if($type != 1 && $type != 4)
-                                            <td>{{ $mem['events'] }}</td>
-                                            @endif
-                                            @if($type != 4)
-                                            <td>{{ $mem['branch_yr'] }}</td>
-                                            @endif
-                                            <td><a class="btn btn-default btn-xs"
-                                                val="{!! $mem['id'] !!}"
-                                                role="edit_button">
-                                                Edit</a>
-                                            </td>
-                                            <td><a class="btn btn-danger btn-xs"
-                                                val="{!! $mem['id'] !!}"
-                                                role="del_button">
-                                                Delete</a>
-                                            </td>
-
-                                        </tr>
+                                @if($type == 1 && $type != 4)
+                                <div class="form-group">
+                                    <label>E-mail</label>
+                                    <input type="email" name="email" placeholder="E-mail" class="form-control email" required>
+                                </div>
+                                @endif
+                                @if($type != 4 && $type != 1)
+                                <div class="form-group">
+                                    <label>Events <em>Press ctrl to select multiple</em></label>
+                                    <select class="events form-control events" name="events[]" multiple>
+                                        @foreach($disp_events as $disp)
+                                        <option value ="{{$disp->event_id}}">{{$disp->event_name}}</option>
                                         @endforeach
-                                    </tbody>
-                                </table>
-                                <button type="submit" class="btn btn-default" id="add">Add Member</button>
-
-                            </div>
-                            <!-- /.table-responsive -->
-
+                                    </select>
+                                </div>
+                                @endif
+                                <div class="form-group">
+                                    <label>Member Contact Number</label>
+                                    <input type="tel" name="phone" placeholder="Phone"  maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control phone" required>
+                                </div>
+                                @if($type != 4)
+                                <div class="form-group">
+                                    <label>Branch/ Course</label>
+                                    <select name ="branch" class="branch form-control">
+                                        <option value="-">-</option>
+                                        <option value="CS">CS</option>
+                                        <option value="EC">EC</option>
+                                        <option value="CE">CE</option>
+                                        <option value="ME">ME</option>
+                                        <option value="EE">EE</option>
+                                        <option value="EEE">EEE</option>
+                                        <option value="IT">IT</option>
+                                        <option value="IC">IC</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MCA">MCA</option>
+                                        <option value="MBA">MBA</option>
+                                        <option value="MTECH">MTECH</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Year</label>
+                                    <select name = "year" class="year form-control">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                                @endif
+                                <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
+                            </form>
                         </div>
-                        <!-- /.panel-body -->
 
-                        <!-- /.panel -->
                     </div>
-                    <!-- /.col-lg-6 -->
                 </div>
-
             </div>
 
-        </div>
-    </div>
 
+            <div class="panel-body" id="include-table">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                @if($type == 4)
+                                <th>Teacher Name</th>
+                                @else
+                                <th>Member Name</th>
+                                @endif
+                                <th>Phone no.</th>
+                                @if($type == 1 && $type != 4)
+                                <th>Email</th>
+                                @endif
+                                @if($type != 1 && $type != 4)
+                                <th>Events</th>
+                                @endif
+                                @if($type != 4)
+                                <th>Branch/Yr</th>
+                                @endif
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ( $members as $mem)
+                            <tr>
+                                <td>{{ $mem['name'] }}</td>
+                                <td>{{ $mem['phone'] }}</td>
+                                @if($type == 1 && $type != 4)
+                                <td>{{ $mem['email'] }}</td>
+                                @endif
+                                @if($type != 1 && $type != 4)
+                                <td>{{ $mem['events'] }}</td>
+                                @endif
+                                @if($type != 4)
+                                <td>{{ $mem['branch_yr'] }}</td>
+                                @endif
+                                <td><a class="btn btn-default btn-xs"
+                                    val="{!! $mem['id'] !!}"
+                                    role="edit_button">
+                                    Edit</a>
+                                </td>
+                                <td><a class="btn btn-danger btn-xs"
+                                    val="{!! $mem['id'] !!}"
+                                    role="del_button">
+                                    Delete</a>
+                                </td>
+
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-default" id="add">Add Member</button>
+
+                </div>
+                <!-- /.table-responsive -->
+
+            </div>
+            <!-- /.panel-body -->
+
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
 
 </div>

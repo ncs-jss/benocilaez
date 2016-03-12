@@ -21,8 +21,14 @@
                 </div>
 
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default" id="table-wrap">
+                        @include('team_table')
+                    </div>
+                </div>
+            </div>
 
-            @include('team_table')
         </div>
 
     </div>
@@ -34,9 +40,16 @@
             console.log(res);
         });
 
+        $('#soc_select').change(function(){
+            var val = $(this).val();
+
+            $.get('{{$type}}/'+val, function(res){
+                $('#table-wrap').html(res);
+            });
+        });
 
 
-        $('a[role=edit_button]').click(function(){
+        $(document).on('click', 'a[role=edit_button]', function(){
             var modal = $('#myModal');
             var x = $(this).parent().parent().find('td');
             var inputs = [];
@@ -85,10 +98,10 @@
             return arr.toString();
         }
 
-        $('a[role=del_button]').click(function(){
+        $(document).on('click', 'a[role=del_button]', function(){
             var tr = $(this).parent().parent();
-            $.get('del_soc/'+$(this).attr('val'), function(res){
-                if(res == 1){
+            $.get('../del-det/'+$(this).attr('val'), function(res){
+                if(res.status == 1){
                     tr.remove();
                 }else{
 
@@ -97,7 +110,7 @@
         });
 
 
-        $('#add').click(function(){
+        $(document).on('click', '#add', function(){
             var modal = $('#myModal');
             modal.find('input').val('');
             modal.modal('show');
@@ -105,11 +118,11 @@
 
         });
 
-        $('#cancel').click(function(){
+            $(document).on('click', '#cancel', function(){
             $('#myModal').modal('hide');
         });
 
-        $('.branch').change(function(){
+        $(document).on('change', '.branch', function(){
             var val = $(this).val();
             var year = $('.year');
 
