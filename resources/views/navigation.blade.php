@@ -63,6 +63,9 @@
                 <li>
                     <a href="admin"><i class="fa fa-table fa-fw"></i> Admin Panel</a>
                 </li>
+                <li>
+                    <a href="add_society"><i class="fa fa-table fa-fw"></i> Add Society</a>
+                </li>
                 @endif
 
 
