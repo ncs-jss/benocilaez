@@ -218,7 +218,7 @@ class PagesController extends BaseController{
 
             if($user->priviliges == 1){
                 if($id == -1){
-                    return \View::make('core_team',   array('society'=>$user->society,
+                    return \View::make('core_team',array('society'=>$user->society,
                     'add_winners'=>$status->add_winners,
                     'societies'=>$societies,
                     'members'=>$members,
@@ -242,6 +242,9 @@ class PagesController extends BaseController{
         }
         return Redirect::route('root');
     }
+
+
+
 
     public function get_soc_mem_details($id){
         //return 'a';

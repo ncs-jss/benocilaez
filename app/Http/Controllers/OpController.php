@@ -152,20 +152,27 @@ class OpController extends BaseController{
         }
     }
 
-    public function save_mem_details(){
+    public function save_mem_details($type){
         if(\Auth::check()){
-            $member = new Members;
             $data = Input::all();
+            $member = new Members;
             $member->name = $data['name'];
-            $member->type = $data['type'];
+            $member->type = $type;
             $member->phone = $data['phone'];
-            $member->roll_num = $data['rollno'];
             $member->soc_id = Session::get('email');
-            $member->branch_yr = $data['branch_yr'];
-            $member->events = $data['events_name'];
-            $member->email = $data['email'];
+            $member->branch_yr = $data['branch']."-".$data['year'];
+
+            if($type == 1){
+                $member->email = $data['email'];
+            }
+            else{
+                if(isset($data['events']))
+                    $member->events = $data['events'];
+            }
+            $user = User::where('email',Session::get('email'))->first();
+            $route = "/team/".$type;
             if($member->save()){
-                return Redirect::route($data['route']);
+                return Redirect::to($route);
             }
         }
         return Redirect::route($data['route']);;
@@ -219,10 +226,18 @@ class OpController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
                 $soc = User::where('id', $id)->first();
-                if($soc->delete()){
-                    return 1;
+                $events = Events::where('society_email',$soc->email)->get();
+                if($events){
+                    foreach($events as $eve){
+                        $event_details = EventDetails::where('event_id',$eve->event_id)->delete();
+                        $eve->delete();
+                    }
                 }
             }
+            if($soc->delete()){
+                return 1;
+            }
+
         }
         return 0;
     }
@@ -233,16 +248,16 @@ class OpController extends BaseController{
 
             $update_arr = [];
 
-                $user = User::where('email', Session::get('email'))->first();
-                if($user->priviliges == 1){
-                    $soc = User::where('id', $id)->first();
-                    if($data['password'] != ''){
-                        $update_arr['password'] = \Hash::make($data['password']);
-                    }
-                    if($soc->update($update_arr)){
-                        return ['status'=>'1', '_token'=> csrf_token()];
-                    }
+            $user = User::where('email', Session::get('email'))->first();
+            if($user->priviliges == 1){
+                $soc = User::where('id', $id)->first();
+                if($data['password'] != ''){
+                    $update_arr['password'] = \Hash::make($data['password']);
                 }
+                if($soc->update($update_arr)){
+                    return ['status'=>'1', '_token'=> csrf_token()];
+                }
+            }
 
         }
         return ['status'=>'0', '_token'=> csrf_token()];

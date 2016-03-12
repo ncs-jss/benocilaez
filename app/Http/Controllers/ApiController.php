@@ -32,8 +32,7 @@ class ApiController extends BaseController{
                     array_push($details, ['id'=>$value,
                                 'name'=>$name]);
                 }
-                echo json_encode($details);
-                return;
+                return $details;
             }
             return 0;
         }
