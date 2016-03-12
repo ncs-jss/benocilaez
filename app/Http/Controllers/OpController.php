@@ -151,7 +151,7 @@ class OpController extends BaseController{
             }
         }
     }
-
+    
     public function save_mem_details($type){
         if(\Auth::check()){
             $data = Input::all();
@@ -160,7 +160,7 @@ class OpController extends BaseController{
             $member->type = $type;
             $member->phone = $data['phone'];
             $member->soc_id = Session::get('email');
-            dd($type);
+            //dd($type);
             if($type == 4){
                 $member->branch_yr = '';
             }else{

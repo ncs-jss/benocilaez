@@ -209,12 +209,17 @@ class PagesController extends BaseController{
             }
 
             $mapping = htmlspecialchars_decode(json_encode($mapping));
-
+            $disp_events = Events::where('society_email',Session::get('email'))
+            ->get()->pluck('event_id');
+            $disp_event_details = array();
+            foreach($disp_events as $disp){
+                $disp_event_details[] = EventDetails::where('event_id',
+                    $disp)->first();
+            }
             $user = User::where('email', Session::get('email'))->first();
             $members = Members::where('soc_id', Session::get('email'))
             ->where('type', $team)->get();
             $members = $members->toArray();
-
             if($user->priviliges == 1){
                 if($id == -1){
                     return \View::make('core_team',array('society'=>$user->society,
@@ -222,17 +227,19 @@ class PagesController extends BaseController{
                     'societies'=>$societies,
                     'members'=>$members,
                     'type'=>$team,
+                    'disp_events'=>$disp_event_details,
                     'event_map'=>$mapping,
                     'action'=>'Member Details', 'admin'=> 1));
                 }
                 else
                 return get_soc_mem_details($id, $redraw);
             }else{
-                return \View::make('core_team',   array('society'=>$user->society,
+                return \View::make('core_team',array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
                 'societies'=>$societies,
                 'members'=>$members,
                 'event_map'=>$mapping,
+                'disp_events'=>$disp_event_details,
                 'type'=>$team,
                 'accessor'=>$user->email,
                 'action'=>'Member Details', 'admin'=> 0));
