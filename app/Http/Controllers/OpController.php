@@ -151,7 +151,7 @@ class OpController extends BaseController{
             }
         }
     }
-
+    
     public function save_mem_details($type){
         if(\Auth::check()){
             $data = Input::all();
@@ -160,7 +160,6 @@ class OpController extends BaseController{
             $member->type = $type;
             $member->phone = $data['phone'];
             $member->soc_id = Session::get('email');
-            
             if($type == 4){
                 $member->branch_yr = '';
             }else{
@@ -278,7 +277,7 @@ class OpController extends BaseController{
                     $update_arr['password'] = \Hash::make($data['password']);
                 }
                 if($data['name'] != ''){
-                    $update_arr['email'] = $data['name'];
+                    $update_arr['society'] = $data['name'];
                 }
                 if($soc->update($update_arr)){
                     return ['status'=>'1', '_token'=> csrf_token()];

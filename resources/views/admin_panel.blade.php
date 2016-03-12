@@ -33,7 +33,7 @@
                                                     <h4 class="modal-title">Edit Society Details</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form role="form" >
+                                                    <form role="form" action = "edit_soc">
                                                         <div class="form-group">
                                                             <label>Society Name</label>
                                                             <input type="text" name="event_name" placeholder="Event Name" class="form-control name" >
