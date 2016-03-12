@@ -117,7 +117,11 @@ class UserController extends BaseController{
             $eventdetails->event_id = $event->event_id;
             $eventdetails->event_name = $data['event_name'];
 
-            $eventdetails->event_description = json_encode($data['event_description']);
+            $eventdetails->event_description = json_encode($data['short_des']);
+
+            // rules n long des ke columns banenge
+            // n vo yahan par se vahan jayenge
+
             if(Status::first()->add_events == 1){
                 if(rtrim($data['timing']) != '' &&
                 strpos($data['timing'], 'undefined') === false){
@@ -137,14 +141,13 @@ class UserController extends BaseController{
             }
             $event->save();
             if($eventdetails->save()){
-                Session::flash('success','1');
-                return ["status" => 1, "_token"=> csrf_token()];
+                return Redirect::route('view_event');
             }else{
                 Session::flash('success','0');
-                return ["status" => 0, "_token"=> csrf_token()];
+                return Redirect::back();
             }
         }else{
-            return ["status" => 0, "_token"=> csrf_token()];
+            return Redirect::route('root');
         }
     }
 }
