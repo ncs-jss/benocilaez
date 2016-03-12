@@ -222,6 +222,7 @@ class PagesController extends BaseController{
                     'add_winners'=>$status->add_winners,
                     'societies'=>$societies,
                     'members'=>$members,
+                    'type'=>$team,
                     'event_map'=>$mapping,
                     'action'=>'Member Details', 'admin'=> 1));
                 }
@@ -233,6 +234,7 @@ class PagesController extends BaseController{
                 'societies'=>$societies,
                 'members'=>$members,
                 'event_map'=>$mapping,
+                'type'=>$team,
                 'accessor'=>$user->email,
                 'action'=>'Member Details', 'admin'=> 0));
             }

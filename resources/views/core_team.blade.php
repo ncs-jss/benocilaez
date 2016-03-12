@@ -38,10 +38,19 @@
                                                             <label>Member Name</label>
                                                             <input type="text" name="name" placeholder="Member Name" class="form-control name" required>
                                                         </div>
+                                                        @if($type == 1)
                                                         <div class="form-group">
                                                             <label>Member email</label>
                                                             <input type="email" name="email" placeholder="E-mail" class="form-control pass" required>
                                                         </div>
+                                                        @else
+                                                        <div class="form-group">
+                                                            <label>Events</label>
+                                                            <select class="events form-control" name="events">
+
+                                                            </select>
+                                                        </div>
+                                                        @endif
                                                         <div class="form-group">
                                                             <label>Member Contact Number</label>
                                                             <input type="text" name="phone" placeholder="Phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57')" class="form-control pass" required>
@@ -107,7 +116,11 @@
                                                     <tr>
                                                         <td>{{ $mem['name'] }}</td>
                                                         <td>{{ $mem['phone'] }}</td>
+                                                        @if($type == 1)
                                                         <td>{{ $mem['email'] }}</td>
+                                                        @else
+                                                        <td>{{ $mem['events'] }}</td>
+                                                        @endif
                                                         <td>{{ $mem['branch_yr'] }}</td>
                                                         <td><a class="btn btn-default btn-xs"
                                                             val="{!! $mem['id'] !!}"
@@ -149,14 +162,43 @@
     </div>
     <script type="text/javascript">
     $(document).ready(function(){
+        var Events;
+        $.get('../xx', function(res){
+            Events = res;
+            console.log(res);
+        });
+
+        function opt_events(){
+            var str = '<select class="button-chod events form-control" multiple= "multiple">';
+            for (var i = 0; i < Events.length; i++) {
+                str += '<option value=' + Events[i].id + '>';
+                str += Events[i].name;
+                str += '</option>';
+            }
+            return str + '</select>';
+        }
+
         $('a[role=edit_button]').click(function(){
             var modal = $('#myModal');
             var soc = $(this).parent().parent().find('td').html();
             console.log(soc);
             modal.modal('show');
+            modal.find('.events').html(opt_events());
             modal.find('.name').val(soc);
             modal.find('#go').attr('val', $(this).attr('val'));
         });
+
+        function get_event_names(parent, events){
+            var option = parent.find('.events option');
+            var arr = [];
+            option.each(function(x){
+                if(events.indexOf($(this).attr('value')) != -1){
+                    arr.push($(this).html());
+                }
+            });
+            return arr.toString();
+        }
+
         $('a[role=del_button]').click(function(){
             var tr = $(this).parent().parent();
             $.get('del_soc/'+$(this).attr('val'), function(res){

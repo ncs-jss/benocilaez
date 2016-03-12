@@ -11,11 +11,7 @@
     </div>
     <!-- /.navbar-header -->
 
-    <ul class="nav navbar-top-links navbar-right">
-        <!-- /.dropdown -->
-        <a href="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-        <!-- /.dropdown -->
-    </ul>
+
     <!-- /.navbar-top-links -->
 
     <div class="navbar-default sidebar" role="navigation">
@@ -67,7 +63,9 @@
                     <a href="{{route('add_soc')}}"><i class="fa fa-table fa-fw"></i> Add Society</a>
                 </li>
                 @endif
-
+                <li>
+                    <a href="{{route('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
 
             </ul>
         </div>
