@@ -179,7 +179,7 @@ class OpController extends BaseController{
                 }
                 else{
                     if(isset($data['events']))
-                    $member->events = $data['events'];
+                    $member->events = implode(',' ,$data['events']);
                 }
             }
 
