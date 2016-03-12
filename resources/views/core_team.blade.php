@@ -33,7 +33,7 @@
                                                     <h4 class="modal-title">Edit Member Details</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form role="form" >
+                                                    <form role="form" action='save_mem_details' method="post">
                                                         <div class="form-group">
                                                             <label>Member Name</label>
                                                             <input type="text" name="name" placeholder="Member Name" class="form-control name" required>
@@ -84,7 +84,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="button" id="go" class="btn btn-primary">Save changes</button>
+                                                    <button type="submit" id="go" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,29 +169,7 @@
                 }
             });
         });
-        $('#go').click(function(){
-            var modal = $('#myModal');
-            var data = {
-                name: $('#myModal .name').val(),
-                email: $('#myModal .email').val(),
-                phone: $('#myModal .phone').val(),
-                rollno: "",
-                type: '1',
-                events:'',
-                route:'core_team'
-                _token:  $('#myModal ._token').val(),
-            }
-            console.log(data);
-            $.post('edit_soc/'+$(this).attr('val'), data, function(res){
-                console.log(res);
-                if(res.status == '1'){
-
-                }else{
-                    modal.find('._token').val(res._token);
-                }
-            });
-            window.location.href = window.location.href;
-        });
+        
 
         $('#add').click(function(){
             var modal = $('#myModal');

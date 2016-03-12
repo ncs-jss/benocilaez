@@ -27,10 +27,10 @@
                     <a href="#"><i class="fa fa-dashboard fa-fw"></i> Events<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="add_event"> Add Event</a>
+                            <a href="{{route('add_event')}}"> Add Event</a>
                         </li>
                         <li>
-                            <a href="view_event"> View Events</a>
+                            <a href="{{route('view_event')}}"> View Events</a>
                         </li>
                     </ul>
                 </li>
@@ -40,31 +40,31 @@
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Add Society Members<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="team/1">Core Team</a>
+                            <a href="{{url('team/1')}}">Core Team</a>
                         </li>
                         <li>
-                            <a href="team/2">Coordinators</a>
+                            <a href="{{url('team/2')}}">Coordinators</a>
                         </li>
                         <li>
-                            <a href="team/3">Volunteers</a>
+                            <a href="{{url('team/3')}}">Volunteers</a>
                         </li>
                         <li>
-                            <a href="team/4">Teacher Coordinators</a>
+                            <a href="{{url('team/4')}}">Teacher Coordinators</a>
                         </li>
                     </ul>
                 </li>
 
                 @if($add_winners == 1)
                 <li>
-                    <a href="add_winners"><i class="fa fa-table fa-fw"></i> Add Winners</a>
+                    <a href="{{route('add_winners')}}"><i class="fa fa-table fa-fw"></i> Add Winners</a>
                 </li>
                 @endif
                 @if($admin == 1)
                 <li>
-                    <a href="admin"><i class="fa fa-table fa-fw"></i> Admin Panel</a>
+                    <a href="{{route('admin_panel')}}"><i class="fa fa-table fa-fw"></i> Admin Panel</a>
                 </li>
                 <li>
-                    <a href="add_society"><i class="fa fa-table fa-fw"></i> Add Society</a>
+                    <a href="{{route('add_soc')}}"><i class="fa fa-table fa-fw"></i> Add Society</a>
                 </li>
                 @endif
 

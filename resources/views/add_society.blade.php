@@ -24,7 +24,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-8 col-lg-offset-2">
-                                    <form role="form" action="register_society" method="post">
+                                    <form role="form" id='form1' action="register_society" method="post">
                                         <div class="form-group">
                                             <label>Society Name</label>
                                             <input type="text" name="society_name" placeholder="Society Name" class="form-control" required>

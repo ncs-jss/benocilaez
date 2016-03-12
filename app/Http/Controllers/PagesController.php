@@ -32,7 +32,6 @@ class PagesController extends BaseController{
     }
 
     public function add_society(){
-        dd('as');
         $user = User::where('email', Session::get('email'))->first();
         $status = Status::first();
         if( \Auth::check() && $user->priviliges == 1){
