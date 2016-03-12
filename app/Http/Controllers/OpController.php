@@ -160,15 +160,30 @@ class OpController extends BaseController{
             $member->type = $type;
             $member->phone = $data['phone'];
             $member->soc_id = Session::get('email');
-            $member->branch_yr = $data['branch']."-".$data['year'];
-
-            if($type == 1){
-                $member->email = $data['email'];
-            }
-            else{
-                if(isset($data['events']))
+            dd($type);
+            if($type == 4){
+                $member->branch_yr = '';
+            }else{
+                if(isset($data['branch'])){
+                    $member->branch_yr = $data['branch'];
+                }
+                else{
+                    $member->branch_yr = '-';
+                }
+                if(isset($data['year'])){
+                    $member->branch_yr .= " ".$data['year'];
+                }else{
+                    $member->branch_yr .= " 1";
+                }
+                if($type == 1){
+                    $member->email = $data['email'];
+                }
+                else{
+                    if(isset($data['events']))
                     $member->events = $data['events'];
+                }
             }
+
             $user = User::where('email',Session::get('email'))->first();
             $route = "/team/".$type;
             if($member->save()){
@@ -181,11 +196,13 @@ class OpController extends BaseController{
     public function update_mem_details($id){
         if(\Auth::check()){
             $data = Input::all();
-            if($id == 'teach'){
+            // dd($data);
+            if($id == '4'){
                 $member = new Members;
                 $member->name = $data['name'];
                 $member->phone = $data['phone'];
                 $member->type = 4;
+
                 $member->soc_id = Session::get('email');
                 if($member->save()){
                     return ['status'=>'1', 'id'=>$member->id];
@@ -194,13 +211,21 @@ class OpController extends BaseController{
             }
             $member = Members::where('id', $id);
             $updation = ['name'=> $data['name'],
-            'type' => $data['type'],
-            'phone' => $data['phone'],
-            'roll_num' => $data['rollno'],
-            'soc_id' => Session::get('email'),
-            'branch_yr' => $data['branch_yr'],
-            'events' => $data['events_name'],
-            'email' => $data['email']];
+            'phone' => $data['phone'],];
+            if(isset($data['branch'])){
+                $updation['branch_yr'] = $data['branch'];
+            }else{
+                $updation['branch_yr'] = '-';
+            }
+            if(isset($data['year'])){
+                $updation['branch_yr'] .= $data['year'];
+            }else{
+                $updation['branch'] = '-';
+            }
+            if($member->get()->type == 1){
+                $updattion['email'] = $data['email'];
+            }
+
             if($member->update($updation)){
                 return ['status'=>'1','id'=>$id];
             }

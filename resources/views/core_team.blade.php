@@ -34,16 +34,7 @@
             console.log(res);
         });
 
-        function opt_events(){
-            var str ='';
-            for (var i = 0; i < Events.length; i++) {
-                str += '<option value=' + Events[i].id + '>';
-                str += Events[i].name;
-                str += '</option>';
-            }
-            console.log(str);
-            return str;
-        }
+
 
         $('a[role=edit_button]').click(function(){
             var modal = $('#myModal');
@@ -65,7 +56,7 @@
             @if($type == 1)
             var email = inputs[2];
             @else
-            var events = opt_events();
+            //var events = opt_events();
             @endif
 
 
@@ -73,13 +64,14 @@
             @if($type == 1)
             modal.find('.email').val(email);
             @else
-            modal.find('.events').html(opt_events());
+            modal.find('.events').html();
             @endif
             modal.find('.name').val(name);
             modal.find('.phone').val(phone);
             modal.find('.branch').val(br);
             modal.find('.year').val(yr);
             modal.find('#go').attr('val', $(this).attr('val'));
+            modal.find('form').attr('action', "{{url('update_mem_details/')}}/"+ $(this).attr('val'))
         });
 
         function get_event_names(parent, events){
@@ -109,6 +101,7 @@
             var modal = $('#myModal');
             modal.find('input').val('');
             modal.modal('show');
+            modal.find('form').attr('action', "{{url('save_mem_details/')}}/{{$type}}");
 
         });
 
