@@ -33,7 +33,7 @@
                                                     <h4 class="modal-title">Edit Member Details</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form role="form" action='save_mem_details' method="post">
+                                                    <form role="form" id="form1" action='save_mem_details' method="post">
                                                         <div class="form-group">
                                                             <label>Member Name</label>
                                                             <input type="text" name="name" placeholder="Member Name" class="form-control name" required>
@@ -80,11 +80,9 @@
                                                         <div class="form-group">
                                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         </div>
+                                                        <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
                                                     </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="go" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +167,7 @@
                 }
             });
         });
-        
+
 
         $('#add').click(function(){
             var modal = $('#myModal');
