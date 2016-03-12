@@ -22,10 +22,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/soc_details/{id?}', ['as'=>'add_soc_details', 'uses'=>'PagesController@add_soc_details']);
     Route::get('/enable_feature/{what}', ['uses'=>'OpController@enable']);
     Route::get('/users-all', function(){
-        return App\Statu::first();
+        return App\Status::first();
     });
 
     Route::get('/team/{team}', ['as'=>'core_team', 'uses'=> 'PagesController@add_soc_details']);
+    Route::get('/team/{team}', ['as'=>'volunteer', 'uses'=> 'PagesController@add_soc_details_volunteer']);
+
+
+
 
 
     Route::get('/del_soc/{id?}', ['uses'=>'OpController@del_soc']);

@@ -18,7 +18,7 @@
                     <div class="panel panel-default">
 
                         <div class="panel-heading">
-                            
+                            Volunteer Team
                         </div>
 
                         <div class="panel-body">
@@ -33,7 +33,7 @@
                                                     <h4 class="modal-title">Edit Member Details</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form role="form" id="form1" action="{{URL('save_mem_details')}}" method="post">
+                                                    <form role="form" id="form1" action="{{URL::asset('save_mem_details')}}" method="post">
                                                         <div class="form-group">
                                                             <label>Member Name</label>
                                                             <input type="text" name="name" placeholder="Member Name" class="form-control name" required>
@@ -73,6 +73,15 @@
                                                                 <option value="4">4</option>
                                                             </select>
                                                         </div>
+
+                                                        <!-- <div class="form-group">
+                                                            <?php  foreach()?>
+                                                        <input type="checkbox" name="" value=""></input>
+
+                                                            
+                                                        </div> -->
+
+
                                                         <div class="form-group">
                                                             <input type="hidden" name="_token" class="form-control _token" value="{{ csrf_token() }}">
                                                         </div>
