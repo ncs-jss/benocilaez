@@ -165,10 +165,10 @@ class OpController extends BaseController{
             $member->events = $data['events_name'];
             $member->email = $data['email'];
             if($member->save()){
-                return ['status'=>'1','id'=>$member->id];
+                return Redirect::route($data['route']);
             }
         }
-        return 0;
+        return Redirect::route($data['route']);;
     }
 
     public function update_mem_details($id){

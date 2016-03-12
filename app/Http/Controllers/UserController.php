@@ -41,9 +41,9 @@ class UserController extends BaseController{
             $user->society = $data['society_name'];
             $user->priviliges = 2;
             if($user->save()){
-                return ['status'=>'a', '_token'=> csrf_token()];
+                return Redirect::route('admin_panel');
             }else
-            return ['status'=>'asssa', '_token'=> csrf_token()];
+            return Redirect::route('admin_panel');
         }
     }
 

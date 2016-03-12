@@ -40,16 +40,16 @@
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Add Society Members<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="core_team">Core Team</a>
+                            <a href="team/1">Core Team</a>
                         </li>
                         <li>
-                            <a href="morris.html">Coordinators</a>
+                            <a href="team/2">Coordinators</a>
                         </li>
                         <li>
-                            <a href="morris.html">Volunteers</a>
+                            <a href="team/3">Volunteers</a>
                         </li>
                         <li>
-                            <a href="morris.html">Teacher Coordinators</a>
+                            <a href="team/4">Teacher Coordinators</a>
                         </li>
                     </ul>
                 </li>
