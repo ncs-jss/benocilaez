@@ -28,15 +28,16 @@
                                     <div class="modal-body">
                                         <form role="form" id="form1" action="" method="get">
                                             <div class="form-group">
-                                                <label>Member Name</label>
-                                                <input type="text" name="name" placeholder="Member Name" class="form-control name" required>
+                                                <label>Name</label>
+                                                <input type="text" name="name" placeholder="Name" class="form-control name" required>
                                             </div>
-                                            @if($type == 1)
+                                            @if($type == 1 && $type != 4)
                                             <div class="form-group">
-                                                <label>Member email</label>
+                                                <label>E-mail</label>
                                                 <input type="email" name="email" placeholder="E-mail" class="form-control email" required>
                                             </div>
-                                            @else
+                                            @endif
+                                            @if($type != 4 && $type != 1)
                                             <div class="form-group">
                                                 <label>Events <em>Press ctrl to select multiple</em></label>
                                                 <select class="events form-control events" name="events" multiple>
@@ -48,8 +49,9 @@
                                             @endif
                                             <div class="form-group">
                                                 <label>Member Contact Number</label>
-                                                <input type="tel" name="phone" placeholder="Phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control phone" required>
+                                                <input type="tel" name="phone" placeholder="Phone"  maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control phone" required>
                                             </div>
+                                            @if($type != 4)
                                             <div class="form-group">
                                                 <label>Branch/ Course</label>
                                                 <select name ="branch" class="branch form-control">
@@ -77,6 +79,7 @@
                                                     <option value="4">4</option>
                                                 </select>
                                             </div>
+                                            @endif
                                             <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
                                             <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
                                         </form>
@@ -91,14 +94,21 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Member Name</th>
-                                            <th>Phone no.</th>
-                                            @if($type == 1)
-                                            <th>Email</th>
+                                            @if($type == 4)
+                                            <th>Teacher Name</th>
                                             @else
+                                            <th>Member Name</th>
+                                            @endif
+                                            <th>Phone no.</th>
+                                            @if($type == 1 && $type != 4)
+                                            <th>Email</th>
+                                            @endif
+                                            @if($type != 1 && $type != 4)
                                             <th>Events</th>
                                             @endif
+                                            @if($type != 4)
                                             <th>Branch/Yr</th>
+                                            @endif
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -108,12 +118,15 @@
                                         <tr>
                                             <td>{{ $mem['name'] }}</td>
                                             <td>{{ $mem['phone'] }}</td>
-                                            @if($type == 1)
+                                            @if($type == 1 && $type != 4)
                                             <td>{{ $mem['email'] }}</td>
-                                            @else
+                                            @endif
+                                            @if($type != 1 && $type != 4)
                                             <td>{{ $mem['events'] }}</td>
                                             @endif
+                                            @if($type != 4)
                                             <td>{{ $mem['branch_yr'] }}</td>
+                                            @endif
                                             <td><a class="btn btn-default btn-xs"
                                                 val="{!! $mem['id'] !!}"
                                                 role="edit_button">

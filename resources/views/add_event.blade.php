@@ -27,13 +27,21 @@
                                     <form role="form" action="add_event" method="post">
                                         <div class="form-group">
                                             <label>Event Name</label>
+                                            @if($edit == 1)
+                                            <input type="text" name="event_name" value="{{ $event_name }}" placeholder="Event Name" class="form-control" required>
+                                            @else
                                             <input type="text" name="event_name" placeholder="Event Name" class="form-control" required>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label>Short description of the event</label>
                                             <textarea class="form-control" name="short_des" rows="3" id="editor1"></textarea>
                                             <script type="text/javascript">
                                             CKEDITOR.replace('editor1');
+                                            @if($edit == 1)
+                                            CKEDITOR.instances['editor1']
+                                            .setData({!! $event_des !!});
+                                            @endif
                                             </script>
                                         </div>
                                         <div class="form-group">

@@ -24,7 +24,7 @@
 
     <script src="{{ asset('components/jquery/dist/jquery.min.js') }}"></script>
 
-    @if($action == 'Add Event')
+    @if($action == 'Add Event' || $action == 'Edit Event')
     <script src="http://cdn.ckeditor.com/4.5.6/basic/ckeditor.js"></script>
     @endif
 
