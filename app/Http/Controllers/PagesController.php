@@ -155,10 +155,6 @@ class PagesController extends BaseController{
         if (\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
-                /*$users = Members::select(DB::raw('count(*) as count, soc_id'))
-                     ->groupBy('soc_id','type')
-                     ->get();
-                */
                      $ema= array();
                      $emails = User::select('email')->distinct()->pluck('email');
                      foreach ($emails as $em) {
@@ -172,15 +168,19 @@ class PagesController extends BaseController{
                             "ctc"=>count(Members::where('soc_id',$mails)
                                 ->where('type',1)->get()),
                             "coordinator"=>count(Members::where('soc_id',$mails)->where('type',2)->get()),
-                            "volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()));
+                            "volunteer"=>count(Members::where('soc_id',$mails)->where('type',3)->get()),
+                            "soc_id"=>User::where('email',$mails)->first()->id,
+                        );
                     }
                     else{
                        $details[] = array("society"=>$s_name['society'],
                         "ctc"=>0,
                         "coordinator"=>0,
-                        "volunteer"=>0);   
+                        "volunteer"=>0,
+                        "sic_id"=>null);
                    }
                }
+               //dd($details);
                return \View::make('admin_panel', array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
                 'add_events'=>$status->add_events,

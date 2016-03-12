@@ -80,11 +80,11 @@ class OpController extends BaseController{
                 $eventdetails->event_description = json_encode($data['event_description']);
                 $eventdetails->timing = $data['timing'];
                 if(isset($data['contact'])){
-                $eventdetails->contact = json_encode($data['contact']);
-            }
+                    $eventdetails->contact = json_encode($data['contact']);
+                }
                 if(isset($data['contact'])){
-                $eventdetails->prize_money = json_encode($data['prize_money']);
-            }  
+                    $eventdetails->prize_money = json_encode($data['prize_money']);
+                }
                 $eventdetails->approved = 0;
                 $eventdetails->save();
                 return 1;
@@ -100,7 +100,7 @@ class OpController extends BaseController{
 
     public function approve($id = null){
         $admin = User::where('email', Session::get('email'))->
-                first()->priviliges;
+        first()->priviliges;
         if($id != null && \Auth::check() && $admin == 1){
             $event = EventDetails::where('event_id', $id)->first();
             $event->approved = ($event->approved == 0) ? 1 : 0;
@@ -113,7 +113,7 @@ class OpController extends BaseController{
     public function request($id){
         $user = User::where('email', Session::get('email'))->first();
         $soc_mail = Events::where('event_id', $id)->
-                    select('society_email')->first();
+        select('society_email')->first();
         $event = EventDetails::where('event_id', $id)->first();
 
         if($event->approved == 0)
@@ -187,13 +187,13 @@ class OpController extends BaseController{
             }
             $member = Members::where('id', $id);
             $updation = ['name'=> $data['name'],
-                        'type' => $data['type'],
-                        'phone' => $data['phone'],
-                        'roll_num' => $data['rollno'],
-                        'soc_id' => Session::get('email'),
-                        'branch_yr' => $data['branch_yr'],
-                        'events' => $data['events_name'],
-                        'email' => $data['email']];
+            'type' => $data['type'],
+            'phone' => $data['phone'],
+            'roll_num' => $data['rollno'],
+            'soc_id' => Session::get('email'),
+            'branch_yr' => $data['branch_yr'],
+            'events' => $data['events_name'],
+            'email' => $data['email']];
             if($member->update($updation)){
                 return ['status'=>'1','id'=>$id];
             }
@@ -212,6 +212,40 @@ class OpController extends BaseController{
             }
         }
         return ['status'=>0];
+    }
+
+    public function del_soc($id){
+        if(\Auth::check()){
+            $user = User::where('email', Session::get('email'))->first();
+            if($user->priviliges == 1){
+                $soc = User::where('id', $id)->first();
+                if($soc->delete()){
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public function edit_soc($id){
+        if(\Auth::check()){
+            $data = Input::all();
+
+            $update_arr = [];
+
+                $user = User::where('email', Session::get('email'))->first();
+                if($user->priviliges == 1){
+                    $soc = User::where('id', $id)->first();
+                    if($data['password'] != ''){
+                        $update_arr['password'] = \Hash::make($data['password']);
+                    }
+                    if($soc->update($update_arr)){
+                        return ['status'=>'1', '_token'=> csrf_token()];
+                    }
+                }
+
+        }
+        return ['status'=>'0', '_token'=> csrf_token()];
     }
 
 }

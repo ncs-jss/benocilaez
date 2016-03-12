@@ -70,12 +70,12 @@
 
                 @if($add_winners == 1)
                 <li>
-                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Add Winners</a>
+                    <a href="add_winners"><i class="fa fa-table fa-fw"></i> Add Winners</a>
                 </li>
                 @endif
                 @if($admin == 1)
                 <li>
-                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Admin Panel</a>
+                    <a href="admin"><i class="fa fa-table fa-fw"></i> Admin Panel</a>
                 </li>
                 @endif
 
