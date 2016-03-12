@@ -160,11 +160,12 @@ class OpController extends BaseController{
             $member->type = $data['type'];
             $member->phone = $data['phone'];
             $member->soc_id = Session::get('email');
-            $member->branch_yr = $data['branch_yr'];
-            $member->events = $data['events_name'];
+            $member->branch_yr = $data['branch']."-".$data['year'];
             $member->email = $data['email'];
+            $user = User::where('email',Session::get('email'))->first();
+            $route = "/team/1";
             if($member->save()){
-                return Redirect::route($data['route']);
+                return Redirect::to($route);
             }
         }
         return Redirect::route($data['route']);;

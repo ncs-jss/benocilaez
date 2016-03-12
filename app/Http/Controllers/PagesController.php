@@ -190,7 +190,7 @@ class PagesController extends BaseController{
         return Redirect::route('root');
     }
 
-    public function add_soc_details_volunteer( $team, $id = -1, $redraw = 0){
+    public function add_soc_details( $team, $id = -1, $redraw = 0){
         $status = Status::first();
         if (\Auth::check()){
             $societies = User::select('id','society', 'email')->get();
@@ -218,7 +218,7 @@ class PagesController extends BaseController{
 
             if($user->priviliges == 1){
                 if($id == -1){
-                    return \View::make('volunteer',   array('society'=>$user->society,
+                    return \View::make('core_team',array('society'=>$user->society,
                     'add_winners'=>$status->add_winners,
                     'societies'=>$societies,
                     'members'=>$members,
@@ -228,7 +228,7 @@ class PagesController extends BaseController{
                 else
                 return get_soc_mem_details($id, $redraw);
             }else{
-                return \View::make('volunteer',   array('society'=>$user->society,
+                return \View::make('core_team',   array('society'=>$user->society,
                 'add_winners'=>$status->add_winners,
                 'societies'=>$societies,
                 'members'=>$members,

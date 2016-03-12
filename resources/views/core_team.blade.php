@@ -48,7 +48,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Branch/ Course</label>
-                                                            <select class="branch form-control">
+                                                            <select name ="branch" class="branch form-control">
                                                                 <option value="-">-</option>
                                                                 <option value="CS">CS</option>
                                                                 <option value="EC">EC</option>
@@ -74,8 +74,9 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="hidden" name="type" class="form-control " value="1">
+                                                            <input type="hidden" name="type" value="1" class="form-control">
                                                         </div>
+                                                        
 
                                                     <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
