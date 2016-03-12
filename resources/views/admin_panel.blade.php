@@ -33,7 +33,7 @@
                                                     <h4 class="modal-title">Edit Society Details</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form role="form" >
+                                                    <form role="form" action = "" method = "post">
                                                         <div class="form-group">
                                                             <label>Society Name</label>
                                                             <input type="text" name="event_name" placeholder="Event Name" class="form-control name" >
@@ -46,11 +46,11 @@
                                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" value ="" id ="socid" name="socid" >
                                                         </div>
                                                         
                                                         <div class="form-group">
-                                                            <button type="button" id="go" class="btn btn-primary">Save changes</button>
+                                                            <button type="button"  id="go" class="btn btn-primary">Save changes</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -60,8 +60,6 @@
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
                                     </div>
-
-
                                     <div class="panel-body" id="include-table">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
@@ -126,7 +124,7 @@
                 console.log(soc);
                 modal.modal('show');
                 modal.find('.name').val(soc);
-                modal.find('#go').attr('val', $(this).attr('val'));
+                modal.find('#socid').val($(this).attr('val'));
             });
             $('a[role=del_button]').click(function(){
                 var tr = $(this).parent().parent();
