@@ -33,7 +33,7 @@
                                                     <h4 class="modal-title">Edit Society Details</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form role="form" >
+                                                    <form role="form" action = "" method = "post">
                                                         <div class="form-group">
                                                             <label>Society Name</label>
                                                             <input type="text" name="event_name" placeholder="Event Name" class="form-control name" >
@@ -43,22 +43,23 @@
                                                             <input type="text" name="password" placeholder="Password" class="form-control pass" >
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="hidden" name="_token" class="form-control _token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" value ="" id ="socid" name="socid" >
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <button type="button"  id="go" class="btn btn-primary">Save changes</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="button" id="go" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
                                     </div>
-
-
                                     <div class="panel-body" id="include-table">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
@@ -116,48 +117,48 @@
 
     </div>
     <script type="text/javascript">
-    $(document).ready(function(){
-        $('a[role=edit_button]').click(function(){
-            var modal = $('#myModal');
-            var soc = $(this).parent().parent().find('td').html();
-            console.log(soc);
-            modal.modal('show');
-            modal.find('.name').val(soc);
-            modal.find('#go').attr('val', $(this).attr('val'));
-        });
-        $('a[role=del_button]').click(function(){
-            var tr = $(this).parent().parent();
-            $.get('del_soc/'+$(this).attr('val'), function(res){
-                if(res == 1){
-                    tr.remove();
-                }else{
-
-                }
+        $(document).ready(function(){
+            $('a[role=edit_button]').click(function(){
+                var modal = $('#myModal');
+                var soc = $(this).parent().parent().find('td').html();
+                console.log(soc);
+                modal.modal('show');
+                modal.find('.name').val(soc);
+                modal.find('#socid').val($(this).attr('val'));
             });
-        });
-        $('#go').click(function(){
-            var modal = $('#myModal');
-            var data = {
-                name: $('#myModal .name').val(),
-                password: $('#myModal .pass').val(),
-                _token:  $('#myModal ._token').val(),
-            }
-            console.log(data);
-            $.post('edit_soc/'+$(this).attr('val'), data, function(res){
-                console.log(res);
-                if(res.status == '1'){
+            $('a[role=del_button]').click(function(){
+                var tr = $(this).parent().parent();
+                $.get('del_soc/'+$(this).attr('val'), function(res){
+                    if(res == 1){
+                        tr.remove();
+                    }else{
 
-                }else{
-                    modal.find('._token').val(res._token);
-                }
+                    }
+                });
             });
-            window.location.href = window.location.href;
-        });
-        $('#cancel').click(function(){
-            $('#myModal').modal('hide');
-        });
+            $('#go').click(function(){
+                var modal = $('#myModal');
+                var data = {
+                    name: $('#myModal .name').val(),
+                    password: $('#myModal .pass').val(),
+                    _token:  $('#myModal ._token').val(),
+                }
+                console.log(data);
+                $.post('edit_soc/'+$(this).attr('val'), data, function(res){
+                    console.log(res);
+                    if(res.status == '1'){
 
-    });
+                    }else{
+                        modal.find('._token').val(res._token);
+                    }
+                });
+                window.location.href = window.location.href;
+            });
+            $('#cancel').click(function(){
+                $('#myModal').modal('hide');
+            });
+
+        });
     </script>
     <!-- /#wrapper -->
 

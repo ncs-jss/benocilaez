@@ -242,12 +242,10 @@ class OpController extends BaseController{
         return 0;
     }
 
-    public function edit_soc($id){
+    public function edit_soc(){
         if(\Auth::check()){
             $data = Input::all();
-
             $update_arr = [];
-
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
                 $soc = User::where('id', $id)->first();
