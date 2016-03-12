@@ -33,7 +33,7 @@
                                                     <h4 class="modal-title">Edit Society Details</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form role="form" action = "" method = "post">
+                                                    <form role="form" >
                                                         <div class="form-group">
                                                             <label>Society Name</label>
                                                             <input type="text" name="event_name" placeholder="Event Name" class="form-control name" >
@@ -43,19 +43,26 @@
                                                             <input type="text" name="password" placeholder="Password" class="form-control pass" >
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="_token" class='_token' value="{{ csrf_token() }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <input type="hidden" value ="" id ="socid" name="socid" >
                                                         </div>
-                                                        
-                                                        <div class="form-group">
-                                                            <button type="button"  id="go" class="btn btn-primary">Save changes</button>
+                                                        <div class="alert success alert-success" style="display:none">
+                                                            <p>
+                                                                Success!!
+                                                            </p>
+                                                        </div>
+                                                        <div class="alert err alert-danger" style="display:none">
+                                                            <p>
+                                                                Failed!!
+                                                            </p>
                                                         </div>
                                                     </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <div class="modal-footer">
+                                                        <button type="button"  id="go" class="btn btn-primary">Save changes</button>
+                                                        <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
@@ -142,17 +149,25 @@
                     name: $('#myModal .name').val(),
                     password: $('#myModal .pass').val(),
                     _token:  $('#myModal ._token').val(),
+                    socid: $('#myModal #socid').val(),
                 }
                 console.log(data);
-                $.post('edit_soc/'+$(this).attr('val'), data, function(res){
-                    console.log(res);
-                    if(res.status == '1'){
 
+                $.post('edit_soc', data, function(res){
+                    console.log(res);
+                    if(res.status == 1){
+                        modal.find('.success').show();
+                        window.setTimeout(function(){
+                            window.location.href = window.location.href;
+                        }, 1000);
                     }else{
-                        modal.find('._token').val(res._token);
+                        modal.find('.err').show();
+                        window.setTimeout(function(){
+                            modal.find('.success').hide();
+                        }, 1000);
                     }
                 });
-                window.location.href = window.location.href;
+
             });
             $('#cancel').click(function(){
                 $('#myModal').modal('hide');

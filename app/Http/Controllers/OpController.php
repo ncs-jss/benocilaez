@@ -235,11 +235,11 @@ class OpController extends BaseController{
                 }
             }
             if($soc->delete()){
-                return 1;
+                return Redirect::route('admin_panel');
             }
 
         }
-        return 0;
+        return Redirect::route('admin_panel');
     }
 
     public function edit_soc(){
@@ -248,9 +248,12 @@ class OpController extends BaseController{
             $update_arr = [];
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
-                $soc = User::where('id', $id)->first();
+                $soc = User::where('id', $data['socid'])->first();
                 if($data['password'] != ''){
                     $update_arr['password'] = \Hash::make($data['password']);
+                }
+                if($data['name'] != ''){
+                    $update_arr['email'] = $data['name'];
                 }
                 if($soc->update($update_arr)){
                     return ['status'=>'1', '_token'=> csrf_token()];
