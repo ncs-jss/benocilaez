@@ -6,7 +6,6 @@ use App\Status;
 use App\Events;
 use App\Members;
 use App\EventDetails;
-
 use DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;

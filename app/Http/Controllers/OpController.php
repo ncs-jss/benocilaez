@@ -253,7 +253,7 @@ class OpController extends BaseController{
                     $update_arr['password'] = \Hash::make($data['password']);
                 }
                 if($data['name'] != ''){
-                    $update_arr['email'] = $data['name'];
+                    $update_arr['society'] = $data['name'];
                 }
                 if($soc->update($update_arr)){
                     return ['status'=>'1', '_token'=> csrf_token()];
