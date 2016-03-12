@@ -37,7 +37,7 @@
                                 @if($type != 4 && $type != 1)
                                 <div class="form-group">
                                     <label>Events <em>Press ctrl to select multiple</em></label>
-                                    <select class="events form-control events" name="events" multiple>
+                                    <select class="events form-control events" name="events[]" multiple>
                                         @foreach($disp_events as $disp)
                                         <option value ="{{$disp->event_id}}">{{$disp->event_name}}</option>
                                         @endforeach

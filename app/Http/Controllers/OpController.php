@@ -195,18 +195,6 @@ class OpController extends BaseController{
     public function update_mem_details($id){
         if(\Auth::check()){
             $data = Input::all();
-            if($id == '4'){
-                $member = new Members;
-                $member->name = $data['name'];
-                $member->phone = $data['phone'];
-                $member->type = 4;
-
-                $member->soc_id = Session::get('email');
-                if($member->save()){
-                    return ['status'=>'1', 'id'=>$member->id];
-                }
-                return 0;
-            }
             $member = Members::where('id', $id);
             $updation = ['name'=> $data['name'],
             'phone' => $data['phone'],];
@@ -221,7 +209,12 @@ class OpController extends BaseController{
                 $updation['branch_yr'] = ' 1';
             }
             if($member->first()->type == 1){
-                $updattion['email'] = $data['email'];
+                $updation['email'] = $data['email'];
+            }
+
+            if($member->first()->type == 2 || $member->first()->type == 3){
+                //dd($data['events']);
+                $updation['events'] = implode("," ,$data['events']);
             }
 
             if($member->update($updation)){

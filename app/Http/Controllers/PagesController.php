@@ -201,7 +201,13 @@ class PagesController extends BaseController{
             $members = Members::where('soc_id', Session::get('email'))
             ->where('type', $team)->get();
             $members = $members->toArray();
-
+            $disp_events = Events::where('society_email',Session::get('email'))
+            ->get()->pluck('event_id');
+            $disp_event_details = array();
+            foreach($disp_events as $disp){
+                $disp_event_details[] = EventDetails::where('event_id',
+                    $disp)->first();
+            }
             if($user->priviliges == 1){
                 if($id == -1){
                     return \View::make('core_team',array('society'=>$user->society,
@@ -209,6 +215,7 @@ class PagesController extends BaseController{
                     'societies'=>$societies,
                     'members'=>$members,
                     'type'=>$team,
+                    'disp_events'=>$disp_event_details,
                     'action'=>'Member Details', 'admin'=> 1));
                 }
                 else
@@ -219,6 +226,7 @@ class PagesController extends BaseController{
                 'societies'=>$societies,
                 'members'=>$members,
                 'type'=>$team,
+                'disp_events'=>$disp_event_details,
                 'accessor'=>$user->email,
                 'action'=>'Member Details', 'admin'=> 0));
             }
