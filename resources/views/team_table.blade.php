@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-lg-12">
 
-<<<<<<< HEAD
+
             <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -38,7 +38,9 @@
                                 <div class="form-group">
                                     <label>Events <em>Press ctrl to select multiple</em></label>
                                     <select class="events form-control events" name="events" multiple>
-
+                                        @foreach($disp_events as $disp)
+                                        <option value ="{{$disp->event_id}}">{{$disp->event_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 @endif
@@ -73,80 +75,13 @@
                                         <option value="3">3</option>
                                         <option value="4">4</option>
                                     </select>
-=======
-                        <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">Edit Member Details</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form role="form" id="form1" action="" method="get">
-                                            <div class="form-group">
-                                                <label>Name</label>
-                                                <input type="text" name="name" placeholder="Name" class="form-control name" required>
-                                            </div>
-                                            @if($type == 1 && $type != 4)
-                                            <div class="form-group">
-                                                <label>E-mail</label>
-                                                <input type="email" name="email" placeholder="E-mail" class="form-control email" required>
-                                            </div>
-                                            @endif
-                                            @if($type != 4 && $type != 1)
-                                            <div class="form-group">
-                                                <label>Events <em>Press ctrl to select multiple</em></label>
-                                                <select class="events form-control events" name="events" multiple>
-                                                    @foreach($disp_events as $disp)
-                                                    <option value ="{{$disp->event_id}}">{{$disp->event_name}}</option>
-                                                @endforeach
-                                                </select>
-                                            </div>
-                                            @endif
-                                            <div class="form-group">
-                                                <label>Member Contact Number</label>
-                                                <input type="tel" name="phone" placeholder="Phone"  maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control phone" required>
-                                            </div>
-                                            @if($type != 4)
-                                            <div class="form-group">
-                                                <label>Branch/ Course</label>
-                                                <select name ="branch" class="branch form-control">
-                                                    <option value="-">-</option>
-                                                    <option value="CS">CS</option>
-                                                    <option value="EC">EC</option>
-                                                    <option value="CE">CE</option>
-                                                    <option value="ME">ME</option>
-                                                    <option value="EE">EE</option>
-                                                    <option value="EEE">EEE</option>
-                                                    <option value="IT">IT</option>
-                                                    <option value="IC">IC</option>
-                                                    <option value="MT">MT</option>
-                                                    <option value="MCA">MCA</option>
-                                                    <option value="MBA">MBA</option>
-                                                    <option value="MTECH">MTECH</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Year</label>
-                                                <select name = "year" class="year form-control">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </div>
-                                            @endif
-                                            <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
-                                        </form>
-                                    </div>
->>>>>>> 95d25752474815d78f0fcc63e442b49b496b0012
                                 </div>
                                 @endif
                                 <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>

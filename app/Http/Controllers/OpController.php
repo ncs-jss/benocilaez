@@ -151,7 +151,7 @@ class OpController extends BaseController{
             }
         }
     }
-    
+
     public function save_mem_details($type){
         if(\Auth::check()){
             $data = Input::all();
@@ -195,7 +195,6 @@ class OpController extends BaseController{
     public function update_mem_details($id){
         if(\Auth::check()){
             $data = Input::all();
-            // dd($data);
             if($id == '4'){
                 $member = new Members;
                 $member->name = $data['name'];
@@ -217,19 +216,19 @@ class OpController extends BaseController{
                 $updation['branch_yr'] = '-';
             }
             if(isset($data['year'])){
-                $updation['branch_yr'] .= $data['year'];
+                $updation['branch_yr'] .= ' '.$data['year'];
             }else{
-                $updation['branch'] = '-';
+                $updation['branch_yr'] = ' 1';
             }
-            if($member->get()->type == 1){
+            if($member->first()->type == 1){
                 $updattion['email'] = $data['email'];
             }
 
             if($member->update($updation)){
-                return ['status'=>'1','id'=>$id];
+                return Redirect::back();
             }
         }
-        return 0;
+        return Redirect::back();
     }
 
     public function delete_mem_details($id){
