@@ -154,12 +154,11 @@ class OpController extends BaseController{
 
     public function save_mem_details(){
         if(\Auth::check()){
-            $member = new Members;
             $data = Input::all();
+            $member = new Members;
             $member->name = $data['name'];
             $member->type = $data['type'];
             $member->phone = $data['phone'];
-            $member->roll_num = $data['rollno'];
             $member->soc_id = Session::get('email');
             $member->branch_yr = $data['branch_yr'];
             $member->events = $data['events_name'];
@@ -219,10 +218,18 @@ class OpController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
                 $soc = User::where('id', $id)->first();
+                $events = Events::where('society_email',$soc->email)->get();
+                if($events){
+                    foreach($events as $eve){
+                       $event_details = EventDetails::where('event_id',$eve->event_id)->delete();
+                        $eve->delete();
+                    }
+                }
+                }
                 if($soc->delete()){
                     return 1;
                 }
-            }
+            
         }
         return 0;
     }

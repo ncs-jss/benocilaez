@@ -33,7 +33,7 @@
                                                     <h4 class="modal-title">Edit Member Details</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form role="form" id="form1" action='save_mem_details' method="post">
+                                                    <form role="form" id="form1" action="{{url('save_mem_details')}}" method="get">
                                                         <div class="form-group">
                                                             <label>Member Name</label>
                                                             <input type="text" name="name" placeholder="Member Name" class="form-control name" required>
@@ -66,7 +66,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Year</label>
-                                                            <select class="year form-control">
+                                                            <select name = "year" class="year form-control">
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>
@@ -74,13 +74,10 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="hidden" name="_token" class="form-control _token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="type" class="form-control " value="1">
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        </div>
-                                                        <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
                                                     </form>
                                                 </div>
