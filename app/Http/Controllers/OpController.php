@@ -36,7 +36,7 @@ class OpController extends BaseController{
                 'society'=>$user->society,
                 'admin'=>$user->priviliges,
                 'id'=>$id,
-                'event_des'=>json_encode($e),
+                'event_des'=>$e,
                 'edit'=>1,
                 'add_winners'=>$status->add_winners,
                 'add_events'=>$status->add_events,
