@@ -196,7 +196,7 @@ class OpController extends BaseController{
         if(\Auth::check()){
             $data = Input::all();
             // dd($data);
-            if($id == '4'){
+            if($id == '4'){       //What is this???? id==4?? y?
                 $member = new Members;
                 $member->name = $data['name'];
                 $member->phone = $data['phone'];
@@ -204,14 +204,15 @@ class OpController extends BaseController{
 
                 $member->soc_id = Session::get('email');
                 if($member->save()){
-                    return ['status'=>'1', 'id'=>$member->id];
+                    return Redirect::back();
                 }
                 return 0;
             }
             $member = Members::where('id', $id);
             $updation = ['name'=> $data['name'],
             'phone' => $data['phone'],];
-            if(isset($data['branch'])){
+            //dd($data);
+            if(isset($data['branch']) && strcmp($data['branch'],'-')){
                 $updation['branch_yr'] = $data['branch'];
             }else{
                 $updation['branch_yr'] = '-';
@@ -219,19 +220,17 @@ class OpController extends BaseController{
             if(isset($data['year'])){
                 $updation['branch_yr'] .= $data['year'];
             }else{
-                $updation['branch'] = '-';
+                $updation['branch_yr'] = '-';
             }
-            if($member->get()->type == 1){
-                $updattion['email'] = $data['email'];
+            if($member->first()->type == 1){
+                $updation['email'] = $data['email'];
             }
-
             if($member->update($updation)){
-                return ['status'=>'1','id'=>$id];
+                return Redirect::back();
             }
         }
         return 0;
     }
-
     public function delete_mem_details($id){
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
