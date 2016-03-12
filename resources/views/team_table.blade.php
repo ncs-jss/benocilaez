@@ -26,7 +26,7 @@
                                         <h4 class="modal-title">Edit Member Details</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form role="form" id="form1" action="{{url('save_mem_details/')}}/{{$type}}" method="get">
+                                        <form role="form" id="form1" action="" method="get">
                                             <div class="form-group">
                                                 <label>Member Name</label>
                                                 <input type="text" name="name" placeholder="Member Name" class="form-control name" required>
