@@ -131,6 +131,7 @@
                                     Edit</a>
                                 </td>
                                 <td><a class="btn btn-danger btn-xs"
+                                    href="{{route('del-det', $mem['id'])}}"
                                     val="{!! $mem['id'] !!}"
                                     role="del_button">
                                     Delete</a>

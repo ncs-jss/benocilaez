@@ -98,17 +98,7 @@
             return arr.toString();
         }
 
-        $(document).on('click', 'a[role=del_button]', function(){
-            var tr = $(this).parent().parent();
-            $.get('../del-det/'+$(this).attr('val'), function(res){
-                if(res.status == 1){
-                    tr.remove();
-                }else{
-
-                }
-            });
-        });
-
+        
 
         $(document).on('click', '#add', function(){
             var modal = $('#myModal');

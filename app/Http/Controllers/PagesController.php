@@ -240,7 +240,8 @@ class PagesController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             if($user->priviliges == 1){
                 $soc = User::where('id', $id)->get()->first();
-                $members = Members::where('soc_id', $soc['email'])->get();
+                $members = Members::where('soc_id', $soc['email'])
+                ->where('type', $type)->get();
                 $members = $members->toArray();
 
                 return \View::make('team_table', array(

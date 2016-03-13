@@ -121,7 +121,7 @@
             var x = $(this);
 
             $.get('delete/' + x.attr('val'), function(res){
-                if(res == '1'){
+                if(res.includes('1')){
                     x.parent().parent().remove()
                     if($('table tr td').length == 0){
                         $('.empty').show();
