@@ -44,9 +44,10 @@
                                             @endif
                                             </script>
                                         </div>
-                    @if( $add_events==1 )
-                    <div class="form-group rules" style="text-align:center">
+                    @if ( $add_events==1 )
+                    <div class="form-group rules" style="text-align:center">    
                     <p class="control-label"><b>Rules:</b></p>
+                    <div class="row">
                     <div class="col-md-10 col-md-offset-2 rule">
                         <div class="col-md-9">
                             <div class="input-group rule-1">
@@ -62,9 +63,10 @@
                         <br><br>
                     </div>
                 </div>
-
+                </div>
                 <br>
                 <div class="form-group">
+                    <div class="row">                    
                     <label for="time" class="col-md-4 control-label">Time</label>
                     <div class="col-md-2">
                         <input type="time" placeholder='HH:MM' name="time" class="form-control">
@@ -73,8 +75,10 @@
                     <div class="col-md-2">
                         <input type="date" placeholder='YYYY-MM-DD' name="date" class="form-control">
                     </div>
+                </div>
                 </div><br>
                 <div class="form-group">
+                    <div class="row">
                     <label for="contact" class="col-md-4 control-label">Contacts</label>
                     <div class="col-md-2">
                         <input type="text" name="contact_name1" class="form-control" placeholder="Name">
@@ -83,8 +87,10 @@
                     <div class="col-md-2">
                         <input type="text" name="contact_number1" class="form-control" placeholder="Number">
                     </div>
+                </div>
                 </div><br>
                 <div class="form-group">
+                    <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col-md-2">
                         <input type="text" name="contact_name2" class="form-control" placeholder="Name">
@@ -93,8 +99,10 @@
                     <div class="col-md-2">
                         <input type="text" name="contact_number2" class="form-control" placeholder="Number">
                     </div>
+                </div>
                 </div><br>
                 <div class="form-group">
+                    <div class="row">
                     <label for="prize_money" class="col-md-4 control-label">Prize Money</label>
                     <div class="col-md-2">
                         <input type="text" name="prize_money1" class="form-control" placeholder="Fisrt Prize">
@@ -103,6 +111,7 @@
                     <div class="col-md-2">
                         <input type="text" name="prize_money2" class="form-control" placeholder="Second Prize">
                     </div>
+                </div>
                 </div><br>
             </div>
             <div class="row">
