@@ -44,7 +44,7 @@
                                             @endif
                                             </script>
                                         </div>
-                    @if( add_events==1 )
+                    @if( $add_events==1 )
                     <div class="form-group rules" style="text-align:center">
                     <p class="control-label"><b>Rules:</b></p>
                     <div class="col-md-10 col-md-offset-2 rule">
