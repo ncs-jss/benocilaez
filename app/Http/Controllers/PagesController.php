@@ -143,7 +143,7 @@ class PagesController extends BaseController{
                 'event_name'=> $name->event_name]);
             }
             return view('add_winners', array('society'=>$user->society,
-            'add_winners'=>$status->add_winners,
+            'add_winners'=>$status->add_winners,'admin'=>$user->priviliges,
             'action'=> 'Add Winners', '`'=> $user->priviliges,
             'events'=> $event_name));
         }else{

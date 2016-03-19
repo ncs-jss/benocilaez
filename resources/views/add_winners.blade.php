@@ -1,22 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Add Winners</title>
-	<style>
-		.help
-		{
-			font-size:10px;
-		}
-
-		.alert
-		{
-			text-align: center;
-			display: none;
-		}
-	</style>
-</head>
+<html lang="en">
+@include('header')
 <body>
-	@include('header')
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('#go').click(function(){
@@ -100,12 +85,24 @@
 			})
 			$('.winner').trigger('rules_add');
 		});
-
-
-
-
 	</script>
-	<div class="container">
+	<div id="wrapper">
+        @include('navigation')
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">{{ $action }}</h2>
+                </div>
+            </div>
+		<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            All Events
+                        </div>
+        <div class="container">
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="" method="POST">
 				<div class="form-group" >
@@ -186,14 +183,15 @@
 				<div class="alert alert-danger col-md-6 col-md-offset-3" role="alert">Empty field.</div>
 				<div class="col-md-7"></div>
 				<div class="col-md-2">
-					<button type="button" class="btn btn-primary btn-block" id="go">Add</button>
+					<button type="button" class="btn btn-default" id="go">Add</button>
 				</div>
 			</div>
 			<div class="col-md-5">
         			<input type="hidden" id="token" value="{{ csrf_token() }}">
     		</div>
 		</form>
-	</div><br>
+	</div></div>
+</div><br>
 	<br><br><br><br><br>
 </body>
 </html>

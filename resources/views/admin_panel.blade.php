@@ -74,7 +74,7 @@
                                                     <tr>
                                                         <th>Society Name</th>
                                                         <th>#CTC</th>
-                                                        <th>#Coordinators?</th>
+                                                        <th>#Coordinators</th>
                                                         <th>#Volunteers</th>
                                                         <th>Edit</th>
                                                         <th>Delete</th>
