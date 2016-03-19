@@ -179,7 +179,7 @@
                 $.post('edit_soc', data, function(res){
                     console.log(res);
                     if(res.status == 1){
-                        modal.find('.success').show();
+                         modal.find('.success').show();
                         window.setTimeout(function(){
                             window.location.href = window.location.href;
                         }, 1000);
@@ -195,54 +195,75 @@
             $('#cancel').click(function(){
                 $('#myModal').modal('hide');
             });
+        });
             $(document).ready(function(){
-        $(#enable_event).click(function(){
+                $(#enable_event).on('click',(function(){
+                 $.ajax({
+                url: 'http://localhost/benocilaez/admin',
+                data: {value: 1},
+                type: 'POST'
+            });
+
+        /*$(#enable_event).on('click',(function(){
             $.post('add_events', 1, function(response){
                 clearInterval(adding);
                 if(response == 1){
                     document.write(response);
                 }else{
                     document.write("Error");
-                };
+                };*/
             }); 
     });
         $(document).ready(function(){
         $(#disable_event).click(function(){
+        $.ajax({
+                url: 'http://localhost/benocilaez/admin',
+                data: {value: 0},
+                type: 'POST'
+                });
+                /*
             $.post('add_events', 0, function(response){
                 clearInterval(adding);
                 if(response == 1){
                     document.write(response);
                 }else{
                     document.write("Error");
-                };
+                };*/
             }); 
-    });
 });
         $(document).ready(function(){
         $(#enable_winner).click(function(){
-            $.post('add_winners', 1, function(response){
+            /*$.post('add_winners', 1, function(response){
                 clearInterval(adding);
                 if(response == 1){
                     document.write(response);
                 }else{
                     document.write("Error");
-                };
+                };*/
+                $.ajax({
+                url: 'http://localhost/benocilaez/admin',
+                data: {value: 1},
+                type: 'POST'
             }); 
+        )};
     });
         $(document).ready(function(){
         $(#disable_winner).click(function(){
-            $.post('add_winners', 1, function(response){
+            /*$.post('add_winners', 1, function(response){
                 clearInterval(adding);
                 if(response == 1){
                     document.write(response);
                 }else{
                     document.write("Error");
-                };
+                };*/
+                $.ajax({
+                url: 'http://localhost/benocilaez/admin',
+                data: {value: 0},
+                type: 'POST'
             }); 
     });
 });
 
-        });
     </script>
     <!-- /#wrapper -->
 

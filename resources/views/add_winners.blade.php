@@ -2,91 +2,8 @@
 <html lang="en">
 @include('header')
 <body>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#go').click(function(){
-				var c = [], d = [], e = [];
-				$('#winner .rule0 input').each(function(){c.push($(this).val())});
-				$('#runnerup1 .rule1 input').each(function(){d.push($(this).val())});
-				$('#runnerup2 .rule2 input').each(function(){e.push($(this).val())});
-				console.log(c);
-			
-			console.log($(this));
-			var i = 0;
 
-			var data = {
-				event_id : $('#event_name').val(),
-				winnner : c,
-				runnnerup1 : d,
-				runnerup2 : e,
-				_token: $('#token').val(),
-			}
-			console.log(data);
-			
-			var check = true;
-			var repeat = function(x){
-				for(var i=0; i<x.length; i++){
-					if(c[i] === ''){
-						return false;
-					}
-				}
-				return true;
-			}
-			check  = repeat(d) && repeat(c) && repeat(e);
-			console.log(check);
-			if(check === true){
-				var button = $(this);
-				var adding = setInterval(function(){
-					button.html('Adding winner'+'.'.repeat(i % 4));
-					i = (i+1) % 4;
-				},500);
-				$.post('add_winners', data, function(response){
-				clearInterval(adding);
-				if(response == 1){
-					document.write(response);
-				}else{
-					document.write("Error");
-				};
-			}); 
-			}else if(check===false){
-				$(".alert").css("display","block");
-			}	
-		});		
-
-
-			$('.winner').each(function(index){
-				$(this).bind('rules_add', function(){
-					var group = $(this);
-				var input = $('.rule'+index, group);
-				var minus = $('.plus', input);
-
-				$(document).on('click', '.add_rule'+index, function(){
-					var s = $(input).clone().appendTo(group);
-					var i = $('.rule'+index).length;
-					s.find('#winnerno'+index).html(i);
-					s.attr('rule_no', i);
-					s.find('.add_rule'+index).removeClass('add_rule' + index +' btn-primary');
-					s.find('.plus button').addClass('del_rule' + index +' btn-danger');
-					s.find('.del_rule'+index).attr('rule', i);
-					s.find('.plus button span').removeClass('glyphicon-plus');
-					s.find('.plus button span').addClass('glyphicon-minus');
-					s.find('input').val('').focus();
-				});
-
-				$(document).on('click', '.del_rule'+index, function(){
-					var x = $(this).parent().parent();
-					x.remove();
-					var z = $('.rule'+index);
-					for(var i = 0; i < z.length; i++){
-						$(z[i]).find('#winnerno'+index).html(i+1);
-					}
-				});
-			});
-			})
-			$('.winner').trigger('rules_add');
-		});
-	</script>
-	<div id="wrapper">
+		<div id="wrapper">
         @include('navigation')
 
         <div id="page-wrapper">
@@ -98,6 +15,14 @@
 		<div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
+                    	<div class="panel-heading">
+                            Add Winners
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+
         <div class="container">
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="" method="POST">
@@ -189,8 +114,98 @@
 	</div>
 </div>
 </div>
-ss</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div><br>
 	<br><br><br><br><br>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#go').click(function(){
+				var c = [], d = [], e = [];
+				$('#winner .rule0 input').each(function(){c.push($(this).val())});
+				$('#runnerup1 .rule1 input').each(function(){d.push($(this).val())});
+				$('#runnerup2 .rule2 input').each(function(){e.push($(this).val())});
+				console.log(c);
+			
+			console.log($(this));
+			var i = 0;
+
+			var data = {
+				event_id : $('#event_name').val(),
+				winnner : c,
+				runnnerup1 : d,
+				runnerup2 : e,
+				_token: $('#token').val(),
+			}
+			console.log(data);
+			
+			var check = true;
+			var repeat = function(x){
+				for(var i=0; i<x.length; i++){
+					if(c[i] === ''){
+						return false;
+					}
+				}
+				return true;
+			}
+			check  = repeat(d) && repeat(c) && repeat(e);
+			console.log(check);
+			if(check === true){
+				var button = $(this);
+				var adding = setInterval(function(){
+					button.html('Adding winner'+'.'.repeat(i % 4));
+					i = (i+1) % 4;
+				},500);
+				$.post('add_winners', data, function(response){
+				clearInterval(adding);
+				if(response == 1){
+					document.write(response);
+				}else{
+					document.write("Error");
+				};
+			}); 
+			}else if(check===false){
+				$(".alert").css("display","block");
+			}	
+		});		
+
+
+			$('.winner').each(function(index){
+				$(this).bind('rules_add', function(){
+					var group = $(this);
+				var input = $('.rule'+index, group);
+				var minus = $('.plus', input);
+
+				$(document).on('click', '.add_rule'+index, function(){
+					var s = $(input).clone().appendTo(group);
+					var i = $('.rule'+index).length;
+					s.find('#winnerno'+index).html(i);
+					s.attr('rule_no', i);
+					s.find('.add_rule'+index).removeClass('add_rule' + index +' btn-primary');
+					s.find('.plus button').addClass('del_rule' + index +' btn-danger');
+					s.find('.del_rule'+index).attr('rule', i);
+					s.find('.plus button span').removeClass('glyphicon-plus');
+					s.find('.plus button span').addClass('glyphicon-minus');
+					s.find('input').val('').focus();
+				});
+
+				$(document).on('click', '.del_rule'+index, function(){
+					var x = $(this).parent().parent();
+					x.remove();
+					var z = $('.rule'+index);
+					for(var i = 0; i < z.length; i++){
+						$(z[i]).find('#winnerno'+index).html(i+1);
+					}
+				});
+			});
+			})
+			$('.winner').trigger('rules_add');
+		});
+	</script>
+
 </body>
 </html>
