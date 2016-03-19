@@ -2,7 +2,7 @@
 <html lang="en">
 @include('header')
 <body>
-
+    
     <div id="wrapper">
         @include('navigation')
 
@@ -12,6 +12,29 @@
                     <h2 class="page-header">{{ $action }}</h2>
                 </div>
             </div>
+            <div class="buttons" style="float:right">
+                @if ($admin == 1)
+                @if ($add_events == 0)
+                <button type="button" class="del-det btn btn-danger unblock button-chod" id="enable_event">
+                                Enable Add Events
+                </button>
+                @else
+                <button type="button" class="del-det btn btn-danger unblock button-chod" id="disable_event">
+                                Disable Add Events
+                </button>
+                @endif
+                @if ($add_winners == 0)
+                <button type="button" class="del-det btn btn-danger unblock button-chod" id="enable_winner">
+                                Enable Add Winners
+                </button>
+                @else
+                <button type="button" class="del-det btn btn-danger unblock button-chod" id="disable_event">
+                                Disable Add Events
+                </button>
+                @endif
+            </div>
+            <br><br>
+                @endif
 
             <div class="row">
                 <div class="col-lg-12">
@@ -172,6 +195,52 @@
             $('#cancel').click(function(){
                 $('#myModal').modal('hide');
             });
+            $(document).ready(function(){
+        $(#enable_event).click(function(){
+            $.post('add_events', 1, function(response){
+                clearInterval(adding);
+                if(response == 1){
+                    document.write(response);
+                }else{
+                    document.write("Error");
+                };
+            }); 
+    });
+        $(document).ready(function(){
+        $(#disable_event).click(function(){
+            $.post('add_events', 0, function(response){
+                clearInterval(adding);
+                if(response == 1){
+                    document.write(response);
+                }else{
+                    document.write("Error");
+                };
+            }); 
+    });
+});
+        $(document).ready(function(){
+        $(#enable_winner).click(function(){
+            $.post('add_winners', 1, function(response){
+                clearInterval(adding);
+                if(response == 1){
+                    document.write(response);
+                }else{
+                    document.write("Error");
+                };
+            }); 
+    });
+        $(document).ready(function(){
+        $(#disable_winner).click(function(){
+            $.post('add_winners', 1, function(response){
+                clearInterval(adding);
+                if(response == 1){
+                    document.write(response);
+                }else{
+                    document.write("Error");
+                };
+            }); 
+    });
+});
 
         });
     </script>

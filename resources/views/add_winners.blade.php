@@ -98,10 +98,6 @@
 		<div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-
-                        <div class="panel-heading">
-                            All Events
-                        </div>
         <div class="container">
 		<div style="text-align:center">
 			<form class="form-horizontal" role="form" action="" method="POST">
@@ -178,19 +174,22 @@
 				<br>
 				<br>
 				<div class="help">
-					<p style="font-size:2em; color:#F44336">The names of winners once added shall not be changed.</p>
+					<p style="font-size:1.2em; color:#F44336">The names of winners once added shall not be changed.</p>
 				</div>
 				<div class="alert alert-danger col-md-6 col-md-offset-3" role="alert">Empty field.</div>
 				<div class="col-md-7"></div>
 				<div class="col-md-2">
-					<button type="button" class="btn btn-default" id="go">Add</button>
+					<button type="button" class="btn btn-default" id="go">{{ $action }}</button>
 				</div>
 			</div>
 			<div class="col-md-5">
         			<input type="hidden" id="token" value="{{ csrf_token() }}">
     		</div>
 		</form>
-	</div></div>
+	</div>
+</div>
+</div>
+ss</div>
 </div><br>
 	<br><br><br><br><br>
 </body>
