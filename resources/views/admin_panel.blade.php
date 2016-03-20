@@ -197,7 +197,7 @@
             });
         });
             $(document).ready(function(){
-                $(#enable_event).on('click',(function(){
+                $('#enable_event').on('click',(function(){
                  $.ajax({
                 url: 'http://localhost/benocilaez/admin',
                 data: {value: 1},
@@ -212,10 +212,10 @@
                 }else{
                     document.write("Error");
                 };*/
-            }); 
+            })); 
     });
         $(document).ready(function(){
-        $(#disable_event).click(function(){
+        $('#disable_event').click(function(){
         $.ajax({
                 url: 'http://localhost/benocilaez/admin',
                 data: {value: 0},
@@ -232,7 +232,7 @@
             }); 
 });
         $(document).ready(function(){
-        $(#enable_winner).click(function(){
+        $('#enable_winner').click(function(){
             /*$.post('add_winners', 1, function(response){
                 clearInterval(adding);
                 if(response == 1){
@@ -245,10 +245,10 @@
                 data: {value: 1},
                 type: 'POST'
             }); 
-        )};
+        });
     });
         $(document).ready(function(){
-        $(#disable_winner).click(function(){
+        $('#disable_winner').click(function(){
             /*$.post('add_winners', 1, function(response){
                 clearInterval(adding);
                 if(response == 1){
