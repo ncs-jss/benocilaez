@@ -29,8 +29,7 @@
                 </button>
                 @else
                 <button type="button" class="del-det btn btn-danger unblock button-chod" id="disable_event">
-                                Disable Add Events
-                </button>
+                                Disable Add Winners
                 @endif
             </div>
             <br><br>
@@ -197,49 +196,29 @@
             });
         });
             $(document).ready(function(){
-                $('#enable_event').on('click',(function(){
+                $('#enable_event').click(function(){
                  $.ajax({
                 url: '{{URL::asset('/admin')}}',
-                data: {value: 1},
+                data: {val: 1},
                 type: 'GET'
             });
 
-        /*$(#enable_event).on('click',(function(){
-            $.post('add_events', 1, function(response){
-                clearInterval(adding);
-                if(response == 1){
-                    document.write(response);
-                }else{
-                    document.write("Error");
-                };*/
+       
             })); 
     });
         $(document).ready(function(){
         $('#disable_event').click(function(){
         $.ajax({
                 url: '{{URL::asset('/admin')}}',
-                data: {value: 0},
+                data: {val: 0},
                 type: 'GET'
                 });
-                /*
-            $.post('add_events', 0, function(response){
-                clearInterval(adding);
-                if(response == 1){
-                    document.write(response);
-                }else{
-                    document.write("Error");
-                };*/
+               
             }); 
 });
         $(document).ready(function(){
         $('#enable_winner').click(function(){
-            /*$.post('add_winners', 1, function(response){
-                clearInterval(adding);
-                if(response == 1){
-                    document.write(response);
-                }else{
-                    document.write("Error");
-                };*/
+           
                 $.ajax({
                 url: '{{URL::asset('/admin')}}',
                 data: {value: 1},
@@ -249,13 +228,7 @@
     });
         $(document).ready(function(){
         $('#disable_winner').click(function(){
-            /*$.post('add_winners', 1, function(response){
-                clearInterval(adding);
-                if(response == 1){
-                    document.write(response);
-                }else{
-                    document.write("Error");
-                };*/
+            
                 $.ajax({
                 url: '{{URL::asset('/admin')}}',
                 data: {value: 0},
