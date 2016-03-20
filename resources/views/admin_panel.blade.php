@@ -199,9 +199,9 @@
             $(document).ready(function(){
                 $('#enable_event').on('click',(function(){
                  $.ajax({
-                url: 'http://localhost/benocilaez/admin',
+                url: '{{URL::asset('/admin')}}',
                 data: {value: 1},
-                type: 'POST'
+                type: 'GET'
             });
 
         /*$(#enable_event).on('click',(function(){
@@ -217,9 +217,9 @@
         $(document).ready(function(){
         $('#disable_event').click(function(){
         $.ajax({
-                url: 'http://localhost/benocilaez/admin',
+                url: '{{URL::asset('/admin')}}',
                 data: {value: 0},
-                type: 'POST'
+                type: 'GET'
                 });
                 /*
             $.post('add_events', 0, function(response){
@@ -241,9 +241,9 @@
                     document.write("Error");
                 };*/
                 $.ajax({
-                url: 'http://localhost/benocilaez/admin',
+                url: '{{URL::asset('/admin')}}',
                 data: {value: 1},
-                type: 'POST'
+                type: 'GET'
             }); 
         });
     });
@@ -257,9 +257,9 @@
                     document.write("Error");
                 };*/
                 $.ajax({
-                url: 'http://localhost/benocilaez/admin',
+                url: '{{URL::asset('/admin')}}',
                 data: {value: 0},
-                type: 'POST'
+                type: 'GET'
             }); 
     });
 });
