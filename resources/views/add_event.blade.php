@@ -117,6 +117,7 @@
                                             </div>
                                         </div>
                                         </div><br>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-offset-4"></div>
                                             <div style="text-align:center">
@@ -127,7 +128,6 @@
                                                     </div>
                                                 <!-- The extended global progress state -->
                                             <div class="progress-extended">&nbsp;</div>
-                                        </div>
                                         </div>
                                         </div>
                                         </div>
@@ -197,8 +197,7 @@
         }
     });
 });
-$('.rules').trigger('rules_add');
-</script>
+$('.rules').trigger('rules_add');</script>
 
 </body>
 
