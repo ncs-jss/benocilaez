@@ -6,6 +6,44 @@
     <div id="wrapper">
         @include('navigation')
 
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        
+
+        $('.feature').click(function(){
+            var what = $(this).attr('what');
+            var button = $(this);
+            button.html('WORKING...');
+            a = ['ADD EVENTS', 'ADD WINNERS'];
+            $.get('enable_feature/'+what, function(response){
+                if(response == 1){
+                    button.html('DISABLE ' + a[what]);
+                    button.removeClass('btn-danger');
+                    button.addClass('btn-success');
+                    if(what == 1){
+                        window.location.href = window.location.href
+                    }
+                }else if(response == 0){
+                    button.html('ENABLE ' + a[what]);
+                    button.removeClass('btn-success');
+                    button.addClass('btn-danger');
+                    if(what == 1){
+                        window.location.href = window.location.href
+                    }
+                }else{
+                    var x = button.hrml();
+                    button.html('ERROR...TRY AGAIN...');
+                    setTimeout(function(){
+                        button.html(x);
+                    }, 1000);
+                }
+            });
+        });
+    });
+</script>
+
+
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -14,24 +52,25 @@
             </div>
             <div class="buttons" style="float:right">
                 @if ($admin == 1)
-                @if ($add_events == 0)
-                <button type="button" class="del-det btn btn-danger unblock button-chod" id="enable_event">
-                                Enable Add Events
+                 @if($add_events == 0)
+                <button type="button" what='0' class="btn btn-danger feature">
+                    ENABLE ADD EVENTS
                 </button>
                 @else
-                <button type="button" class="del-det btn btn-danger unblock button-chod" id="disable_event">
-                                Disable Add Events
+                <button type="button" what='0' class="btn btn-success feature">
+                    DISABLE ADD EVENTS
                 </button>
                 @endif
-                @if ($add_winners == 0)
-                <button type="button" class="del-det btn btn-danger unblock button-chod" id="enable_winner">
-                                Enable Add Winners
+                @if($add_winners == 0)
+                <button type="button" id="feature" what='1' class="btn btn-danger feature">
+                    ENABLE ADD WINNERS
                 </button>
                 @else
-                <button type="button" class="del-det btn btn-danger unblock button-chod" id="disable_event">
-                                Disable Add Winners
+                <button type="button" id="feature" what='1' class="btn btn-success feature">
+                    DISABLE ADD WINNERS
+                </button>
                 @endif
-            </div>
+                 </div>
             <br><br>
                 @endif
 
@@ -189,7 +228,7 @@
                         }, 1000);
                     }
                 });
-
+ 
             });
             $('#cancel').click(function(){
                 $('#myModal').modal('hide');
