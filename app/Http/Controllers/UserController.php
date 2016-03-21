@@ -118,11 +118,14 @@ class UserController extends BaseController{
             $eventdetails->event_name = $data['event_name'];
 
             $eventdetails->event_description = json_encode($data['short_des']);
-
             // rules n long des ke columns banenge
             // n vo yahan par se vahan jayenge
 
+
             if(Status::first()->add_events == 1){
+               $data['timing'] = $data['date'] . " " . $data['time'];
+               $data['contact'] = array(array("name" => $data['contact_name1'],"number" => $data['contact_number1']),array("name" => $data['contact_name2'],"number" => $data['contact_number2']));
+               $data['prize_money'] = array($data['prize_money1'],$data['prize_money2']); 
                 if(rtrim($data['timing']) != '' &&
                 strpos($data['timing'], 'undefined') === false){
                     $tv = preg_split('/[- :]/', $data['timing']);

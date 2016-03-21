@@ -117,7 +117,6 @@
                                             </div>
                                         </div>
                                         </div><br>
-                                        </div>
                                         <div class="row">
                                             <div class="col-md-offset-4"></div>
                                             <div style="text-align:center">
@@ -130,7 +129,6 @@
                                             <div class="progress-extended">&nbsp;</div>
                                         </div>
                                         </div>
-                                        </form>
                                         </div>
                                         </div>
                                     @endif
