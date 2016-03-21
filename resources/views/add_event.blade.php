@@ -197,7 +197,8 @@
         }
     });
 });
-$('.rules').trigger('rules_add');</script>
+$('.rules').trigger('rules_add');
+</script>
 
 </body>
 
