@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale =1">
 	<title>Back Office Login</title>
 	<link rel="stylesheet" href="{{asset("css/bootstrap.min.css")}}"/>
 </head>

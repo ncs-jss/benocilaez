@@ -24,7 +24,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-8 col-lg-offset-2">
-                                    <form role="form" action="add_event" method="post">
+                                    @if($action == 'Add Event')<form role="form" action="{{route('event_creation')}}" method="post">@else<form role="form" action="{{route('edit', $id)}}" method="post">@endif
                                         <div class="form-group">
                                             <label>Event Name</label>
                                             @if($edit == 1)
@@ -56,7 +56,7 @@
                                             </ul>
                                         </div>
                                         @endif
-                                        <button type="submit" class="btn btn-default">Add Event</button>
+                                        <button type="submit" class="btn btn-default">{{ $action }}</button>
                                     </form>
                                 </div>
                             </div>
