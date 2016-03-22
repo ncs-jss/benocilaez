@@ -200,6 +200,7 @@ class OpController extends BaseController{
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
             $member = Members::where('id', $id);
+            // dd($member->first());
             if($member->first()->soc_id == Session::get('email')){
                 if($member->delete()){
                     return Redirect::back();

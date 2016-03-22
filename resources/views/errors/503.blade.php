@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">I know for sure that this page does'nt exist.</div>
             </div>
         </div>
     </body>

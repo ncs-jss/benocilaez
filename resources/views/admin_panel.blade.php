@@ -2,9 +2,47 @@
 <html lang="en">
 @include('header')
 <body>
-
+    
     <div id="wrapper">
         @include('navigation')
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        
+
+        $('.feature').click(function(){
+            var what = $(this).attr('what');
+            var button = $(this);
+            button.html('WORKING...');
+            a = ['ADD EVENTS', 'ADD WINNERS'];
+            $.get('enable_feature/'+what, function(response){
+                if(response == 1){
+                    button.html('DISABLE ' + a[what]);
+                    button.removeClass('btn-danger');
+                    button.addClass('btn-success');
+                    if(what == 1){
+                        window.location.href = window.location.href
+                    }
+                }else if(response == 0){
+                    button.html('ENABLE ' + a[what]);
+                    button.removeClass('btn-success');
+                    button.addClass('btn-danger');
+                    if(what == 1){
+                        window.location.href = window.location.href
+                    }
+                }else{
+                    var x = button.hrml();
+                    button.html('ERROR...TRY AGAIN...');
+                    setTimeout(function(){
+                        button.html(x);
+                    }, 1000);
+                }
+            });
+        });
+    });
+</script>
+
 
         <div id="page-wrapper">
             <div class="row">
@@ -12,6 +50,29 @@
                     <h2 class="page-header">{{ $action }}</h2>
                 </div>
             </div>
+            <div class="buttons" style="float:right">
+                @if ($admin == 1)
+                 @if($add_events == 0)
+                <button type="button" what='0' class="btn btn-danger feature">
+                    ENABLE ADD EVENTS
+                </button>
+                @else
+                <button type="button" what='0' class="btn btn-success feature">
+                    DISABLE ADD EVENTS
+                </button>
+                @endif
+                @if($add_winners == 0)
+                <button type="button" id="feature" what='1' class="btn btn-danger feature">
+                    ENABLE ADD WINNERS
+                </button>
+                @else
+                <button type="button" id="feature" what='1' class="btn btn-success feature">
+                    DISABLE ADD WINNERS
+                </button>
+                @endif
+                 </div>
+            <br><br>
+                @endif
 
             <div class="row">
                 <div class="col-lg-12">
@@ -74,7 +135,7 @@
                                                     <tr>
                                                         <th>Society Name</th>
                                                         <th>#CTC</th>
-                                                        <th>#Coordinators?</th>
+                                                        <th>#Coordinators</th>
                                                         <th>#Volunteers</th>
                                                         <th>Edit</th>
                                                         <th>Delete</th>
@@ -156,7 +217,7 @@
                 $.post('edit_soc', data, function(res){
                     console.log(res);
                     if(res.status == 1){
-                        modal.find('.success').show();
+                         modal.find('.success').show();
                         window.setTimeout(function(){
                             window.location.href = window.location.href;
                         }, 1000);
@@ -167,13 +228,54 @@
                         }, 1000);
                     }
                 });
-
+ 
             });
             $('#cancel').click(function(){
                 $('#myModal').modal('hide');
             });
-
         });
+            $(document).ready(function(){
+                $('#enable_event').click(function(){
+                 $.ajax({
+                url: '{{URL::asset('/admin')}}',
+                data: {val: 1},
+                type: 'GET'
+            });
+
+       
+            })); 
+    });
+        $(document).ready(function(){
+        $('#disable_event').click(function(){
+        $.ajax({
+                url: '{{URL::asset('/admin')}}',
+                data: {val: 0},
+                type: 'GET'
+                });
+               
+            }); 
+});
+        $(document).ready(function(){
+        $('#enable_winner').click(function(){
+           
+                $.ajax({
+                url: '{{URL::asset('/admin')}}',
+                data: {value: 1},
+                type: 'GET'
+            }); 
+        });
+    });
+        $(document).ready(function(){
+        $('#disable_winner').click(function(){
+            
+                $.ajax({
+                url: '{{URL::asset('/admin')}}',
+                data: {value: 0},
+                type: 'GET'
+            }); 
+    });
+});
+
     </script>
     <!-- /#wrapper -->
 
