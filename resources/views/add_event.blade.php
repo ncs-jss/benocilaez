@@ -85,11 +85,11 @@
                                                 <div class="row">                    
                                                     <label for="time" class="col-md-2 control-label">Time</label>
                                                     <div class="col-md-4">
-                                                        <input type="time" placeholder='HH:MM' name="time" class="form-control">
+                                                        <input type="time" placeholder='HH:MM' name="time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]">
                                                     </div>
                                                     <label for="date" class="col-md-2 control-label">Date</label>
                                                     <div class="col-md-4">
-                                                        <input type="date" placeholder='YYYY-MM-DD' name="date" class="form-control">
+                                                        <input type="date" placeholder='YYYY-MM-DD' name="date" class="form-control" pattern="2016-04-0[7-9]">
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -100,7 +100,7 @@
                                                         <input type="text" name="contact_name1" class="form-control" placeholder="Name">
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="text" name="contact_number1" class="form-control" placeholder="Number">
+                                                        <input type="tel" name="contact_number1" class="form-control" placeholder="Number" pattern="[0-9]{10}">
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -110,7 +110,7 @@
                                                         <input type="text" name="contact_name2" class="form-control" placeholder="Name">
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="text" name="contact_number2" class="form-control" placeholder="Number">
+                                                        <input type="tel" name="contact_number2" class="form-control" placeholder="Number" pattern="[0-9]{10}">
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -118,10 +118,10 @@
                                                 <div class="row">
                                                     <label for="prize_money" class="col-md-2 control-label">Prize Money</label>
                                                     <div class="col-md-4">
-                                                        <input type="text" name="prize_money1" class="form-control" placeholder="Fisrt Prize  (don't add Rs.)">
+                                                        <input type="tel" name="prize_money1" class="form-control" placeholder="Fisrt Prize  (don't add Rs.)" pattern="[0-9]*">
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="text" name="prize_money2" class="form-control" placeholder="Second Prize  (don't add Rs.)">
+                                                        <input type="tel" name="prize_money2" class="form-control" placeholder="Second Prize  (don't add Rs.)" pattern="[0-9]*">
                                                     </div>
                                                 </div>
                                             </div><br>
