@@ -26,9 +26,9 @@
                                 <div class="col-lg-8 col-lg-offset-2">
 
                                     @if($action == 'Add Event')
-                                    <form role="form" action="{{route('event_creation')}}" method="post">
+                                    <form role="form" action="{{route('event_creation')}}" method="post" enctype="multipart/form-data">
                                         @else
-                                        <form role="form" action="{{route('edit', $id)}}" method="post">
+                                        <form role="form" action="{{route('edit', $id)}}" method="post" enctype="multipart/form-data">
                                             @endif
                                             <div class="form-group">
                                                 <label>Event Name</label>
@@ -122,6 +122,14 @@
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
                                                         <input type="text" name="prize_money2" class="form-control" placeholder="Second Prize  (don't add Rs.)">
+                                                    </div>
+                                                </div>
+                                            </div><br>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label for="file" class="col-md-2 control-label">File Upload (Optional)</label>
+                                                    <div class="col-md-4 col-md-offset-2">
+                                                        <input type="file" name="file" class="form-control" >
                                                     </div>
                                                 </div>
                                             </div><br>

@@ -82,8 +82,8 @@ class UserController extends BaseController{
             Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
             Session::put('attachment',$fileName);
             $response = array("files"=>array("url"=>"http://localhost/benocilaez/public/uploads/"
-            .$fileName,"thumbnailUrl"=>"http://localhost/benocilaez/public/uploads/"
-            .$fileName,"name" => $fileName, "type"=> $extension, "size" =>Input::file('files')->getClientSize()));
+                .$fileName,"thumbnailUrl"=>"http://localhost/benocilaez/public/uploads/"
+                .$fileName,"name" => $fileName, "type"=> $extension, "size" =>Input::file('files')->getClientSize()));
 
             return json_encode($response);
         }
@@ -96,7 +96,7 @@ class UserController extends BaseController{
             $user = User::where('email', Session::get('email'))->first();
             $data = Input::all();
             array_pop($data);
-            $rules = ['event_name'=>'required'];
+            $rules = ['event_name'=>'required','file'=>'mimes:application/pdf'];
             $validator = Validator::make($data, $rules);
 
             if($validator->fails()){
@@ -110,7 +110,8 @@ class UserController extends BaseController{
                 $event_count = Events::all()->last()->id + 1;
             }
             else
-            $event_count = 0;
+
+                $event_count = 0;
             $event->event_id = strtolower(substr($user->society, 0, 4)).$event_count;
 
             $eventdetails = new EventDetails;
@@ -123,34 +124,37 @@ class UserController extends BaseController{
 
 
             if(Status::first()->add_events == 1){
-               $data['timing'] = $data['date'] . " " . $data['time'];
-               $data['contact'] = array(array("name" => $data['contact_name1'],"number" => $data['contact_number1']),array("name" => $data['contact_name2'],"number" => $data['contact_number2']));
-               $data['prize_money'] = array($data['prize_money1'],$data['prize_money2']); 
-                if(rtrim($data['timing']) != '' &&
+             $data['timing'] = $data['date'] . " " . $data['time'];
+             $data['contact'] = array(array("name" => $data['contact_name1'],"number" => $data['contact_number1']),array("name" => $data['contact_name2'],"number" => $data['contact_number2']));
+             $data['prize_money'] = array($data['prize_money1'],$data['prize_money2']); 
+             if(rtrim($data['timing']) != '' &&
                 strpos($data['timing'], 'undefined') === false){
-                    $tv = preg_split('/[- :]/', $data['timing']);
-                    $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
-                    $timestamp = date("Y-m-d h:i:s", $d);
-                    $eventdetails->timing = $timestamp;
-                }
+                $tv = preg_split('/[- :]/', $data['timing']);
+            $d = mktime($tv[3], $tv[4], 0, $tv[1], $tv[2], $tv[0]);
+            $timestamp = date("Y-m-d h:i:s", $d);
+            $eventdetails->timing = $timestamp;
+        }
 
-                $eventdetails->contact = json_encode($data['contact']);
-                $eventdetails->prize_money = json_encode($data['prize_money']);
-                $eventdetails->approved = 0;
-
-                if (Session::get('attachment')) {
-                    $eventdetails->attachment = Session::get('attachment');
-                }
-            }
-            $event->save();
-            if($eventdetails->save()){
-                return Redirect::route('view_event');
-            }else{
-                Session::flash('success','0');
-                return Redirect::back();
-            }
-        }else{
-            return Redirect::route('root');
+        $eventdetails->contact = json_encode($data['contact']);
+        $eventdetails->prize_money = json_encode($data['prize_money']);
+        $eventdetails->approved = 0;
+        if (Input::file('files') != null && Input::file('files') -> isValid()) {
+            $destinationPath = 'uploads'; // upload path
+            $extension = Input::file('files') -> getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
+            $eventdetails->attachment = $fileName;
         }
     }
+    $event->save();
+    if($eventdetails->save()){
+        return Redirect::route('view_event');
+    }else{
+        Session::flash('success','0');
+        return Redirect::back();
+    }
+}else{
+    return Redirect::route('root');
+}
+}
 }
