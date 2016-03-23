@@ -51,13 +51,25 @@
                                             </div>
 
                                             @if ($add_events == 1)
+
+                                            <div class="form-group">
+                                                <label>Long description of the event</label>
+                                                <textarea class="form-control" name="long_des" rows="3" id="editor2"></textarea>
+                                                <script type="text/javascript">
+                                                CKEDITOR.replace('editor2');
+                                                @if($edit == 1)
+                                                CKEDITOR.instances['editor2']
+                                                .setData({!! $event_des !!});
+                                                @endif
+                                                </script>
+                                            </div>
                                             <div class="form-group rules" style="text-align:center">    
                                                 <p class="control-label"><b>Rules:</b></p>
                                                 <div class="rule row">
                                                     <div class="col-md-11">
                                                         <div class="input-group rule-1">
                                                             <span class="input-group-addon" id="rulenumber">1</span>
-                                                            <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1">
+                                                            <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1" name="rules[]">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1 plus">
