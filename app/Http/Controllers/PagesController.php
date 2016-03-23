@@ -201,8 +201,15 @@ class PagesController extends BaseController{
             ->where('type', $team)->get();
             $members = $members->toArray();
             foreach ($members as $key => $field) {
-                if($members[$key]['events'] != '' && $members[$key]['events'] != null && $members[$key]['events'] != 'null')
-                    $members[$key]['events'] = EventDetails::where('event_id', $members[$key]['events'])->first()->event_name;
+                if($members[$key]['events'] != '' && $members[$key]['events'] != null && $members[$key]['events'] != 'null'){
+                    $x = EventDetails::where('event_id', $members[$key]['events'])->first();
+                    if($x != ''){
+                        $members[$key]['events'] = EventDetails::where('event_id', $members[$key]['events'])->first()->event_name;
+                    }else{
+                        $members[$key]['events'] = '';
+                    }
+
+                }
             }
             $disp_events = Events::where('society_email',Session::get('email'))
             ->get()->pluck('event_id');
@@ -246,9 +253,17 @@ class PagesController extends BaseController{
                 ->where('type', $type)->get();
                 $members = $members->toArray();
                 foreach ($members as $key => $field) {
-                    if($members[$key]['events'] != '' && $members[$key]['events'] != null && $members[$key]['events'] != 'null')
-                        $members[$key]['events'] = EventDetails::where('event_id', $members[$key]['events'])->first()->event_name;
+                    if($members[$key]['events'] != '' && $members[$key]['events'] != null && $members[$key]['events'] != 'null'){
+                        $x = EventDetails::where('event_id', $members[$key]['events'])->first();
+                        if($x != ''){
+                            $members[$key]['events'] = EventDetails::where('event_id', $members[$key]['events'])->first()->event_name;
+                        }else{
+                            $members[$key]['events'] = '';
+                        }
+
+                    }
                 }
+
                 $disp_events = Events::where('society_email',$soc->email)
                 ->get()->pluck('event_id');
                 $disp_event_details = array();
