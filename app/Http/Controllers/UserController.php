@@ -95,6 +95,7 @@ class UserController extends BaseController{
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
             $data = Input::all();
+            //dd($data);
             array_pop($data);
             $rules = ['event_name'=>'required','file'=>'mimes:application/pdf'];
             $validator = Validator::make($data, $rules);
@@ -119,6 +120,8 @@ class UserController extends BaseController{
             $eventdetails->event_name = $data['event_name'];
 
             $eventdetails->event_description = json_encode($data['short_des']);
+            $eventdetails->long_des = json_encode($data['long_des']);
+            $eventdetails->rules = json_encode($data['rules']);
             // rules n long des ke columns banenge
             // n vo yahan par se vahan jayenge
 
@@ -138,11 +141,11 @@ class UserController extends BaseController{
         $eventdetails->contact = json_encode($data['contact']);
         $eventdetails->prize_money = json_encode($data['prize_money']);
         $eventdetails->approved = 0;
-        if (Input::file('files') != null && Input::file('files') -> isValid()) {
+        if (Input::file('file') != null && Input::file('file') -> isValid()) {
             $destinationPath = 'uploads'; // upload path
-            $extension = Input::file('files') -> getClientOriginalExtension(); // getting image extension
+            $extension = Input::file('file') -> getClientOriginalExtension(); // getting image extension
             $fileName = rand(11111,99999).'.'.$extension; // renameing image
-            Input::file('files')->move($destinationPath, $fileName); // uploading file to given path
+            Input::file('file')->move($destinationPath, $fileName); // uploading file to given path
             $eventdetails->attachment = $fileName;
         }
     }
