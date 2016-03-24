@@ -19,7 +19,7 @@ class PagesController extends BaseController{
     public function root(){
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
-            return Redirect::route('add_event');
+            return Redirect::route('view_event');
         }else{
             if(Session::get('err') == '1'){
                 return view('back_office_login',

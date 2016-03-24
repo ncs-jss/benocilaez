@@ -23,10 +23,6 @@
                     <a href="#"><i class="fa fa-dashboard fa-fw"></i> Events<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         
-                        <!-- <li>
-                            <a href="{{route('add_event')}}"> Add Event</a>
-                        </li> -->
-                        
                         <li>
                             <a href="{{route('view_event')}}"> View Events</a>
                         </li>
