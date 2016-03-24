@@ -59,15 +59,16 @@
                                                 CKEDITOR.replace('editor2');
                                                 @if($edit == 1)
                                                 CKEDITOR.instances['editor2']
-                                                .setData({!! $event_des !!});
+                                                .setData({!! $long_des !!});
                                                 @endif
                                                 </script>
                                             </div>
                                             <div class="form-group rules" style="text-align:center">    
                                                 <p class="control-label"><b>Rules:</b></p>
-                                                <div class="rule row">
+                                                @if($action == 'Add Event')
+                                                <div class="rule-1 row x">
                                                     <div class="col-md-11">
-                                                        <div class="input-group rule-1">
+                                                        <div class="input-group">
                                                             <span class="input-group-addon" id="rulenumber">1</span>
                                                             <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1" name="rules[]">
                                                         </div>
@@ -79,17 +80,51 @@
                                                     </div>
                                                     <br><br>
                                                 </div>
+                                                @else
+                                                <?php $i = 1; ?>
+                                                @foreach(json_decode($rules) as $rule)
+                                                <div class="rule-{{$i}} row x">
+                                                    <div class="col-md-11">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="rulenumber">{{$i}}</span>
+                                                            <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1" name="rules[]" value="{{$rule}}">
+                                                        </div>
+                                                    </div>
+                                                    @if($i == 1)
+                                                    <div class="col-md-1 plus">
+                                                        <button type="button" class="btn btn-primary add_rule" aria-label="Left Align">
+                                                            <span class="glyphicon glyphicon-plus chod" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                    @else
+                                                    <div class="col-md-1 plus">
+                                                        <button type="button" class="btn btn-danger del_rule" aria-label="Left Align">
+                                                            <span class="glyphicon glyphicon-minus chod" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                    @endif
+                                                    <br><br>
+                                                </div>
+                                                <?php $i++; ?>
+                                                @endforeach
+                                                @endif
                                             </div>
                                             <br>
+
+                                            <?php 
+                                            $time = explode(" ", $timing)[1];
+                                            $date = explode(" ", $timing)[0];
+                                            ?>
+
                                             <div class="form-group">
                                                 <div class="row">                    
                                                     <label for="time" class="col-md-2 control-label">Time</label>
                                                     <div class="col-md-4">
-                                                        <input type="time" placeholder='HH:MM' name="time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]">
+                                                        <input type="time" placeholder='HH:MM' name="time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" value="{{$time}}">
                                                     </div>
                                                     <label for="date" class="col-md-2 control-label">Date</label>
                                                     <div class="col-md-4">
-                                                        <input type="date" placeholder='YYYY-MM-DD' name="date" class="form-control" pattern="2016-04-0[7-9]">
+                                                        <input type="date" placeholder='YYYY-MM-DD' name="date" class="form-control" pattern="2016-04-0[7-9]" value="{{$date}}">
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -97,20 +132,20 @@
                                                 <div class="row">
                                                     <label for="contact" class="col-md-2 control-label">Contacts</label>
                                                     <div class="col-md-4">
-                                                        <input type="text" name="contact_name1" class="form-control" placeholder="Name">
+                                                        <input type="text" name="contact_name1" class="form-control" placeholder="Name" value="{{$contacts[0]->name}}">
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="tel" name="contact_number1" class="form-control" placeholder="Number" pattern="[0-9]{10}">
+                                                        <input type="tel" name="contact_number1" class="form-control" placeholder="Number" pattern="[0-9]{10}" value="{{$contacts[0]->number}}">
                                                     </div>
                                                 </div>
                                             </div><br>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="text" name="contact_name2" class="form-control" placeholder="Name">
+                                                        <input type="text" name="contact_name2" class="form-control" placeholder="Name" value="{{$contacts[1]->name}}">
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="tel" name="contact_number2" class="form-control" placeholder="Number" pattern="[0-9]{10}">
+                                                        <input type="tel" name="contact_number2" class="form-control" placeholder="Number" pattern="[0-9]{10}" value="{{$contacts[1]->number}}">
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -118,19 +153,31 @@
                                                 <div class="row">
                                                     <label for="prize_money" class="col-md-2 control-label">Prize Money</label>
                                                     <div class="col-md-4">
-                                                        <input type="tel" name="prize_money1" class="form-control" placeholder="Fisrt Prize  (don't add Rs.)" pattern="[0-9]*">
+                                                        <input type="tel" name="prize_money1" class="form-control" placeholder="Fisrt Prize  (don't add Rs.)" pattern="[0-9]*" value="{{$prizes[0]}}">
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="tel" name="prize_money2" class="form-control" placeholder="Second Prize  (don't add Rs.)" pattern="[0-9]*">
+                                                        <input type="tel" name="prize_money2" class="form-control" placeholder="Second Prize  (don't add Rs.)" pattern="[0-9]*" value="{{$prizes[1]}}">
                                                     </div>
                                                 </div>
                                             </div><br>
+
+
+                                            
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label for="file" class="col-md-2 control-label">File Upload (Optional)</label>
                                                     <div class="col-md-4 col-md-offset-2">
                                                         <input type="file" name="file" class="form-control" >
                                                     </div>
+                                                </div>
+                                                <div class="row" style="text-align:center; color:#ef2345">
+                                                    @if($action == 'Edit Event' && $attachment != "")
+                                                    <p>This event has an attachment already!
+                                                        <br>
+                                                        Uploading another attachment will override the previous one.
+                                                        Click <a href="{{ url('uploads') }}/{{ $attachment }}">here</a> to download attachment.
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div><br>
 
@@ -178,13 +225,12 @@
         <script src="{{ asset('js/sb-admin-2.js') }}"></script>
         <script type="text/javascript">
         $('.rules').bind('rules_add', function(){
-            console.log('abhay');
             var group = $(this);
-            var input = $('.rule', group);
+            var input = $('.rule-1', group);
             var minus = $('.plus', input);
             $(document).on('click', '.add_rule', function(){
                 var s = $(input).clone().appendTo(group);
-                var i = $('.rule').length;
+                var i = $('.x').length;
                 s.find('#rulenumber').html(i);
                 s.attr('rule_no', i);
                 s.find('.add_rule').removeClass('add_rule btn-primary');

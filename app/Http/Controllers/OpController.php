@@ -19,6 +19,11 @@ class OpController extends BaseController{
         if(\Auth::check() && Session::get('email') == $owner){
             $user = User::where('email', Session::get('email'))->first();
             $event = EventDetails::where('event_id',$id)->get();
+            //dd($event[0]);
+            $rules = ($event[0]->rules != "" && $event[0]->rules != null) ? $event[0]->rules : '[""]';
+            $contacts = ($event[0]->contact != "" && $event[0]->contact != null) ? $event[0]->contact : '[{"name":"", "number":""},{"name":"", "number":""}]' ;
+            $prize = ($event[0]->prize_money != "" && $event[0]->prize_money != null) ? $event[0]->prize_money : '["",""]';
+            //dd(count($contacts));
             if(!($event[0]->approved == 0))
             return Redirect::route('view_event');
             $e = $event[0]->event_description;
@@ -33,8 +38,12 @@ class OpController extends BaseController{
                 'edit'=>1,
                 'add_winners'=>$status->add_winners,
                 'add_events'=>$status->add_events,
-                'contacts'=>$event[0]->contact,
-                'prizes'=>$event[0]->prize_money,
+                'contacts'=>json_decode($contacts),
+                'prizes'=>json_decode($prize),
+                'attachment'=>$event[0]->attachment,
+                'long_des'=>$event[0]->long_des,
+                'rules'=>$rules,
+                'timing'=>$event[0]->timing,
             ));
         }else{
             return Redirect::back();
