@@ -37,4 +37,16 @@ class ApiController extends BaseController{
             return 0;
         }
     }
+
+    public function get_events_by_category($cat){
+        if($cat > 6)
+            abort(404);
+        $status = Status::first();
+        if($status->add_winners == 0)
+            return EventDetails::where('grp', $cat)->select('event_name', 'event_description')->get()->toArray();
+        else
+            return EventDetails::where('grp', $cat)->get()->toArray();
+    }
+
+    public function get_events_by_soc(){}
 }

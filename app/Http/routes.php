@@ -34,4 +34,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/upload_add_event', ['as'=>'event_creation_upload', 'before'=>'csrf', 'uses'=>'UserController@upload_add_event']);
 	Route::post('/add_event', ['as'=>'event_creation', 'before'=>'csrf', 'uses'=>'UserController@create_event']);
 	Route::post('/add_winners', ['as'=>'create_winners', 'before'=>'csrf', 'uses'=>'OpController@add_winners']);
+
+    Route::get('/events/{category}', ['uses'=>'ApiController@get_events_by_category']);
 });
