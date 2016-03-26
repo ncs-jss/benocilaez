@@ -63,7 +63,7 @@
                                                 @endif
                                                 </script>
                                             </div>
-                                            <div class="form-group rules" style="text-align:center">    
+                                            <div class="form-group rules" style="text-align:center">
                                                 <p class="control-label"><b>Rules:</b></p>
                                                 @if($action == 'Add Event')
                                                 <div class="rule-1 row x">
@@ -111,13 +111,13 @@
                                             </div>
                                             <br>
 
-                                            <?php 
+                                            <?php
                                             $time = explode(" ", $timing)[1];
                                             $date = explode(" ", $timing)[0];
                                             ?>
 
                                             <div class="form-group">
-                                                <div class="row">                    
+                                                <div class="row">
                                                     <label for="time" class="col-md-2 control-label">Time</label>
                                                     <div class="col-md-4">
                                                         <input type="time" placeholder='HH:MM' name="time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" value="{{$time}}">
@@ -162,7 +162,7 @@
                                             </div><br>
 
 
-                                            
+
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label for="file" class="col-md-2 control-label">File Upload (Optional)</label>
@@ -175,7 +175,7 @@
                                                     <p>This event has an attachment already!
                                                         <br>
                                                         Uploading another attachment will override the previous one.
-                                                        Click <a href="{{ url('uploads') }}/{{ $attachment }}">here</a> to download attachment.
+                                                        Click <a href="{{ route('download', ['id'=>$attachment, 'event'=>$event_name]) }}">here</a> to download attachment.
                                                     </p>
                                                     @endif
                                                 </div>

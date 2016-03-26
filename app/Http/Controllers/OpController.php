@@ -73,16 +73,31 @@ class OpController extends BaseController{
             $eventdetails = EventDetails::where('event_id', $id)->first();
 
             $eventdetails['event_description'] = json_encode($data['short_des']);
-            if(isset($data['timing'])){
-                $eventdetails->timing = $data['timing'];
-            }
-            if(isset($data['contact'])){
-                $eventdetails->contact = json_encode($data['contact']);
-            }
-            if(isset($data['contact'])){
-                $eventdetails->prize_money = json_encode($data['prize_money']);
-            }
+            $eventdetails['long_des'] = json_encode($data['long_des']);
+            $eventdetails['rules'] = json_encode($data['rules']);
+
+
+
+            $data['timing'] = $data['date'] . " " . $data['time'];
+            $eventdetails->timing = $data['timing'];
+
+            $data['contact'] = array(array("name" => $data['contact_name1'],"number" => $data['contact_number1']),
+                                        array("name" => $data['contact_name2'],"number" => $data['contact_number2']));
+            $eventdetails->contact = json_encode($data['contact']);
+
+            $data['prize_money'] = array($data['prize_money1'],$data['prize_money2']);
+            $eventdetails->prize_money = json_encode($data['prize_money']);
+
             $eventdetails->approved = 0;
+
+            if (Input::file('file') != null && Input::file('file') -> isValid()) {
+                $destinationPath = 'uploads'; // upload path
+                $extension = Input::file('file') -> getClientOriginalExtension(); // getting image extension
+                $fileName = rand(11111,99999).'.'.$extension; // renameing image
+                Input::file('file')->move($destinationPath, $fileName); // uploading file to given path
+                $eventdetails->attachment = $fileName;
+            }
+
             $eventdetails->save();
             return Redirect::route('view_event');
 
@@ -256,5 +271,12 @@ class OpController extends BaseController{
             }
         }
         return ['status'=>'0', '_token'=> csrf_token()];
+    }
+
+    public function download($id, $event){
+        $path = "uploads/$id";
+        $extention = explode('.', $id)[1];
+        $name = "$event.$extention";
+        return response()->download($path, $name);
     }
 }

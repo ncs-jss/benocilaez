@@ -129,7 +129,7 @@ class UserController extends BaseController{
             if(Status::first()->add_events == 1){
              $data['timing'] = $data['date'] . " " . $data['time'];
              $data['contact'] = array(array("name" => $data['contact_name1'],"number" => $data['contact_number1']),array("name" => $data['contact_name2'],"number" => $data['contact_number2']));
-             $data['prize_money'] = array($data['prize_money1'],$data['prize_money2']); 
+             $data['prize_money'] = array($data['prize_money1'],$data['prize_money2']);
              if(rtrim($data['timing']) != '' &&
                 strpos($data['timing'], 'undefined') === false){
                 $tv = preg_split('/[- :]/', $data['timing']);
