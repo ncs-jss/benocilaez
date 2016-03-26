@@ -16,7 +16,7 @@ class OpController extends BaseController{
     public function edit($id){
         $owner = Events::where('event_id', $id)->get()[0]->society_email;
         $status = Status::first();
-        if(\Auth::check() && Session::get('email') == $owner){
+        if(\Auth::check() &&(strcasecmp(Session::get('email') , $owner )) == 0){
             $user = User::where('email', Session::get('email'))->first();
             $event = EventDetails::where('event_id',$id)->get();
             //dd($event[0]);
