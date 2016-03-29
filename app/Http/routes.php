@@ -1,7 +1,8 @@
 <?php
 use App\User;
 Route::group(['middleware' => ['web']], function () {
-	Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);
+	Route::get('/', ['as'=>'zeal_root', 'uses'=>'ZealController@root']);
+	Route::get('administrator', ['as'=>'root', 'uses'=>'PagesController@root']);
 	Route::get('/add_society', ['as'=>'add_soc', 'uses'=>'PagesController@add_society']);
 	Route::get('/event_approval', ['as'=>'event_approval', 'uses'=>'PagesController@event_approval']);
 	Route::get('/view_event/{soc_id?}', ['as'=>'view_event', 'uses'=>'PagesController@view_events']);
