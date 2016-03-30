@@ -17,7 +17,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ZealController extends BaseController{
     public function root(){
-        
-        return View::make('zeal');
+        $events = Events::all();
+        $eventdetails = EventDetails::all();
+        return View::make('zeal',['events' => $events,'eventdetails' => $eventdetails]);
     }
 }

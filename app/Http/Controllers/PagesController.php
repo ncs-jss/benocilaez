@@ -45,7 +45,7 @@ class PagesController extends BaseController{
 
 
     public function add_event(){
-        if(\Auth::check()){
+        if(\Auth::check() && \Auth::user()->priviliges == 1){
             $status = Status::first();
 
             $user = User::where('email', Session::get('email'))->first();

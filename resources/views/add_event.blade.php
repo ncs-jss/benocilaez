@@ -111,10 +111,19 @@
                                             </div>
                                             <br>
 
+                                            @if($action == 'Add Event')
+                                            <?php
+                                            $timing = '0000-00-00 00:00';
+                                            $contacts = [['name'=>'', 'number'=>''],['name'=>'', 'number'=>'']];
+                                            $prizes = ['', ''];
+                                            ?>
+                                            @endif
+
                                             <?php
                                             $time = explode(" ", $timing)[1];
                                             $date = explode(" ", $timing)[0];
                                             ?>
+
 
                                             <div class="form-group">
                                                 <div class="row">

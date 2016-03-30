@@ -16,7 +16,7 @@ class OpController extends BaseController{
     public function edit($id){
         $owner = Events::where('event_id', $id)->get()[0]->society_email;
         $status = Status::first();
-        if(\Auth::check() &&(strcasecmp(Session::get('email') , $owner )) == 0){
+        if((\Auth::check() &&(strcasecmp(Session::get('email') , $owner )) == 0) || \Auth::user()->priviliges == 1){
             $user = User::where('email', Session::get('email'))->first();
             $event = EventDetails::where('event_id',$id)->get();
             //dd($event[0]);
@@ -89,6 +89,7 @@ class OpController extends BaseController{
             $eventdetails->prize_money = json_encode($data['prize_money']);
 
             $eventdetails->approved = 0;
+            // dd($eventdetails);
 
             if (Input::file('file') != null && Input::file('file') -> isValid()) {
                 $destinationPath = 'uploads'; // upload path
@@ -98,7 +99,7 @@ class OpController extends BaseController{
                 $eventdetails->attachment = $fileName;
             }
 
-            $eventdetails->save();
+            //dd($eventdetails->save());
             return Redirect::route('view_event');
 
         }else{

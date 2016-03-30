@@ -1228,8 +1228,10 @@ h5{
 	/*background: #000;*/
 }
 .right-detail{
+	color: #252525;
+	line-height: 20px;
 	position: fixed;
-	width: calc(100vw - 270px);
+	width: calc(100vw - 570px);
 	height: calc(100vh - 155px);
 	bottom: 20;
 	right: 20px;
@@ -1240,6 +1242,21 @@ h5{
 	padding: 20px;
 	border-radius: 4px;
 	font-family: 'back';
+	left: 185px;
+}
+.result-div{
+	left: auto;
+	    right: 30px;
+    width: 227px;
+
+
+}
+.result-div ul {
+	/*padding: 0px;*/
+	margin: 0px;
+	padding: 0px;
+    
+
 }
 .left-nav ul{
 	padding: 0px;
@@ -1258,6 +1275,11 @@ h5{
 	
 	background-color: rgba(255,255,255,0.5);
 
+}
+
+.right-detail h4 {
+	font-family: 'comix';
+	text-transform: capitalize;
 }
 
 ::-webkit-scrollbar {
