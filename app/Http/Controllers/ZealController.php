@@ -5,6 +5,7 @@ use App\User;
 use App\Status;
 use App\Events;
 use App\Members;
+use App\Registration;
 use App\EventDetails;
 use DB;
 use View;
@@ -41,6 +42,19 @@ class ZealController extends BaseController{
 			return json_encode($validator->errors());
 		}
 		else {
+
+			$registrations = new Registration;
+			$registrations->name = $data['name'];
+			$registrations->email = $data['email'];
+			$registrations->course = $data['course'];
+			$registrations->branch = $data['branch'];
+			$registrations->contact = $data['contact'];
+			$registrations->college = $data['college'];
+			$registrations->year = $data['year'];
+			$registrations->zeal_id = "zeal_onl_".$registrations->id;
+			$registrations->save();
+			return $registrations->zeal_id;
 		}
+
 	}
 }
