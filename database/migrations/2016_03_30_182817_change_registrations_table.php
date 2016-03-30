@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class ChangeRegistrationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        //
-    }
+        Schema::table('registrations', function($table)
+        {
+            $table->string('zeal_id');           
+        });
+       }
 
     /**
      * Reverse the migrations.
