@@ -46,6 +46,24 @@ ul {
 	/*	border: 1px soild red;*/
 }
 
+.day-balloon{
+		position: absolute;
+	bottom: 0;
+	z-index: 18;
+	width: 100px;
+	height: 150px;
+	transition: all 0.5s ease;
+}
+.day-balloon img{
+		position: absolute;
+	bottom: 300;
+	left: 1150;
+	height: 100%;
+	animation: balloons 4s ease-in-out infinite;
+	transition: all 0.5s ease;
+}
+
+
 header {
 
 	position: fixed;
@@ -67,7 +85,7 @@ header ul li {
 }
 
 header ul li i {
-	color: #757459;
+	color: #777;
 	font-size: 1.3em !important;
 	transition: all 0.2s ease;
 	cursor: pointer;
@@ -924,16 +942,58 @@ header .main-header li  .link:hover {
 	background-size: 100% 100%;
 }
 
+.team-slider{
+	position: absolute;
+	width: 100%;
+    display: inline-block;
+    height: 100vh;
+    overflow-x: scroll;
+    position: absolute;
+    top: 90px;
+    /*padding-top: 2px;*/
+}
+
+.team-slider-inner{
+	position: absolute;
+	    display: inline-block;
+	    width: 2355px;
+	      overflow-x: hidden;
+}
+
 
 .team1,.team2,.team3,.team4{
 	margin: auto;
 	margin-top: 20px;
 	padding: 0px;
 	display: inline-block;
-	width: 24.6%;
+	width: 200px;
 	z-index: 25;
 	height: 150px;
+	margin: 65px;
 
+
+}
+.slider-arrow{
+	position: fixed;
+	font-size: 3em;
+	color: white;
+	z-index: 2;
+	opacity: 0.7;
+	cursor: pointer;
+	transition:all 0.2 ease;
+	bottom: 230px;
+
+}
+.slider-arrow:hover{
+	
+	opacity: 1;
+
+}
+.left{
+	left: 20px;
+}
+.right{
+	right: 20px;
 }
 
 .header{
@@ -1200,6 +1260,44 @@ h5{
 	text-align: right;
 }
 
+/*-----------------------------Register page*/
+
+.register{
+display: block;
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	z-index: 20;
+	background: #000;
+	left: 100vw;
+	transition: all 0.6s ease-in-out;
+	background-image: url(../images/registerbg.gif);
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}
+.super{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	
+	
+}
+.register-main{
+	font-size: 20px;
+	color: #333333;
+	padding-top: 70px;
+	padding-left: 30px;
+	margin-bottom: 0px;
+}
+.register-submain{
+	font-size: 12px;
+	color: #b32323;
+	margin-top: 0px;
+	padding-left: 30px;
+}
+
+
 
 /*events-details====*/
 
@@ -1225,9 +1323,17 @@ h5{
 	bottom: 0;
 	overflow-y:scroll;
 	text-align: left;
+
 	/*background: #000;*/
 }
+.left-nav ul li{
+	line-height: 22px;
+}
 .right-detail{
+	/*temporary styling*/
+	text-align: center !important;
+	
+	/**/
 	color: #252525;
 	line-height: 20px;
 	position: fixed;
@@ -1243,6 +1349,9 @@ h5{
 	border-radius: 4px;
 	font-family: 'back';
 	left: 185px;
+}
+.right-detail h4{
+	padding-top: 100px;
 }
 .result-div{
 	left: auto;
@@ -1347,6 +1456,190 @@ p{
 	margin: auto;
 	padding-right: 310px;
 	padding-left: 310px;
+}
+input[type=submit]{
+	cursor: pointer;
+}
+form {
+
+  display: table;
+  margin: 5px auto;
+	float: left;
+	margin-left:30px;
+	width: 600px;
+}
+form label {
+	font-family: 'back';
+  position: relative;
+  display: block;
+	margin-right: 20px;
+	width: 60%;
+}
+form label input {
+
+   font-family: 'back';
+   font-size: 18px;
+  box-sizing: border-box;
+  display: block;
+  border: none;
+  padding: 20px;
+  width: 300px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  outline: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+	border-radius: 4px;
+}
+form label input::-webkit-input-placeholder {
+
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #999;
+  font: 18px 'back';
+}
+form label input::-moz-placeholder {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #999;
+  font: 18px 'back';
+}
+form label input:-ms-input-placeholder {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #999;
+  font: 18px 'back';
+}
+form label input::placeholder {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #999;
+  font: 18px 'back';
+}
+form label input:focus, form label input.populated {
+  padding-top: 28px;
+  padding-bottom: 12px;
+  font-family: 'back';
+}
+form label input:focus::-webkit-input-placeholder, form label input.populated::-webkit-input-placeholder {
+  color: transparent;
+    font-family: 'back';
+}
+form label input:focus::-moz-placeholder, form label input.populated::-moz-placeholder {
+  color: transparent;
+    font-family: 'back';
+}
+form label input:focus:-ms-input-placeholder, form label input.populated:-ms-input-placeholder {
+  color: transparent;
+    font-family: 'back';
+}
+form label input:focus::placeholder, form label input.populated::placeholder {
+  color: transparent;
+    font-family: 'back';
+}
+form label input:focus + span, form label input.populated + span {
+  opacity: 1;
+  top: 10px;
+    font-family: 'back';
+}
+form label span {
+  color: #777777;
+  font: 13px 'back';
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+form input[type="submit"] {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font: 18px 'back';
+  border: none;
+  background: #333333;
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 4px;
+}
+form input[type="submit"]:hover {
+  background: #1d1d1d;
+}
+.left-form select{
+
+	transition:all 0.2s ease-in-out;
+	font-family: 'back';
+	cursor: pointer;
+	display: block;
+	width: 120px;
+	margin-bottom: 19px;
+	width: 150px;
+    height: 60px;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: shadow;
+    box-shadow: 0px 0px;
+    border: transparent;
+    padding-left: 14px;
+    font-size: 18px;
+    color: #252525;
+}
+.left-form select[value="volvo"]{
+	color:#999;
+}
+.left-form select option:first-child{
+	color: green;
+}
+.left-form{
+	display: inline-block;
+	position: absolute;
+	width: 40%;
+	text-align: left;
+	float: left;
+
+}
+.right-form{
+	width: 340px;
+	display: inline-block;
+
+}
+.dark-option{
+	color: #252525;
+}
+/*video*/
+.vid{
+
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,0.9);
+	position: absolute;
+	z-index: 30;
+	color: white;
+	text-align: center;
+	padding-top: 45vh;
+}
+.vid-cross{
+	position: absolute;
+	z-index: 1;
+	top: 20px;
+	left: 30px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	cursor: pointer;
+
+}
+.vid-cross-icon{
+	position: absolute;
+    z-index: 1;
+    top: 34px;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
 }
 
 

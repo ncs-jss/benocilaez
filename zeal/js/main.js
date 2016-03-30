@@ -149,34 +149,6 @@ $(document).ready(function () {
 				$(".cross,.cross-icon").fadeIn();
 
 			}, 1000)
-			//		var e = $(".events").position();
-			//		// alert("")
-			//
-			//		$(document).mousemove(function (event) {
-			//
-			//			if (event.pageX >= (window_width / 2)) {
-			//
-			//				$(".events ").css({
-			//					'left': window_width - e.left - 160
-			//				})
-			//
-			//			} else {
-			//
-			//				$(".events ").css({
-			//					'left': window_width - e.left - 60
-			//				})
-			//			}
-			//
-			//		});
-			//
-			//		$(document).mouseout(function () {
-			//
-			//			$(".events").css({
-			//				'left': '-10vw',
-			//				'right': '0'
-			//			})
-			//
-			//		})
 
 
 
@@ -201,36 +173,7 @@ $(document).ready(function () {
 
 	//	click cross
 	$(".events .cross ").click(function () {
-		//		setTimeout(function () {
-		//			$(".cross,.cross-icon").fadeOut();
-		//
-		//		}, 0)
-		//
-		//		$(document).mousemove(function (event) {
-		//
-		//			if (event.pageX >= (window_width / 2)) {
-		//
-		//				$(".events ").css({
-		//					'left': '100vw'
-		//				})
-		//
-		//			} else {
-		//
-		//				$(".events ").css({
-		//					'left': '100vw'
-		//				})
-		//			}
-		//
-		//		});
-		//
-		//		$(document).mouseout(function () {
-		//
-		//			$(".events").css({
-		//				'left': '100vw',
-		//				'right': '0'
-		//			})
-		//
-		//		})
+		
 
 
 		$(".base").css({
@@ -246,7 +189,7 @@ $(document).ready(function () {
 			'opacity': '0'
 		})
 		$(".cross,.cross-icon").hide();
-		// $(".event-1").fadeOut();
+	
 	});
 
 
@@ -506,6 +449,102 @@ $(document).ready(function () {
 		})
 
 	})
+
+
+
+
+// team slider
+
+$(".slider-arrow").hide();
+
+
+	$(".team-link").click(function(){
+		setTimeout(function(){
+	$(".slider-arrow").fadeIn();
+},500)
+})
+
+
+$(".cross-2").click(function(){
+	$(".slider-arrow").hide();
+})
+
+$(".right").click(function(){
+	// alert("k")
+	$(".team-slider").animate({
+            scrollLeft: "+=330"
+        }, 800);
+})
+$(".left").click(function(){
+	// alert("k")
+	$(".team-slider").animate({
+            scrollLeft: "-=330"
+        }, 800);
+})
+
+
+//register page===================
+
+		
+	$("header .main-header li .register-link").click(function () {
+
+		$(".register").css({
+			'left': '0px'
+		})
+		setTimeout(function () {
+			$(".cross-2,.cross-icon-2").fadeIn();
+
+		}, 800)
+		$(".base").css({
+			'left': '-40vw',
+			'transition': 'all 0.9s ease-in-out'
+		})
+
+	})
+
+	$(".cross-2,.cross-icon-2").click(function () {
+
+		$(".cross-2,.cross-icon-2").hide();
+
+		$(".base").css({
+			'left': '0vw',
+			'transition': 'all 0.5s ease-in-out'
+		})
+
+		$(".register").css({
+			'left': '100vw'
+
+		})
+	})
+		
+
+		// video
+		$(".vid").hide();
+		$(".video-link").click(function(){
+			$(".vid").fadeIn();
+			
+			$(".vid-cross").click(function(){
+				$(".vid").fadeOut();
+				
+
+			})
+
+
+		})
+
+		
+	
+   // $('#select').css('color','gray');
+   // $('#select').change(function() {
+   //    var current = $('#select').val();
+   //    if (current != 'null') {
+   //        $('#select').css('color','black');
+   //    } else {
+   //        $('#select').css('color','gray');
+   //    }
+   // }); 
+
+	
 
 
 	
