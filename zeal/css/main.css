@@ -1227,7 +1227,7 @@ h5{
 #lead{
 	padding-top: 0px;
 	color: #043b54;
-	font-size: 15px;
+	font-size: 15px;`
 	text-align: right;
 }
 .reach-header{
@@ -1335,9 +1335,7 @@ display: block;
 	line-height: 22px;
 }
 .right-detail{
-	text-align: center;
-
-	color: #252525;
+color: #252525;
 	line-height: 20px;
 	position: fixed;
 	width: calc(100vw - 570px);
@@ -1352,10 +1350,12 @@ display: block;
 	border-radius: 4px;
 	font-family: 'back';
 	left: 185px;
-}
-.right-detail h4{
-	text-align: center;
-	margin-top: 200px;
+}	
+
+.right-detail p{
+	padding-left: inherit !important;
+	padding-right: inherit !important;
+
 }
 .result-div{
 	left: auto;
