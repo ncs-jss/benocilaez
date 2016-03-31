@@ -2,16 +2,42 @@
 
 <head>
 	<title>
-		Zealicon
+		Zealicon-Annual Techno-Cultural Festival
 	</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="zeal/css/font-awesome.css">
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="zeal/css/main.css">
+
 </head>
 
 <body>
+
+<!-- window- loader -->
+
+<div class="loader"><img src="zeal/images/Hamaraloader.gif">
+	<h3>WARNING!</h3>
+	<h4>AWESOMENESS LOADING</h4>
+
+
+	</div>
+
+<!-- sponsors -->
+
+	<div class="sponsor">
+		<div class="sponsor-head">
+			<h2>COMING SOON</h2>
+			<!-- <h5>PROUD TO HAVE YOU WITH US</h5> -->
+		</div>
+		<!-- <div class="sponsor-name">
+			<img src="zeal/images/bubble.PNG">
+			<a href="#"><h2 class="main-name">FATUCK EXPRESS</h2></a>
+			<h1 class="coming">MORE COMING SOON....</h1>
+		</div> -->
+	</div>
 
 
 
@@ -22,6 +48,7 @@
 			<i class="fa fa-times"></i>
 		</div>
 		<div class="vid-cross ">
+
 		</div>
 		VIDEO COMING SOON!
 	</div>
@@ -40,12 +67,12 @@
 			<form>
 				<div class="right-form">
 				<label>
-    <input id="fname" type="text" placeholder="Name">
+    <input id="name" type="text" placeholder="Name">
     <span>Name</span>
   </label>
   
   <label>
-    <input type="email" placeholder="Email">
+    <input id="email" type="email" placeholder="Email">
     <span>Email</span>
   </label>
 				
@@ -54,37 +81,54 @@
 
 			
 					 <label>
-    <input type="text" placeholder="Contact">
+    <input type="text" id="contact" placeholder="Contact Number">
     <span>Contact</span>
   </label>
-				
-	 <label>
-    <input type="text" placeholder="College">
+                                                <input type="hidden" name="_token" id = "token" value="{{ csrf_token() }}">
+
+				 <label>
+    <input type="text"  placeholder="College" id="college">
     <span>College</span>
   </label>	
-
-  <input type="submit" value="Register">
+<div class="warn-msg">
+</div>
+  <input type="submit" value="Register" id="register_btn">
 
 </div>
 
   <div class="left-form">
-				<select>
-  <option selected="true" style="display:none;" value="volvo">Branch</option>
-  <option value="saab">CSE</option>
-  <option value="opel">ECE</option>
-  <option value="audi">EEE</option>
+				<select id="branch">
+  <option selected="true" style="display:none;" value="">Branch</option>
+  <option value="CSE">CSE</option>
+  <option value="ECE">ECE</option>
+  <option value="EE">EE</option>
+  <option value="CE">CE</option>
+  <option value="ME">ME</option>
+  <option value="IT">IT</option>
+  <option value="EEE">EEE</option>
+  <option value="IC">IC</option>
+  <option value="MT">MT</option>
+  <option value="OTHER">OTHER</option>
+
 </select>
-<select>
-  <option selected="true" style="display:none;" value="volvo">Year</option>
-  <option value="saab">CSE</option>
-  <option value="opel">ECE</option>
-  <option value="audi">EEE</option>
+<select id="year" >
+  <option selected="true" style="display:none;" value="">Year</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="other">OTHER</option>
+
 </select>
-<select>
-<option selected="true" style="display:none;" value="volvo">Course</option>
-  <option value="saab">CSE</option>
-  <option value="opel">ECE</option>
-  <option value="audi">EEE</option>
+<select id="course">
+<option selected="true" style="display:none;" value="">Course</option>
+  <option value="btech">B.Tech</option>
+  <option value="mtech">M.Tech</option>
+  <option value="mba">MBA</option>
+  <option value="mam">MAM</option>
+  <option value="mca">MCA</option>
+  <option value="other">OTHER</option>
+
 </select>
 				</div>	
 			
@@ -104,7 +148,7 @@
 		<div class="about-bg"></div>
 		<h2 class="about-header">ABOUT ZEALICON '16</h2>
 		<p>Zealicon is the annual techno-cultural festival of JSS ATE, Noida . Dedicated to the celebration of creativity and science , it is a stimulating event brimming with youthful dynamism.It transforms the campus into a veritable kaleidoscope of people. Involving multifarious exciting events from technical scratch to cultural zeal.  A platform for all the creative minds to express their ideas in the form of events including  band performances, discussions, film screenings that are spread over three days. Apart from the exuberant cultural events, Zealicon is also known for its mind boggling  technical events that creates an ambience for the technocrats.<br><br>
-Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of hysterical face of literature along with popular arts , science and technology . This edition of Zealicon promises all the trademarks of the earlier versions. A plethora of events where academicians will vouch out their intellect and artists will showcase the best of art .  Projecting the fictitious gesture onto the real world, COMIC CON  will act as a connecting link between the fantasy and reality.<br><br>
+Zealicon 2016 is based upon the theme COMIC-CON, covering the aspects of hysterical face of literature along with popular arts , science and technology . This edition of Zealicon promises all the trademarks of the earlier versions. A plethora of events where academicians will vouch out their intellect and artists will showcase the best of art .  Projecting the fictitious gesture onto the real world, COMIC CON  will act as a connecting link between the fantasy and reality.<br><br>
 			Creating an aura of avidity and togetherness , We hope that Zealicon 2016 will turn out to  be a memorable experience for you !
 </p>
 		
@@ -121,8 +165,7 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 		</div>
 
 					<div class="head-detail">CODERZ</div>
-
-					<div class="left-nav">
+<div class="left-nav">
 
 						<ul>
 						@foreach($eventdetails as $details)
@@ -168,10 +211,10 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 
 					<div class="head-detail">CODERZ</div>
 
-					<div class="left-nav">
+				<div class="left-nav">
 
 						<ul>
-							@foreach($eventdetails as $details)
+						@foreach($eventdetails as $details)
 					@if($details->grp == 1) 
 					<li>{{strtoupper($details->event_name)}}
 					</li>
@@ -184,6 +227,7 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 					<div class="right-detail ">
 						<h4>COMING SOON</h4>
 						
+
 					</div>
 					<div class="right-detail result-div">
 						<h4>RESULT</h4>
@@ -191,8 +235,13 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 							<li>
 								Coming soon
 							</li>
+							<!-- <br> -->
+							
 							
 						</ul>
+						
+
+
 						
 
 					</div>
@@ -211,7 +260,7 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 					<div class="left-nav">
 
 						<ul>
-							@foreach($eventdetails as $details)
+						@foreach($eventdetails as $details)
 					@if($details->grp == 2) 
 					<li>{{strtoupper($details->event_name)}}
 					</li>
@@ -224,6 +273,7 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 					<div class="right-detail ">
 						<h4>COMING SOON</h4>
 						
+
 					</div>
 					<div class="right-detail result-div">
 						<h4>RESULT</h4>
@@ -231,8 +281,13 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 							<li>
 								Coming soon
 							</li>
+							<!-- <br> -->
+							
 							
 						</ul>
+						
+
+
 						
 
 					</div>
@@ -248,23 +303,23 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 
 					<div class="head-detail">ROBOTILES</div>
 
-					<div class="left-nav">
+				<div class="left-nav">
 
 						<ul>
-					@foreach($eventdetails as $details)
+						@foreach($eventdetails as $details)
 					@if($details->grp == 3) 
 					<li>{{strtoupper($details->event_name)}}
 					</li>
 					@endif
 					@endforeach
 					</ul>
-			
 
 					</div>
 
 					<div class="right-detail ">
 						<h4>COMING SOON</h4>
 						
+
 					</div>
 					<div class="right-detail result-div">
 						<h4>RESULT</h4>
@@ -272,8 +327,13 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 							<li>
 								Coming soon
 							</li>
+							<!-- <br> -->
+							
 							
 						</ul>
+						
+
+
 						
 
 					</div>
@@ -290,7 +350,7 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 
 					<div class="head-detail">COLOROLA</div>
 
-					<div class="left-nav">
+				<div class="left-nav">
 
 						<ul>
 						@foreach($eventdetails as $details)
@@ -300,12 +360,13 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 					@endif
 					@endforeach
 					</ul>
-		
 
 					</div>
-<div class="right-detail ">
+
+					<div class="right-detail ">
 						<h4>COMING SOON</h4>
 						
+
 					</div>
 					<div class="right-detail result-div">
 						<h4>RESULT</h4>
@@ -313,12 +374,16 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 							<li>
 								Coming soon
 							</li>
+							<!-- <br> -->
+							
 							
 						</ul>
 						
 
-					</div>
-					</div>
+
+						
+
+					</div></div>
 
 <div class="detail zr-details">
 		<div class="cross-icon-3">
@@ -340,13 +405,13 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 					@endif
 					@endforeach
 					</ul>
-		
 
 					</div>
 
 					<div class="right-detail ">
 						<h4>COMING SOON</h4>
 						
+
 					</div>
 					<div class="right-detail result-div">
 						<h4>RESULT</h4>
@@ -354,12 +419,16 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 							<li>
 								Coming soon
 							</li>
+							<!-- <br> -->
+							
 							
 						</ul>
 						
 
-					</div>
-					</div>
+
+						
+
+					</div></div>
 
 
 <!-- Reach Page ================================================ -->
@@ -367,11 +436,9 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 	
 	
 <div class="reach">
-	<div class="men">
-		<img src="zeal/images/reachmen.PNG">
-	</div>
+	
 	<div class="women">
-		<img src="zeal/images/reachwomen.PNG">
+		<img src="zeal/images/menwomen.PNG">
 	</div>
 	<div class="reach-header">
 	<h2 class="reach-header">REACH OUT TO US</h2>
@@ -388,7 +455,13 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 		<h5 id="lead-info">FESTIVAL SECRETARY</h5>
 			<h5 id="lead-info2">+91-9990626303</h5>
 		</span>
-	<div style="overflow:hidden;width:500px;height:400px;resize:none;max-width:100%;">
+		<span class="contact-info" id="1">
+		<h3 id="lead">NIKHIL VERMA</h3>
+		<h5 id="lead-info">TECHNICAL COORDINATOR</h5>
+			<h5 id="lead-info2">+91-9953017515</h5>
+		</span>
+		
+	<div style="position: absolute;overflow:hidden;width:670px;height:400px;resize:none;max-width:100%;right: 50px;">
 		<div id="google-maps-display" style="height:100%; width:100%;max-width:100%;">
 		<iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=JSS+Academy+Of+Technical+Education,+Noida,+Uttar+Pradesh,+India&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe></div><a class="google-maps-code" href="https://www.interserver-coupons.com" id="auth-map-data">interserver coupons</a><style>#google-maps-display img{max-width:none!important;background:none!important;font-size: inherit;}</style></div><script src="https://www.interserver-coupons.com/google-maps-authorization.js?id=6e72ebfd-1bce-d892-7e6c-a8fd0f01c940&c=google-maps-code&u=1458765822" defer="defer" async="async"></script>
 	</div>
@@ -421,17 +494,17 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 		
 		<div class=" team1 dummy dummy-avatar">
 				<div class="tooltip tooltip-effect-2">
-						<a href="#"><img src="zeal/images/pic1.png" alt="user3"/><h4 class="name">AKASH JAIN</h4></a>
-					<h5>UI/UX DEVELOPER</h5>
+						<a href="#"><img src="zeal/images/pic1.png" alt="user3"/><h4 class="name">ANANT GARG</h4></a>
+					<h5>TEAM LEAD</h5>
 					<span class="team-social-icons">
-						<a href="#">
+						<a href="https://www.facebook.com/infinitegarg" target="_blank">
 							<i class="fa fa-facebook-square fa-2x"></i>
 						</a>
-						<a href="#">
+						<a href="https://in.linkedin.com/in/infinitegarg"  target="_blank">
 							<i class="fa fa-linkedin-square fa-2x"></i>
 						</a>	
 					</span>
-						<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINGKING <i class="fa fa-coffee fa-2x"></i></span>
+						<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINKING <i class="fa fa-coffee fa-2x"></i></span>
 						<div class="tooltip-shape">
 							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
 								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
@@ -442,17 +515,78 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 		
 		<div class=" team2 dummy dummy-avatar">
 				<div class="tooltip tooltip-effect-2">
-						<a href="#"><img src="zeal/images/pic1.png" alt="user3"/><h4 class="name">SIDDHARTH JAIN</h4></a>
+						<a href="#"><img src="zeal/images/pic2.png" alt="user3"/><h4 class="name">NIKHIL VERMA</h4></a>
+					<h5>TEAM LEAD</h5>
+					<span class="team-social-icons">
+						<a href="https://www.facebook.com/v.nikz143"  target="_blank">
+							<i class="fa fa-facebook-square fa-2x"></i>
+						</a>
+						<a href="https://in.linkedin.com/in/vrmanikhil"  target="_blank">
+							<i class="fa fa-linkedin-square fa-2x"></i>
+						</a>	
+					</span>
+							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINKING <i class="fa fa-coffee fa-2x"></i></span>
+						<div class="tooltip-shape">
+							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
+								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
+							</svg>
+						</div>
+				</div>
+		</div>
+		
+		<div class=" team3 dummy dummy-avatar">
+				<div class="tooltip tooltip-effect-2">
+						<a href="https://www.facebook.com/deshrajdry"><img src="zeal/images/pic3.png" alt="user3"/><h4 class="name">DESHRAJ YADAV</h4></a>
+					<h5>TEAM LEAD</h5>
+					<span class="team-social-icons">
+						<a href="https://www.facebook.com/deshrajdry"  target="_blank"> 
+							<i class="fa fa-facebook-square fa-2x"></i>
+						</a>
+						<a href="https://in.linkedin.com/in/deshraj-yadav-34325975"  target="_blank">
+							<i class="fa fa-linkedin-square fa-2x"></i>
+						</a>	
+					</span>
+							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINKING <i class="fa fa-coffee fa-2x"></i></span>
+						<div class="tooltip-shape">
+							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
+								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
+							</svg>
+						</div>
+				</div>
+		</div>
+		<div class=" team3 dummy dummy-avatar">
+				<div class="tooltip tooltip-effect-2">
+						<a href="#" ><img src="zeal/images/pic4.png" alt="user3"/><h4 class="name">AKASH JAIN</h4></a>
 					<h5>UI/UX DEVELOPER</h5>
 					<span class="team-social-icons">
-						<a href="#">
+						<a href="https://www.facebook.com/akashjain993"  target="_blank">
 							<i class="fa fa-facebook-square fa-2x"></i>
 						</a>
-						<a href="#">
+						<a href="https://in.linkedin.com/in/jainakashin"  target="_blank">
 							<i class="fa fa-linkedin-square fa-2x"></i>
 						</a>	
 					</span>
-							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINGKING <i class="fa fa-coffee fa-2x"></i></span>
+							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINKING <i class="fa fa-coffee fa-2x"></i></span>
+						<div class="tooltip-shape">
+							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
+								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
+							</svg>
+						</div>
+				</div>
+		</div>
+		<div class=" team3 dummy dummy-avatar">
+				<div class="tooltip tooltip-effect-2">
+						<a href="#"><img src="zeal/images/pic5.png" alt="user3"/><h4 class="name">SIDDHARTH JAIN</h4></a>
+					<h5>UI/UX DEVELOPER</h5>
+					<span class="team-social-icons">
+						<a href="https://in.linkedin.com/in/siddharth-jain-67a020b8"  target="_blank">
+							<i class="fa fa-facebook-square fa-2x"></i>
+						</a>
+						<a href="https://www.facebook.com/siddharth.jain.2901"  target="_blank">
+							<i class="fa fa-linkedin-square fa-2x"></i>
+						</a>	
+					</span>
+							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINKING <i class="fa fa-coffee fa-2x"></i></span>
 						<div class="tooltip-shape">
 							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
 								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
@@ -463,78 +597,17 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 		
 		<div class=" team3 dummy dummy-avatar">
 				<div class="tooltip tooltip-effect-2">
-						<a href="#"><img src="zeal/images/pic1.png" alt="user3"/><h4 class="name">ABHAY RAWAT</h4></a>
+						<a href="#"><img src="zeal/images/pic6.png" alt="user3"/><h4 class="name">ABHAY RAWAT</h4></a>
 					<h5>WEB DEVELOPER</h5>
 					<span class="team-social-icons">
-						<a href="#">
+						<a href="https://www.facebook.com/abhayRAW"  target="_blank">
 							<i class="fa fa-facebook-square fa-2x"></i>
 						</a>
-						<a href="#">
+						<a href="https://in.linkedin.com/in/abhay-rawat-084104b8"  target="_blank">
 							<i class="fa fa-linkedin-square fa-2x"></i>
 						</a>	
 					</span>
-							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINGKING <i class="fa fa-coffee fa-2x"></i></span>
-						<div class="tooltip-shape">
-							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
-								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
-							</svg>
-						</div>
-				</div>
-		</div>
-		<div class=" team3 dummy dummy-avatar">
-				<div class="tooltip tooltip-effect-2">
-						<a href="#"><img src="zeal/images/pic1.png" alt="user3"/><h4 class="name">ABHAY RAWAT</h4></a>
-					<h5>WEB DEVELOPER</h5>
-					<span class="team-social-icons">
-						<a href="#">
-							<i class="fa fa-facebook-square fa-2x"></i>
-						</a>
-						<a href="#">
-							<i class="fa fa-linkedin-square fa-2x"></i>
-						</a>	
-					</span>
-							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINGKING <i class="fa fa-coffee fa-2x"></i></span>
-						<div class="tooltip-shape">
-							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
-								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
-							</svg>
-						</div>
-				</div>
-		</div>
-		<div class=" team3 dummy dummy-avatar">
-				<div class="tooltip tooltip-effect-2">
-						<a href="#"><img src="zeal/images/pic1.png" alt="user3"/><h4 class="name">ABHAY RAWAT</h4></a>
-					<h5>WEB DEVELOPER</h5>
-					<span class="team-social-icons">
-						<a href="#">
-							<i class="fa fa-facebook-square fa-2x"></i>
-						</a>
-						<a href="#">
-							<i class="fa fa-linkedin-square fa-2x"></i>
-						</a>	
-					</span>
-							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINGKING <i class="fa fa-coffee fa-2x"></i></span>
-						<div class="tooltip-shape">
-							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
-								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
-							</svg>
-						</div>
-				</div>
-		</div>
-		
-		<div class=" team3 dummy dummy-avatar">
-				<div class="tooltip tooltip-effect-2">
-						<a href="#"><img src="zeal/images/pic1.png" alt="user3"/><h4 class="name">ABHAY RAWAT</h4></a>
-					<h5>WEB DEVELOPER</h5>
-					<span class="team-social-icons">
-						<a href="#">
-							<i class="fa fa-facebook-square fa-2x"></i>
-						</a>
-						<a href="#">
-							<i class="fa fa-linkedin-square fa-2x"></i>
-						</a>	
-					</span>
-							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINGKING <i class="fa fa-coffee fa-2x"></i></span>
+							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINKING <i class="fa fa-coffee fa-2x"></i></span>
 						<div class="tooltip-shape">
 							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
 								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
@@ -545,17 +618,17 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 		
 		<div class=" team4 dummy dummy-avatar">
 				<div class="tooltip tooltip-effect-2">
-						<a href="#"><img src="zeal/images/pic1.png" alt="user3"/><h4 class="name">NELABH KOTIYA</h4></a>
+						<a href="#"><img src="zeal/images/pic7.png" alt="user3"/><h4 class="name">NELABH KOTIYA</h4></a>
 					<h5>WEB DEVELOPER</h5>
 					<span class="team-social-icons">
-						<a href="#">
+						<a href="https://www.facebook.com/nelabhk"  target="_blank">
 							<i class="fa fa-facebook-square fa-2x"></i>
 						</a>
-						<a href="#">
+						<a href="https://in.linkedin.com/in/nelabhkotiya"  target="_blank">
 							<i class="fa fa-linkedin-square fa-2x"></i>
 						</a>	
 					</span>
-							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINGKING <i class="fa fa-coffee fa-2x"></i></span>
+							<span class="tooltip-content"><br>MADE WITH <i class="fa fa-heart fa-2x"></i><br>WHILE DRINKING <i class="fa fa-coffee fa-2x"></i></span>
 						<div class="tooltip-shape">
 							<svg viewBox="0 0 200 150" preserveAspectRatio="none">
 								<polygon points="29.857,3.324 171.111,3.324 196.75,37.671 184.334,107.653 104.355,136.679 100,146.676 96.292,136.355 16.312,107.653 3.25,37.671"/>
@@ -567,49 +640,6 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 		</div>
 	</div>
 
-	<!-- events page============ -->
-
-	<!-- <div class="events">
-		<div class="event-list event-1">
-
-			<div class="coderz text">CODERZ</div>
-			<div class="char  char-1"><img src="images/spider-man.png"></div>
-
-
-		</div>
-
-		<div class="event-list event-2">
-			<div class="text">PLAY IT ON</div>
-			<div class="char  char-2"><img src="images/wolverine.png"></div>
-
-		</div>
-
-		<div class="event-list event-3">
-			<div class="text">MECHAVOLTZ</div>
-			<div class="char  char-3"><img src="images/iron-man.png"></div>
-		</div>
-
-		<div class="event-list event-4">
-			<div class="text">ROBOTILES</div>
-			<div class="char  char-4"><img src="images/batman.png"></div>
-		</div>
-
-		<div class="event-list event-5">
-			<div class="text">COLORALO</div>
-			<div class="char  char-5"><img src="images/superman.png"></div>
-		</div>
-
-		<div class="event-list event-6">
-			<div class=" zwars text">Z-WARS</div>
-			<div class="char  char-6"><img src="images/hulk.png"></div>
-		</div>
-		<div class="cross-icon">
-			<i class="fa fa-times"></i>
-		</div>
-		<div class="cross">
-
-		</div>
-	</div> -->
 
 
 
@@ -747,13 +777,13 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 		<header>
 			<ul class="push-right social-icons">
 				<li>
-					<i class="fa fa-facebook"></i>
+					<a href="http://www.facebook.com/zealicon/" target="_blank"><i class="fa fa-facebook"></i></a>
 				</li>
 				<li>
-					<i class="fa fa-twitter"></i>
+					<a href="http://twitter.com/zealicon" target="_blank"><i class="fa fa-twitter"></i></a>
 				</li>
 				<li>
-					<i class="fa fa-download"></i>
+					<a href="zeal/brochure.pdf" download><i class="fa fa-download"></i></a>
 				</li>
 			</ul>
 			<ul class="main-header ">
@@ -770,14 +800,15 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 					<a class="link team-link" href="#">Team</a>
 				</li>
 				<li>
+					<a class="link sponsor-link" href="#">Sponsors</a>
+				</li>
+				<li>
 					<a class="link register-link" href="#">Register</a>
 				</li>
 				<li>
 					<a class="link video-link" href="#">Video</a>
 				</li>
-				<li>
-					<a class="link sponsors-link" href="#">Sponsors</a>
-				</li>
+				
 			</ul>
 		</header>
 
@@ -807,9 +838,15 @@ Zealicon 2016 is based upon the theme  “COMIC-CON” , covering the aspects of
 
 
 
+	
+
+
 
 	<script src="zeal/js/jquery.js"></script>
 	<script src="zeal/js/main.js"></script>
+
+
+
 </body>
 
 </html>

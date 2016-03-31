@@ -8,6 +8,7 @@
 }
 
 body {
+	line-height: 35px;
 	padding: 0;
 	margin: 0;
 	overflow: hidden;
@@ -601,7 +602,7 @@ header .main-header li  .link:hover {
 	position: absolute;
 	top: 0;
 	overflow: hidden;
-	z-index: 12;
+	z-index: 3;
 	width: 47vw;
 	height: 70vh;
 	animation: stars-blink 0.8s ease-in-out infinite;
@@ -789,7 +790,7 @@ header .main-header li  .link:hover {
 
 .event-1 {
 	overflow: hidden;
-	background-image: url(../images/spid.jpg);
+	background-image: url(../images/spid.PNG);
 	background-size: cover;
 	background-repeat: no-repeat;
 	transition: all 0.6s ease;
@@ -797,7 +798,7 @@ header .main-header li  .link:hover {
 
 .event-2 {
 	overflow: hidden;
-	background-image: url(../images/wolv.jpg);
+	background-image: url(../images/wolv.PNG);
 	background-size: cover;
 	background-repeat: no-repeat;
 	transition: all 0.6s ease;
@@ -805,7 +806,7 @@ header .main-header li  .link:hover {
 
 .event-3 {
 	overflow: hidden;
-	background-image: url(../images/iron.jpg);
+	background-image: url(../images/iron.PNG);
 	background-size: cover;
 	background-repeat: no-repeat;
 	transition: all 0.6s ease;
@@ -813,7 +814,7 @@ header .main-header li  .link:hover {
 
 .event-4 {
 	overflow: hidden;
-	background-image: url(../images/bat.jpg);
+	background-image: url(../images/bat.PNG);
 	background-size: cover;
 	background-repeat: no-repeat;
 	transition: all 0.6s ease;
@@ -821,7 +822,7 @@ header .main-header li  .link:hover {
 
 .event-5 {
 	overflow: hidden;
-	background-image: url(../images/super.jpg);
+	background-image: url(../images/super.PNG);
 	background-size: cover;
 	background-repeat: no-repeat;
 	transition: all 0.6s ease;
@@ -829,7 +830,7 @@ header .main-header li  .link:hover {
 
 .event-6 {
 	overflow: hidden;
-	background-image: url(../images/hulk-back.jpg);
+	background-image: url(../images/hulk-back.PNG);
 	background-size: cover;
 	background-repeat: no-repeat;
 	transition: all 0.6s ease;
@@ -938,7 +939,7 @@ header .main-header li  .link:hover {
 	left: 100vw;
 	transition: all 0.6s ease-in-out;
 	background-color: #042a4d;
-	background-image: url(../images/night.jpg);
+	background-image: url(../images/teampage.gif);
 	background-size: 100% 100%;
 }
 
@@ -1175,6 +1176,7 @@ a{
 
 
 h5{
+	line-height: 17px;
 	font-size: 0.5em;
 	text-align: center;
 	padding-top: 0px;
@@ -1197,16 +1199,18 @@ h5{
 	background-image: url(../images/reachpage.gif);
 }
 
-.men img{
+.women{
 	position: absolute;
-	bottom: 0;
-	width: 100%;
+	width: 50%;
+	height: 100vh;
+
 }
 
 .women img{
+	width: 100%;
 	position: absolute;
 	bottom: 0;
-	width: 100%;
+	
 }
 
 .reach-header{
@@ -1227,14 +1231,16 @@ h5{
 	text-align: right;
 }
 .reach-header{
+
 	font-weight: 100;
 	font-size: 25px;
 	color: #043b54;
 	margin-left: 20px;
 	margin-top:40px;
-	margin-bottom: 0px;
+	margin-bottom: 14px;
 }
 .contact-info{
+	    line-height: 2;
 	margin-bottom: 10px;
 	margin-left:67px;
 	margin-top: 0px;
@@ -1278,8 +1284,8 @@ display: block;
 }
 .super{
 	position: absolute;
-	bottom: 0;
-	right: 0;
+	bottom: 20px;
+	right: 90px;
 	
 	
 }
@@ -1287,14 +1293,14 @@ display: block;
 	font-size: 20px;
 	color: #333333;
 	padding-top: 70px;
-	padding-left: 30px;
+	padding-left: 70px;
 	margin-bottom: 0px;
 }
 .register-submain{
 	font-size: 12px;
 	color: #b32323;
 	margin-top: 0px;
-	padding-left: 30px;
+	padding-left: 70px;
 }
 
 
@@ -1323,17 +1329,14 @@ display: block;
 	bottom: 0;
 	overflow-y:scroll;
 	text-align: left;
-
 	/*background: #000;*/
 }
-.left-nav ul li{
+.left-nav ul li {
 	line-height: 22px;
 }
 .right-detail{
-	/*temporary styling*/
-	text-align: center !important;
-	
-	/**/
+	text-align: center;
+
 	color: #252525;
 	line-height: 20px;
 	position: fixed;
@@ -1351,7 +1354,8 @@ display: block;
 	left: 185px;
 }
 .right-detail h4{
-	padding-top: 100px;
+	text-align: center;
+	margin-top: 200px;
 }
 .result-div{
 	left: auto;
@@ -1361,6 +1365,7 @@ display: block;
 
 }
 .result-div ul {
+	text-align: center;
 	/*padding: 0px;*/
 	margin: 0px;
 	padding: 0px;
@@ -1459,6 +1464,9 @@ p{
 }
 input[type=submit]{
 	cursor: pointer;
+}
+.form-group{
+	margin-left: 44px;
 }
 form {
 
@@ -1623,12 +1631,20 @@ form input[type="submit"]:hover {
 	position: absolute;
 	z-index: 1;
 	top: 20px;
-	left: 30px;
+	left: 28px;
 	width: 40px;
 	height: 40px;
-	border: 1px solid #fff;
+	border: 2px solid rgba(255,255,255,0.4);
 	border-radius: 50%;
 	cursor: pointer;
+	transition:all 0.2s ease-in-out;
+
+}
+.vid-cross:hover{
+	width: 45px;
+    height: 45px;
+    top: 17px;
+    left: 26px;
 
 }
 .vid-cross-icon{
@@ -1643,6 +1659,125 @@ form input[type="submit"]:hover {
 }
 
 
+/*messages*/
+
+.warn-msg{
+	font-family: 'back';
+	margin-bottom: 10px;
+}
+#message{
+	display: block;
+    width: 800px;
+    height: 300px;
+    font-family: 'comix';
+    font-size: 1em;
+    color: #252525;
+    line-height: 32px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+#message span{
+	color: #b32323;
+}
+
+/*sponsor*/
+
+/*-----------------------------Sponsor page*/
+
+.sponsor{
+display: block;
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	z-index: 20;
+	background: #000;
+	left: 100vw;
+	transition: all 0.6s ease-in-out;
+	background-image: url(../images/sponsorbg.gif);
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}
+.sponsor-head h2{
+	text-align: center;
+	color: white;
+	padding-top: 200px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+.sponsor-head h5{
+	margin-top: 0px;
+	font-size: 10px;
+}
+.sponsor-name{
+	text-align: center;
+	padding-top: 50px;
+}
+
+.main-name{
+	font-family: 'back';
+	color: white;
+	font-size: 30px;
+	
+}
+
+
+.coming{
+	padding-right: 30px;
+	float: right;
+	padding-top: 30px;
+	font-size: 12px;
+}
+
+.google-maps-display{
+	position: absolute;
+	right: 0;
+}
+
+.loader{
+	color: white;
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 100;
+	background: #000;
+	text-align: center;
+
+}
+.loader img{
+	width: auto;
+	padding-top: 30vh;
+}
+.loader h3{
+	margin-top: -20px;
+	color: red;
+	-webkit-animation: warning 0.8s infinite;
+	/* Safari 4+ */
+	-moz-animation: warning 0.8s infinite;
+	/* Fx 5+ */
+	-o-animation: warning 0.8s infinite;
+	/* Opera 12+ */
+	animation: warning 0.8s infinite;
+	animation-direction: alternate-reverse;
+	-webkit-animation-direction: alternate-reverse;
+	-moz-animation-direction: alternate-reverse;
+	-o-animation-direction: alternate-reverse;
+}
+@keyframes warning{
+	from{
+		opacity:1;
+	}
+	to{
+		opacity:0.5;
+	}
+}
+.loader h4{
+	color: white;
+	font-family: 'back';
+	margin-top: 5px;
+}
 /*media queries*/
 
 @media(min-width:1400px) {

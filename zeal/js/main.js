@@ -1,6 +1,12 @@
 $(document).ready(function () {
 
 
+$(".loader").show();
+$(window).load(function(){
+$(".loader").fadeOut();
+})
+
+
 	var window_width = $(window).innerWidth();
 	var p = $(".logo img").position();
 
@@ -473,13 +479,13 @@ $(".right").click(function(){
 	// alert("k")
 	$(".team-slider").animate({
             scrollLeft: "+=330"
-        }, 800);
+        }, 400);
 })
 $(".left").click(function(){
 	// alert("k")
 	$(".team-slider").animate({
             scrollLeft: "-=330"
-        }, 800);
+        }, 400);
 })
 
 
@@ -532,20 +538,124 @@ $(".left").click(function(){
 
 		})
 
+// sponsor
+
+	//sponsor
+				
+	$("header .main-header li .sponsor-link").click(function () {
+
+		$(".sponsor").css({
+			'left': '0px'
+		})
+		setTimeout(function () {
+			$(".cross-2,.cross-icon-2").fadeIn();
+
+		}, 800)
+		$(".base").css({
+			'left': '-40vw',
+			'transition': 'all 0.9s ease-in-out'
+		})
+
+	})
+
+	$(".cross-2,.cross-icon-2").click(function () {
+
+		$(".cross-2,.cross-icon-2").hide();
+
+		$(".base").css({
+			'left': '0vw',
+			'transition': 'all 0.5s ease-in-out'
+		})
+
+		$(".sponsor").css({
+			'left': '100vw'
+
+		})
+	})
+
+
+
+// ajax
+
 		
-	
-   // $('#select').css('color','gray');
-   // $('#select').change(function() {
-   //    var current = $('#select').val();
-   //    if (current != 'null') {
-   //        $('#select').css('color','black');
-   //    } else {
-   //        $('#select').css('color','gray');
-   //    }
-   // }); 
+	$('#register_btn').on('click', function() {
+			event.preventDefault();
+			create_post();
+		});
 
-	
+		function create_post() {
 
+			// var name = $("input#name").val();
+			var name = $("#name").val(),
+			 email = $("#email").val(),
+			 college = $("#college").val(),
+			 contact = $("#contact").val(),
+			 branch= $("#branch").val(),
+			 course= $("#course").val(),
+			 year= $("#year").val(),
+			 token = $("#token").val(),
+			 dataString = '';
 
-	
+			if(name==null || email==null || college==null || contact == null || branch == "" || year == "" || course == ""){
+				$(".warn-msg").html("PLease fill all the enteries").hide().fadeIn(500);
+				
+			}
+			else if ( contact.length!=10 ) {
+
+				$(".warn-msg").html("PLease check your contact number").hide().fadeIn(500);
+				
+		
+			}
+				else if(isNaN(contact)==true){
+				$(".warn-msg").html("PLease check your contact number").hide().fadeIn(500);
+				
+			} 
+			else if(validateEmail(email)==false){
+				$(".warn-msg").html("PLease check your email address").hide().fadeIn(500);
+				
+			}
+			else  {
+				// $("form").css({
+				// 	'opacity': '0.1'
+				// });
+				
+				$("form").html("SENDING...");
+				$.ajax({
+					url: "http://localhost/benocilaez/register", // the endpoint
+					type: "POST", // http method
+					data: {'college' : college,'name' : name, '_token': token,'email' : email,'contact' : contact,'branch' : branch,'course' : course,'year' : year
+					}, // data sent with the post request
+
+					// handle a successful response
+					success: function(json) {
+						
+						$("form").css({
+							'opacity': '1'
+						})
+						name= name.toUpperCase();
+						if(json.length<=15){
+						$('form').html("<div id='message'>HI'"+ name +"'!<br> WE HAVE RECIEVED YOUR REQUEST.<br>PLEASE NOTE DOWN YOUR ZEALICON ID<br><span>"+json+"</span></div>");
+						}
+						else{
+							$('form').html("<div id='message'>:( ERRORRRRRR...!<br> IT SEEMS THAT YOU HAVE ALREADY REGISTERED WITH YOUR EMAIL ID.<br>PLEASE RELOAD THE PAGE AND TRY AGAIN<br>THANKS</div>");
+						}
+					},
+
+					// handle a non-successful response
+					error: function(xhr, errmsg, err) {
+						$("form").html("LOOKS LIKE SOMETHING WENT WRONG :(")
+					}
+				});
+			} 
+			function validateEmail(email) {
+				var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,10}$/;
+
+				if (filter.test(email)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+
 });

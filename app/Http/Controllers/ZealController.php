@@ -8,6 +8,7 @@ use App\Members;
 use App\Registration;
 use App\EventDetails;
 use DB;
+use Validator;
 use View;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -39,10 +40,17 @@ class ZealController extends BaseController{
 
     // send back to the page with the input data and errors
 
-			return json_encode($validator->errors());
+			return "Looks Like You Have Already Registeres With This Email ID";
 		}
 		else {
-
+			$last = Registration::all()->last();
+			if($last==null)
+			{
+				$last = 1;
+			} 
+			else{
+				$last = $last->id;
+			}
 			$registrations = new Registration;
 			$registrations->name = $data['name'];
 			$registrations->email = $data['email'];
@@ -51,9 +59,9 @@ class ZealController extends BaseController{
 			$registrations->contact = $data['contact'];
 			$registrations->college = $data['college'];
 			$registrations->year = $data['year'];
-			$registrations->zeal_id = "zeal_onl_".$registrations->id;
+			$registrations->zeal_id = "zeal_onl_".strval($last+1);
 			$registrations->save();
-			return $registrations->zeal_id;
+			return strtoupper($registrations->zeal_id);
 		}
 
 	}

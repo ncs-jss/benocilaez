@@ -29,6 +29,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/save_mem_details/{type?}', ['uses'=>'OpController@save_mem_details']);
     Route::post('/edit_soc', ['as'=>'edit_soc', 'uses'=>'OpController@edit_soc']);
 		//POST Routes
+	Route::post('/register', ['as'=>'register_user', 'before'=>'csrf', 'uses'=>'ZealController@register']);    
 	Route::post('/edit_event/{id}', ['as'=>'edit', 'before'=>'csrf', 'uses'=>'OpController@edit_event']);
 	Route::post('/register_society', ['as'=>'register', 'before'=>'csrf', 'uses'=>'UserController@reg_society']);
 	Route::post('/login_society',['as'=>'login', 'before'=>'csrf', 'uses'=>'UserController@login_society']);
