@@ -21,6 +21,10 @@ class ZealController extends BaseController{
 	public function root(){
 		$events = Events::all();
 		$eventdetails = EventDetails::all();
+		foreach($eventdetails as $eve){
+			$eve->contacts = array(json_decode($eve->contact)[0]->name => json_decode($eve->contact)[0]->number);			
+		}
+		dd($eventdetails);
 		return View::make('zeal',['events' => $events,'eventdetails' => $eventdetails]);
 	}
 	public function register()

@@ -194,6 +194,11 @@
 					@endif
 					@if(isset($details->rules))
 					<h4>RULES</h4>
+					<?php $i = 1;?>
+						@foreach(json_decode($details->rules) as $rul)
+						{{$i++}}. {{$rul}}</br>
+						
+						@endforeach				
 					@endif
 				</div>
 				@endif
@@ -213,9 +218,9 @@
 
 
 						<?php  $i++; ?>
+							@if(isset($details->first_place))
 						<h4>RESULT</h4>
 						<ul>
-							@if(isset($details->first_place))
 							<li>
 								{{$details->first_place}}
 							</li>
@@ -223,34 +228,32 @@
 							<li>
 								{{$details->second_place}}
 							</li>
-							@else
-							<li>
-								Coming soon
-							</li>
-							@endif	
 						</ul>
+							@endif	
+							@if(isset($details->prize_money))
 						<h4>PRIZES</h4>
 						<ul>
 							<li>
-								Rs. 1200
+							{{json_decode($details->prize_money)[0]}}
 							</li>
 							<!-- <br> -->
 							<li>
-								Rs. 1000
+							{{json_decode($details->prize_money)[1]}}
 							</li>
 
 						</ul>
-						<h4>CONTACT</h4>
+						@endif
+						@if(isset($details->contact))
+						<h4></h4>
 						<ul>
 							<li>
-								Akash Jain
 							</li>
 							<!-- <br> -->
 							<li>
-								Siddharth jain
 							</li>
 
 						</ul>
+						@endif
 					</div>
 					@endif
 					@endforeach
