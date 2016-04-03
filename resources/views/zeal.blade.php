@@ -245,15 +245,27 @@
 						</ul>
 						@endif
 						@if(isset($details->contact))
-						<h4></h4>
+						@if(json_decode($details->contact,true)[0]['name']!= "" && strcmp(json_decode($details->contact,true)[0]['name'], " "))
+						<h4>CONTACT</h4>
 						<ul>
+						
 							<li>
-							</li>
-							<!-- <br> -->
+							{{json_decode($details->contact,true)[0]['name']}}
+								</li>
+							
 							<li>
-							</li>
+							{{json_decode($details->contact,true)[0]['number']}}
+								</li>
 
+							<li>
+							{{json_decode($details->contact,true)[1]['name']}}
+								</li>
+							
+							<li>
+							{{json_decode($details->contact,true)[1]['number']}}
+								</li>
 						</ul>
+						@endif
 						@endif
 					</div>
 					@endif

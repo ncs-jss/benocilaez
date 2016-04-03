@@ -21,6 +21,8 @@ class ZealController extends BaseController{
 	public function root(){
 		$events = Events::all();
 		$eventdetails = EventDetails::all();
+
+		
 		return View::make('zeal',['events' => $events,'eventdetails' => $eventdetails]);
 	}
 	public function register()
