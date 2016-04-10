@@ -64,7 +64,23 @@ class OpController extends BaseController{
         }
     }
     public function add_winners(){
-        return "abhay";
+        if(\Auth::check()){
+            $data = Input::all();
+         //   dd(Events::where('event_id',$data['event_id'])->first()->society_email);
+       /*     dd(\Auth::user()->email);
+            dd(User::where('email',Events::where('event_id',$data['event_id'])->first()->society_email)->first());
+       */     if(!strcmp(\Auth::user()->email, Events::where('event_id',$data['event_id'])->first()->society_email)){
+                $eventdetails = EventDetails::where('event_id',$data['event_id'])->first();
+                $eventdetails->first_place = json_encode($data['winnner']);
+                $eventdetails->second_place = json_encode($data['runnnerup1']);
+                $eventdetails->save();
+                return Redirect::route('add_winners')->with('success',"Winners Successfully Added");          
+            }
+            return 0;
+         }
+         else{
+            return 0;
+         }
     }
     public function edit_event($id = null){
         if(\Auth::check()){

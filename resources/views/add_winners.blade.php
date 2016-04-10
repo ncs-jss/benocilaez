@@ -28,7 +28,7 @@
 			<form class="form-horizontal" role="form" action="" method="POST">
 				<div class="form-group" >
 					<label for="event_name" class="control-label" style="display:block; text-align:center;">Event Name</label>
-					<select  class="form-control" id="event_name" style="margin-left:1.5%; width:inherit; display:inline">
+					<select  class="form-control" id="event_name" name="event_name" style="margin-left:1.5%; width:inherit; display:inline">
 						@foreach ($events as $data)
 						<option value="{{ $data['event_id']}}">{{ $data['event_name'] }}</option>
 						@endforeach
@@ -78,30 +78,15 @@
 				<br>
 				<br>
 
-				<div class="form-group winner" id='runnerup2'style="text-align:center">
-					<p><b>2nd Runner Up:</b></p>
-					<div class="col-md-10 col-md-offset-2 rule2">
-						<div class="col-md-9">
-							<div class="input-group rule-1">
-								<span class="input-group-addon" id="winnerno2">1</span>
-								<input type="text" class="form-control event_rule" placeholder="2nd Runner Up" aria-describedby="basic-addon1">
-							</div>
-						</div>                      
-						<div class="col-md-1 plus">
-							<button type="button" class="btn btn-primary add_rule2" aria-label="Left Align">
-								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-							</button>
-						</div>
-						<br><br>
-					</div>
-				</div>
-
+				
 				<br>
 				<br>
 				<div class="help">
 					<p style="font-size:1.2em; color:#F44336">The names of winners once added shall not be changed.</p>
 				</div>
-				<div class="alert alert-danger col-md-6 col-md-offset-3" role="alert">Empty field.</div>
+				@if(Session::has('success'))
+				<div class="alert alert-success col-md-6 col-md-offset-3" role="alert">{{Session::get('success')}}</div>
+				@endif
 				<div class="col-md-7"></div>
 				<div class="col-md-2">
 					<button type="button" class="btn btn-default" id="go">{{ $action }}</button>
@@ -125,10 +110,9 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('#go').click(function(){
-				var c = [], d = [], e = [];
+				var c = [], d = [];
 				$('#winner .rule0 input').each(function(){c.push($(this).val())});
 				$('#runnerup1 .rule1 input').each(function(){d.push($(this).val())});
-				$('#runnerup2 .rule2 input').each(function(){e.push($(this).val())});
 				console.log(c);
 			
 			console.log($(this));
@@ -138,7 +122,6 @@
 				event_id : $('#event_name').val(),
 				winnner : c,
 				runnnerup1 : d,
-				runnerup2 : e,
 				_token: $('#token').val(),
 			}
 			console.log(data);
@@ -152,7 +135,7 @@
 				}
 				return true;
 			}
-			check  = repeat(d) && repeat(c) && repeat(e);
+			check  = repeat(d) && repeat(c);
 			console.log(check);
 			if(check === true){
 				var button = $(this);
@@ -162,10 +145,10 @@
 				},500);
 				$.post('add_winners', data, function(response){
 				clearInterval(adding);
-				if(response == 1){
-					document.write(response);
-				}else{
+				if(response == 0){
 					document.write("Error");
+				}else{
+					document.write(response);
 				};
 			}); 
 			}else if(check===false){

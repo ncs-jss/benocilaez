@@ -231,17 +231,26 @@
 							</li>
 						</ul>
 							@endif	
-							@if(isset($details->prize_money))
+							@if(isset($details->prize_money)&& !strcmp(trim(json_decode($details->prize_money[0])),""))
 						<h4>PRIZES</h4>
 						<ul>
+							@if(isset(json_decode($details->prize_money)[0]) && !strcmp(trim(json_decode($details->prize_money[0])),""))
+							<li>
+							First Prize:
+							</li>
+
 							<li>
 							{{json_decode($details->prize_money)[0]}}
 							</li>
-							<!-- <br> -->
+							@endif
+							@if(isset(json_decode($details->prize_money)[1]) && empty(json_decode($details->prize_money)[1]))
+							<li>
+							Second Prize:
+							</li>							<!-- <br> -->
 							<li>
 							{{json_decode($details->prize_money)[1]}}
 							</li>
-
+							@endif
 						</ul>
 						@endif
 						@if(isset($details->contact))
