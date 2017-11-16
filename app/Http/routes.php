@@ -11,13 +11,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/delete/{id}', ['as'=>'delete' , 'uses'=>'OpController@delete']);
 	Route::get('/add_winners', ['as'=>'add_winners', 'uses'=>'PagesController@add_winners']);
     Route::get('/acd/{id}', ['uses'=>'PagesController@get_soc_mem_details']);
-    Route::get('/update_mem_details/{id}', ['uses'=>'OpController@update_mem_details']);
+    Route::get('/update_mem_details/{type}/{id}', ['uses'=>'OpController@update_mem_details']);
     Route::get('/del-det/{id}', ["as"=>'del-det', 'uses'=>'OpController@delete_mem_details']);
     Route::get('/get_soc_events', ['uses'=>'PagesController@get_events']);
     Route::get('/xx/{id?}', ['uses'=>'ApiController@get_events']);
 	Route::get('/logout', ['as'=>'logout', 'uses'=>'OpController@logout']);
 	Route::get('/req/{id}', ['as'=>'request', 'uses'=>'OpController@request']);
 	Route::get('/approve/{id}', ['as'=>'approve', 'uses'=>'OpController@approve']);
+	Route::get('/request/{id}', ['as'=>'request', 'uses'=>'OpController@editRequest']);
     Route::get('/admin',  ['as'=>'admin_panel', 'uses'=>'PagesController@admin']);
     Route::get('/soc_details/{id?}', ['as'=>'add_soc_details', 'uses'=>'PagesController@add_soc_details']);
     Route::get('/enable_feature/{what}', ['uses'=>'OpController@enable']);

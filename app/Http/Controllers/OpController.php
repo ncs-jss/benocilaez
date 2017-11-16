@@ -6,6 +6,7 @@ use App\Status;
 use App\Events;
 use App\Members;
 use App\EventDetails;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -23,6 +24,7 @@ class OpController extends BaseController{
             $rules = ($event[0]->rules != "" && $event[0]->rules != null) ? $event[0]->rules : '[""]';
             $contacts = ($event[0]->contact != "" && $event[0]->contact != null) ? $event[0]->contact : '[{"name":"", "number":""},{"name":"", "number":""}]' ;
             $prize = ($event[0]->prize_money != "" && $event[0]->prize_money != null) ? $event[0]->prize_money : '["",""]';
+            $category = ($event[0]->category != "" && $event[0]->category != null) ? $event[0]->category : '-';
             //dd(count($contacts));
             if(!($event[0]->approved == 0))
             return Redirect::route('view_event');
@@ -38,8 +40,10 @@ class OpController extends BaseController{
                 'edit'=>1,
                 'add_winners'=>$status->add_winners,
                 'add_events'=>$status->add_events,
+                'add_members'=>$status->add_members,
                 'contacts'=>json_decode($contacts),
                 'prizes'=>json_decode($prize),
+                'category'=>$category,
                 'attachment'=>$event[0]->attachment,
                 'long_des'=>$event[0]->long_des,
                 'rules'=>$rules,
@@ -86,13 +90,14 @@ class OpController extends BaseController{
         if(\Auth::check()){
             $user = User::where('email', Session::get('email'))->first();
             $data = Input::all();
+            
             $eventdetails = EventDetails::where('event_id', $id)->first();
-
+// var_dump($data); die;
             $eventdetails['event_description'] = json_encode($data['short_des']);
             $eventdetails['long_des'] = json_encode($data['long_des']);
             $eventdetails['rules'] = json_encode($data['rules']);
 
-
+            $eventdetails->category = $data['category'];
 
             $data['timing'] = $data['date'] . " " . $data['time'];
             $eventdetails->timing = $data['timing'];
@@ -115,21 +120,23 @@ class OpController extends BaseController{
                 $eventdetails->attachment = $fileName;
             }
 
-            //dd($eventdetails->save());
+            $eventdetails->save();
             return Redirect::route('view_event');
 
         }else{
             return Redirect::route('root');
         }
     }
-    public function approve($id = null){
-        $admin = User::where('email', Session::get('email'))->
-        first()->priviliges;
+    public function approve($id){
+        $admin = User::where('email', Session::get('email'))->first()->priviliges;
         if($id != null && \Auth::check() && $admin == 1){
             $event = EventDetails::where('event_id', $id)->first();
             $event->approved = ($event->approved == 0) ? 1 : 0;
+            if($event->approved == 1)
+                $event->edit_request = 0;
             $event->save();
-            return 1;
+            $mail = Events::select('society_email')->where('event_id',$id)->first();
+            return Redirect::back()->with('mail', $mail);
         }
         return 0;
     }
@@ -143,7 +150,7 @@ class OpController extends BaseController{
         if($id != null && Session::get('email') == $soc_mail->society_email){
             $event->approved = 2;
             $event->save();
-            return 1;
+            return Redirect::back();
         }
         return 0;
     }
@@ -164,65 +171,69 @@ class OpController extends BaseController{
                     $status->add_winners = ($status->add_winners) ? 0 : 1;
                     $status->save();
                     return $status->add_winners;
-                }else {
+                }else if($what == 2){
+                    $status->add_members = ($status->add_members) ? 0 : 1;
+                    $status->save();
+                    return $status->add_members;
+                 }else {
                     return 0;
                 }
             }
         }
     }
-    public function save_mem_details($type){
+    public function save_mem_details($type, Request $request){
         if(\Auth::check()){
-            $data = Input::all();
+            $data = $request->all();
             $member = new Members;
-            $member->name = $data['name'];
+            $member->name = $_GET['name'];
             $member->type = $type;
-            $member->phone = $data['phone'];
+            $member->phone = $_GET['phone'];
             $member->soc_id = Session::get('email');
             if($type == 4){
                 $member->branch_yr = '';
             }else{
-                if(isset($data['branch'])){
-                    $member->branch_yr = $data['branch'];
+                if(isset($data['roll'])){
+                    $member->roll_num = $data['roll'];
                 }
                 else{
-                    $member->branch_yr = '-';
+                    $member->roll_num = 0;
                 }
-                if(isset($data['year'])){
-                    $member->branch_yr .= " ".$data['year'];
+                if(isset($data['zeal'])){
+                    $member->zeal_id = $data['zeal'];
                 }else{
-                    $member->branch_yr .= " 1";
+                    $member->zeal_id = "-";
                 }
                 if($type == 1){
-                    $member->email = $data['email'];
+                    $member->email = $_GET['email'];
                 }
                 else{
                     if(isset($data['events']))
-                    $member->events = implode(',' ,$data['events']);
+                    $member->events = implode(',' ,$_GET['events']);
                 }
             }
             $user = User::where('email',Session::get('email'))->first();
-            $route = "/team/".$type;
+            $route = "/team/".$type;    
             if($member->save()){
                 return Redirect::to($route);
             }
         }
-        return Redirect::route($data['route']);;
+        return Redirect::route($data['route']);
     }
     public function update_mem_details($id){
         if(\Auth::check()){
             $data = Input::all();
             $member = Members::where('id', $id);
             $updation = ['name'=> $data['name'],
-            'phone' => $data['phone'],];
-            if(isset($data['branch'])){
-                $updation['branch_yr'] = $data['branch'];
+            'phone' => $data['phone']];
+            if(isset($data['roll'])){
+                $updation['roll_num'] = $data['roll'];
             }else{
-                $updation['branch_yr'] = '-';
+                $updation['roll_num'] = 0;
             }
-            if(isset($data['year'])){
-                $updation['branch_yr'] .= ' '.$data['year'];
+            if(isset($data['zeal'])){
+                $updation['zeal_id'] = $data['zeal'];
             }else{
-                $updation['branch_yr'] = ' 1';
+                $updation['zeal_id'] = '-';
             }
             if($member->first()->type == 1){
                 $updation['email'] = $data['email'];
@@ -295,5 +306,17 @@ class OpController extends BaseController{
         $extention = explode('.', $id)[1];
         $name = "$event.$extention";
         return response()->download($path, $name);
+    }
+
+    public function editRequest($id){
+        $admin = User::where('email', Session::get('email'))->first()->priviliges;
+        if($id != null && \Auth::check()){
+            $event = EventDetails::where('event_id', $id)->first();
+            $event->edit_request = ($event->edit_request == 0) ? 1 : 0;
+            $event->save();
+            $mail = Events::select('society_email')->where('event_id',$id)->first();
+            return Redirect::back()->with('mail', $mail);
+        }
+        return 0;
     }
 }

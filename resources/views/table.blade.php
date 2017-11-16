@@ -8,6 +8,7 @@
                 @if($society == $accessor || $admin == 1)
                 <th>Edit</th>
                 <th>Delete</th>
+                <th>Request</th>
                 @endif
             </tr>
         </thead>
@@ -26,7 +27,7 @@
                     @if($admin == 1)
                     <label>
                         @if($event->approved == 0 )
-                        <a class="btn btn-success btn-xs approve"
+                        <a class="btn btn-success btn-xs approve" 
                         val="{!! $event->event_id !!}"
                         role="button">
                         Approve</a>
@@ -61,11 +62,31 @@
                     val="{!! $event->event_id !!}"
                     role="del_button"
                     appr="{{$event->approved}}"
-                    {{ ($event->approved == 0 ) ? ''
+                    {{ ($event->approved == 1 && $event->edit_request == 0) ? ''
                     : "disabled='disabled'" }}>
                     Delete</a>
                 </td>
                 @endif
+                <td>
+                @if($admin <> 1)
+                <a class="btn btn-success btn-xs approve" 
+                href = "{{url('req/'. $event->event_id)}}"
+                val="{!! $event->event_id !!}"
+                role="button"
+                {{ ($event->approved == 1 ) ? ''
+                : "disabled='disabled'" }}>
+                Request</a>
+                @else
+                <h4>
+                    @if($event->edit_request == 0 )
+                        NO
+                    @else
+                        YES
+                    @endif
+                </h4>
+                @endif
+                </td>
+                </a>
             </tr>
             @endforeach
         </tbody>

@@ -25,11 +25,15 @@
                         
                         <li>
                             <a href="{{route('view_event')}}"> View Events</a>
+                            @if($add_events == 1)
+                                <a href="{{route('add_event')}}">Add Event</a>
+                            @endif
                         </li>
                     </ul>
                 </li>
 
                 <!-- Add Society Members -->
+                @if($add_members == 1)
                 <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Add Society Members<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -47,7 +51,7 @@
                         </li>
                     </ul>
                 </li>
-
+                @endif
                 @if($add_winners == 1)
                 <li>
                     <a href="{{route('add_winners')}}"><i class="fa fa-table fa-fw"></i> Add Winners</a>

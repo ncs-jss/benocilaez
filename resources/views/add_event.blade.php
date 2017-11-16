@@ -70,7 +70,7 @@
                                                     <div class="col-md-11">
                                                         <div class="input-group">
                                                             <span class="input-group-addon" id="rulenumber">1</span>
-                                                            <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1" name="rules[]">
+                                                            <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1" name="rules[]" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1 plus">
@@ -87,7 +87,7 @@
                                                     <div class="col-md-11">
                                                         <div class="input-group">
                                                             <span class="input-group-addon" id="rulenumber">{{$i}}</span>
-                                                            <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1" name="rules[]" value="{{$rule}}">
+                                                            <input type="text" class="form-control event_rule" placeholder="Rules" aria-describedby="basic-addon1" name="rules[]" value="{{$rule}}" required>
                                                         </div>
                                                     </div>
                                                     @if($i == 1)
@@ -116,6 +116,7 @@
                                             $timing = '0000-00-00 00:00';
                                             $contacts = [['name'=>'', 'number'=>''],['name'=>'', 'number'=>'']];
                                             $prizes = ['', ''];
+                                            $category = '';
                                             ?>
                                             @endif
 
@@ -129,11 +130,11 @@
                                                 <div class="row">
                                                     <label for="time" class="col-md-2 control-label">Time</label>
                                                     <div class="col-md-4">
-                                                        <input type="time" placeholder='HH:MM' name="time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" value="{{$time}}">
+                                                        <input type="time" placeholder='HH:MM' name="time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" value="{{$time}}" required>
                                                     </div>
                                                     <label for="date" class="col-md-2 control-label">Date</label>
                                                     <div class="col-md-4">
-                                                        <input type="date" placeholder='YYYY-MM-DD' name="date" class="form-control" pattern="2016-04-0[7-9]" value="{{$date}}">
+                                                        <input type="date" placeholder='YYYY-MM-DD' name="date" class="form-control" pattern="2016-04-0[7-9]" value="{{$date}}" required>
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -141,20 +142,38 @@
                                                 <div class="row">
                                                     <label for="contact" class="col-md-2 control-label">Contacts</label>
                                                     <div class="col-md-4">
-                                                        <input type="text" name="contact_name1" class="form-control" placeholder="Name" value="{{$contacts[0]->name}}">
+                                                    @if($action == 'Add Event')
+                                                    	<input type="text" name="contact_name1" class="form-control" placeholder="Name" value="{{$contacts[0]['name']}}" required>
+													@else
+														<input type="text" name="contact_name1" class="form-control" placeholder="Name" value="{{$contacts[0]->name}}" required>
+													@endif    
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="tel" name="contact_number1" class="form-control" placeholder="Number" pattern="[0-9]{10}" value="{{$contacts[0]->number}}">
+                                                    @if($action == 'Add Event')
+                                                        <input type="tel" name="contact_number1" class="form-control" placeholder="Number" pattern="[0-9]{10}" value="{{$contacts[0]['number']}}" required>
+                                                    @else
+                                                    	<input type="tel" name="contact_number1" class="form-control" placeholder="Number" pattern="[0-9]{10}" value="{{$contacts[0]->number}}" required>
+                                                    @endif
                                                     </div>
                                                 </div>
                                             </div><br>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="text" name="contact_name2" class="form-control" placeholder="Name" value="{{$contacts[1]->name}}">
+                                                    @if($action == 'Add Event')
+														<input type="text" name="contact_name2" class="form-control" placeholder="Name" value="{{$contacts[1]['name']}}" required>
+													@else
+														<input type="text" name="contact_name2" class="form-control" placeholder="Name" value="{{$contacts[1]->name}}" required>
+													@endif
+                                                        
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="tel" name="contact_number2" class="form-control" placeholder="Number" pattern="[0-9]{10}" value="{{$contacts[1]->number}}">
+                                                    @if($action == 'Add Event')
+														<input type="tel" name="contact_number2" class="form-control" placeholder="Number" pattern="[0-9]{10}" value="{{$contacts[1]['number']}}">
+													@else
+														<input type="tel" name="contact_number2" class="form-control" placeholder="Number" pattern="[0-9]{10}" value="{{$contacts[1]->number}}">
+													@endif
+                                                        
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -162,10 +181,10 @@
                                                 <div class="row">
                                                     <label for="prize_money" class="col-md-2 control-label">Prize Money</label>
                                                     <div class="col-md-4">
-                                                        <input type="tel" name="prize_money1" class="form-control" placeholder="Fisrt Prize  (don't add Rs.)" pattern="[0-9]*" value="{{$prizes[0]}}">
+                                                        <input type="tel" name="prize_money1" class="form-control" placeholder="Fisrt Prize  (don't add Rs.)" pattern="[0-9]*" value="{{$prizes[0]}}" required>
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-2">
-                                                        <input type="tel" name="prize_money2" class="form-control" placeholder="Second Prize  (don't add Rs.)" pattern="[0-9]*" value="{{$prizes[1]}}">
+                                                        <input type="tel" name="prize_money2" class="form-control" placeholder="Second Prize  (don't add Rs.)" pattern="[0-9]*" value="{{$prizes[1]}}" required>
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -175,8 +194,20 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label for="file" class="col-md-2 control-label">File Upload (Optional)</label>
-                                                    <div class="col-md-4 col-md-offset-2">
+                                                    <div class="col-md-4">
                                                         <input type="file" name="file" class="form-control" >
+                                                    </div>
+                                                    <label for="date" class="col-md-2 control-label">Category</label>
+                                                    <div class="col-md-4">
+                                                        <select name = "category" class = "dropdown" required>
+                                                            <option value = "{{$category}}">{{$category}}</option>
+                                                            <option value = "Coloralo">Coloralo</option>
+                                                            <option value = "Mechavoltz">Mechavoltz</option>
+                                                            <option value = "Coderz">Coderz</option>
+                                                            <option value = "Robotiles">Robotiles</option>
+                                                            <option value = "Play it On">Play it On</option>
+                                                            <option value = "Z-Wars">Z-Wars</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row" style="text-align:center; color:#ef2345">

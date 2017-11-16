@@ -10,6 +10,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="page-header">{{ $action }}</h2>
+                    <?php
+                    print_r($mail);
+                    ?>
                     @if ($admin == 1)
         			<select style="font-size:1.2em" class="form-control" id="soc_select">
         				@foreach ($societies as $data)
@@ -72,7 +75,7 @@
         $('.approve').click(function(){
             var id = $(this).attr('val');
             var x = $(this);
-            $.get('approve/' + id, function(res){
+            $.get('../approve/' + id, function(res){
                 if(res == '1'){
                     if(x.hasClass('btn-success')){
                         x.removeClass('btn-success');

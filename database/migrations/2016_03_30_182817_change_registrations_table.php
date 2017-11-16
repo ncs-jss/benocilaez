@@ -25,6 +25,5 @@ class ChangeRegistrationsTable extends Migration
      */
     public function down()
     {
-        //
     }
 }

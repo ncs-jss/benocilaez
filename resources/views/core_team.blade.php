@@ -60,18 +60,15 @@
                 }
             });
             console.log(inputs);
-            var bryr = inputs[3].split(' ');
-            var br = bryr[0];
-            var yr = bryr[1];
-
             var name = inputs[0];
             var phone = inputs[1];
             @if($type == 1)
             var email = inputs[2];
             @else
-            //var events = opt_events();
+            // var events = opt_events();
             @endif
-
+            var roll = inputs[3];
+            var zeal_id = inputs[4];
 
             modal.modal('show');
             @if($type == 1)
@@ -81,10 +78,10 @@
             @endif
             modal.find('.name').val(name);
             modal.find('.phone').val(phone);
-            modal.find('.branch').val(br);
-            modal.find('.year').val(yr);
+            modal.find('.zeal').val(zeal_id);
+            modal.find('.roll').val(roll);
             modal.find('#go').attr('val', $(this).attr('val'));
-            modal.find('form').attr('action', "{{url('update_mem_details/')}}/"+ $(this).attr('val'))
+            modal.find('form').attr('action', "{{url('update_mem_details/')}}/"+ <?php echo $type; ?> +"/"+ $(this).attr('val'))
         });
 
         function get_event_names(parent, events){

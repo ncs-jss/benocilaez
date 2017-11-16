@@ -23,7 +23,7 @@
                             <h4 class="modal-title">Edit Member Details</h4>
                         </div>
                         <div class="modal-body">
-                            <form role="form" id="form1" action="" method="get">
+                            <form role="form" id="form1" action="save_mem_details/1" method="get">
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input type="text" name="name" placeholder="Name" class="form-control name" required>
@@ -50,6 +50,14 @@
                                 </div>
                                 @if($type != 4)
                                 <div class="form-group">
+                                    <label>Member Roll Number</label>
+                                    <input type="text" name="roll" placeholder="Roll Number"  maxlength="10" class="form-control roll" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Member Zealicon ID</label>
+                                    <input type="text" name="zeal" placeholder="Zealicon ID"  maxlength="15" class="form-control zeal">
+                                </div>
+                                <!-- <div class="form-group">
                                     <label>Branch/ Course</label>
                                     <select name ="branch" class="branch form-control">
                                         <option value="-">-</option>
@@ -75,7 +83,7 @@
                                         <option value="3">3</option>
                                         <option value="4">4</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 @endif
                                 <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" id="go" for='form1' class="btn btn-primary">Save changes</button>
@@ -85,7 +93,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div class="panel-body" id="include-table">
                 <div class="table-responsive">
@@ -105,7 +112,8 @@
                                 <th>Events</th>
                                 @endif
                                 @if($type != 4)
-                                <th>Branch/Yr</th>
+                                <th>Roll Number</th>
+                                <th>Zealicon ID</th>
                                 @endif
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -120,10 +128,11 @@
                                 <td>{{ $mem['email'] }}</td>
                                 @endif
                                 @if($type != 1 && $type != 4)
-                                <td>{{ $mem['events'] }}</td>
+                                <td>{{ $mem['event'] }}</td>
                                 @endif
                                 @if($type != 4)
-                                <td>{{ $mem['branch_yr'] }}</td>
+                                <td>{{ $mem['roll_num'] }}</td>
+                                <td>{{ $mem['zeal_id'] }}</td>
                                 @endif
                                 <td><a class="btn btn-default btn-xs"
                                     val="{!! $mem['id'] !!}"

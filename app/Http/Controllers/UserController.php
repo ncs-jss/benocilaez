@@ -118,7 +118,7 @@ class UserController extends BaseController{
             $eventdetails = new EventDetails;
             $eventdetails->event_id = $event->event_id;
             $eventdetails->event_name = $data['event_name'];
-
+            $eventdetails->category = $data['category'];
             $eventdetails->event_description = json_encode($data['short_des']);
             $eventdetails->long_des = json_encode($data['long_des']);
             $eventdetails->rules = json_encode($data['rules']);

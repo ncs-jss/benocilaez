@@ -44,6 +44,10 @@
 								<span class="input-group-addon" id="winnerno0">1</span>
 								<input type="text" class="form-control event_rule" placeholder="Winner" aria-describedby="basic-addon1">
 							</div>
+							<div class="input-group rule-1">
+								<span class="input-group-addon" id="zeal0">1</span>
+								<input type="text" class="form-control event_rule" placeholder="Zeal_id" aria-describedby="basic-addon1">
+							</div>
 						</div>                      
 						<div class="col-md-1 plus">
 							<button type="button" class="btn btn-primary add_rule0" aria-label="Left Align">
@@ -64,6 +68,10 @@
 							<div class="input-group rule-1">
 								<span class="input-group-addon" id="winnerno1">1</span>
 								<input type="text" class="form-control event_rule" placeholder="1st Runner Up" aria-describedby="basic-addon1">
+							</div>
+							<div class="input-group rule-1">
+								<span class="input-group-addon" id="zeal1">1</span>
+								<input type="text" class="form-control event_rule" placeholder="Zeal_id" aria-describedby="basic-addon1">
 							</div>
 						</div>                      
 						<div class="col-md-1 plus">
@@ -148,7 +156,9 @@
 				if(response == 0){
 					document.write("Error");
 				}else{
-					document.write(response);
+					var pro =  prompt("Winners Added Sucessfully. Enter 'yes' to continue.");
+					if(pro == 'yes')
+					location.reload();
 				};
 			}); 
 			}else if(check===false){
@@ -167,6 +177,7 @@
 					var s = $(input).clone().appendTo(group);
 					var i = $('.rule'+index).length;
 					s.find('#winnerno'+index).html(i);
+					s.find('#zeal'+index).html(i);
 					s.attr('rule_no', i);
 					s.find('.add_rule'+index).removeClass('add_rule' + index +' btn-primary');
 					s.find('.plus button').addClass('del_rule' + index +' btn-danger');

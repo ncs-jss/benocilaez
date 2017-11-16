@@ -15,20 +15,20 @@
             var what = $(this).attr('what');
             var button = $(this);
             button.html('WORKING...');
-            a = ['ADD EVENTS', 'ADD WINNERS'];
+            a = ['ADD EVENTS', 'ADD WINNERS','ADD MEMBERS'];
             $.get('enable_feature/'+what, function(response){
                 if(response == 1){
                     button.html('DISABLE ' + a[what]);
                     button.removeClass('btn-danger');
                     button.addClass('btn-success');
-                    if(what == 1){
+                    if(what == 1 || what == 2 || what == 0){
                         window.location.href = window.location.href
                     }
                 }else if(response == 0){
                     button.html('ENABLE ' + a[what]);
                     button.removeClass('btn-success');
                     button.addClass('btn-danger');
-                    if(what == 1){
+                    if(what == 1 || what == 2 || what == 0){
                         window.location.href = window.location.href
                     }
                 }else{
@@ -68,6 +68,15 @@
                 @else
                 <button type="button" id="feature" what='1' class="btn btn-success feature">
                     DISABLE ADD WINNERS
+                </button>
+                @endif
+                @if($add_members == 0)
+                <button type="button" what='2' class="btn btn-danger feature">
+                    ENABLE ADD MEMBERS
+                </button>
+                @else
+                <button type="button" what='2' class="btn btn-success feature">
+                    DISABLE ADD MEMBERS
                 </button>
                 @endif
                  </div>
