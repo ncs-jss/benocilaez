@@ -20,8 +20,6 @@ class CreateEventsTable extends Migration
             $table->integer('society_id')->unsigned();
             $table->integer('winner1', false, true)->length(11);
             $table->integer('winner2', false, true)->length(11)->nullable();
-            $table->dateTime('start');
-            $table->dateTime('end');
             $table->string('contact_name', 100);
             $table->integer('contact_no', false, true)->length(10);
             $table->boolean('is_active');
