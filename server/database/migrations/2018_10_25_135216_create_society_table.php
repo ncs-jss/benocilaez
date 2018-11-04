@@ -17,7 +17,6 @@ class CreateSocietyTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('username');
-            $table->string('password');
             $table->rememberToken();
         });
     }
