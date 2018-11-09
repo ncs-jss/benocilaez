@@ -17,4 +17,6 @@ Route::get('login', 'Api\SocietyController@login');
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('details', 'Api\SocietyController@details');
 	Route::get('update', 'Api\SocietyController@update');
+
+	Route::resource('events', 'Api\EventController');
 });
