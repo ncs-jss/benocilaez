@@ -1,11 +1,4 @@
 language: php
-addons:
-  apt:
-    sources:
-    - mysql-5.7-trusty
-    packages:
-    - mysql-server
-    - mysql-client
 php:
 - 7.1
 before_install:
@@ -13,7 +6,6 @@ before_install:
 - cp .env.travis .env
 - composer install --dev --ignore-platform-reqs
 - php artisan key:generate
-- mysql -e 'CREATE DATABASE beaconzialis;'
 - php artisan migrate
 - php artisan storage:link
 script:
@@ -23,7 +15,6 @@ script:
   app/
 - php vendor/bin/phpcs --standard=ruleset.xml app/
 # - php artisan code:analyse --level=1
-- php artisan self-diagnosis
 after_script:
 - php vendor/bin/coveralls -v
 deploy:
