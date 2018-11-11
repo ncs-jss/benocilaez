@@ -28,4 +28,3 @@ deploy:
     branch: master
   run:
     - "composer install --dev"
-    - "php artisan migrate"
