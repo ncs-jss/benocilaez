@@ -6,7 +6,6 @@ before_install:
 - cp .env.travis .env
 - composer install --dev --ignore-platform-reqs
 - php artisan key:generate
-- php artisan migrate
 - php artisan storage:link
 script:
 - mkdir -p build/logs
