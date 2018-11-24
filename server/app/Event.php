@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     public $timestamps = false;
+    protected $fillable = [
+            'name', 'description', 'society_id', 'winner1', 'winner2', 'contact_name', 'contact_no', 'is_active'
+        ];
 
     /**
      * Get the society that owns the event.
