@@ -1,3 +1,5 @@
+@extends('layouts.default')
+@section('content')
 <div class="page-wrapper">
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
@@ -674,3 +676,4 @@
         </div>
     </div>
 </div>
+@stop
