@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController as BaseController;
+use Validator;
+use App\Event;
 
-class EventController extends Controller
+class EventController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +17,9 @@ class EventController extends Controller
     public function index()
     {
         //
+        $events = Event::all();
+        return $this->sendResponse($events->toArray(), 'Events retrieved successfully.');
+
     }
 
     /**
@@ -22,10 +27,6 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,6 +37,25 @@ class EventController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'description' => 'required',
+            'winner1' => 'required|numeric',
+            'winner2' => 'required|numeric',
+            'contact_name' => 'required',
+            'contact_no' => 'required|numeric',
+            'is_active' => 'required|boolean'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());       
+        }
+
+        $event = Event::create(['name' => $input['name'], 'description' => $input['description'], 'society_id' => \Auth::id(), 'winner1' => $input['winner1'], 'winner2' => $input['winner2'], 'contact_name' => $input['contact_name'], 'contact_no' => $input['contact_no'], 'is_active' => $input['is_active']]);
+
+        return $this->sendResponse($event->toArray(), 'Event created successfully.');
     }
 
     /**
@@ -47,6 +67,13 @@ class EventController extends Controller
     public function show($id)
     {
         //
+        $event = Event::find($id);
+
+        if (is_null($event)) {
+            return $this->sendError('Event not found.');
+        }
+
+        return $this->sendResponse($event->toArray(), 'Event retrieved successfully.');
     }
 
     /**
@@ -55,10 +82,6 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,6 +93,35 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $event =Event::find($id);
+        if (is_null($event)) {
+            return $this->sendError('Event not found.');
+        }
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'description' => 'required',
+            'winner1' => 'required|numeric',
+            'winner2' => 'required|numeric',
+            'contact_name' => 'required',
+            'contact_no' => 'required|numeric',
+            'is_active' => 'required|boolean'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());       
+        }
+
+        $event->name = $input['name'];
+        $event->description = $input['description'];
+        $event->winner1 = $input['winner1'];
+        $event->winner2 = $input['winner2'];
+        $event->contact_name = $input['contact_name'];
+        $event->contact_no = $input['contact_no'];
+        $event->is_active = $input['is_active'];
+        $event->save();
+        return $this->sendResponse($event->toArray(), 'Event updated successfully.');
     }
 
     /**
@@ -81,5 +133,11 @@ class EventController extends Controller
     public function destroy($id)
     {
         //
+        $event =Event::find($id);
+        if (is_null($event)) {
+            return $this->sendError('Event not found.');
+        }
+        $event->delete();
+        return $this->sendResponse($event->toArray(), 'Event deleted successfully.');
     }
 }
