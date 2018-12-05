@@ -1,4 +1,9 @@
 @extends('layouts.default')
+
+@section('css')
+    <link href="{{ custom_url('assets/libs/flot/css/float-chart.css') }} " rel="stylesheet">
+@stop
+
 @section('content')
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
