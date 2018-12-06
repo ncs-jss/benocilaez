@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('society.login');
 });
+
+Route::post('login', 'SocietyController@login');
+
+    Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::group(['middleware' => ['auth']], function () {
+	Route::get('home', function () {
+	    return view('society.home');
+	});
+});
