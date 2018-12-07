@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration
             $table->integer('winner1', false, true)->length(11);
             $table->integer('winner2', false, true)->length(11)->nullable();
             $table->string('contact_name', 100);
-            $table->string('contact_no', 10);
+            $table->bigInteger('contact_no');
             $table->boolean('is_active');
         });
     }
