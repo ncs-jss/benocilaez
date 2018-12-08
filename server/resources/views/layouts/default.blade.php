@@ -1,14 +1,23 @@
 <!doctype html>
 <html>
-<head>
     @include('includes.head')
-</head>
-<body class="bg">
-    @include('includes.header')
-    <main role="main" style="margin-bottom: 2rem;">
-        @yield('content')
-    </main>
-    @include('includes.sidebar')
-    @include('includes.footer')
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper">
+	    @include('includes.header')
+	    @include('includes.sidebar')
+	    <div class="page-wrapper">
+	        @yield('content')
+	        @include('includes.footer')
+	    </div>
+	</div>
 </body>
 </html>
