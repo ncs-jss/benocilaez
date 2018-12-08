@@ -8,6 +8,7 @@
     <main role="main" style="margin-bottom: 2rem;">
         @yield('content')
     </main>
+    @include('includes.sidebar')
     @include('includes.footer')
 </body>
 </html>
