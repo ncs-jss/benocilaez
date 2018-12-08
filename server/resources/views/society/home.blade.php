@@ -114,57 +114,34 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Latest Posts</h4>
+                    <h4 class="card-title">Active Events</h4>
                 </div>
                 <div class="comment-widgets scrollable">
                     <!-- Comment Row -->
+                    @if(isset($events))
+                    @foreach($events as $event)
                     <div class="d-flex flex-row comment-row m-t-0">
                         <div class="p-2"><img src="../../assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle"></div>
                         <div class="comment-text w-100">
-                            <h6 class="font-medium">James Anderson</h6>
-                            <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-                            <div class="comment-footer">
-                                <span class="text-muted float-right">April 14, 2016</span> 
-                                <button type="button" class="btn btn-cyan btn-sm">Edit</button>
-                                <button type="button" class="btn btn-success btn-sm">Publish</button>
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                            <h6 class="font-medium">{{$event->name}}</h6>
+                            <span class="m-b-15 d-block">{{$event->description}} </span>
+                            <div class="comment-footer"> 
+                                <a href="{{ custom_url('events/'.$event->id.'/edit') }}" type="button" class="btn btn-cyan btn-sm">Edit</a>
+                                {!! Form::open(['method'=>'delete', 'route'=>['event.destroy', $event['id']], 'class'=>'delete_form']) !!}
+                                    {!! Form::button('Delete', ['class'=>'btn btn-danger btn-sm', 'type'=>'submit']) !!}
+                                {!! Form::close() !!}
+                                {{-- <a href="{{ custom_url('events/'.$event->id) }}" type="button" class="btn btn-danger btn-sm">Delete</a> --}}
                             </div>
                         </div>
                     </div>
-                    <!-- Comment Row -->
-                    <div class="d-flex flex-row comment-row">
-                        <div class="p-2"><img src="../../assets/images/users/4.jpg" alt="user" width="50" class="rounded-circle"></div>
-                        <div class="comment-text active w-100">
-                            <h6 class="font-medium">Michael Jorden</h6>
-                            <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-                            <div class="comment-footer">
-                                <span class="text-muted float-right">May 10, 2016</span> 
-                                <button type="button" class="btn btn-cyan btn-sm">Edit</button>
-                                <button type="button" class="btn btn-success btn-sm">Publish</button>
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Comment Row -->
-                    <div class="d-flex flex-row comment-row">
-                        <div class="p-2"><img src="../../assets/images/users/5.jpg" alt="user" width="50" class="rounded-circle"></div>
-                        <div class="comment-text w-100">
-                            <h6 class="font-medium">Johnathan Doeting</h6>
-                            <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-                            <div class="comment-footer">
-                                <span class="text-muted float-right">August 1, 2016</span> 
-                                <button type="button" class="btn btn-cyan btn-sm">Edit</button>
-                                <button type="button" class="btn btn-success btn-sm">Publish</button>
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
             <!-- Card -->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">To Do List</h4>
+                    <h4 class="card-title">Past Events</h4>
                     <div class="todo-widget scrollable" style="height:450px;">
                         <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
                             <li class="list-group-item todo-item" data-role="task">

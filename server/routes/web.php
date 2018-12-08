@@ -29,4 +29,12 @@ Route::group(['middleware' => ['auth']], function () {
 	});
 
 	Route::post('event', 'EventController@store');
+
+	Route::get('events', 'EventController@index');
+
+	Route::get('events/{event}/edit', 'EventController@edit');
+
+	Route::put('events/{event}', 'EventController@update');
+
+	Route::delete('events/{event}', 'EventController@delete')->name('event.destroy');
 });
