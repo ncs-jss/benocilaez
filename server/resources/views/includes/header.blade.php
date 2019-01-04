@@ -8,17 +8,11 @@
                     <!-- ============================================================== -->
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
-                        <b class="logo-icon p-l-10">
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="{{ custom_url('assets/images/logo-icon.png') }}" alt="homepage" class="light-logo" />
-                           
-                        </b>
                         <!--End Logo icon -->
                          <!-- Logo text -->
                         <span class="logo-text">
                              <!-- dark Logo text -->
-                             <img src="{{ custom_url('assets/images/logo-text.png') }}" alt="homepage" class="light-logo" />
+                             <h3>Event Handler</h3>
                             
                         </span>
                         <!-- Logo icon -->
