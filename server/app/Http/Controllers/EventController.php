@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Category;
 use App\Event;
 use Validator;
 
@@ -21,7 +22,8 @@ class EventController extends Controller
         $input = $request->all();
 
         $this->validate(
-            $request, [
+            $request,
+            [
             'title' => 'required|max:100',
             'description' => 'required',
             'winner1_amount' => 'required|numeric|min:1',
@@ -46,6 +48,7 @@ class EventController extends Controller
         } else {
             $event->is_active = 1;
         }
+        $event->category_id = $request->category;
         $event->save();
 
         return back()->with(['msg' =>'Event added successfully.', 'class' => 'alert-success']);
@@ -60,8 +63,9 @@ class EventController extends Controller
     public function edit($id)
     {
         $event =Event::find($id);
+        $category = Category::all();
         if (!is_null($event)) {
-            return view('society.edit-event', ['event' => $event]);
+            return view('society.add-event', ['event' => $event, 'category' => $category]);
         }
     }
 
@@ -70,7 +74,8 @@ class EventController extends Controller
         $input = $request->all();
 
         $this->validate(
-            $request, [
+            $request,
+            [
             'title' => 'required|max:100',
             'description' => 'required',
             'winner1_amount' => 'required|numeric|min:1',
@@ -90,6 +95,7 @@ class EventController extends Controller
         }
         $event->contact_name = $request->contact_name;
         $event->contact_no = $request->contact_number;
+        $event->category_id = $request->category;
         if (is_null($request->is_active)) {
             $event->is_active = 0;
         } else {

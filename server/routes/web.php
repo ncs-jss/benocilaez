@@ -1,15 +1,5 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Category;
 
 Route::get('/', function () {
     return view('society.login');
@@ -20,21 +10,22 @@ Route::post('login', 'SocietyController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::group(['middleware' => ['auth']], function () {
-	Route::get('home', function () {
-	    return view('society.home');
-	});
+    Route::get('home', function () {
+        return view('society.home');
+    });
 
-	Route::get('event', function () {
-	    return view('society.add-event');
-	});
+    Route::get('event', function () {
+        $category = Category::all();
+        return view('society.add-event', ['category' => $category]);
+    });
 
-	Route::post('event', 'EventController@store');
+    Route::post('event', 'EventController@store');
 
-	Route::get('events', 'EventController@index');
+    Route::get('events', 'EventController@index');
 
-	Route::get('events/{event}/edit', 'EventController@edit');
+    Route::get('events/{event}/edit', 'EventController@edit');
 
-	Route::put('events/{event}', 'EventController@update');
+    Route::put('events/{event}', 'EventController@update');
 
-	Route::delete('events/{event}', 'EventController@delete')->name('event.destroy');
+    Route::delete('events/{event}', 'EventController@delete')->name('event.destroy');
 });
