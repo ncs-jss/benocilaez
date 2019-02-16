@@ -18,20 +18,20 @@ class EventController extends BaseController
     {
         $events = Event::all();
         return $this->sendResponse($events->toArray(), 'Events retrieved successfully.');
-
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $validator = Validator::make(
+            $input, [
             'name' => 'required',
             'description' => 'required',
             'winner1' => 'required|numeric',
@@ -39,13 +39,15 @@ class EventController extends BaseController
             'contact_name' => 'required',
             'contact_no' => 'required|numeric',
             'is_active' => 'required|boolean'
-        ]);
+            ]
+        );
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $event = Event::create([
+        $event = Event::create(
+            [
             'name' => $input['name'],
             'description' => $input['description'],
             'society_id' => \Auth::id(),
@@ -54,7 +56,8 @@ class EventController extends BaseController
             'contact_name' => $input['contact_name'],
             'contact_no' => $input['contact_no'],
             'is_active' => $input['is_active'
-        ]]);
+            ]]
+        );
 
         return $this->sendResponse($event->toArray(), 'Event created successfully.');
     }
@@ -62,7 +65,7 @@ class EventController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -87,8 +90,8 @@ class EventController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -99,7 +102,8 @@ class EventController extends BaseController
         }
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $validator = Validator::make(
+            $input, [
             'name' => 'required',
             'description' => 'required',
             'winner1' => 'required|numeric',
@@ -107,10 +111,11 @@ class EventController extends BaseController
             'contact_name' => 'required',
             'contact_no' => 'required|numeric',
             'is_active' => 'required|boolean'
-        ]);
+            ]
+        );
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $event->name = $input['name'];
@@ -127,7 +132,7 @@ class EventController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

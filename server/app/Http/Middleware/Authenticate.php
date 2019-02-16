@@ -9,11 +9,12 @@ class Authenticate extends Middleware
     /**
      * Display error when user is not authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     protected function redirectTo($request)
     {
-        return response()->json(['error'=>'Unauthorised'], 401);;
+        return response()->json(['error'=>'Unauthorised'], 401);
+        ;
     }
 }
