@@ -15,6 +15,7 @@ class CreateForegionKey extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             $table->foreign('society_id')->references('id')->on('society')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
         });
         Schema::table('ctc', function (Blueprint $table) {
             $table->foreign('society_id')->references('id')->on('society')->onDelete('cascade');
@@ -34,6 +35,8 @@ class CreateForegionKey extends Migration
         Schema::table('events', function (Blueprint $table) {
             $table->dropForeign('events_society_id_foreign');
             $table->dropIndex('events_society_id_foreign');
+            $table->dropForeign('events_category_id_foreign');
+            $table->dropIndex('events_category_id_foreign');
         });
         Schema::table('ctc', function (Blueprint $table) {
             $table->dropForeign('ctc_society_id_foreign');
