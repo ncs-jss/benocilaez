@@ -20,6 +20,14 @@ class Event extends Model
     }
 
     /**
+     * Get the Categories of the event.
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Category', 'category_id');
+    }
+
+    /**
      * Get the winners fof the event.
      */
     public function winners()
