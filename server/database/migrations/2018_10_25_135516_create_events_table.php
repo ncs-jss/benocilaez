@@ -18,6 +18,7 @@ class CreateEventsTable extends Migration
             $table->string('name', 100);
             $table->text('description');
             $table->integer('society_id')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->integer('winner1', false, true)->length(11);
             $table->integer('winner2', false, true)->length(11)->nullable();
             $table->string('contact_name', 100);

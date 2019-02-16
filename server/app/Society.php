@@ -8,12 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Society extends Authenticatable
 {
-	use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable;
     protected $table = 'society';
     public $timestamps = false;
 
     /**
-     * Get the events fof the society.
+     * Get the events of the society.
      */
     public function events()
     {
