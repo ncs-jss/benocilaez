@@ -19,7 +19,18 @@ class EventController extends BaseController
         //
         $events = Event::all();
         return $this->sendResponse($events->toArray(), 'Events retrieved successfully.');
+    }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexCategory($id)
+    {
+        //
+        $events = Event::select('id', 'name')->where('category_id', $id)->get();
+        return $this->sendResponse($events->toArray(), 'Events retrieved successfully.');
     }
 
     /**
@@ -49,8 +60,8 @@ class EventController extends BaseController
             'is_active' => 'required|boolean'
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $event = Event::create(['name' => $input['name'], 'description' => $input['description'], 'society_id' => \Auth::id(), 'winner1' => $input['winner1'], 'winner2' => $input['winner2'], 'contact_name' => $input['contact_name'], 'contact_no' => $input['contact_no'], 'is_active' => $input['is_active']]);
@@ -109,8 +120,8 @@ class EventController extends BaseController
             'is_active' => 'required|boolean'
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $event->name = $input['name'];
