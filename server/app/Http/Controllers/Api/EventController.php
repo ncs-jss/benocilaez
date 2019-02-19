@@ -29,8 +29,11 @@ class EventController extends BaseController
     public function indexCategory($id)
     {
         //
-        $events = Event::select('id', 'name')->where('category_id', $id)->get();
-        return $this->sendResponse($events->toArray(), 'Events retrieved successfully.');
+        $events = Event::select('id', 'name')->where('category_id', $id)->get()->toArray();
+        for ($i = 0; $i < sizeof($events); $i++) {
+            $events[$i]['name'] = ucwords(strtolower($events[$i]['name']));
+        }
+        return $this->sendResponse($events, 'Events retrieved successfully.');
     }
 
     /**
