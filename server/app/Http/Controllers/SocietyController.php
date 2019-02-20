@@ -17,7 +17,8 @@ class SocietyController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make(
-            $request->all(), [
+            $request->all(),
+            [
             'username' => 'required',
             'password' => 'required',
             ]
@@ -37,7 +38,8 @@ class SocietyController extends Controller
         // init the resource
         $ch = curl_init();
         curl_setopt_array(
-            $ch, array(
+            $ch,
+            array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,

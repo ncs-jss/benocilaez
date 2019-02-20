@@ -133,7 +133,7 @@
 			        </div>
 			        <div class="border-top">
 			            <div class="card-body">
-			                <button type="submit" class="btn btn-primary">Add Event</button>
+			                <button type="submit" class="btn btn-primary">@if(isset($ctc))Edit Event @else Add Event @endif</button>
 			            </div>
 			        </div>
 			    </form>

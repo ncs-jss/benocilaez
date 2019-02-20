@@ -28,4 +28,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('events/{event}', 'EventController@update');
 
     Route::delete('events/{event}', 'EventController@delete')->name('event.destroy');
+
+    Route::get('ctc', function () {
+        return view('society.add-ctc');
+    });
+
+    Route::get('ctcs', 'CtcController@index');
+
+    Route::get('ctcs/{ctc}/edit', 'CtcController@edit');
+
+    Route::post('ctc', 'CtcController@store');
 });
