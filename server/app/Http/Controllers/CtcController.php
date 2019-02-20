@@ -41,4 +41,34 @@ class CtcController extends Controller
             return view('society.add-ctc', ['ctc' => $ctc]);
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        $input = $request->all();
+
+        $this->validate(
+            $request,
+            [
+            'name' => 'required|max:100',
+            ]
+        );
+
+        $ctc =CTC::find($id);
+        if (is_null($ctc)) {
+            return back()->with(['msg' =>'CTC does not exist anymore.', 'class' => 'alert-danger']);
+        }
+        $ctc->name = $input['name'];
+        $ctc->save();
+
+        return back()->with(['msg' =>'CTC edited successfully.', 'class' => 'alert-success']);
+    }
+
+    public function delete($id)
+    {
+        $ctc =CTC::find($id);
+        if (!is_null($ctc)) {
+            $ctc->delete();
+            return back()->with(['msg' =>'CTC deleted successfully.', 'class' => 'alert-success']);
+        }
+    }
 }

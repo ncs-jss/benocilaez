@@ -16,7 +16,7 @@ class CreateWinnersTable extends Migration
         Schema::create('winners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->integer('contact_no', false, true)->length(10);
+            $table->bigInteger('contact_no', false, true)->length(10);
             $table->string('zeal_id', 10);
             $table->integer('event_id')->unsigned();
             $table->boolean('rank');

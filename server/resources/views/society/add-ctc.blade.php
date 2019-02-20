@@ -21,7 +21,7 @@
 			        <div class="card-body">
 			            <h4 class="card-title">Add CTC</h4>
 			            <div class="form-group row">
-			                <label for="title" class="col-sm-3 text-right control-label col-form-label">CTC Name <font color="red">*</font></label>
+			                <label for="name" class="col-sm-3 text-right control-label col-form-label">CTC Name <font color="red">*</font></label>
 			                <div class="col-sm-9">
 			                    <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ isset($ctc) ? $ctc->name : old('name') }}" id="name" name="name" placeholder="CTC Name" required="">
 				                @if ($errors->has('title'))
