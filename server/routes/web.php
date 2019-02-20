@@ -1,5 +1,6 @@
 <?php
 use App\Category;
+use App\Event;
 
 Route::get('/', function () {
     return view('society.login');
@@ -28,4 +29,33 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('events/{event}', 'EventController@update');
 
     Route::delete('events/{event}', 'EventController@delete')->name('event.destroy');
+
+    Route::get('ctc', function () {
+        return view('society.add-ctc');
+    });
+
+    Route::get('ctcs', 'CtcController@index');
+
+    Route::get('ctcs/{ctc}/edit', 'CtcController@edit');
+
+    Route::post('ctc', 'CtcController@store');
+
+    Route::put('ctcs/{ctc}', 'CtcController@update');
+
+    Route::delete('ctcs/{ctc}', 'CtcController@delete')->name('ctc.destroy');
+
+    Route::get('winner', function () {
+        $events = Event::all();
+        return view('society.add-winner', ['events' => $events]);
+    });
+
+    Route::get('winners', 'WinnerController@index');
+
+    Route::get('winners/{winner}/edit', 'WinnerController@edit');
+
+    Route::post('winner', 'WinnerController@store');
+
+    Route::put('winners/{winner}', 'WinnerController@update');
+
+    Route::delete('winners/{winner}', 'WinnerController@delete')->name('winner.destroy');
 });

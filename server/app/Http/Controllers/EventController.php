@@ -86,6 +86,9 @@ class EventController extends Controller
         );
         
         $event =Event::find($id);
+        if (is_null($event)) {
+            return back()->with(['msg' =>'Event does not exist anymore.', 'class' => 'alert-danger']);
+        }
         $event->name = $request->title;
         $event->description = $request->description;
         $event->society_id = Auth::id();
