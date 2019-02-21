@@ -3,13 +3,24 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Support\Facades\Auth;
 use App\Society;
 use Validator;
 
-class SocietyController extends Controller
+class SocietyController extends BaseController
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $events = Society::select('id', 'name', 'username')->get();
+        return $this->sendResponse($events->toArray(), 'Societies retrieved successfully.');
+    }
+
     /**
      * Login of society.
      *
@@ -50,8 +61,7 @@ class SocietyController extends Controller
         $output = curl_exec($ch);
         
         //Print error if any
-        if(curl_errno($ch))
-        {
+        if (curl_errno($ch)) {
             return response()->json(['error'=>curl_error($ch)], 401);
         }
         
@@ -59,11 +69,9 @@ class SocietyController extends Controller
         
         $arr = json_decode($output, true);
 
-        if (array_key_exists('username',$arr))
-        {
+        if (array_key_exists('username', $arr)) {
             $society = Society::select('id')->where('username', '=', $arr['username'])->first();
-            if (empty($society))
-            {
+            if (empty($society)) {
                 $society = new Society;
                 $society->name = $arr['first_name'];
                 $society->username = $arr['username'];
@@ -71,20 +79,15 @@ class SocietyController extends Controller
             }
 
             Auth::loginUsingId($society->id);
-            if($arr['group'] == "others")
-            {
+            if ($arr['group'] == "others") {
                 $society = Auth::user();
                 $success['access_token'] =  $society->createToken('Personal Access Token')->accessToken;
                 $success['token_type'] = 'Bearer';
-                return response()->json(['success' => $success], 200); 
-            }
-            else
-            {
+                return response()->json(['success' => $success], 200);
+            } else {
                 return response()->json(['error'=>'This login is correct but does not belong to any society'], 401);
             }
-        }
-        else
-        {
+        } else {
             return response()->json(['error'=>'The username and/or password you specified are not correct.'], 401);
         }
     }
@@ -119,6 +122,6 @@ class SocietyController extends Controller
             'name' => $request->input('name')
         ]);
         $success['name'] = $request->input('name');
-        return response()->json(['success' => $success], 200); 
+        return response()->json(['success' => $success], 200);
     }
 }
