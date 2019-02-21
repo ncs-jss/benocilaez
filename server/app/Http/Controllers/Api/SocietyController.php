@@ -3,13 +3,24 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Support\Facades\Auth;
 use App\Society;
 use Validator;
 
-class SocietyController extends Controller
+class SocietyController extends BaseController
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $events = Society::select('id', 'name', 'username')->get();
+        return $this->sendResponse($events->toArray(), 'Societies retrieved successfully.');
+    }
+
     /**
      * Login of society.
      *
