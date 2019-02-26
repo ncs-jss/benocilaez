@@ -23,8 +23,8 @@ class Society extends Authenticatable
     /**
      * Get the CTCs of the society.
      */
-    public function ctc()
+    public function members()
     {
-        return $this->hasMany('App\CTC', 'society_id');
+        return $this->hasMany('App\Member', 'society_id');
     }
 }

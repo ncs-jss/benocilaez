@@ -1,6 +1,8 @@
 <?php
 use App\Category;
 use App\Event;
+use App\Branch;
+use App\MemberType;
 
 Route::get('/', function () {
     return view('society.login');
@@ -30,19 +32,21 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::delete('events/{event}', 'EventController@delete')->name('event.destroy');
 
-    Route::get('ctc', function () {
-        return view('society.add-ctc');
+    Route::get('member', function () {
+        $branch = Branch::all();
+        $member_type = MemberType::all();
+        return view('society.add-member', ['branch' => $branch, 'member_type' => $member_type]);
     });
 
-    Route::get('ctcs', 'CtcController@index');
+    Route::get('members', 'MemberController@index');
 
-    Route::get('ctcs/{ctc}/edit', 'CtcController@edit');
+    Route::get('members/{member}/edit', 'MemberController@edit');
 
-    Route::post('ctc', 'CtcController@store');
+    Route::post('member', 'MemberController@store');
 
-    Route::put('ctcs/{ctc}', 'CtcController@update');
+    Route::put('members/{member}', 'MemberController@update');
 
-    Route::delete('ctcs/{ctc}', 'CtcController@delete')->name('ctc.destroy');
+    Route::delete('members/{member}', 'MemberController@delete')->name('member.destroy');
 
     Route::get('winner', function () {
         $events = Event::all();
