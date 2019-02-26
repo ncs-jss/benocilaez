@@ -42,19 +42,19 @@
                     @endforeach
                 </div>
                 @endif
-                @if(isset($ctcs))
+                @if(isset($members))
                 <div class="card-body">
-                    <h4 class="card-title">All CTCs</h4>
+                    <h4 class="card-title">All Members</h4>
                 </div>
                 <div class="comment-widgets scrollable">
                     <!-- Comment Row -->
-                    @foreach($ctcs as $ctc)
+                    @foreach($members as $member)
                     <div class="d-flex flex-row comment-row m-t-0">
                         <div class="comment-text w-100">
-                            <h6 class="font-medium">{{$ctc->name}}</h6>
+                            <h6 class="font-medium">{{$member->name}}</h6>
                             <div class="comment-footer"> 
-                                <a href="{{ custom_url('ctcs/'.$ctc->id.'/edit') }}" type="button" class="btn btn-cyan btn-sm">Edit</a>
-                                {!! Form::open(['method'=>'delete', 'route'=>['ctc.destroy', $ctc['id']], 'class'=>'delete_form']) !!}
+                                <a href="{{ custom_url('members/'.$member->id.'/edit') }}" type="button" class="btn btn-cyan btn-sm">Edit</a>
+                                {!! Form::open(['method'=>'delete', 'route'=>['member.destroy', $member['id']], 'class'=>'delete_form']) !!}
                                 {!! Form::button('Delete', ['class'=>'btn btn-danger btn-sm', 'type'=>'submit']) !!}
                                 {!! Form::close() !!}
                                 {{-- <a href="{{ custom_url('events/'.$event->id) }}" type="button" class="btn btn-danger btn-sm">Delete</a> --}}
