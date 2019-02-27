@@ -90,6 +90,24 @@
                     @endforeach
                 </div>
                 @endif
+                @if(isset($files))
+                <div class="card-body">
+                    <h4 class="card-title">Files</h4>
+                </div>
+                <div class="comment-widgets scrollable">
+                    <!-- Comment Row -->
+                    @foreach($files as $file)
+                    <div class="d-flex flex-row comment-row m-t-0">
+                        <div class="comment-text w-100">
+                            <h6 class="font-medium"><a href="{{ custom_url('uploads/'.$file->location) }}" target="_blank">Download File</a></h6>
+                            <div class="comment-footer"> 
+                                <a href="{{ custom_url('file/delete/'.$file->id) }}" type="button" class="btn btn-cyan btn-sm btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
             </div>
         </div>
         <!-- column -->

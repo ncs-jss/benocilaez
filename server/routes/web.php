@@ -62,4 +62,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('winners/{winner}', 'WinnerController@update');
 
     Route::delete('winners/{winner}', 'WinnerController@delete')->name('winner.destroy');
+
+    Route::get('files', 'FileController@index');
+
+    Route::post('file', 'FileController@store');
+
+    Route::get('file', 'FileController@all');
+
+    Route::get('file/delete/{id}', 'FileController@delete');
 });

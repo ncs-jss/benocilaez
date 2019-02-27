@@ -25,6 +25,9 @@ class CreateForegionKey extends Migration
         Schema::table('winners', function (Blueprint $table) {
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         });
+        Schema::table('files', function (Blueprint $table) {
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+        });
     }
 
     /**
@@ -51,6 +54,10 @@ class CreateForegionKey extends Migration
         Schema::table('winners', function (Blueprint $table) {
             $table->dropForeign('winners_event_id_foreign');
             $table->dropIndex('winners_event_id_foreign');
+        });
+        Schema::table('files', function (Blueprint $table) {
+            $table->dropForeign('files_event_id_foreign');
+            $table->dropIndex('files_event_id_foreign');
         });
     }
 }
