@@ -29,7 +29,7 @@ class EventController extends BaseController
     public function indexCategory($id)
     {
         //
-        $events = Event::select('id', 'name')->where('category_id', $id)->get()->toArray();
+        $events = Event::select('id', 'name')->where('category_id', $id)->with('files')->get()->toArray();
         for ($i = 0; $i < sizeof($events); $i++) {
             $events[$i]['name'] = ucwords(strtolower($events[$i]['name']));
         }
