@@ -17,7 +17,7 @@ class EventController extends BaseController
     public function index()
     {
         //
-        $events = Event::all();
+        $events = Event::with('files')->get();
         return $this->sendResponse($events->toArray(), 'Events retrieved successfully.');
     }
 

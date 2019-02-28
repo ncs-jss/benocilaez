@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('members/{member}', 'MemberController@delete')->name('member.destroy');
 
     Route::get('winner', function () {
-        $events = Event::all();
+        $events = Event::where('society_id', Auth::id())->get();
         return view('society.add-winner', ['events' => $events]);
     });
 
