@@ -29,7 +29,7 @@ class EventController extends BaseController
     public function indexCategory($id)
     {
         //
-        $events = Event::select('id', 'name')->where('category_id', $id)->with('files')->get()->toArray();
+        $events = Event::select('id', 'name')->where('category_id', $id)->get()->toArray();
         for ($i = 0; $i < sizeof($events); $i++) {
             $events[$i]['name'] = ucwords(strtolower($events[$i]['name']));
         }
@@ -81,7 +81,7 @@ class EventController extends BaseController
     public function show($id)
     {
         //
-        $event = Event::find($id);
+        $event = Event::with('files')->find($id);
 
         if (is_null($event)) {
             return $this->sendError('Event not found.');
