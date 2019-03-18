@@ -57,7 +57,14 @@ class MemberController extends Controller
         $branch = Branch::all();
         $member_type = MemberType::all();
         if (!is_null($member)) {
-            return view('society.add-member', ['member' => $member, 'branch' => $branch, 'member_type' => $member_type]);
+            return view(
+                'society.add-member',
+                [
+                    'member' => $member,
+                    'branch' => $branch,
+                    'member_type' => $member_type
+                ]
+            );
         }
     }
 

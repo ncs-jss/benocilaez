@@ -76,10 +76,22 @@ class SocietyController extends Controller
             if ($arr['group'] == "others") {
                 return redirect('home');
             } else {
-                return redirect('/')->with(['msg' => 'The username and/or password you specified are not correct.', 'class' => 'alert-danger']);
+                return redirect('/')
+                    ->with(
+                        [
+                            'msg' => 'The username and/or password you specified are not correct.',
+                            'class' => 'alert-danger'
+                        ]
+                    );
             }
         } else {
-            return redirect('/')->with(['msg' => 'The username and/or password you specified are not correct.', 'class' => 'alert-danger']);
+            return redirect('/')
+                ->with(
+                    [
+                        'msg' => 'The username and/or password you specified are not correct.',
+                        'class' => 'alert-danger'
+                    ]
+                );
         }
     }
 }
