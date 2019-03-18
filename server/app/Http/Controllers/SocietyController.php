@@ -1,26 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Support\Facades\Auth;
 use App\Society;
 use Validator;
 
-class SocietyController extends BaseController
+class SocietyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $events = Society::select('id', 'name', 'username')->get();
-        return $this->sendResponse($events->toArray(), 'Societies retrieved successfully.');
-    }
-
     /**
      * Login of society.
      *
@@ -86,53 +74,24 @@ class SocietyController extends BaseController
 
             Auth::loginUsingId($society->id);
             if ($arr['group'] == "others") {
-                $society = Auth::user();
-                $success['access_token'] =  $society->createToken('Personal Access Token')->accessToken;
-                $success['token_type'] = 'Bearer';
-                return response()->json(['success' => $success], 200);
+                return redirect('home');
             } else {
-                return response()->json(['error'=>'This login is correct but does not belong to any society'], 401);
+                return redirect('/')
+                    ->with(
+                        [
+                            'msg' => 'The username and/or password you specified are not correct.',
+                            'class' => 'alert-danger'
+                        ]
+                    );
             }
         } else {
-            return response()->json(['error'=>'The username and/or password you specified are not correct.'], 401);
+            return redirect('/')
+                ->with(
+                    [
+                        'msg' => 'The username and/or password you specified are not correct.',
+                        'class' => 'alert-danger'
+                    ]
+                );
         }
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function details()
-    {
-        $user = Auth::user()->only(['id', 'name']);
-        return response()->json(['success' => $user], 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $validator = Validator::make(
-            $request->all(),
-            [
-            'name' => 'required|max:100',
-            ]
-        );
-        if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
-        }
-        Society::where('id', Auth::id())->update(
-            [
-            'name' => $request->input('name')
-            ]
-        );
-        $success['name'] = $request->input('name');
-        return response()->json(['success' => $success], 200);
     }
 }

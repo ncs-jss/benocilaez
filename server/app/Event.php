@@ -28,10 +28,18 @@ class Event extends Model
     }
 
     /**
-     * Get the winners fof the event.
+     * Get the winners of the event.
      */
     public function winners()
     {
         return $this->hasMany('App\Winner', 'event_id');
+    }
+
+    /**
+     * Get the files of the event.
+     */
+    public function files()
+    {
+        return $this->hasMany('App\File', 'event_id');
     }
 }

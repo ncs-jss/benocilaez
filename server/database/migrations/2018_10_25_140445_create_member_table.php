@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWinnersTable extends Migration
+class CreateMemberTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateWinnersTable extends Migration
      */
     public function up()
     {
-        Schema::create('winners', function (Blueprint $table) {
+        Schema::create('member', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->bigInteger('contact_no', false, true)->length(10);
-            $table->string('zeal_id', 10);
-            $table->integer('event_id')->unsigned();
-            $table->boolean('rank');
+            $table->integer('society_id')->unsigned();
             $table->year('year');
+            $table->integer('yr');
+            $table->integer('branch_id')->unsigned();
+            $table->string('email')->unique();
+            $table->string('contact', 100);
+            $table->integer('member_type_id')->unsigned();
+            $table->string('zeal_id', 10);
         });
     }
 
@@ -31,6 +34,6 @@ class CreateWinnersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('winners');
+        Schema::dropIfExists('member');
     }
 }

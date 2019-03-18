@@ -17,7 +17,7 @@ class EventController extends BaseController
     public function index()
     {
         //
-        $events = Event::all();
+        $events = Event::with('files')->get();
         return $this->sendResponse($events->toArray(), 'Events retrieved successfully.');
     }
 
@@ -29,8 +29,11 @@ class EventController extends BaseController
     public function indexCategory($id)
     {
         //
-        $events = Event::select('id', 'name')->where('category_id', $id)->get();
-        return $this->sendResponse($events->toArray(), 'Events retrieved successfully.');
+        $events = Event::select('id', 'name')->where('category_id', $id)->get()->toArray();
+        for ($i = 0; $i < sizeof($events); $i++) {
+            $events[$i]['name'] = ucwords(strtolower($events[$i]['name']));
+        }
+        return $this->sendResponse($events, 'Events retrieved successfully.');
     }
 
     /**
@@ -64,7 +67,18 @@ class EventController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $event = Event::create(['name' => $input['name'], 'description' => $input['description'], 'society_id' => \Auth::id(), 'winner1' => $input['winner1'], 'winner2' => $input['winner2'], 'contact_name' => $input['contact_name'], 'contact_no' => $input['contact_no'], 'is_active' => $input['is_active']]);
+        $event = Event::create(
+            [
+                'name' => $input['name'],
+                'description' => $input['description'],
+                'society_id' => \Auth::id(),
+                'winner1' => $input['winner1'],
+                'winner2' => $input['winner2'],
+                'contact_name' => $input['contact_name'],
+                'contact_no' => $input['contact_no'],
+                'is_active' => $input['is_active']
+            ]
+        );
 
         return $this->sendResponse($event->toArray(), 'Event created successfully.');
     }
@@ -78,7 +92,7 @@ class EventController extends BaseController
     public function show($id)
     {
         //
-        $event = Event::find($id);
+        $event = Event::with('files')->find($id);
 
         if (is_null($event)) {
             return $this->sendError('Event not found.');
