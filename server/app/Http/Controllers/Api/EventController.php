@@ -64,7 +64,18 @@ class EventController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $event = Event::create(['name' => $input['name'], 'description' => $input['description'], 'society_id' => \Auth::id(), 'winner1' => $input['winner1'], 'winner2' => $input['winner2'], 'contact_name' => $input['contact_name'], 'contact_no' => $input['contact_no'], 'is_active' => $input['is_active']]);
+        $event = Event::create(
+            [
+                'name' => $input['name'],
+                'description' => $input['description'],
+                'society_id' => \Auth::id(),
+                'winner1' => $input['winner1'],
+                'winner2' => $input['winner2'],
+                'contact_name' => $input['contact_name'],
+                'contact_no' => $input['contact_no'],
+                'is_active' => $input['is_active']
+            ]
+        );
 
         return $this->sendResponse($event->toArray(), 'Event created successfully.');
     }

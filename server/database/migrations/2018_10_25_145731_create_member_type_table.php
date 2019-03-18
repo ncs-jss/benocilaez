@@ -1,10 +1,9 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCtcTable extends Migration
+class CreateMemberTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +12,11 @@ class CreateCtcTable extends Migration
      */
     public function up()
     {
-        Schema::create('ctc', function (Blueprint $table) {
+        Schema::create('member_type', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->integer('society_id')->unsigned();
-            $table->year('year');
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -28,6 +24,6 @@ class CreateCtcTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ctc');
+        Schema::dropIfExists('member_type');
     }
 }
