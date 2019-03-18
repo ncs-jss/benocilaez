@@ -19,7 +19,7 @@
 			    		<input name="_method" type="hidden" value="PUT">
 			    	@endif
 			        <div class="card-body">
-			            <h4 class="card-title">Add Event</h4>
+			            <h4 class="card-title">@if(isset($event))Edit @else Add @endif Event</h4>
 			            <div class="form-group row">
 			                <label for="title" class="col-sm-3 text-right control-label col-form-label">Event Title <font color="red">*</font></label>
 			                <div class="col-sm-9">

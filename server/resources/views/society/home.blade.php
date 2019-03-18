@@ -21,7 +21,7 @@
             <div class="card">
                 @if(isset($events))
                 <div class="card-body">
-                    <h4 class="card-title">Active Events</h4>
+                    <h4 class="card-title">Active Events <a href="{{ custom_url('export/events') }}" class="btn btn-success" target="_blank">Export Events</a></h4>
                 </div>
                 <div class="comment-widgets scrollable">
                     <!-- Comment Row -->
@@ -66,7 +66,7 @@
                 @endif
                 @if(isset($winners))
                 <div class="card-body">
-                    <h4 class="card-title">Event Winners</h4>
+                    <h4 class="card-title">Event Winners <a href="{{ custom_url('export/winners') }}" class="btn btn-success" target="_blank">Export Winners</a></h4>
                 </div>
                 <div class="comment-widgets scrollable">
                     <!-- Comment Row -->
