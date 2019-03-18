@@ -1,5 +1,7 @@
 # Zealicon Backoffoice
 
+[![Build Status](https://travis-ci.com/dhruvhacks/beaconzialis.svg?token=GswNQqzQBpsTNepy5MaT&branch=master)](https://travis-ci.com/dhruvhacks/beaconzialis)
+
 This is the backoffice for the Zealicon (tech-culture fest of JSSATEN). It is used to store and extract details of events, winner of events & member of societies.
 
 
