@@ -3,6 +3,7 @@ use App\Category;
 use App\Event;
 use App\Branch;
 use App\MemberType;
+use App\Winner;
 
 Route::get('/', function () {
     return view('society.login');
@@ -70,4 +71,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('file', 'FileController@all');
 
     Route::get('file/delete/{id}', 'FileController@delete');
+
+    Route::get('export/events', function () {
+        $event = Event::with('category')->OrderBy('name')->get();
+        return view('society.export_events', ['events' => $event]);
+    });
+
+    Route::get('export/winners', function () {
+        $winner = Winner::with('event')->OrderBy('event_id')->OrderBy('rank')->get();
+        return view('society.export_winners', ['winners' => $winner]);
+    });
 });

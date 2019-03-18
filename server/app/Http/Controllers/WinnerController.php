@@ -45,10 +45,10 @@ class WinnerController extends Controller
 
     public function edit($id)
     {
-        $event =Event::find($id);
-        $category = Category::all();
-        if (!is_null($event)) {
-            return view('society.add-event', ['event' => $event, 'category' => $category]);
+        $winner =Winner::find($id);
+        $event = Event::all();
+        if (!is_null($winner)) {
+            return view('society.add-winner', ['winner' => $winner, 'events' => $event]);
         }
     }
 
