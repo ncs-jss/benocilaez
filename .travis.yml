@@ -15,4 +15,4 @@ before_script:
   - composer require "squizlabs/php_codesniffer=*"
   - phpenv rehash
 script:
-  - php vendor/bin/phpcs --standard=ruleset.xml app
+  - php vendor/bin/phpcs --standard=PSR2 app
