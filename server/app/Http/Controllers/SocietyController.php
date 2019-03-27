@@ -69,6 +69,7 @@ class SocietyController extends Controller
                 $society = new Society;
                 $society->name = $arr['first_name'];
                 $society->username = $arr['username'];
+                $society->is_admin = '0';
                 $society->save();
             }
 
