@@ -82,3 +82,10 @@ Route::group(['middleware' => ['auth']], function () {
         return view('society.export_winners', ['winners' => $winner]);
     });
 });
+
+
+Route::group(['prefix' => '/admin', 'middleware' => ['auth','admin']], function () {
+    Route::get('home', function () {
+        return view('admin.home');
+    });
+});
