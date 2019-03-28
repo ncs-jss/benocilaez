@@ -14,7 +14,15 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1 style="text-align: center;">Zealicon Report</h1>
+        <h1 class="font-weight-bold" style="text-align: center; text-decoration: underline;">Zealicon Report</h1>
+        <br>
+        <h2>This report includes the detailed description of the annual techno-cultural fest Zealicon of Jss Academy of Technical Education, Noida.</h2><br>
+        <ul>  
+        <li><h3 class="font-weight-bold"><li>Total Number of Active Events : {{ $events->count() }}</li></h3>
+        <h3 class="font-weight-bold"><li>Total Number of participating Societies : {{ $societies->count() }}</li></h3>
+        <h3 class="font-weight-bold"><li>Total Number of CTCs : 21</li></h3>
+        <h3 class="font-weight-bold"><li>Total Number of Registrations : 1911</li></h3>
+    </ul>
         @php
         $count=1;
         @endphp
@@ -50,11 +58,15 @@
         </table>
         <br>
         <h3 class="font-weight-bold">Events' Winners:</h3>
+        @php
+            $t = 1;
+        @endphp
             @foreach($society->events as $event)
             <table class="table table-bordered w-50">
                 <h4 class="font-weight-bold">Winner Details:</h4>
                 <thead>
                 <tr>
+                    <th scope="col">S.No.</th>
                     <th scope="col">Event</th>
                     <th scope="col">Winner/Runner Up</th>
                     <th scope="col">Winner/Runner Up Amount</th> 
@@ -71,8 +83,10 @@
             @foreach($event->winners as $winner)
                 <tr>
                     @if($e == 0)
+                    <td>{{ $t++ }}</td>
                     <td>{{ $event->name }}</td>
                     @else
+                    <td> </td>
                     <td> </td>
                     @endif
                     <td>{{ $winner->name }}</td>

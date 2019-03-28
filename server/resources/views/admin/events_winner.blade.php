@@ -14,6 +14,8 @@
 </head>
 <body>
     <h1 style="text-align: center;">Events Winner List</h1>
+    @foreach($societies as $society)
+    <h2 style="text-align: center;">{{ $society->name }}</h2>
     <table class="table table-bordered">
         <thead>
             <tr>

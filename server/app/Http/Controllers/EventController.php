@@ -120,9 +120,9 @@ class EventController extends Controller
 
     public function summary()
     {
-        // $events = Event::all();
+        $events = Event::all();
         $societies  = Society::all();
-        return view('admin.summary', compact('societies'));
+        return view('admin.summary', compact('societies', 'events'));
     }
         
 }
