@@ -118,18 +118,11 @@ class EventController extends Controller
         }
     }
 
-    public function winners()
+    public function summary()
     {
         // $events = Event::all();
         $societies  = Society::all();
-        return view('admin.events_winner', compact('societies'));
-    }
-
-    public function members()
-    {
-        // $events = Event::all();
-        $societies  = Society::all();
-        return view('admin.events_member', compact('societies'));
+        return view('admin.summary', compact('societies'));
     }
         
 }

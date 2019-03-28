@@ -88,6 +88,5 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth','admin']], function 
         return view('admin.home');
     });
 
-    Route::get('events/winners', 'EventController@winners');
-    Route::get('events/members', 'EventController@members');
+    Route::get('events/summary', 'EventController@summary');
 });
