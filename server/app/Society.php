@@ -25,6 +25,6 @@ class Society extends Authenticatable
      */
     public function members()
     {
-        return $this->hasMany('App\Member', 'society_id');
+        return $this->hasMany('App\Member', 'society_id')->orderBy('member_type_id');
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Category;
 use App\Event;
 use Validator;
+use App\Society;
 
 class EventController extends Controller
 {
@@ -116,4 +117,19 @@ class EventController extends Controller
             return back()->with(['msg' =>'Event deleted successfully.', 'class' => 'alert-success']);
         }
     }
+
+    public function winners()
+    {
+        // $events = Event::all();
+        $societies  = Society::all();
+        return view('admin.events_winner', compact('societies'));
+    }
+
+    public function members()
+    {
+        // $events = Event::all();
+        $societies  = Society::all();
+        return view('admin.events_member', compact('societies'));
+    }
+        
 }

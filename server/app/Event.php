@@ -32,7 +32,7 @@ class Event extends Model
      */
     public function winners()
     {
-        return $this->hasMany('App\Winner', 'event_id');
+        return $this->hasMany('App\Winner', 'event_id')->orderBy('rank');
     }
 
     /**

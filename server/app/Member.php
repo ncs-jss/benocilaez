@@ -22,6 +22,6 @@ class Member extends Model
     }
     public function memberType()
     {
-        return $this->belongsTo('App\MemberType', 'member_type_id');
+        return $this->belongsTo('App\MemberType', 'member_type_id')->orderBy('name');
     }
 }

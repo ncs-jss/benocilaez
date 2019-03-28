@@ -63,7 +63,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('winners/{winner}', 'WinnerController@update');
 
     Route::delete('winners/{winner}', 'WinnerController@delete')->name('winner.destroy');
-
     Route::get('files', 'FileController@index');
 
     Route::post('file', 'FileController@store');
@@ -88,4 +87,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth','admin']], function 
     Route::get('home', function () {
         return view('admin.home');
     });
+
+    Route::get('events/winners', 'EventController@winners');
+    Route::get('events/members', 'EventController@members');
 });
