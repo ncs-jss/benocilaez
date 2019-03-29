@@ -69,7 +69,6 @@
         @php
         $t = 1;
         @endphp
-        @foreach($society->events as $event)
         <table class="table table-bordered w-50">
             <h4 class="font-weight-bold">Winner Details:</h4>
             <thead>
@@ -82,13 +81,14 @@
                     <th scope="col">Zeal Id</th>               
                 </tr>
             </thead>
-            @php
-            $a = 1;
-            @endphp
-            @php
-            $e = 0;
-            @endphp
             <tbody>
+                @foreach($society->events as $event)
+                @php
+                $a = 1;
+                @endphp
+                @php
+                $e = 0;
+                @endphp
                 @foreach($event->winners as $winner)
                 <tr>
                     @if($e == 0)
@@ -107,16 +107,15 @@
                 $e++;
                 @endphp
                 @endforeach
+                @endforeach
             </tbody>
         </table>
-        @endforeach
         @endforeach
         <br>
         <h2 class="font-weight-bold">Events Details:</h2>
         @php
             $w =1;
         @endphp
-        @foreach($events as $event)
         <table class="table table-bordered w-50">
             <thead>
                 <tr>
@@ -130,6 +129,7 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($events as $event)
                 <tr>
                     <td>{{ $w++ }}</td>
                     <td>{{ $event->name }}</td>
@@ -139,10 +139,10 @@
                     <td>{{ $event->contact_name }}</td>
                     <td>{{ $event->contact_no }}</td>
                 </tr>
+                @endforeach
             </tbody>
             
         </table>
-        @endforeach
     </div>
 </body>
 </html>
