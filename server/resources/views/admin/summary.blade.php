@@ -85,9 +85,9 @@
                 @foreach($society->events as $event)
                 @php
                 $a = 1;
-                @endphp
-                @php
                 $e = 0;
+                $ec = $event->winners->count();
+                $ect = $ec;
                 @endphp
                 @foreach($event->winners as $winner)
                 <tr>
@@ -99,12 +99,17 @@
                     <td> </td>
                     @endif
                     <td>{{ $winner->name }}</td>
+                    @if($ec == 4 && ($ect == 3 ||$ect ==1))
+                    <td> </td>
+                    @else
                     <td>{{ ${'event'}->{'winner' . $a++} }}</td>
+                    @endif
                     <td>{{ $winner->contact_no }}</td>
                     <td>{{ $winner->zeal_id }}</td>
                 </tr>
                 @php
                 $e++;
+                $ect--;
                 @endphp
                 @endforeach
                 @endforeach
