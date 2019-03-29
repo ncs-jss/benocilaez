@@ -18,20 +18,20 @@
         <br>
         <h2>This report includes the detailed description of the annual techno-cultural fest Zealicon of Jss Academy of Technical Education, Noida.</h2><br>
         <ul>  
-        <li><h3 class="font-weight-bold"><li>Total Number of Active Events : {{ $events->count() }}</li></h3>
-        <h3 class="font-weight-bold"><li>Total Number of participating Societies : {{ $societies->count() }}</li></h3>
-        <h3 class="font-weight-bold"><li>Total Number of CTCs : 21</li></h3>
-        <h3 class="font-weight-bold"><li>Total Number of Registrations : 1911</li></h3>
-    </ul>
+            <li><h3 class="font-weight-bold"><li>Total Number of Active Events : {{ $events->count() }}</li></h3>
+            <h3 class="font-weight-bold"><li>Total Number of participating Societies : {{ $societies->count() }}</li></h3>
+            <h3 class="font-weight-bold"><li>Total Number of CTCs : 21</li></h3>
+            <h3 class="font-weight-bold"><li>Total Number of Registrations : 1911</li></h3>
+        </ul>
         @php
         $count=1;
         @endphp
         <br>
+        <h2 class="font-weight-bold">Society Member Details:</h2>
         @foreach($societies as $society)
-        <h2 class="font-weight-bold">{{ $count++ }}. {{ $society->name }}</h2>
+        <h3>{{ $count++ }}. {{ $society->name }}</h3>
         <br>
         <table class="table table-bordered w-50">
-            <h3 class="font-weight-bold">Member Details:</h3>
             <thead>
                 <tr>
                     <th scope="col">S.No.</th>
@@ -57,14 +57,22 @@
             </tbody>
         </table>
         <br>
-        <h3 class="font-weight-bold">Events' Winners:</h3>
+        @endforeach
         @php
-            $t = 1;
+        $count=1;
         @endphp
-            @foreach($society->events as $event)
-            <table class="table table-bordered w-50">
-                <h4 class="font-weight-bold">Winner Details:</h4>
-                <thead>
+        <br>
+        <h2 class="font-weight-bold">Event Winner Details:</h2>
+        @foreach($societies as $society)
+        <h3>{{ $count++ }}. {{ $society->name }}</h3>
+        <br>
+        @php
+        $t = 1;
+        @endphp
+        @foreach($society->events as $event)
+        <table class="table table-bordered w-50">
+            <h4 class="font-weight-bold">Winner Details:</h4>
+            <thead>
                 <tr>
                     <th scope="col">S.No.</th>
                     <th scope="col">Event</th>
@@ -73,14 +81,15 @@
                     <th scope="col">Contact No.</th>
                     <th scope="col">Zeal Id</th>               
                 </tr>
-                </thead>
-                @php
-                    $a = 1;
-                @endphp
-                @php
-                    $e = 0;
-                @endphp
-            @foreach($event->winners as $winner)
+            </thead>
+            @php
+            $a = 1;
+            @endphp
+            @php
+            $e = 0;
+            @endphp
+            <tbody>
+                @foreach($event->winners as $winner)
                 <tr>
                     @if($e == 0)
                     <td>{{ $t++ }}</td>
@@ -95,12 +104,44 @@
                     <td>{{ $winner->zeal_id }}</td>
                 </tr>
                 @php
-                    $e++;
+                $e++;
                 @endphp
-            @endforeach
+                @endforeach
+            </tbody>
         </table>
         @endforeach
+        @endforeach
         <br>
+        <h2 class="font-weight-bold">Events Details:</h2>
+        @php
+            $w =1;
+        @endphp
+        @foreach($events as $event)
+        <table class="table table-bordered w-50">
+            <thead>
+                <tr>
+                    <th scope="col">S.No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Winner Amount</th> 
+                    <th scope="col">Runner Up Ammount</th>
+                    <th scope="col">Contact Person</th> 
+                    <th scope="col">Contact No.</th>               
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $w++ }}</td>
+                    <td>{{ $event->name }}</td>
+                    <td>{{ $event->description }}</td>
+                    <td>{{ $event->winner1 }}</td>
+                    <td>{{ $event->winner2 }}</td>
+                    <td>{{ $event->contact_name }}</td>
+                    <td>{{ $event->contact_no }}</td>
+                </tr>
+            </tbody>
+            
+        </table>
         @endforeach
     </div>
 </body>

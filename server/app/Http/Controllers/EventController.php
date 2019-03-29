@@ -120,7 +120,7 @@ class EventController extends Controller
 
     public function summary()
     {
-        $events = Event::all();
+        $events = Event::all()->sortBy('society_id');
         $societies  = Society::all();
         return view('admin.summary', compact('societies', 'events'));
     }
