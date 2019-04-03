@@ -31,7 +31,7 @@
         @foreach($societies as $society)
         <h3>{{ $count++ }}. {{ $society->name }}</h3>
         <br>
-        <table class="table table-bordered w-50">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">S.No.</th>
@@ -69,7 +69,7 @@
         @php
         $t = 1;
         @endphp
-        <table class="table table-bordered w-50">
+        <table class="table table-bordered">
             <h4 class="font-weight-bold">Winner Details:</h4>
             <thead>
                 <tr>
@@ -121,7 +121,7 @@
         @php
             $w =1;
         @endphp
-        <table class="table table-bordered w-50">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">S.No.</th>
