@@ -99,7 +99,7 @@
                     <td> </td>
                     @endif
                     <td>{{ $winner->name }}</td>
-                    @if($ec == 4 && ($ect == 3 ||$ect ==1))
+                    @if(($ec == 4 && ($ect == 3 ||$ect ==1)) || ($ec == 8 && ($ect == 7 ||$ect == 6 || $ect == 5 || $ect == 3 || $ect == 2 || $ect ==1)))
                     <td> </td>
                     @else
                     <td>{{ ${'event'}->{'winner' . $a++} }}</td>
