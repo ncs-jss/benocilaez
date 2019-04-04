@@ -20,7 +20,7 @@
         <ul>  
             <li><h3 class="font-weight-bold"><li>Total Number of Active Events : {{ $events->count() }}</li></h3>
             <h3 class="font-weight-bold"><li>Total Number of participating Societies : {{ $societies->count() }}</li></h3>
-            <h3 class="font-weight-bold"><li>Total Number of CTCs : 21</li></h3>
+            <h3 class="font-weight-bold"><li>Total Number of CTCs : 22</li></h3>
             <h3 class="font-weight-bold"><li>Total Number of Registrations : 1911</li></h3>
         </ul>
         @php
