@@ -124,5 +124,4 @@ class EventController extends Controller
         $societies  = Society::all();
         return view('admin.summary', compact('societies', 'events'));
     }
-        
 }
